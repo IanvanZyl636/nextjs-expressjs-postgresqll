@@ -1,0 +1,21 @@
+{
+  "name": "@nextjs-expressjs-postgresql/root",
+  "scripts": {
+    "backend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
+    "build": "tsc -b",
+    "start": "node ./apps/backend/dist/index.js",
+    "docker:start": "docker compose up -d --no-deps --build"
+  },
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.15.30",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
+  }
+}

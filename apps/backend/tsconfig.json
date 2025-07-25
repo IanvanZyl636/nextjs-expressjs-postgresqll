@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "types": ["node", "express"],
+    "rootDir": "src",
+    "paths": {
+      "@nextjs-expressjs-postgresql/shared": ["../../libs/shared/src"]
+    }
+  },
+  "references": [
+    {
+      "path": "../../libs/shared"
+    },
+  ],
+  "include": ["src/**/*.ts"],
+  "exclude": [
+    "out-tsc",
+    "dist",
+    "jest.config.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "eslint.config.js",
+    "eslint.config.cjs",
+    "eslint.config.mjs"
+  ]
+}

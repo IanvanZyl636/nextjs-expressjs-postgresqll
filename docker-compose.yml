@@ -1,0 +1,10 @@
+services:
+
+  backend:
+    container_name: "backend"
+    image: "backend"
+    build:
+      dockerfile: docker/apps/Dockerfile.backend
+    restart: unless-stopped
+    ports:
+      - "3333:3333"

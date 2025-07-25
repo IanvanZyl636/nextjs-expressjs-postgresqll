@@ -1,0 +1,9 @@
+{
+  "name": "@nextjs-expressjs-postgresql/backend",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
