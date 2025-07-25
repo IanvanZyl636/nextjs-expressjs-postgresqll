@@ -1,13 +1,22 @@
 {
   "name": "@nextjs-expressjs-postgresql/root",
   "scripts": {
-    "backend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
+    "backend:dev": "dotenv -e .env -- npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
+    "backend:build": "tsc -b",
+    "backend:start": "node ./apps/backend/dist/index.js",
     "frontend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/frontend",
     "frontend:build": "npm run build --workspace=@nextjs-expressjs-postgresql/frontend",
     "frontend:start": "npm run start --workspace=@nextjs-expressjs-postgresql/frontend",
-    "build": "tsc -b",
-    "start": "node ./apps/backend/dist/index.js",
-    "docker:start": "docker compose up -d --no-deps --build"
+    "docker:start": "docker compose up -d --no-deps --build",
+    "docker:postgresql:start": "docker compose --profile postgresql up -d --no-deps --build",
+    "docker:cloudflare:start": "docker compose --profile cloudflare up -d --no-deps --build",
+    "prisma:migrate": "npx prisma migrate dev --schema=apps/backend/src/integrations/prisma",
+    "prisma:reset": "npx prisma migrate reset --schema=apps/backend/src/integrations/prisma",
+    "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma",
+    "prisma:reset:test": "dotenv -e .env.test -- npx prisma migrate reset --schema=apps/backend/src/integrations/prisma",
+    "prisma:reset:force:test": "dotenv -e .env.test -- npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma",
+    "prisma:deploy": "npx prisma migrate deploy --schema=apps/backend/src/integrations/prisma",
+    "prisma:seed": "npx prisma db seed --schema=apps/backend/src/integrations/prisma"
   },
   "workspaces": [
     "apps/*",
@@ -16,9 +25,16 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^22.15.30",
+    "dotenv-cli": "^9.0.0",
     "nodemon": "^3.1.10",
+    "prisma": "^6.12.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tslib": "^2.8.1",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.12.0",
+    "zod": "^4.0.10"
   }
 }

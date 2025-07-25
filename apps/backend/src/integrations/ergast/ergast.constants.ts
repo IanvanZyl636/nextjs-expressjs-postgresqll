@@ -1,0 +1,1 @@
+export const ergastRootApi = 'https://ergast.com/api/f1';

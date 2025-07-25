@@ -5,6 +5,37 @@ services:
     image: "backend"
     build:
       dockerfile: docker/apps/Dockerfile.backend
+    profiles: ["backend"]
     restart: unless-stopped
     ports:
       - "3333:3333"
+
+  postgresql:
+    container_name: "postgresql"
+    image: postgres:latest
+    restart: always
+    profiles: ["postgresql"]
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+
+  adminer:
+    container_name: "adminer"
+    image: adminer
+    profiles: ["postgresql"]    
+    restart: always
+    ports:
+      - 8085:8080
+
+volumes:
+  postgresql_data:

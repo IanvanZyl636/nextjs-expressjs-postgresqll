@@ -1,5 +1,10 @@
-import {testfunc} from "@nextjs-expressjs-postgresql/shared";
+import { initializeDB } from './integrations/prisma';
+import { initializeExpress } from './integrations/express';
+import { initializeSwagger } from './integrations/swagger';
 
-setInterval(() =>{
-    console.log(testfunc());
-},3000);
+(async () => {
+  await initializeDB();
+  await initializeSwagger();
+  await initializeExpress();
+})()
+
