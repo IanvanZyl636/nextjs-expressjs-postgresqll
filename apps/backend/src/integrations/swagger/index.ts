@@ -15,7 +15,7 @@ export const initializeSwagger = () =>
             description: 'API documentation',
           },
         },
-        apis: ['./apps/backend/src/integrations/express/routers/**/*.ts'],
+        apis: ['./src/integrations/express/routers/**/*.ts'],
       };
 
       swaggerSpec = swaggerJSDoc(swaggerOptions);

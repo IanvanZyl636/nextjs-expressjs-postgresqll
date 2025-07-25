@@ -3,7 +3,7 @@
   "scripts": {
     "backend:dev": "dotenv -e .env -- npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
     "backend:build": "tsc -b",
-    "backend:start": "node ./apps/backend/dist/index.js",
+    "backend:start": "dotenv -e .env -- node ./apps/backend/dist/index.js",
     "frontend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/frontend",
     "frontend:build": "npm run build --workspace=@nextjs-expressjs-postgresql/frontend",
     "frontend:start": "npm run start --workspace=@nextjs-expressjs-postgresql/frontend",
