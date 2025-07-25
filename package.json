@@ -2,6 +2,9 @@
   "name": "@nextjs-expressjs-postgresql/root",
   "scripts": {
     "backend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
+    "frontend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/frontend",
+    "frontend:build": "npm run build --workspace=@nextjs-expressjs-postgresql/frontend",
+    "frontend:start": "npm run start --workspace=@nextjs-expressjs-postgresql/frontend",
     "build": "tsc -b",
     "start": "node ./apps/backend/dist/index.js",
     "docker:start": "docker compose up -d --no-deps --build"
