@@ -4,6 +4,7 @@
     "outDir": "dist",
     "types": ["node", "express"],
     "rootDir": "src",
+    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "paths": {
       "@nextjs-expressjs-postgresql/shared": ["../../libs/shared/src"]
     }

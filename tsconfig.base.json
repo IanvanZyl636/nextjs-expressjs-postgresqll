@@ -12,8 +12,7 @@
     "noUnusedLocals": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2022",
-    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
+    "target": "es2022",    
     "customConditions": ["development"]
   }
 }
