@@ -1,6 +1,6 @@
 import { initializeDB, prisma } from './index';
 
-jest.mock('@nextjs-expressjs-postgre-sql/shared', () => {
+jest.mock('@nextjs-expressjs-postgresql/shared', () => {
   return {
     PrismaClient: jest.fn().mockImplementation(() => ({
       $connect: jest.fn(),

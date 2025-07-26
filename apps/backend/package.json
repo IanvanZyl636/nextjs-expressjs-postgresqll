@@ -1,7 +1,8 @@
 {
   "name": "@nextjs-expressjs-postgresql/backend",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "test": "jest --runInBand"
   },
   "dependencies": {
     "axios": "^1.11.0",
