@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { getChampionBySeasonsController, getRaceWinnersBySeasonController } from '../controllers/f1.controller';
 import { asyncHandler } from '../middleware/async-handler.middleware';
+import {login, register} from '../controllers/auth.controller'
 
 const router = Router();
 
 /**
  * @swagger
- * /api/seasons/champions:
- *  get:
- *   summary: Get all season with their champion.
+ * /api/auth/register:
+ *  post:
+ *   summary: User register
  *   parameters:
  *    - name: startYear
  *      in: query
@@ -25,13 +25,13 @@ const router = Router();
  *    200:
  *     description: a List of seasons with their champion.
  */
-router.get('/seasons/champions', asyncHandler(getChampionBySeasonsController));
+router.post('/auth/register', asyncHandler(register));
 
 /**
  * @swagger
- * /api/season/race-winners:
+ * /api/auth/login:
  *  get:
- *   summary: Get a specific season with all the race winners
+ *   summary: User login
  *   parameters:
  *    - name: seasonYear
  *      in: query
@@ -43,6 +43,6 @@ router.get('/seasons/champions', asyncHandler(getChampionBySeasonsController));
  *    200:
  *     description: a season with a list of all the race winners.
  */
-router.get('/season/race-winners', asyncHandler(getRaceWinnersBySeasonController));
+router.get('/auth/login', asyncHandler(login));
 
 export default router;

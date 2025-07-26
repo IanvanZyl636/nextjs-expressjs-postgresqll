@@ -1,5 +1,5 @@
 import express from 'express';
-import f1Router from './routers/f1.router';
+import authRouter from './routers/auth.router'
 import swaggerUi from 'swagger-ui-express';
 import errorLogger from './middleware/error-logger.middleware';
 import { swaggerSpec } from '../swagger';
@@ -13,7 +13,7 @@ export const initializeExpress = async () => new Promise<void>(resolve => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
-  app.use('/api', f1Router);
+  app.use('/api', authRouter);
   app.use(errorLogger);
 
   const port = process.env.PORT || 3333;

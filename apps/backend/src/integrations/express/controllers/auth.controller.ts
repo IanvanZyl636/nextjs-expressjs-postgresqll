@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 
 
-export const getChampionBySeasonsController = async (
+export const register = async (
   req: Request,
   res: Response
 ) => {
   
 };
 
-export const getRaceWinnersBySeasonController = async (
+export const login = async (
   req: Request,
   res: Response
 ) => {
