@@ -60,5 +60,10 @@ path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-linux
  * 
  */
 export type Log = Prisma.LogModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
 
 

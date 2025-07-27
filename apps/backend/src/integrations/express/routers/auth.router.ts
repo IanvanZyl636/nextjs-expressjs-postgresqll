@@ -16,11 +16,6 @@ const router = Router();
  *      required: true
  *      schema:
  *       type: integer
- *    - name: endYear
- *      in: query
- *      description: End year of the seasons you want if blank will default to the last year.
- *      schema:
- *       type: integer
  *   responses:
  *    200:
  *     description: a List of seasons with their champion.

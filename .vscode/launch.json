@@ -2,6 +2,22 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Debug Backend with Nodemon and ts-node",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "nodemon",
+      "program": "${workspaceFolder}/apps/backend/src/index.ts",
+      "restart": true,
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",     
+      "skipFiles": ["<node_internals>/**"],
+      "autoAttachChildProcesses": true,
+      "sourceMaps": true,
+      "envFile": "${workspaceFolder}/.env"
+    },
+    
+    {
       "name": "Debug Jest in Backend",
       "type": "node",
       "request": "launch",
@@ -13,9 +29,9 @@
       ],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "cwd": "${workspaceFolder}/apps/backend",
-      "runtimeArgs": ["--inspect-brk"],
-      "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+      "cwd": "${workspaceFolder}/apps/backend",    
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
