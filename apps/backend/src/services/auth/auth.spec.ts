@@ -1,13 +1,17 @@
 import { prisma } from '../../integrations/prisma';
-import {registerUser} from './auth.service';
+import {registerUser, loginUser} from './auth.service';
 
 beforeAll(async () => {
   await prisma.$disconnect();
 });
 
-describe('Other block', () => {
-  test('three', () => {   
+describe('Auth', () => {
+  test('registerUser', () => {   
     registerUser();
+  });
+
+  test.only('loginUser', () => {   
+    loginUser();
   });
 });
 

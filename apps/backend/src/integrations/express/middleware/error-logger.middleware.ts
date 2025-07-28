@@ -10,7 +10,8 @@ const errorLogger = (
 ): void => {
   try{
   const statusCode = err instanceof HttpError ? err.statusCode : 500;
-  const message = err.stack || 'Internal Server Error';
+  const message = err.message || 'Internal Server Error';
+  const stack = err.stack;
 
   const requestData =
     req.method === 'GET'
@@ -18,12 +19,12 @@ const errorLogger = (
       : { body: req.body };
 
   logger.error({
-    message:`[${req.method}] ${req.originalUrl} - ${statusCode}\n${message}`,
+    message:`[${req.method}] ${req.originalUrl} - ${statusCode}\n${stack ?? message}`,
     requestData
   });
 
   res.status(statusCode).json({
-    error: 'Internal Server Error',
+    error: message,
   });
   }catch(e){
     next(e);

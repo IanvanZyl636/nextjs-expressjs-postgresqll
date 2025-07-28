@@ -1,14 +1,13 @@
 {
   "name": "@nextjs-expressjs-postgresql/root",
   "scripts": {
-    
     "backend:dev": "dotenv -e .env -- npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
     "backend:build": "tsc -b",
     "backend:start": "dotenv -e .env -- node ./apps/backend/dist/index.js",
     "backend:test": "dotenv -e .env -- npm run test --workspace=@nextjs-expressjs-postgresql/backend",
     "frontend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/frontend",
     "frontend:build": "npm run build --workspace=@nextjs-expressjs-postgresql/frontend",
-    "frontend:start": "npm run start --workspace=@nextjs-expressjs-postgresql/frontend",    
+    "frontend:start": "npm run start --workspace=@nextjs-expressjs-postgresql/frontend",
     "docker:start": "docker compose up -d --no-deps --build",
     "docker:postgresql:start": "docker compose --profile postgresql up -d --no-deps --build",
     "docker:cloudflare:start": "docker compose --profile cloudflare up -d --no-deps --build",
@@ -28,6 +27,7 @@
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.15.30",
     "dotenv-cli": "^9.0.0",
     "jest": "^30.0.5",
