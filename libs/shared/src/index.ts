@@ -1,5 +1,3 @@
-export * from './prisma'
-
-export function testfunc(){
-    return 'Hello3';
-}
+export * from './prisma';
+export * from './constants';
+export * from './types';

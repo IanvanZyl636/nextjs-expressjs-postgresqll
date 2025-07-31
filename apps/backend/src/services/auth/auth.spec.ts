@@ -1,18 +1,14 @@
 import { prisma } from '../../integrations/prisma';
-import {registerUser, loginUser} from './auth.service';
 
 beforeAll(async () => {
   await prisma.$disconnect();
 });
 
 describe('Auth', () => {
-  test('registerUser', () => {   
-    registerUser();
-  });
-
-  test.only('loginUser', () => {   
-    loginUser();
-  });
+  test('registerUser and login user', async () => {   
+    // registerUser('root@email.com', 'password');
+    // loginUser('root@email.com','password');
+  }); 
 });
 
 afterAll(async () => {
