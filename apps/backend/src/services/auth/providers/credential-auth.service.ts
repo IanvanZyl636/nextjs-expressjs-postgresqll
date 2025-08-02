@@ -2,8 +2,9 @@
 import bcrypt from 'bcrypt';
 import { prisma } from '../../../integrations/prisma';
 import { AuthResult, CredentialInput, RegisterResult } from '@nextjs-expressjs-postgresql/shared';
-import { generateJwt } from '../auth.util';
 import HttpError from '../../../utils/error/http-error';
+import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
+
 
 export async function loginWithCredentials(input: CredentialInput): Promise<AuthResult> {
   const user = await prisma.user.findUnique({ where: { email: input.email } });
@@ -12,9 +13,20 @@ export async function loginWithCredentials(input: CredentialInput): Promise<Auth
     throw new HttpError(401, 'Invalid credentials');
   }
 
-  const token = generateJwt(user);
+  const accessToken = generateAccessToken(user.id);
+  const refreshToken = generateRefreshToken(user.id);
 
-  return { token, user };
+  await prisma.refreshToken.create({
+    data: {
+      token: refreshToken,
+      userId: user.id,
+      ip: input.ip,
+      userAgent: input.userAgent,
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    }
+  });
+
+  return { accessToken, refreshToken, user: { email: user.email } };
 };
 
 export async function registerCredentials(input: CredentialInput): Promise<RegisterResult>{

@@ -14,7 +14,22 @@ export const initializeSwagger = () =>
             version: '1.0.0',
             description: 'API documentation',
           },
+          components: {
+            securitySchemes: {
+              authorization: {
+                type: 'http',
+                scheme: 'bearer',
+                bearerFormat: 'JWT', // Optional, but helps Swagger show "JWT"
+              },
+            },
+          },
+          security: [ // This enables it globally (optional)
+            {
+              authorization: [],
+            },
+          ],
         },
+
         apis: ['./src/integrations/express/routers/**/*.ts', './apps/backend/src/integrations/express/routers/**/*.ts'],
       };
 

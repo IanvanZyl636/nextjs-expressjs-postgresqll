@@ -65,5 +65,10 @@ export type Log = Prisma.LogModel
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model RefreshToken
+ * 
+ */
+export type RefreshToken = Prisma.RefreshTokenModel
 
 

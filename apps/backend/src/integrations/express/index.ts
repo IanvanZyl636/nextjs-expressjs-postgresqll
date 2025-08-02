@@ -1,8 +1,10 @@
 import express from 'express';
-import authRouter from './routers/auth.router'
+import authRouter from './routers/auth.router';
+import userRouter from './routers/protected/user.router';
 import swaggerUi from 'swagger-ui-express';
 import errorLogger from './middleware/error-logger.middleware';
 import { swaggerSpec } from '../swagger';
+import { authenticateToken } from './middleware/authenticate-token.middleware';
 
 export const initializeExpress = async () => new Promise<void>(resolve => {
   const app = express();
@@ -14,6 +16,10 @@ export const initializeExpress = async () => new Promise<void>(resolve => {
     res.send(swaggerSpec);
   });
   app.use('/api', authRouter);
+
+  app.use('/api/protected', authenticateToken);
+  app.use('/api/protected', userRouter);
+
   app.use(errorLogger);
 
   const port = process.env.PORT || 3333;

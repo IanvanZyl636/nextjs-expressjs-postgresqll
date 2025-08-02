@@ -1,8 +1,10 @@
-import { AuthProvider } from "src/constants/auth-provider.constants";
+import { AuthProvider } from "../constants/auth-provider.constants";
 
 export interface CredentialInput {
   email: string;
   password: string;
+  ip?:string;
+  userAgent?:string;
 }
 
 export interface GoogleInput {
@@ -23,11 +25,9 @@ export interface RegisterResult {
 }
 
 export interface AuthResult {
-  token: string;
-  user: {
-    id: string;
+  accessToken: string;
+  refreshToken: string;
+  user: {    
     email: string;
-    name?: string;
-    [key: string]: any;
   };
 }
