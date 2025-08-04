@@ -24,8 +24,8 @@ export * as $Enums from './enums'
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Logs
- * const logs = await prisma.log.findMany()
+ * // Fetch zero or more Addresses
+ * const addresses = await prisma.address.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -56,6 +56,46 @@ path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node")
 path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 
 /**
+ * Model Address
+ * 
+ */
+export type Address = Prisma.AddressModel
+/**
+ * Model Cart
+ * 
+ */
+export type Cart = Prisma.CartModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
+/**
+ * Model OrderItem
+ * 
+ */
+export type OrderItem = Prisma.OrderItemModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
+/**
  * Model Log
  * 
  */
@@ -70,6 +110,15 @@ export type User = Prisma.UserModel
  * 
  */
 export type Token = Prisma.TokenModel
+
+export type OrderStatus = $Enums.OrderStatus
+export const OrderStatus = $Enums.OrderStatus
+
+export type PaymentStatus = $Enums.PaymentStatus
+export const PaymentStatus = $Enums.PaymentStatus
+
+export type PaymentMethod = $Enums.PaymentMethod
+export const PaymentMethod = $Enums.PaymentMethod
 
 export type Role = $Enums.Role
 export const Role = $Enums.Role

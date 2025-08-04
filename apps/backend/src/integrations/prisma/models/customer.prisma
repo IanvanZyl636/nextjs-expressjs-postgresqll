@@ -1,0 +1,11 @@
+model Customer {
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  addresses    Address[]
+  orders       Order[]
+  cart         Cart?
+  user         User     @relation(fields: [userId], references: [id])
+}

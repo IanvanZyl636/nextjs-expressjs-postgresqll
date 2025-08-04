@@ -18,6 +18,7 @@ model User {
   emailVerifiedAt DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  customer       Customer?
 }
 
 model Token {
