@@ -1,7 +1,7 @@
 import { prisma } from "../../integrations/prisma";
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "./utils/jwt.util";
 
-export async function refreshTokenService(refreshToken: string, ip?: string, userAgent?: string) {
+export async function refreshTokenService(refreshToken: string, ip: string, userAgent: string) {
   const payload = verifyRefreshToken(refreshToken);
   const storedToken = await prisma.refreshToken.findUnique({ 
     where: { 
@@ -15,8 +15,8 @@ export async function refreshTokenService(refreshToken: string, ip?: string, use
     throw new Error('Invalid or expired refresh token');
   }
 
-  const newAccessToken = generateAccessToken(payload.sub);
-  const newRefreshToken = generateRefreshToken(payload.sub);
+  const newAccessToken = generateAccessToken(payload);
+  const newRefreshToken = generateRefreshToken(payload);
 
   await prisma.refreshToken.update({
     where: { token: refreshToken },
@@ -26,7 +26,7 @@ export async function refreshTokenService(refreshToken: string, ip?: string, use
   await prisma.refreshToken.create({
     data: {
       token: newRefreshToken,
-      userId: payload.sub,
+      userId: payload.userId,
       ip,
       userAgent,
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),

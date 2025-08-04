@@ -13,8 +13,8 @@ export async function loginWithCredentials(input: CredentialInput): Promise<Auth
     throw new HttpError(401, 'Invalid credentials');
   }
 
-  const accessToken = generateAccessToken(user.id);
-  const refreshToken = generateRefreshToken(user.id);
+  const accessToken = generateAccessToken({userId: user.id, ip: input.ip, userAgent: input.userAgent});
+  const refreshToken = generateRefreshToken({userId: user.id, ip: input.ip, userAgent: input.userAgent});
 
   await prisma.refreshToken.create({
     data: {

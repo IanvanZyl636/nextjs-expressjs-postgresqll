@@ -3,8 +3,8 @@ import { AuthProvider } from "../constants/auth-provider.constants";
 export interface CredentialInput {
   email: string;
   password: string;
-  ip?:string;
-  userAgent?:string;
+  ip:string;
+  userAgent:string;
 }
 
 export interface GoogleInput {
