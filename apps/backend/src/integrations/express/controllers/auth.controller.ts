@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { loginService, registerService } from '../../../services/auth/auth.service';
+import { loginService, logoutService, refreshTokenService, registerService } from '../../../services/auth/auth.service';
 import { AuthProvider } from '@nextjs-expressjs-postgresql/shared';
-import { refreshTokenService } from '../../../services/auth/refresh-token.service';
 import { getRequestIpUserAgent } from '../util';
+import HttpError from '../../../utils/error/http-error';
 
 export const registerController = async (
   req: Request,
@@ -40,6 +40,20 @@ export const loginController = async (
   });
 
   return res.json(loginResult);
+}
+
+export const logoutController = async (
+  req: Request,
+  res: Response
+) => {
+  const refreshToken = req.body.refreshToken;
+  const { ip, userAgent } = getRequestIpUserAgent(req);
+
+  if (!refreshToken) throw new HttpError(400, 'Refresh token required');
+
+  await logoutService(refreshToken, ip, userAgent);
+
+  return res.json({ message: 'Logged out successfully' });
 }
 
 export const refreshController = async (
