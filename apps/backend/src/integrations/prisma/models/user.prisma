@@ -3,24 +3,32 @@ enum Role {
   CLIENT
 }
 
+enum TokenType {
+  REFRESH
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
 model User {
   id             String   @id @default(cuid())
   email          String   @unique
   passwordHash   String
   role           Role     @default(CLIENT)
-  refreshTokens RefreshToken[]
+  refreshTokens  Token[]
+  emailVerifiedAt DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
 
-model RefreshToken {
-  id         String   @id @default(uuid())
-  token      String   @unique
-  user       User     @relation(fields: [userId], references: [id])
+model Token {
+  id         String    @id @default(uuid())
+  token      String    @unique
+  type       TokenType
+  user       User      @relation(fields: [userId], references: [id])
   userId     String
-  createdAt  DateTime @default(now())
-  revoked    Boolean  @default(false)
+  createdAt  DateTime  @default(now())
   expiresAt  DateTime
+  revoked    Boolean   @default(false)
   ip         String?
   userAgent  String?
 }

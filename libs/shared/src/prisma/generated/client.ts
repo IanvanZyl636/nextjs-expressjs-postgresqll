@@ -66,10 +66,13 @@ export type Log = Prisma.LogModel
  */
 export type User = Prisma.UserModel
 /**
- * Model RefreshToken
+ * Model Token
  * 
  */
-export type RefreshToken = Prisma.RefreshTokenModel
+export type Token = Prisma.TokenModel
 
 export type Role = $Enums.Role
 export const Role = $Enums.Role
+
+export type TokenType = $Enums.TokenType
+export const TokenType = $Enums.TokenType

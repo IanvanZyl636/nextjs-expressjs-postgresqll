@@ -13,3 +13,12 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const TokenType = {
+  REFRESH: 'REFRESH',
+  EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
+  PASSWORD_RESET: 'PASSWORD_RESET'
+} as const
+
+export type TokenType = (typeof TokenType)[keyof typeof TokenType]

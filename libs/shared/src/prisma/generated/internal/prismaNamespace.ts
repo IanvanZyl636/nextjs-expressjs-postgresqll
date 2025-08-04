@@ -396,7 +396,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Log: 'Log',
   User: 'User',
-  RefreshToken: 'RefreshToken'
+  Token: 'Token'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "log" | "user" | "refreshToken"
+    modelProps: "log" | "user" | "token"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -564,77 +564,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    RefreshToken: {
-      payload: Prisma.$RefreshTokenPayload<ExtArgs>
-      fields: Prisma.RefreshTokenFieldRefs
+    Token: {
+      payload: Prisma.$TokenPayload<ExtArgs>
+      fields: Prisma.TokenFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.RefreshTokenFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          args: Prisma.TokenFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.RefreshTokenFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          args: Prisma.TokenFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>
         }
         findFirst: {
-          args: Prisma.RefreshTokenFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload> | null
+          args: Prisma.TokenFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.RefreshTokenFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          args: Prisma.TokenFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>
         }
         findMany: {
-          args: Prisma.RefreshTokenFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          args: Prisma.TokenFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>[]
         }
         create: {
-          args: Prisma.RefreshTokenCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          args: Prisma.TokenCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>
         }
         createMany: {
-          args: Prisma.RefreshTokenCreateManyArgs<ExtArgs>
+          args: Prisma.TokenCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.RefreshTokenCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          args: Prisma.TokenCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>[]
         }
         delete: {
-          args: Prisma.RefreshTokenDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          args: Prisma.TokenDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>
         }
         update: {
-          args: Prisma.RefreshTokenUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          args: Prisma.TokenUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>
         }
         deleteMany: {
-          args: Prisma.RefreshTokenDeleteManyArgs<ExtArgs>
+          args: Prisma.TokenDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.RefreshTokenUpdateManyArgs<ExtArgs>
+          args: Prisma.TokenUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.RefreshTokenUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>[]
+          args: Prisma.TokenUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>[]
         }
         upsert: {
-          args: Prisma.RefreshTokenUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$RefreshTokenPayload>
+          args: Prisma.TokenUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TokenPayload>
         }
         aggregate: {
-          args: Prisma.RefreshTokenAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateRefreshToken>
+          args: Prisma.TokenAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateToken>
         }
         groupBy: {
-          args: Prisma.RefreshTokenGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RefreshTokenGroupByOutputType>[]
+          args: Prisma.TokenGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TokenGroupByOutputType>[]
         }
         count: {
-          args: Prisma.RefreshTokenCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.RefreshTokenCountAggregateOutputType> | number
+          args: Prisma.TokenCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TokenCountAggregateOutputType> | number
         }
       }
     }
@@ -693,6 +693,7 @@ export const UserScalarFieldEnum = {
   email: 'email',
   passwordHash: 'passwordHash',
   role: 'role',
+  emailVerifiedAt: 'emailVerifiedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -700,18 +701,19 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const RefreshTokenScalarFieldEnum = {
+export const TokenScalarFieldEnum = {
   id: 'id',
   token: 'token',
+  type: 'type',
   userId: 'userId',
   createdAt: 'createdAt',
-  revoked: 'revoked',
   expiresAt: 'expiresAt',
+  revoked: 'revoked',
   ip: 'ip',
   userAgent: 'userAgent'
 } as const
 
-export type RefreshTokenScalarFieldEnum = (typeof RefreshTokenScalarFieldEnum)[keyof typeof RefreshTokenScalarFieldEnum]
+export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -832,6 +834,20 @@ export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
+ * Reference to a field of type 'TokenType'
+ */
+export type EnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType'>
+    
+
+
+/**
+ * Reference to a field of type 'TokenType[]'
+ */
+export type ListEnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType[]'>
+    
+
+
+/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -928,7 +944,7 @@ export interface PrismaClientOptions {
 export type GlobalOmitConfig = {
   log?: Prisma.LogOmit
   user?: Prisma.UserOmit
-  refreshToken?: Prisma.RefreshTokenOmit
+  token?: Prisma.TokenOmit
 }
 
 /* Types for Logging */
