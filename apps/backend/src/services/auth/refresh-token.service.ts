@@ -1,3 +1,4 @@
+import ms, { StringValue } from "ms";
 import { prisma } from "../../integrations/prisma";
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "./utils/jwt.util";
 
@@ -29,7 +30,7 @@ export async function refreshTokenService(refreshToken: string, ip: string, user
       userId: payload.userId,
       ip,
       userAgent,
-      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      expiresAt: new Date(Date.now() + ms(process.env.BACKEND_JWT_REFRESH_EXPIRATION as StringValue)),
     }
   });
 

@@ -1,15 +1,24 @@
+import { Role } from '@nextjs-expressjs-postgresql/shared';
 import jwt from 'jsonwebtoken';
+import { StringValue } from 'ms';
 
 const ACCESS_SECRET = process.env.JWT_ACCESS_SECRET!;
 const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET!;
 
-export const generateAccessToken = (data:{ userId: string, ip:string, userAgent:string } ) => {
-  return jwt.sign(data, ACCESS_SECRET, { expiresIn: '15m' });
+export interface JwtPayload {
+  userId: string;
+  role: Role;
+  ip: string;
+  userAgent: string;
+}
+
+export const generateAccessToken = (data: JwtPayload) => {
+  return jwt.sign(data, ACCESS_SECRET, { expiresIn: process.env.BACKEND_JWT_EXPIRATION as StringValue });
 };
 
-export const generateRefreshToken = (data:{ userId: string, ip:string, userAgent:string } ) => {
-  return jwt.sign(data, REFRESH_SECRET, { expiresIn: '7d' });
+export const generateRefreshToken = (data:JwtPayload ) => {
+  return jwt.sign(data, REFRESH_SECRET, { expiresIn: process.env.BACKEND_JWT_REFRESH_EXPIRATION as StringValue });
 };
 
-export const verifyAccessToken = (token: string):{ userId: string, ip:string, userAgent:string } => jwt.verify(token, ACCESS_SECRET) as { userId: string, ip:string, userAgent:string };
-export const verifyRefreshToken = (token: string):{ userId: string, ip:string, userAgent:string } => jwt.verify(token, REFRESH_SECRET) as { userId: string, ip:string, userAgent:string };
+export const verifyAccessToken = (token: string):JwtPayload => jwt.verify(token, ACCESS_SECRET) as JwtPayload;
+export const verifyRefreshToken = (token: string):JwtPayload => jwt.verify(token, REFRESH_SECRET) as JwtPayload;

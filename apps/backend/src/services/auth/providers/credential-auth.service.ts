@@ -1,9 +1,10 @@
 
 import bcrypt from 'bcrypt';
 import { prisma } from '../../../integrations/prisma';
-import { AuthResult, CredentialInput, RegisterResult } from '@nextjs-expressjs-postgresql/shared';
+import { AuthResult, CredentialInput, RegisterResult, Role } from '@nextjs-expressjs-postgresql/shared';
 import HttpError from '../../../utils/error/http-error';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
+import ms, { StringValue } from 'ms';
 
 
 export async function loginWithCredentials(input: CredentialInput): Promise<AuthResult> {
@@ -13,8 +14,8 @@ export async function loginWithCredentials(input: CredentialInput): Promise<Auth
     throw new HttpError(401, 'Invalid credentials');
   }
 
-  const accessToken = generateAccessToken({userId: user.id, ip: input.ip, userAgent: input.userAgent});
-  const refreshToken = generateRefreshToken({userId: user.id, ip: input.ip, userAgent: input.userAgent});
+  const accessToken = generateAccessToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
+  const refreshToken = generateRefreshToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
 
   await prisma.refreshToken.create({
     data: {
@@ -22,14 +23,14 @@ export async function loginWithCredentials(input: CredentialInput): Promise<Auth
       userId: user.id,
       ip: input.ip,
       userAgent: input.userAgent,
-      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      expiresAt: new Date(Date.now() + ms(process.env.BACKEND_JWT_REFRESH_EXPIRATION as StringValue)),
     }
   });
 
   return { accessToken, refreshToken, user: { email: user.email } };
 };
 
-export async function registerCredentials(input: CredentialInput): Promise<RegisterResult>{
+export async function registerCredentials(input: CredentialInput, role:Role = Role.CLIENT): Promise<RegisterResult>{
     const existingUser = await prisma.user.findFirst({
         where: { email: input.email }
     })
@@ -42,6 +43,7 @@ export async function registerCredentials(input: CredentialInput): Promise<Regis
         data: {
             email:input.email,
             passwordHash,
+            role
         },
     });
 
