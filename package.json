@@ -3,6 +3,7 @@
   "scripts": {
     "backend:dev": "dotenv -e .env -- npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
     "backend:build": "tsc -b",
+    "backend:build:minify": "npm run build:minify --workspace=@nextjs-expressjs-postgresql/backend",
     "backend:start": "dotenv -e .env -- node ./apps/backend/dist/index.js",
     "backend:test": "dotenv -e .env -- npm run test --workspace=@nextjs-expressjs-postgresql/backend",
     "frontend:dev": "npm run dev --workspace=@nextjs-expressjs-postgresql/frontend",
@@ -32,6 +33,10 @@
     "@types/node": "^22.15.30",
     "@types/nodemailer": "^6.4.17",
     "dotenv-cli": "^9.0.0",
+    "esbuild": "^0.25.8",
+    "esbuild-plugin-alias": "^0.2.1",
+    "esbuild-plugin-tsc": "^0.5.0",
+    "esbuild-ts-paths": "^1.1.3",
     "jest": "^30.0.5",
     "nodemon": "^3.1.10",
     "prisma": "^6.12.0",
