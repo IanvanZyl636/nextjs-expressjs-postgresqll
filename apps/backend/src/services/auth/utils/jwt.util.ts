@@ -20,5 +20,13 @@ export const generateRefreshToken = (data:JwtPayload ) => {
   return jwt.sign(data, REFRESH_SECRET, { expiresIn: process.env.BACKEND_JWT_REFRESH_EXPIRATION as StringValue });
 };
 
-export const verifyAccessToken = (token: string):JwtPayload => jwt.verify(token, ACCESS_SECRET) as JwtPayload;
-export const verifyRefreshToken = (token: string):JwtPayload => jwt.verify(token, REFRESH_SECRET) as JwtPayload;
+export const verifyAccessToken = (token: string):JwtPayload => {
+  const {userId, role, ip, userAgent} = jwt.verify(token, ACCESS_SECRET) as JwtPayload;
+
+  return {userId, role, ip, userAgent};
+};
+export const verifyRefreshToken = (token: string):JwtPayload => {
+  const {userId, role, ip, userAgent} = jwt.verify(token, REFRESH_SECRET) as JwtPayload;
+
+  return {userId, role, ip, userAgent};
+};

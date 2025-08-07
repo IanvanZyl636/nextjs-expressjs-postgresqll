@@ -76,6 +76,11 @@ export type CartItem = Prisma.CartItemModel
  */
 export type Customer = Prisma.CustomerModel
 /**
+ * Model Image
+ * 
+ */
+export type Image = Prisma.ImageModel
+/**
  * Model Order
  * 
  */
@@ -110,6 +115,9 @@ export type User = Prisma.UserModel
  * 
  */
 export type Token = Prisma.TokenModel
+
+export type ImageSize = $Enums.ImageSize
+export const ImageSize = $Enums.ImageSize
 
 export type OrderStatus = $Enums.OrderStatus
 export const OrderStatus = $Enums.OrderStatus

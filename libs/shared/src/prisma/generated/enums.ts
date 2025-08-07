@@ -7,6 +7,15 @@
 *
 * 🟢 You can import this file directly.
 */
+export const ImageSize = {
+  THUMB: 'THUMB',
+  MEDIUM: 'MEDIUM',
+  LARGE: 'LARGE'
+} as const
+
+export type ImageSize = (typeof ImageSize)[keyof typeof ImageSize]
+
+
 export const OrderStatus = {
   PENDING: 'PENDING',
   PAID: 'PAID',

@@ -11,6 +11,7 @@
     "frontend:start": "npm run start --workspace=@nextjs-expressjs-postgresql/frontend",
     "docker:start": "docker compose up -d --no-deps --build",
     "docker:postgresql:start": "docker compose --profile postgresql up -d --no-deps --build",
+    "docker:minio:start": "docker compose --profile minio up -d --no-deps --build",
     "docker:cloudflare:start": "docker compose --profile cloudflare up -d --no-deps --build",
     "prisma:migrate": "npx prisma migrate dev --schema=apps/backend/src/integrations/prisma",
     "prisma:reset": "npx prisma migrate reset --schema=apps/backend/src/integrations/prisma",

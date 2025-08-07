@@ -1,6 +1,7 @@
 import express from 'express';
 import authRouter from './routers/auth.router';
 import userRouter from './routers/protected/user.router';
+import imageRouter from './routers/protected/image.router';
 import swaggerUi from 'swagger-ui-express';
 import errorLogger from './middleware/error-logger.middleware';
 import { swaggerSpec } from '../swagger';
@@ -19,6 +20,8 @@ export const initializeExpress = async () => new Promise<void>(resolve => {
 
   app.use('/api/protected', authenticateToken);
   app.use('/api/protected', userRouter);
+  app.use('/api/protected', imageRouter);
+  
 
   app.use(errorLogger);
 
