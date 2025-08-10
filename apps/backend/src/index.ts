@@ -15,6 +15,11 @@ const initialzeEnvVariables = async () => {
     if (!process.env.SMTP_EMAIL_FROM) throw new Error('SMTP_EMAIL_FROM is not defined in .env file');
     if (!process.env.SMTP_EMAIL_TO) throw new Error('SMTP_EMAIL_TO is not defined in .env file');
     if (!process.env.FRONTEND_URL) throw new Error('FRONTEND_URL is not defined in .env file');
+    if (!process.env.MINIO_ENDPOINT) throw new Error('MINIO_ENDPOINT is not defined in .env file');
+    if (!process.env.MINIO_ACCESS_KEY) throw new Error('MINIO_ACCESS_KEY is not defined in .env file');
+    if (!process.env.MINIO_SECRET_KEY) throw new Error('MINIO_SECRET_KEY is not defined in .env file');
+    if (!process.env.MINIO_BUCKET) throw new Error('MINIO_BUCKET is not defined in .env file');
+    if (!process.env.MINIO_PUBLIC_URL) throw new Error('MINIO_PUBLIC_URL is not defined in .env file');
 
     console.log('✅  Environment variables initialized.');
 }

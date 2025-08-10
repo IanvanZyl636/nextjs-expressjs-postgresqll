@@ -41,6 +41,7 @@ services:
     image: minio/minio:latest
     container_name: minio
     profiles: ["minio"] 
+    restart: always
     ports:
       - "9000:9000"   # Web UI/API
       - "9001:9001"   # Console

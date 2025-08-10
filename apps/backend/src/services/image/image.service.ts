@@ -6,9 +6,9 @@ import { prisma } from '../../integrations/prisma';
 
 
 const sizes = [
-  { key: ImageSize.THUMB, width: 150 },
-  { key: ImageSize.MEDIUM, width: 500 },
-  { key: ImageSize.LARGE, width: 1000 },
+  { enum: ImageSize.THUMB, width: 150 },
+  { enum: ImageSize.MEDIUM, width: 500 },
+  { enum: ImageSize.LARGE, width: 1000 },
 ];
 
 export async function processAndUploadImagesService(
@@ -19,17 +19,17 @@ export async function processAndUploadImagesService(
 
   for (const size of sizes) {
     const resized = await sharp(originalBuffer).resize(size.width).toBuffer();
-    const fileName = `${generatedFileName}-${size.key}.jpg`;
+    const fileName = `${generatedFileName}-${size.enum}.jpg`;
     const url = await uploadImageToMinio(resized, fileName);
-    await prisma.image.create({
+    const image = await prisma.image.create({
       data: {
         url,
         fileName,
-        size: size.key,        
+        size: size.enum,        
         isStale: true
       },
     });
-    uploadedUrls[size.key] = url;
+    uploadedUrls[size.enum] = image.url;
   }
 
   return uploadedUrls;

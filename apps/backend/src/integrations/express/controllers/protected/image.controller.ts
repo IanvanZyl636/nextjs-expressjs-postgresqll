@@ -12,14 +12,16 @@ function isValidExtension(filename: string): boolean {
     return !!ext && ALLOWED_EXTENSIONS.includes(ext);
 }
 
-function validateUploadInput(file?: Express.Multer.File | undefined, productId?: string) {
-    if (!file || !productId) throw new HttpError(400, "Image and productId are required");
+function validateUploadInput(file: Express.Multer.File | undefined) {
+    if (!file) throw new HttpError(400, "Image is required");
 
-    const isValidProductId = 
-        (typeof productId === "string" && productId.trim().length > 0) ||
-        typeof productId === "number";
+    if (!file.buffer || !(file.buffer instanceof Buffer)) {
+        throw new HttpError(400, "Invalid or missing file buffer");
+    }
 
-    if (!isValidProductId) throw new HttpError(400, "Invalid productId");
+    if (!file.originalname || file.originalname.length > MAX_FILENAME_LENGTH) {
+        throw new HttpError(400, `Filename too long (max ${MAX_FILENAME_LENGTH} chars)`);
+    }
 
     if (!file.buffer || !(file.buffer instanceof Buffer)) {
         throw new HttpError(400, "Invalid or missing file buffer");

@@ -9,9 +9,9 @@ const router = Router();
 
 /**
  * @swagger
- * /api/protected/upload-product-images:
+ * /api/protected/upload-images:
  *   post:
- *     summary: Upload product images
+ *     summary: Upload images
  *     tags:
  *       - Image
  *     requestBody:
@@ -26,7 +26,7 @@ const router = Router();
  *                 items:
  *                   type: string
  *                   format: binary
- *                 description: Product image files to upload
+ *                 description: Image files to upload
  *     responses:
  *       200:
  *         description: Images uploaded successfully
