@@ -24,8 +24,8 @@ export * as $Enums from './enums'
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Addresses
- * const addresses = await prisma.address.findMany()
+ * // Fetch zero or more Images
+ * const images = await prisma.image.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -56,30 +56,20 @@ path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node")
 path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 
 /**
- * Model Address
+ * Model Image
  * 
  */
-export type Address = Prisma.AddressModel
-/**
- * Model Cart
- * 
- */
-export type Cart = Prisma.CartModel
-/**
- * Model CartItem
- * 
- */
-export type CartItem = Prisma.CartItemModel
+export type Image = Prisma.ImageModel
 /**
  * Model Customer
  * 
  */
 export type Customer = Prisma.CustomerModel
 /**
- * Model Image
+ * Model Address
  * 
  */
-export type Image = Prisma.ImageModel
+export type Address = Prisma.AddressModel
 /**
  * Model Order
  * 
@@ -101,10 +91,15 @@ export type Payment = Prisma.PaymentModel
  */
 export type Product = Prisma.ProductModel
 /**
- * Model Log
+ * Model Cart
  * 
  */
-export type Log = Prisma.LogModel
+export type Cart = Prisma.CartModel
+/**
+ * Model CartItem
+ * 
+ */
+export type CartItem = Prisma.CartItemModel
 /**
  * Model User
  * 
@@ -115,6 +110,11 @@ export type User = Prisma.UserModel
  * 
  */
 export type Token = Prisma.TokenModel
+/**
+ * Model Log
+ * 
+ */
+export type Log = Prisma.LogModel
 
 export type ImageSize = $Enums.ImageSize
 export const ImageSize = $Enums.ImageSize

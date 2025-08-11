@@ -206,7 +206,7 @@ type GetOrderItemGroupByPayload<T extends OrderItemGroupByArgs> = Prisma.PrismaP
           : Prisma.GetScalarType<T[P], OrderItemGroupByOutputType[P]>
       }
     >
-  > 
+  >
 
 
 
@@ -408,6 +408,14 @@ export type OrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
   update?: Prisma.OrderItemUpdateWithWhereUniqueWithoutOrderInput | Prisma.OrderItemUpdateWithWhereUniqueWithoutOrderInput[]
   updateMany?: Prisma.OrderItemUpdateManyWithWhereWithoutOrderInput | Prisma.OrderItemUpdateManyWithWhereWithoutOrderInput[]
   deleteMany?: Prisma.OrderItemScalarWhereInput | Prisma.OrderItemScalarWhereInput[]
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type OrderItemCreateNestedManyWithoutProductInput = {

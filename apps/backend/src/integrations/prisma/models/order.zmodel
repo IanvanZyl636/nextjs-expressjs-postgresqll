@@ -1,0 +1,37 @@
+import "./customer.zmodel"
+import "./payment.zmodel"
+import "./address.zmodel"
+import "./product.zmodel"
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+model Order {
+  id          String   @id @default(uuid())
+  customerId  String
+  total       Float
+  status      OrderStatus
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  customer    Customer @relation(fields: [customerId], references: [id])
+  orderItems  OrderItem[]
+  payment     Payment?
+  shippingAddressId String?
+  shippingAddress Address? @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  order     Order    @relation(fields: [orderId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
+}

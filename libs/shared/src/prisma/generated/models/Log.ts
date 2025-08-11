@@ -198,7 +198,7 @@ type GetLogGroupByPayload<T extends LogGroupByArgs> = Prisma.PrismaPromise<
           : Prisma.GetScalarType<T[P], LogGroupByOutputType[P]>
       }
     >
-  > 
+  >
 
 
 

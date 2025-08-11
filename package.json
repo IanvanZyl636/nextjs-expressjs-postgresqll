@@ -13,13 +13,14 @@
     "docker:postgresql:start": "docker compose --profile postgresql up -d --no-deps --build",
     "docker:minio:start": "docker compose --profile minio up -d --no-deps --build",
     "docker:cloudflare:start": "docker compose --profile cloudflare up -d --no-deps --build",
-    "prisma:migrate": "npx prisma migrate dev --schema=apps/backend/src/integrations/prisma",
-    "prisma:reset": "npx prisma migrate reset --schema=apps/backend/src/integrations/prisma",
-    "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma",
-    "prisma:reset:test": "dotenv -e .env.test -- npx prisma migrate reset --schema=apps/backend/src/integrations/prisma",
-    "prisma:reset:force:test": "dotenv -e .env.test -- npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma",
-    "prisma:deploy": "npx prisma migrate deploy --schema=apps/backend/src/integrations/prisma",
-    "prisma:seed": "npx prisma db seed --schema=apps/backend/src/integrations/prisma"
+    "zenstack:migrate":"npx zenstack generate --schema=apps/backend/src/integrations/prisma/schema.zmodel --output=../../../../../../libs/shared/src/prisma/generated",
+    "prisma:migrate": "npx prisma migrate dev --schema=apps/backend/src/integrations/prisma/prisma",
+    "prisma:reset": "npx prisma migrate reset --schema=apps/backend/src/integrations/prisma/prisma",
+    "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",
+    "prisma:reset:test": "dotenv -e .env.test -- npx prisma migrate reset --schema=apps/backend/src/integrations/prisma/prisma",
+    "prisma:reset:force:test": "dotenv -e .env.test -- npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",
+    "prisma:deploy": "npx prisma migrate deploy --schema=apps/backend/src/integrations/prisma/prisma",
+    "prisma:seed": "npx prisma db seed --schema=apps/backend/src/integrations/prisma/prisma"
   },
   "workspaces": [
     "apps/*",
@@ -45,7 +46,8 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tslib": "^2.8.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zenstack": "2.18.0"
   },
   "dependencies": {
     "zod": "^4.0.10"

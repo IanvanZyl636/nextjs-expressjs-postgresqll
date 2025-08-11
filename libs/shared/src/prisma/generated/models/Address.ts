@@ -196,7 +196,7 @@ type GetAddressGroupByPayload<T extends AddressGroupByArgs> = Prisma.PrismaPromi
           : Prisma.GetScalarType<T[P], AddressGroupByOutputType[P]>
       }
     >
-  > 
+  >
 
 
 
@@ -365,6 +365,16 @@ export type AddressUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type AddressListRelationFilter = {
+  every?: Prisma.AddressWhereInput
+  some?: Prisma.AddressWhereInput
+  none?: Prisma.AddressWhereInput
+}
+
+export type AddressOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type AddressCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
@@ -401,27 +411,9 @@ export type AddressMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type AddressListRelationFilter = {
-  every?: Prisma.AddressWhereInput
-  some?: Prisma.AddressWhereInput
-  none?: Prisma.AddressWhereInput
-}
-
-export type AddressOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
-}
-
 export type AddressNullableScalarRelationFilter = {
   is?: Prisma.AddressWhereInput | null
   isNot?: Prisma.AddressWhereInput | null
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 export type AddressCreateNestedManyWithoutCustomerInput = {

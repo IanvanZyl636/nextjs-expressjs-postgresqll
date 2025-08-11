@@ -1,0 +1,7 @@
+model Log {
+  id          Int      @id @default(autoincrement())
+  level       String
+  requestData Json?
+  timestamp   DateTime @default(now())
+  message     String
+}
