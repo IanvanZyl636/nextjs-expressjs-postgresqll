@@ -182,7 +182,7 @@ type GetImageGroupByPayload<T extends ImageGroupByArgs> = Prisma.PrismaPromise<
           : Prisma.GetScalarType<T[P], ImageGroupByOutputType[P]>
       }
     >
-  >
+  > 
 
 
 

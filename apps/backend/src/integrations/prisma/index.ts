@@ -1,11 +1,17 @@
-import { PrismaClient } from '@nextjs-expressjs-postgresql/shared';
+import { PrismaClient, enhance } from '@nextjs-expressjs-postgresql/shared';
 
-export const prisma = new PrismaClient();
+const prismaClient = new PrismaClient();
+
+export function prisma(userId?:string):PrismaClient{
+  const user = userId ? { id:userId } : undefined;
+
+  return enhance(prismaClient, { user });  
+}
 
 export const initializeDB = async (): Promise<void> => {
   while (true) {
     try {
-      await prisma.$connect();
+      await prismaClient.$connect();
 
       console.log('✅  Connected to the database.');
       break;

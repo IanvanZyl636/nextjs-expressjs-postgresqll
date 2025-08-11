@@ -13,4 +13,6 @@ model Address {
   updatedAt   DateTime @updatedAt
   customer    Customer @relation(fields: [customerId], references: [id])
   orders      Order[]  @relation("ShippingAddress")
+
+  @@allow('all', true)
 }

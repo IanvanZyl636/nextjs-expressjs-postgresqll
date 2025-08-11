@@ -12,7 +12,7 @@ const sizes = [
 ];
 
 export async function processAndUploadImagesService(
-  originalBuffer: Buffer  
+  originalBuffer: Buffer
 ): Promise<Record<string, string>> {
   const uploadedUrls: Record<string, string> = {};
   const generatedFileName = randomUUID();
@@ -21,7 +21,8 @@ export async function processAndUploadImagesService(
     const resized = await sharp(originalBuffer).resize(size.width).toBuffer();
     const fileName = `${generatedFileName}-${size.enum}.jpg`;
     const url = await uploadImageToMinio(resized, fileName);
-    const image = await prisma.image.create({
+
+    const image = await prisma().image.create({
       data: {
         url,
         fileName,
@@ -29,6 +30,7 @@ export async function processAndUploadImagesService(
         isStale: true
       },
     });
+
     uploadedUrls[size.enum] = image.url;
   }
 

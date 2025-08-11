@@ -23,4 +23,6 @@ model Payment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   order     Order    @relation(fields: [orderId], references: [id])
+
+  @@allow('all', true)
 }

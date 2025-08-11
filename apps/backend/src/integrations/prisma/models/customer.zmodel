@@ -13,4 +13,6 @@ model Customer {
   orders       Order[]
   cart         Cart?
   user         User     @relation(fields: [userId], references: [id])
+
+  @@allow('all', true)
 }

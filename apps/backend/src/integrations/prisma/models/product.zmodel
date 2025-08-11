@@ -12,4 +12,6 @@ model Product {
   updatedAt   DateTime @updatedAt
   orderItems  OrderItem[]
   cartItems   CartItem[]
+
+  @@allow('all', true)
 }

@@ -206,7 +206,7 @@ type GetOrderItemGroupByPayload<T extends OrderItemGroupByArgs> = Prisma.PrismaP
           : Prisma.GetScalarType<T[P], OrderItemGroupByOutputType[P]>
       }
     >
-  >
+  > 
 
 
 

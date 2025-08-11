@@ -4,13 +4,13 @@
 // @ts-nocheck 
 /**
  * WARNING: This is an internal file that is subject to change!
- *
+ * 
  * 🛑 Under no circumstances should you import this file directly! 🛑
- *
+ * 
  * All exports from this file are wrapped under a `Prisma` namespace object in the client.ts file.
  * While this enables partial backward compatibility, it is not part of the stable public API.
- *
- * If you are looking for your Models, Enums, and Input Types, please import them from the respective
+ * 
+ * If you are looking for your Models, Enums, and Input Types, please import them from the respective 
  * model files in the `model` directory!
  */
 
@@ -92,12 +92,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 6.13.0
- * Query Engine version: 361e86d0ea4987e9f53a565309b3eed797a6bcbd
+ * Prisma Client JS version: 6.12.0
+ * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
  */
 export const prismaVersion: PrismaVersion = {
-  client: "6.13.0",
-  engine: "361e86d0ea4987e9f53a565309b3eed797a6bcbd"
+  client: "6.12.0",
+  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
 }
 
 /**
@@ -1465,7 +1465,7 @@ export type CartItemScalarFieldEnum = (typeof CartItemScalarFieldEnum)[keyof typ
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  passwordHash: 'passwordHash',
+  password: 'password',
   role: 'role',
   emailVerifiedAt: 'emailVerifiedAt',
   createdAt: 'createdAt',
@@ -1544,7 +1544,7 @@ export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof Json
 
 
 /**
- * Field references
+ * Field references 
  */
 
 
@@ -1742,24 +1742,16 @@ export interface PrismaClientOptions {
   /**
    * @example
    * ```
-   * // Shorthand for `emit: 'stdout'`
+   * // Defaults to stdout
    * log: ['query', 'info', 'warn', 'error']
    * 
-   * // Emit as events only
+   * // Emit as events
    * log: [
-   *   { emit: 'event', level: 'query' },
-   *   { emit: 'event', level: 'info' },
-   *   { emit: 'event', level: 'warn' }
-   *   { emit: 'event', level: 'error' }
+   *   { emit: 'stdout', level: 'query' },
+   *   { emit: 'stdout', level: 'info' },
+   *   { emit: 'stdout', level: 'warn' }
+   *   { emit: 'stdout', level: 'error' }
    * ]
-   * 
-   * / Emit as events and log to stdout
-   * og: [
-   *  { emit: 'stdout', level: 'query' },
-   *  { emit: 'stdout', level: 'info' },
-   *  { emit: 'stdout', level: 'warn' }
-   *  { emit: 'stdout', level: 'error' }
-   * 
    * ```
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
    */
@@ -1812,15 +1804,10 @@ export type LogDefinition = {
   emit: 'stdout' | 'event'
 }
 
-export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
-
-export type GetLogType<T> = CheckIsLogLevel<
-  T extends LogDefinition ? T['level'] : T
->;
-
-export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
-  ? GetLogType<T[number]>
-  : never;
+export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
+export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
+  GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
+  : never
 
 export type QueryEvent = {
   timestamp: Date
@@ -1858,7 +1845,7 @@ export type PrismaAction =
   | 'aggregate'
   | 'count'
   | 'runCommandRaw'
-  | 'findRaw'
+  | 'findRaw' 
   | 'groupBy'
 
 /**

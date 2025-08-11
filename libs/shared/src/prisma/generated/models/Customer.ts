@@ -168,7 +168,7 @@ type GetCustomerGroupByPayload<T extends CustomerGroupByArgs> = Prisma.PrismaPro
           : Prisma.GetScalarType<T[P], CustomerGroupByOutputType[P]>
       }
     >
-  >
+  > 
 
 
 

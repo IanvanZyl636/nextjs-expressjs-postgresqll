@@ -1,7 +1,7 @@
 import { prisma } from '../../integrations/prisma';
 
 beforeAll(async () => {
-  await prisma.$disconnect();
+  await prisma().$disconnect();
 });
 
 describe('Auth', () => {
@@ -12,5 +12,5 @@ describe('Auth', () => {
 });
 
 afterAll(async () => {
-  await prisma.$disconnect();
+  await prisma().$disconnect();
 });

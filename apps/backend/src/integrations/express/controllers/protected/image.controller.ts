@@ -2,6 +2,7 @@ import { Response } from "express";
 import { processAndUploadImagesService } from "../../../../services/image/image.service";
 import { MulterImageRequest } from "../../models/muler-image-request.model";
 import HttpError from "../../../../utils/error/http-error";
+import { AuthenticatedRequest } from "../../models/authenticated-request.model";
 
 const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -45,7 +46,7 @@ function validateUploadInput(file: Express.Multer.File | undefined) {
 }
 
 export async function uploadImagesController(
-    req: MulterImageRequest,
+    req: AuthenticatedRequest & MulterImageRequest,
     res: Response
 ) {    
     const files = req.files;
@@ -55,7 +56,7 @@ export async function uploadImagesController(
     }
 
     const uploadPromises = files.map(async file => {
-        validateUploadInput(file);
+        validateUploadInput(file);        
 
         return await processAndUploadImagesService(file.buffer);
     });

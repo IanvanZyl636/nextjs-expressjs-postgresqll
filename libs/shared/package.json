@@ -16,6 +16,7 @@
     }
   },
   "dependencies": {
-    "@prisma/client": "^6.13.0"
+    "@prisma/client": "^6.13.0",
+    "@zenstackhq/runtime": "^2.18.0"
   }
 }

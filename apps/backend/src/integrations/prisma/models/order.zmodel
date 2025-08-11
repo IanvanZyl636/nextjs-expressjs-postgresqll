@@ -24,6 +24,8 @@ model Order {
   payment     Payment?
   shippingAddressId String?
   shippingAddress Address? @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+
+  @@allow('all', true)
 }
 
 model OrderItem {
@@ -34,4 +36,6 @@ model OrderItem {
   price     Float
   order     Order    @relation(fields: [orderId], references: [id])
   product   Product  @relation(fields: [productId], references: [id])
+
+  @@allow('all', true)
 }

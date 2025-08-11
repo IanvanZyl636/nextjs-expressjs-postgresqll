@@ -14,13 +14,15 @@ enum TokenType {
 model User {
   id             String   @id @default(cuid())
   email          String   @unique
-  passwordHash   String
+  password       String
   role           Role     @default(CLIENT)
   refreshTokens  Token[]
   emailVerifiedAt DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   customer       Customer?
+
+  @@allow('read', true)
 }
 
 model Token {
@@ -34,4 +36,6 @@ model Token {
   revoked    Boolean   @default(false)
   ip         String?
   userAgent  String?
+
+  @@allow('all', true)
 }

@@ -23,7 +23,7 @@ const logger: Logger = createLogger({
 
 logger.on('data', async (log) => {
   try {
-    await prisma.log.create({
+    await prisma().log.create({
       data: {
         level: log.level,
         message: log.message,

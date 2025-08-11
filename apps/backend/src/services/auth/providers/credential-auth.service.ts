@@ -8,16 +8,16 @@ import ms, { StringValue } from 'ms';
 
 
 export async function loginWithCredentials(input: CredentialInput, role: Role): Promise<AuthResult> {
-  const user = await prisma.user.findUnique({ where: { email: input.email, role } });
+  const user = await prisma().user.findUnique({ where: { email: input.email, role } });
 
-  if (!user || !(await bcrypt.compare(input.password, user.passwordHash))) {
+  if (!user || !(await bcrypt.compare(input.password, user.password))) {
     throw new HttpError(401, 'Invalid credentials');
   }
 
   const accessToken = generateAccessToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
   const refreshToken = generateRefreshToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
 
-  await prisma.token.create({
+  await prisma().token.create({
     data: {
       type: TokenType.REFRESH,
       token: refreshToken,
@@ -32,18 +32,18 @@ export async function loginWithCredentials(input: CredentialInput, role: Role): 
 };
 
 export async function registerCredentials(input: CredentialInput, role:Role): Promise<RegisterResult>{
-    const existingUser = await prisma.user.findFirst({
+    const existingUser = await prisma().user.findFirst({
         where: { email: input.email, role }
     })
 
     if (existingUser) throw new HttpError(409, 'User already exists');
     
-    const passwordHash = await bcrypt.hash(input.password, 10)
+    const password = await bcrypt.hash(input.password, 10)
 
-    const user = await prisma.user.create({
+    const user = await prisma().user.create({
         data: {
             email:input.email,
-            passwordHash,
+            password,
             role
         },
     });

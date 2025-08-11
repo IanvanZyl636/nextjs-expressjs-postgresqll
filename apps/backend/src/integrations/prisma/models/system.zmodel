@@ -4,4 +4,6 @@ model Log {
   requestData Json?
   timestamp   DateTime @default(now())
   message     String
+
+  @@allow('all', true)
 }

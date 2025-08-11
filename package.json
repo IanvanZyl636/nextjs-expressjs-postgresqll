@@ -13,7 +13,8 @@
     "docker:postgresql:start": "docker compose --profile postgresql up -d --no-deps --build",
     "docker:minio:start": "docker compose --profile minio up -d --no-deps --build",
     "docker:cloudflare:start": "docker compose --profile cloudflare up -d --no-deps --build",
-    "zenstack:migrate":"npx zenstack generate --schema=apps/backend/src/integrations/prisma/schema.zmodel --output=../../../../../../libs/shared/src/prisma/generated",
+    "zenstack:generate": "npx zenstack generate --schema=apps/backend/src/integrations/prisma/schema.zmodel --output=libs/shared/src/prisma/enhance",
+    "prisma:push": "npx prisma db push --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:migrate": "npx prisma migrate dev --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:reset": "npx prisma migrate reset --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",
@@ -50,6 +51,6 @@
     "zenstack": "2.18.0"
   },
   "dependencies": {
-    "zod": "^4.0.10"
+    "zod": "^3.25.0"
   }
 }

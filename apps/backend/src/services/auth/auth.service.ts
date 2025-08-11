@@ -36,7 +36,7 @@ export async function loginService(input: ProviderInput, role:Role = Role.CLIENT
 }
 
 export async function logoutService(refreshToken: string, ip: string, userAgent: string): Promise<void> {
-  await prisma.token.updateMany({
+  await prisma().token.updateMany({
     where: { 
       type: TokenType.REFRESH,
       token: refreshToken,
@@ -49,7 +49,7 @@ export async function logoutService(refreshToken: string, ip: string, userAgent:
 
 export async function refreshTokenService(refreshToken: string, ip: string, userAgent: string) {
   const payload = verifyRefreshToken(refreshToken);
-  const storedToken = await prisma.token.findUnique({ 
+  const storedToken = await prisma().token.findUnique({ 
     where: { 
         token: refreshToken,
         type: TokenType.REFRESH,
@@ -65,12 +65,12 @@ export async function refreshTokenService(refreshToken: string, ip: string, user
   const newAccessToken = generateAccessToken(payload);
   const newRefreshToken = generateRefreshToken(payload);
 
-  await prisma.token.update({
+  await prisma().token.update({
     where: { token: refreshToken, type: TokenType.REFRESH },
     data: { revoked: true }
   });
 
-  await prisma.token.create({
+  await prisma().token.create({
     data: {
       type: TokenType.REFRESH,
       token: newRefreshToken,
@@ -85,7 +85,7 @@ export async function refreshTokenService(refreshToken: string, ip: string, user
 }
 
 export async function forgotPasswordService(email: string) {
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await prisma().user.findUnique({ where: { email } });
   const resetToken = crypto.randomBytes(32).toString("hex");
 
   if (!user) return;
@@ -93,7 +93,7 @@ export async function forgotPasswordService(email: string) {
   
   const expiresAt = new Date(Date.now() + ms("1h"));
 
-  await prisma.token.create({
+  await prisma().token.create({
     data: {
       token: resetToken,
       userId: user.id,
@@ -110,7 +110,7 @@ export async function forgotPasswordService(email: string) {
 }
 
 export async function resetPasswordService(token: string, newPassword: string): Promise<void> {
-  const resetRecord = await prisma.token.findUnique({ where: { token, type: TokenType.PASSWORD_RESET } });
+  const resetRecord = await prisma().token.findUnique({ where: { token, type: TokenType.PASSWORD_RESET } });
   if (
     !resetRecord ||
     resetRecord.revoked ||
@@ -119,21 +119,21 @@ export async function resetPasswordService(token: string, newPassword: string): 
     throw new HttpError(400, "Invalid or expired password reset token");
   }
 
-  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  const password = await bcrypt.hash(newPassword, 10);
 
-  await prisma.user.update({
+  await prisma().user.update({
     where: { id: resetRecord.userId },
-    data: { passwordHash: hashedPassword }
+    data: { password }
   });
 
-  await prisma.token.update({
+  await prisma().token.update({
     where: { token, type: TokenType.PASSWORD_RESET },
     data: { revoked: true }
   });
 }
 
 export async function requestEmailVerificationService(userId: string) {
-  const user = await prisma.user.findUnique({ where: { id: userId } });
+  const user = await prisma().user.findUnique({ where: { id: userId } });
   if (!user) {
     throw new HttpError(404, "User not found");
   }
@@ -141,7 +141,7 @@ export async function requestEmailVerificationService(userId: string) {
   const verificationToken = crypto.randomBytes(32).toString("hex");
   const expiresAt = new Date(Date.now() + ms("24h"));
 
-  await prisma.token.create({
+  await prisma().token.create({
     data: {
       type: TokenType.EMAIL_VERIFICATION,
       token: verificationToken,
@@ -158,7 +158,7 @@ export async function requestEmailVerificationService(userId: string) {
 }
 
 export async function verifyEmailService(token: string): Promise<void> {
-  const record = await prisma.token.findUnique({ where: { token, type: TokenType.EMAIL_VERIFICATION } });
+  const record = await prisma().token.findUnique({ where: { token, type: TokenType.EMAIL_VERIFICATION } });
   if (
     !record ||
     record.revoked ||
@@ -167,12 +167,12 @@ export async function verifyEmailService(token: string): Promise<void> {
     throw new HttpError(400, "Invalid or expired email verification token");
   }
 
-  await prisma.user.update({
+  await prisma().user.update({
     where: { id: record.userId },
     data: { emailVerifiedAt: new Date() }
   });
 
-  await prisma.token.update({
+  await prisma().token.update({
     where: { token, type: TokenType.EMAIL_VERIFICATION },
     data: { revoked: true }
   });

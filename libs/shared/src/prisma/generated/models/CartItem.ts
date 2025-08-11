@@ -195,7 +195,7 @@ type GetCartItemGroupByPayload<T extends CartItemGroupByArgs> = Prisma.PrismaPro
           : Prisma.GetScalarType<T[P], CartItemGroupByOutputType[P]>
       }
     >
-  >
+  > 
 
 
 
