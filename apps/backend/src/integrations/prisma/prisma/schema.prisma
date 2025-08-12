@@ -18,10 +18,19 @@ generator client {
   importFileExtension    = ""
 }
 
+enum MediaType {
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+  OTHER
+}
+
 enum ImageSize {
   THUMB
   MEDIUM
   LARGE
+  ORIGINAL
 }
 
 enum OrderStatus {
@@ -59,14 +68,20 @@ enum TokenType {
   PASSWORD_RESET
 }
 
-model Image {
-  id        String    @id() @default(uuid())
-  url       String    @unique()
-  size      ImageSize
+model Media {
+  id        String     @id() @default(uuid())
+  type      MediaType
+  key       String     @unique()
+  imageSize ImageSize?
   fileName  String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt()
-  isStale   Boolean   @default(true)
+  mimeType  String
+  fileSize  Int
+  duration  Int?
+  width     Int?
+  height    Int?
+  isStale   Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt()
 }
 
 model Customer {

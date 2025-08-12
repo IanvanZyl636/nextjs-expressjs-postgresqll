@@ -4,13 +4,13 @@
 // @ts-nocheck 
 /**
  * WARNING: This is an internal file that is subject to change!
- * 
+ *
  * 🛑 Under no circumstances should you import this file directly! 🛑
- * 
+ *
  * All exports from this file are wrapped under a `Prisma` namespace object in the client.ts file.
  * While this enables partial backward compatibility, it is not part of the stable public API.
- * 
- * If you are looking for your Models, Enums, and Input Types, please import them from the respective 
+ *
+ * If you are looking for your Models, Enums, and Input Types, please import them from the respective
  * model files in the `model` directory!
  */
 
@@ -92,12 +92,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 6.12.0
- * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
+ * Prisma Client JS version: 6.13.0
+ * Query Engine version: 361e86d0ea4987e9f53a565309b3eed797a6bcbd
  */
 export const prismaVersion: PrismaVersion = {
-  client: "6.12.0",
-  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
+  client: "6.13.0",
+  engine: "361e86d0ea4987e9f53a565309b3eed797a6bcbd"
 }
 
 /**
@@ -394,7 +394,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Image: 'Image',
+  Media: 'Media',
   Customer: 'Customer',
   Address: 'Address',
   Order: 'Order',
@@ -421,81 +421,81 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "image" | "customer" | "address" | "order" | "orderItem" | "payment" | "product" | "cart" | "cartItem" | "user" | "token" | "log"
+    modelProps: "media" | "customer" | "address" | "order" | "orderItem" | "payment" | "product" | "cart" | "cartItem" | "user" | "token" | "log"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
-    Image: {
-      payload: Prisma.$ImagePayload<ExtArgs>
-      fields: Prisma.ImageFieldRefs
+    Media: {
+      payload: Prisma.$MediaPayload<ExtArgs>
+      fields: Prisma.MediaFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ImageFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload> | null
+          args: Prisma.MediaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ImageFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
+          args: Prisma.MediaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>
         }
         findFirst: {
-          args: Prisma.ImageFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload> | null
+          args: Prisma.MediaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ImageFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
+          args: Prisma.MediaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>
         }
         findMany: {
-          args: Prisma.ImageFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>[]
+          args: Prisma.MediaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>[]
         }
         create: {
-          args: Prisma.ImageCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
+          args: Prisma.MediaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>
         }
         createMany: {
-          args: Prisma.ImageCreateManyArgs<ExtArgs>
+          args: Prisma.MediaCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ImageCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>[]
+          args: Prisma.MediaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>[]
         }
         delete: {
-          args: Prisma.ImageDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
+          args: Prisma.MediaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>
         }
         update: {
-          args: Prisma.ImageUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
+          args: Prisma.MediaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>
         }
         deleteMany: {
-          args: Prisma.ImageDeleteManyArgs<ExtArgs>
+          args: Prisma.MediaDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ImageUpdateManyArgs<ExtArgs>
+          args: Prisma.MediaUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ImageUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>[]
+          args: Prisma.MediaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>[]
         }
         upsert: {
-          args: Prisma.ImageUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ImagePayload>
+          args: Prisma.MediaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MediaPayload>
         }
         aggregate: {
-          args: Prisma.ImageAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateImage>
+          args: Prisma.MediaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMedia>
         }
         groupBy: {
-          args: Prisma.ImageGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ImageGroupByOutputType>[]
+          args: Prisma.MediaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MediaGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ImageCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ImageCountAggregateOutputType> | number
+          args: Prisma.MediaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MediaCountAggregateOutputType> | number
         }
       }
     }
@@ -1352,17 +1352,23 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const ImageScalarFieldEnum = {
+export const MediaScalarFieldEnum = {
   id: 'id',
-  url: 'url',
-  size: 'size',
+  type: 'type',
+  key: 'key',
+  imageSize: 'imageSize',
   fileName: 'fileName',
+  mimeType: 'mimeType',
+  fileSize: 'fileSize',
+  duration: 'duration',
+  width: 'width',
+  height: 'height',
+  isStale: 'isStale',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isStale: 'isStale'
+  updatedAt: 'updatedAt'
 } as const
 
-export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
+export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
 
 
 export const CustomerScalarFieldEnum = {
@@ -1544,7 +1550,7 @@ export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof Json
 
 
 /**
- * Field references 
+ * Field references
  */
 
 
@@ -1563,6 +1569,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'MediaType'
+ */
+export type EnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaType'>
+    
+
+
+/**
+ * Reference to a field of type 'MediaType[]'
+ */
+export type ListEnumMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MediaType[]'>
+    
+
+
+/**
  * Reference to a field of type 'ImageSize'
  */
 export type EnumImageSizeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ImageSize'>
@@ -1577,6 +1597,27 @@ export type ListEnumImageSizeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -1587,13 +1628,6 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1622,20 +1656,6 @@ export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'OrderStatus[]'
  */
 export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -1742,16 +1762,24 @@ export interface PrismaClientOptions {
   /**
    * @example
    * ```
-   * // Defaults to stdout
+   * // Shorthand for `emit: 'stdout'`
    * log: ['query', 'info', 'warn', 'error']
    * 
-   * // Emit as events
+   * // Emit as events only
    * log: [
-   *   { emit: 'stdout', level: 'query' },
-   *   { emit: 'stdout', level: 'info' },
-   *   { emit: 'stdout', level: 'warn' }
-   *   { emit: 'stdout', level: 'error' }
+   *   { emit: 'event', level: 'query' },
+   *   { emit: 'event', level: 'info' },
+   *   { emit: 'event', level: 'warn' }
+   *   { emit: 'event', level: 'error' }
    * ]
+   * 
+   * / Emit as events and log to stdout
+   * og: [
+   *  { emit: 'stdout', level: 'query' },
+   *  { emit: 'stdout', level: 'info' },
+   *  { emit: 'stdout', level: 'warn' }
+   *  { emit: 'stdout', level: 'error' }
+   * 
    * ```
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
    */
@@ -1783,7 +1811,7 @@ export interface PrismaClientOptions {
   omit?: GlobalOmitConfig
 }
 export type GlobalOmitConfig = {
-  image?: Prisma.ImageOmit
+  media?: Prisma.MediaOmit
   customer?: Prisma.CustomerOmit
   address?: Prisma.AddressOmit
   order?: Prisma.OrderOmit
@@ -1804,10 +1832,15 @@ export type LogDefinition = {
   emit: 'stdout' | 'event'
 }
 
-export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
-export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
-  GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
-  : never
+export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
+
+export type GetLogType<T> = CheckIsLogLevel<
+  T extends LogDefinition ? T['level'] : T
+>;
+
+export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition>
+  ? GetLogType<T[number]>
+  : never;
 
 export type QueryEvent = {
   timestamp: Date
@@ -1845,7 +1878,7 @@ export type PrismaAction =
   | 'aggregate'
   | 'count'
   | 'runCommandRaw'
-  | 'findRaw' 
+  | 'findRaw'
   | 'groupBy'
 
 /**

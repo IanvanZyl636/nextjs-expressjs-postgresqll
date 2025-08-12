@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { asyncHandler } from '../middleware/async-handler.middleware';
+import { asyncHandlerMiddleware } from '../middleware/async-handler.middleware';
 import { loginController, refreshController, registerController, logoutController } from '../controllers/auth.controller'
 
-const router = Router();
+const authRouter = Router();
 
 
 /**
@@ -44,7 +44,7 @@ const router = Router();
  *       401:
  *         description: Invalid credentials
  */
-router.post('/auth/register', asyncHandler(registerController));
+authRouter.post('/auth/register', asyncHandlerMiddleware(registerController));
 
 /**
  * @swagger
@@ -85,7 +85,7 @@ router.post('/auth/register', asyncHandler(registerController));
  *       401:
  *         description: Invalid credentials
  */
-router.post('/auth/login', asyncHandler(loginController));
+authRouter.post('/auth/login', asyncHandlerMiddleware(loginController));
 
 /**
  * @swagger
@@ -120,7 +120,7 @@ router.post('/auth/login', asyncHandler(loginController));
  *       401:
  *         description: Invalid refresh token
  */
-router.post('/auth/refresh', asyncHandler(refreshController));
+authRouter.post('/auth/refresh', asyncHandlerMiddleware(refreshController));
 
 /**
  * @swagger
@@ -155,6 +155,6 @@ router.post('/auth/refresh', asyncHandler(refreshController));
  *       400:
  *         description: Missing refresh token
  */
-router.post('/auth/logout', asyncHandler(logoutController));
+authRouter.post('/auth/logout', asyncHandlerMiddleware(logoutController));
 
-export default router;
+export { authRouter };

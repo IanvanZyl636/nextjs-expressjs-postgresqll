@@ -196,7 +196,7 @@ type GetTokenGroupByPayload<T extends TokenGroupByArgs> = Prisma.PrismaPromise<
           : Prisma.GetScalarType<T[P], TokenGroupByOutputType[P]>
       }
     >
-  > 
+  >
 
 
 

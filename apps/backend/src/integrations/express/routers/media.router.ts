@@ -1,0 +1,39 @@
+import { Router } from "express";
+import { asyncHandlerMiddleware } from "../middleware/async-handler.middleware";
+import { mediaController } from "../controllers/media.router";
+
+
+const mediaRouter = Router();
+
+/**
+ * @swagger
+ * /api/media/{fileId}:
+ *   get:
+ *     summary: Retrieve an uploaded image by fileId
+ *     tags:
+ *       - Image
+ *     parameters:
+ *       - in: path
+ *         name: fileId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The name of the file to retrieve
+ *     responses:
+ *       200:
+ *         description: Image file retrieved successfully
+ *         content:
+ *           image/*:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       400:
+ *         description: Bad request (invalid filename)
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: File not found
+ */
+mediaRouter.get('/media/:fileId', asyncHandlerMiddleware(mediaController));
+
+export { mediaRouter };

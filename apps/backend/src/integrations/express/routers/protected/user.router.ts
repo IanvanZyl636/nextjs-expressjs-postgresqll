@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { asyncHandler } from "../../middleware/async-handler.middleware";
+import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
 import { getUser } from "../../controllers/protected/user.controller";
 
-const router = Router();
+const protectedUserRouter = Router();
 
 /**
  * @swagger
@@ -17,6 +17,6 @@ const router = Router();
  *       401:
  *         description: Unauthorized
  */
-router.get('/user', asyncHandler(getUser));
+protectedUserRouter.get('/user', asyncHandlerMiddleware(getUser));
 
-export default router;
+export { protectedUserRouter };

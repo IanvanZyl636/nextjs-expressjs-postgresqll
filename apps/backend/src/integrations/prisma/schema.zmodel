@@ -1,4 +1,4 @@
-import "./models/image.zmodel"
+import "./models/media.zmodel"
 import "./models/customer.zmodel"
 import "./models/user.zmodel"
 import "./models/address.zmodel"

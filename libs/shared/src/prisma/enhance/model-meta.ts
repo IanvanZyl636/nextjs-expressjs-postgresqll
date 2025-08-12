@@ -7,23 +7,49 @@
 
 const metadata = {
     models: {
-        image: {
-            name: 'Image', fields: {
+        media: {
+            name: 'Media', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, url: {
-                    name: "url",
+                }, type: {
+                    name: "type",
+                    type: "MediaType",
+                }, key: {
+                    name: "key",
                     type: "String",
                     attributes: [{ "name": "@unique", "args": [] }],
-                }, size: {
-                    name: "size",
+                }, imageSize: {
+                    name: "imageSize",
                     type: "ImageSize",
+                    isOptional: true,
                 }, fileName: {
                     name: "fileName",
                     type: "String",
+                }, mimeType: {
+                    name: "mimeType",
+                    type: "String",
+                }, fileSize: {
+                    name: "fileSize",
+                    type: "Int",
+                }, duration: {
+                    name: "duration",
+                    type: "Int",
+                    isOptional: true,
+                }, width: {
+                    name: "width",
+                    type: "Int",
+                    isOptional: true,
+                }, height: {
+                    name: "height",
+                    type: "Int",
+                    isOptional: true,
+                }, isStale: {
+                    name: "isStale",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
                 }, createdAt: {
                     name: "createdAt",
                     type: "DateTime",
@@ -32,21 +58,17 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, isStale: {
-                    name: "isStale",
-                    type: "Boolean",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, url: {
-                    name: "url",
-                    fields: ["url"]
+                }, key: {
+                    name: "key",
+                    fields: ["key"]
                 },
             },
-            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }, { "name": "@@validate", "args": [{ "name": "value" }, { "name": "message", "value": "imageSize can only be set for images" }] }],
         },
         customer: {
             name: 'Customer', fields: {
@@ -533,7 +555,7 @@ const metadata = {
                     fields: ["email"]
                 },
             },
-            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "read" }, { "name": "condition", "value": true }] }],
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         token: {
             name: 'Token', fields: {

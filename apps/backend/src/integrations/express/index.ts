@@ -1,11 +1,12 @@
 import express from 'express';
-import authRouter from './routers/auth.router';
-import userRouter from './routers/protected/user.router';
-import imageRouter from './routers/protected/image.router';
+import { authRouter } from './routers/auth.router';
+import { protectedUserRouter } from './routers/protected/user.router';
+import { protectedMediaRouter } from './routers/protected/media.router';
+import { mediaRouter } from './routers/media.router';
 import swaggerUi from 'swagger-ui-express';
-import errorLogger from './middleware/error-logger.middleware';
+import errorLoggerMiddleware from './middleware/error-logger.middleware';
 import { swaggerSpec } from '../swagger';
-import { authenticateToken } from './middleware/authenticate-token.middleware';
+import { authenticateTokenMiddleware } from './middleware/authenticate-token.middleware';
 
 export const initializeExpress = async () => new Promise<void>(resolve => {
   const app = express();
@@ -17,13 +18,14 @@ export const initializeExpress = async () => new Promise<void>(resolve => {
     res.send(swaggerSpec);
   });
   app.use('/api', authRouter);
+  app.use('/api', mediaRouter);
 
-  app.use('/api/protected', authenticateToken);
-  app.use('/api/protected', userRouter);
-  app.use('/api/protected', imageRouter);
+  app.use('/api/protected', authenticateTokenMiddleware);
+  app.use('/api/protected', protectedUserRouter);
+  app.use('/api/protected', protectedMediaRouter);
   
 
-  app.use(errorLogger);
+  app.use(errorLoggerMiddleware);
 
   const port = process.env.PORT || 3333;
   const server = app.listen(port, async ()=> {

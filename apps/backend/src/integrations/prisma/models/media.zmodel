@@ -1,0 +1,35 @@
+enum MediaType {
+  IMAGE
+  VIDEO
+  AUDIO
+  DOCUMENT
+  OTHER
+}
+
+enum ImageSize {
+  THUMB
+  MEDIUM
+  LARGE
+  ORIGINAL
+}
+
+model Media {
+  id          String     @id @default(uuid())
+  type        MediaType
+  key         String     @unique
+  imageSize   ImageSize?
+  fileName    String
+  mimeType    String
+  fileSize    Int
+  duration    Int?
+  width       Int?
+  height      Int?
+  isStale     Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@allow("all", true)
+  @@validate(imageSize != null && type == IMAGE, "imageSize can only be set for images")
+
+}
+

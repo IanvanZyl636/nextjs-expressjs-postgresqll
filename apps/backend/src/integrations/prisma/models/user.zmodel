@@ -22,7 +22,7 @@ model User {
   updatedAt      DateTime @updatedAt
   customer       Customer?
 
-  @@allow('read', true)
+  @@allow('all', true)
 }
 
 model Token {

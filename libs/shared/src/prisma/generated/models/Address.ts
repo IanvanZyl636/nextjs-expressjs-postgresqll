@@ -196,7 +196,7 @@ type GetAddressGroupByPayload<T extends AddressGroupByArgs> = Prisma.PrismaPromi
           : Prisma.GetScalarType<T[P], AddressGroupByOutputType[P]>
       }
     >
-  > 
+  >
 
 
 

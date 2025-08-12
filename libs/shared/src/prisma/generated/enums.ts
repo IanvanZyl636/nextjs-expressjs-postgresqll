@@ -7,10 +7,22 @@
 *
 * 🟢 You can import this file directly.
 */
+export const MediaType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  AUDIO: 'AUDIO',
+  DOCUMENT: 'DOCUMENT',
+  OTHER: 'OTHER'
+} as const
+
+export type MediaType = (typeof MediaType)[keyof typeof MediaType]
+
+
 export const ImageSize = {
   THUMB: 'THUMB',
   MEDIUM: 'MEDIUM',
-  LARGE: 'LARGE'
+  LARGE: 'LARGE',
+  ORIGINAL: 'ORIGINAL'
 } as const
 
 export type ImageSize = (typeof ImageSize)[keyof typeof ImageSize]

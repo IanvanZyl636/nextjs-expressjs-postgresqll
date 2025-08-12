@@ -24,8 +24,8 @@ export * as $Enums from './enums'
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Images
- * const images = await prisma.image.findMany()
+ * // Fetch zero or more Media
+ * const media = await prisma.media.findMany()
  * ```
  * 
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
@@ -56,10 +56,10 @@ path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node")
 path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 
 /**
- * Model Image
+ * Model Media
  * 
  */
-export type Image = Prisma.ImageModel
+export type Media = Prisma.MediaModel
 /**
  * Model Customer
  * 
@@ -115,6 +115,9 @@ export type Token = Prisma.TokenModel
  * 
  */
 export type Log = Prisma.LogModel
+
+export type MediaType = $Enums.MediaType
+export const MediaType = $Enums.MediaType
 
 export type ImageSize = $Enums.ImageSize
 export const ImageSize = $Enums.ImageSize

@@ -227,7 +227,7 @@ type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromi
           : Prisma.GetScalarType<T[P], ProductGroupByOutputType[P]>
       }
     >
-  > 
+  >
 
 
 

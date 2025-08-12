@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import logger from '../../winston';
 import HttpError from '../../../utils/error/http-error';
 
-const errorLogger = (
+const errorLoggerMiddleware = (
   err: Error | HttpError,
   req: Request,
   res: Response,
@@ -31,4 +31,4 @@ const errorLogger = (
   }
 };
 
-export default errorLogger;
+export default errorLoggerMiddleware;

@@ -8,6 +8,7 @@
 import { type QueryContext, type CrudContract, type PermissionCheckerContext } from "@zenstackhq/runtime";
 import { allFieldsEqual } from "@zenstackhq/runtime/validation";
 import { type PolicyDef, type PermissionCheckerConstraint } from "@zenstackhq/runtime/enhancements/node";
+import { MediaType } from "../generated/client";
 import { ImageSize } from "../generated/client";
 import { OrderStatus } from "../generated/client";
 import { PaymentStatus } from "../generated/client";
@@ -17,13 +18,13 @@ import { TokenType } from "../generated/client";
 
 const policy: PolicyDef = {
     policy: {
-        image: {
+        media: {
             modelLevel: {
-                read: { guard: Image_read, },
-                create: { guard: Image_create, inputChecker: Image_create_input, },
-                update: { guard: Image_update, },
-                postUpdate: { guard: Image_postUpdate, },
-                delete: { guard: Image_delete, }
+                read: { guard: Media_read, },
+                create: { guard: Media_create, inputChecker: Media_create_input, },
+                update: { guard: Media_update, },
+                postUpdate: { guard: Media_postUpdate, },
+                delete: { guard: Media_delete, }
             },
             fieldLevel: {
                 read:
@@ -259,7 +260,7 @@ const policy: PolicyDef = {
         },
     },
     validation: {
-        image: { hasValidation: false },
+        media: { hasValidation: true },
         customer: { hasValidation: false },
         address: { hasValidation: false },
         order: { hasValidation: false },
@@ -275,53 +276,53 @@ const policy: PolicyDef = {
 
 };
 
-function Image_read(context: QueryContext, db: CrudContract): any {
+function Media_read(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Image_read(input: any, context: QueryContext): any {
+function $check_Media_read(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Image_create(context: QueryContext, db: CrudContract): any {
+function Media_create(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Image_create(input: any, context: QueryContext): any {
+function $check_Media_create(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Image_create_input(input: any, context: QueryContext): boolean {
+function Media_create_input(input: any, context: QueryContext): boolean {
     return true
 }
 
-function Image_update(context: QueryContext, db: CrudContract): any {
+function Media_update(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Image_update(input: any, context: QueryContext): any {
+function $check_Media_update(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Image_postUpdate(context: QueryContext, db: CrudContract): any {
+function Media_postUpdate(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Image_postUpdate(input: any, context: QueryContext): any {
+function $check_Media_postUpdate(input: any, context: QueryContext): any {
     return true;
 }
 
-function Image_delete(context: QueryContext, db: CrudContract): any {
+function Media_delete(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Image_delete(input: any, context: QueryContext): any {
+function $check_Media_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
@@ -754,22 +755,26 @@ function $check_User_read(input: any, context: QueryContext): any {
 }
 
 function User_create(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_User_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function User_create_input(input: any, context: QueryContext): boolean {
-    return false;
+    return true
 }
 
 function User_update(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_User_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -782,10 +787,12 @@ function $check_User_postUpdate(input: any, context: QueryContext): any {
 }
 
 function User_delete(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_User_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 

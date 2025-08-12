@@ -216,7 +216,7 @@ type GetPaymentGroupByPayload<T extends PaymentGroupByArgs> = Prisma.PrismaPromi
           : Prisma.GetScalarType<T[P], PaymentGroupByOutputType[P]>
       }
     >
-  > 
+  >
 
 
 

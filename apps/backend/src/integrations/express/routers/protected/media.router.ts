@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { asyncHandler } from "../../middleware/async-handler.middleware";
-import { uploadImagesController } from "../../controllers/protected/image.controller";
+import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
+import { uploadImagesController } from "../../controllers/protected/media.controller";
 import multer from 'multer';
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-const router = Router();
+const protectedMediaRouter = Router();
 
 /**
  * @swagger
@@ -35,6 +35,6 @@ const router = Router();
  *       401:
  *         description: Unauthorized
  */
-router.post('/upload-images', upload.array('images'), asyncHandler(uploadImagesController));
+protectedMediaRouter.post('/upload-images', upload.array('images'), asyncHandlerMiddleware(uploadImagesController));
 
-export default router;
+export { protectedMediaRouter };

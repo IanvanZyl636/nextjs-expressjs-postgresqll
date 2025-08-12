@@ -1,10 +1,11 @@
 import { Response } from "express";
-import { processAndUploadImagesService } from "../../../../services/image/image.service";
+import { processAndUploadImagesService } from "../../../../services/media/media.service";
 import { MulterImageRequest } from "../../models/muler-image-request.model";
 import HttpError from "../../../../utils/error/http-error";
 import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import sharp from "sharp";
 
-const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif"];
+const ALLOWED_EXTENSIONS = ['jpeg', 'png', 'webp', 'tiff', 'gif', 'avif'];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const MAX_FILENAME_LENGTH = 100;
 
@@ -13,7 +14,7 @@ function isValidExtension(filename: string): boolean {
     return !!ext && ALLOWED_EXTENSIONS.includes(ext);
 }
 
-function validateUploadInput(file: Express.Multer.File | undefined) {
+async function validateUploadInput(file: Express.Multer.File | undefined) {
     if (!file) throw new HttpError(400, "Image is required");
 
     if (!file.buffer || !(file.buffer instanceof Buffer)) {
@@ -43,6 +44,12 @@ function validateUploadInput(file: Express.Multer.File | undefined) {
     if (file.size > MAX_FILE_SIZE) {
         throw new HttpError(400, `Image size must be less than ${MAX_FILE_SIZE / (1024 * 1024)}MB`);
     }
+
+    const metadata = await sharp(file.buffer).metadata();    
+
+    if (!ALLOWED_EXTENSIONS.includes(metadata.format || '')) {
+      throw new HttpError(400, 'Unsupported image format');
+    }    
 }
 
 export async function uploadImagesController(
@@ -56,9 +63,9 @@ export async function uploadImagesController(
     }
 
     const uploadPromises = files.map(async file => {
-        validateUploadInput(file);        
+       await validateUploadInput(file);
 
-        return await processAndUploadImagesService(file.buffer);
+        return await processAndUploadImagesService(file);
     });
 
     const results = await Promise.all(uploadPromises);
