@@ -33,6 +33,13 @@ enum ImageSize {
   ORIGINAL
 }
 
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
 enum OrderStatus {
   PENDING
   PAID
@@ -69,16 +76,16 @@ enum PaymentMethod {
 }
 
 model Media {
-  id                    String        @id() @default(uuid())
-  bucketKey             String        @unique()
+  id                    String               @id() @default(uuid())
+  bucketKey             String               @unique()
   mediaType             MediaType
   fileName              String
   mimeType              String
   fileSize              Int
-  isStale               Boolean       @default(true)
-  createdAt             DateTime      @default(now())
-  updatedAt             DateTime      @updatedAt()
-  product               ProductMedia?
+  isStale               Boolean              @default(true)
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt()
+  product               ProductVariantMedia?
   delegate_aux_image    Image?
   delegate_aux_video    Video?
   delegate_aux_audio    Audio?
@@ -117,25 +124,57 @@ model File {
 }
 
 model Product {
-  id          String         @id() @default(uuid())
+  id          String           @id() @default(uuid())
+  slug        String           @unique()
   name        String
   description String
-  price       Float
-  stock       Int
-  imageUrl    String?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt()
-  orderItems  OrderItem[]
-  cartItems   CartItem[]
-  mediaItems  ProductMedia[]
+  status      ProductStatus    @default(DRAFT)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt()
+  deletedAt   DateTime?
+  tags        Tag[]            @relation("ProductTags")
+  categories  Category[]       @relation("ProductCategories")
+  variants    ProductVariant[]
+  ratings     Rating[]
 }
 
-model ProductMedia {
-  id        String  @id() @default(uuid())
-  productId String
-  mediaId   String  @unique()
-  product   Product @relation(fields: [productId], references: [id])
-  media     Media   @relation(fields: [mediaId], references: [id])
+model ProductVariant {
+  id          String                @id() @default(uuid())
+  productId   String
+  featured    Boolean               @default(false)
+  sku         String                @unique()
+  slug        String                @unique()
+  name        String
+  description String?
+  color       String?
+  weight      Float?
+  dimensions  Json?
+  price       Float
+  stock       Int
+  salePrice   Float?
+  saleStart   DateTime?
+  saleEnd     DateTime?
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt()
+  deletedAt   DateTime?
+  product     Product               @relation(fields: [productId], references: [id])
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+  mediaItems  ProductVariantMedia[]
+
+  @@index([slug])
+  @@index([sku])
+  @@index([productId])
+}
+
+model ProductVariantMedia {
+  id               String         @id() @default(uuid())
+  isPrimary        Boolean        @default(false)
+  sortOrder        Int            @default(0)
+  productVariantId String
+  mediaId          String         @unique()
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  media            Media          @relation(fields: [mediaId], references: [id])
 }
 
 model Order {
@@ -153,13 +192,13 @@ model Order {
 }
 
 model OrderItem {
-  id        String  @id() @default(uuid())
-  orderId   String
-  productId String
-  quantity  Int
-  price     Float
-  order     Order   @relation(fields: [orderId], references: [id])
-  product   Product @relation(fields: [productId], references: [id])
+  id             String         @id() @default(uuid())
+  orderId        String
+  productId      String
+  quantity       Int
+  price          Float
+  order          Order          @relation(fields: [orderId], references: [id])
+  productVariant ProductVariant @relation(fields: [productId], references: [id])
 }
 
 model Customer {
@@ -198,12 +237,12 @@ model Cart {
 }
 
 model CartItem {
-  id        String  @id() @default(uuid())
-  cartId    String
-  productId String
-  quantity  Int
-  cart      Cart    @relation(fields: [cartId], references: [id])
-  product   Product @relation(fields: [productId], references: [id])
+  id             String         @id() @default(uuid())
+  cartId         String
+  productId      String
+  quantity       Int
+  cart           Cart           @relation(fields: [cartId], references: [id])
+  productVariant ProductVariant @relation(fields: [productId], references: [id])
 }
 
 model User {
@@ -216,6 +255,7 @@ model User {
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt()
   customer        Customer?
+  ratings         Rating[]
 }
 
 model Token {
@@ -231,6 +271,22 @@ model Token {
   userAgent String?
 }
 
+model Rating {
+  id        String   @id() @default(uuid())
+  productId String
+  userId    String
+  rating    Int
+  review    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([productId, userId])
+  @@index([productId])
+  @@index([userId])
+}
+
 model Payment {
   id        String        @id() @default(uuid())
   orderId   String        @unique()
@@ -240,6 +296,24 @@ model Payment {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt()
   order     Order         @relation(fields: [orderId], references: [id])
+}
+
+model Category {
+  id        String    @id() @default(uuid())
+  name      String    @unique()
+  slug      String    @unique()
+  parentId  String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt()
+  products  Product[] @relation("ProductCategories")
+}
+
+model Tag {
+  id        String    @id() @default(uuid())
+  name      String    @unique()
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt()
+  products  Product[] @relation("ProductTags")
 }
 
 model Log {

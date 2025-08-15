@@ -219,7 +219,7 @@ export type FileWhereInput = {
       isStale?: Prisma.BoolFilter<"File"> | boolean
       createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     };
 export type FileOrderByWithRelationInput = {
       id?: Prisma.SortOrder
@@ -231,7 +231,7 @@ export type FileOrderByWithRelationInput = {
       isStale?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
-      product?: Prisma.ProductMediaOrderByWithRelationInput
+      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
     };
 export type FileWhereUniqueInput = Prisma.AtLeast<{
       id?: string
@@ -246,7 +246,7 @@ export type FileWhereUniqueInput = Prisma.AtLeast<{
       isStale?: Prisma.BoolFilter<"File"> | boolean
       createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     }, "id" | "bucketKey">;
 export type FileOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
@@ -287,7 +287,7 @@ export type FileCreateInput = {
       isStale?: boolean
       createdAt?: Date | string
       updatedAt?: Date | string
-      product?: Prisma.ProductMediaCreateNestedOneWithoutDelegate_aux_ProductMedia_media_FileInput
+      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_4Input
     };
 export type FileUncheckedCreateInput = {
       id?: string
@@ -298,7 +298,7 @@ export type FileUncheckedCreateInput = {
       isStale?: boolean
       createdAt?: Date | string
       updatedAt?: Date | string
-      product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductMedia_media_FileInput
+      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_4Input
     };
 export type FileUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -309,7 +309,7 @@ export type FileUpdateInput = {
       isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductMediaUpdateOneWithoutDelegate_aux_ProductMedia_media_FileNestedInput
+      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_4NestedInput
     };
 export type FileUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -320,7 +320,7 @@ export type FileUncheckedUpdateInput = {
       isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductMediaUncheckedUpdateOneWithoutDelegate_aux_ProductMedia_media_FileNestedInput
+      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_4NestedInput
     };
 export type FileCreateManyInput = {
       id?: string
@@ -514,7 +514,7 @@ export type FileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $FilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "File"
       objects: {
-        product: Prisma.$ProductMediaPayload<ExtArgs> | null
+        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
@@ -877,7 +877,7 @@ export interface FileDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
  */
 export interface Prisma__FileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.File$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.File$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    product<T extends Prisma.File$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.File$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1290,18 +1290,18 @@ export type FileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export type File$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       /**
-       * Select specific fields to fetch from the ProductMedia
+       * Select specific fields to fetch from the ProductVariantMedia
        */
-      select?: Prisma.ProductMediaSelect<ExtArgs> | null
+      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
       /**
-       * Omit specific fields from the ProductMedia
+       * Omit specific fields from the ProductVariantMedia
        */
-      omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: Prisma.ProductMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductMediaWhereInput
+      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
+      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * File without action

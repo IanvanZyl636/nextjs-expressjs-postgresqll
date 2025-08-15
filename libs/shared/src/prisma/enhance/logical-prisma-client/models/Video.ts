@@ -231,7 +231,7 @@ export type VideoWhereInput = {
       createdAt?: Prisma.DateTimeFilter<"Video"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Video"> | Date | string
       duration?: Prisma.IntFilter<"Video"> | number
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     };
 export type VideoOrderByWithRelationInput = {
       id?: Prisma.SortOrder
@@ -244,7 +244,7 @@ export type VideoOrderByWithRelationInput = {
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
-      product?: Prisma.ProductMediaOrderByWithRelationInput
+      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
     };
 export type VideoWhereUniqueInput = Prisma.AtLeast<{
       id?: string
@@ -260,7 +260,7 @@ export type VideoWhereUniqueInput = Prisma.AtLeast<{
       createdAt?: Prisma.DateTimeFilter<"Video"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Video"> | Date | string
       duration?: Prisma.IntFilter<"Video"> | number
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     }, "id" | "bucketKey">;
 export type VideoOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
@@ -304,7 +304,7 @@ export type VideoCreateInput = {
       createdAt?: Date | string
       updatedAt?: Date | string
       duration: number
-      product?: Prisma.ProductMediaCreateNestedOneWithoutDelegate_aux_ProductMedia_media_VideoInput
+      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_1Input
     };
 export type VideoUncheckedCreateInput = {
       id?: string
@@ -316,7 +316,7 @@ export type VideoUncheckedCreateInput = {
       createdAt?: Date | string
       updatedAt?: Date | string
       duration: number
-      product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductMedia_media_VideoInput
+      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_1Input
     };
 export type VideoUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -328,7 +328,7 @@ export type VideoUpdateInput = {
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductMediaUpdateOneWithoutDelegate_aux_ProductMedia_media_VideoNestedInput
+      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_1NestedInput
     };
 export type VideoUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -340,7 +340,7 @@ export type VideoUncheckedUpdateInput = {
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductMediaUncheckedUpdateOneWithoutDelegate_aux_ProductMedia_media_VideoNestedInput
+      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_1NestedInput
     };
 export type VideoCreateManyInput = {
       id?: string
@@ -550,7 +550,7 @@ export type VideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $VideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "Video"
       objects: {
-        product: Prisma.$ProductMediaPayload<ExtArgs> | null
+        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
@@ -914,7 +914,7 @@ export interface VideoDelegate<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export interface Prisma__VideoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.Video$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    product<T extends Prisma.Video$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1328,18 +1328,18 @@ export type VideoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
  */
 export type Video$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       /**
-       * Select specific fields to fetch from the ProductMedia
+       * Select specific fields to fetch from the ProductVariantMedia
        */
-      select?: Prisma.ProductMediaSelect<ExtArgs> | null
+      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
       /**
-       * Omit specific fields from the ProductMedia
+       * Omit specific fields from the ProductVariantMedia
        */
-      omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: Prisma.ProductMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductMediaWhereInput
+      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
+      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * Video without action

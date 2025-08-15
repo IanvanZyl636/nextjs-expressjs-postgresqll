@@ -251,7 +251,7 @@ export type ImageWhereInput = {
       width?: Prisma.IntFilter<"Image"> | number
       height?: Prisma.IntFilter<"Image"> | number
       imageSize?: Prisma.EnumImageSizeFilter<"Image"> | $Enums.ImageSize
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     };
 export type ImageOrderByWithRelationInput = {
       id?: Prisma.SortOrder
@@ -266,7 +266,7 @@ export type ImageOrderByWithRelationInput = {
       width?: Prisma.SortOrder
       height?: Prisma.SortOrder
       imageSize?: Prisma.SortOrder
-      product?: Prisma.ProductMediaOrderByWithRelationInput
+      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
     };
 export type ImageWhereUniqueInput = Prisma.AtLeast<{
       id?: string
@@ -284,7 +284,7 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
       width?: Prisma.IntFilter<"Image"> | number
       height?: Prisma.IntFilter<"Image"> | number
       imageSize?: Prisma.EnumImageSizeFilter<"Image"> | $Enums.ImageSize
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     }, "id" | "bucketKey">;
 export type ImageOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
@@ -334,7 +334,7 @@ export type ImageCreateInput = {
       width: number
       height: number
       imageSize: $Enums.ImageSize
-      product?: Prisma.ProductMediaCreateNestedOneWithoutDelegate_aux_ProductMedia_media_ImageInput
+      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_0Input
     };
 export type ImageUncheckedCreateInput = {
       id?: string
@@ -348,7 +348,7 @@ export type ImageUncheckedCreateInput = {
       width: number
       height: number
       imageSize: $Enums.ImageSize
-      product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductMedia_media_ImageInput
+      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_0Input
     };
 export type ImageUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -362,7 +362,7 @@ export type ImageUpdateInput = {
       width?: Prisma.IntFieldUpdateOperationsInput | number
       height?: Prisma.IntFieldUpdateOperationsInput | number
       imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
-      product?: Prisma.ProductMediaUpdateOneWithoutDelegate_aux_ProductMedia_media_ImageNestedInput
+      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_0NestedInput
     };
 export type ImageUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -376,7 +376,7 @@ export type ImageUncheckedUpdateInput = {
       width?: Prisma.IntFieldUpdateOperationsInput | number
       height?: Prisma.IntFieldUpdateOperationsInput | number
       imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
-      product?: Prisma.ProductMediaUncheckedUpdateOneWithoutDelegate_aux_ProductMedia_media_ImageNestedInput
+      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_0NestedInput
     };
 export type ImageCreateManyInput = {
       id?: string
@@ -619,7 +619,7 @@ export type ImageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "Image"
       objects: {
-        product: Prisma.$ProductMediaPayload<ExtArgs> | null
+        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
@@ -985,7 +985,7 @@ export interface ImageDelegate<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export interface Prisma__ImageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.Image$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    product<T extends Prisma.Image$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1401,18 +1401,18 @@ export type ImageDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
  */
 export type Image$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       /**
-       * Select specific fields to fetch from the ProductMedia
+       * Select specific fields to fetch from the ProductVariantMedia
        */
-      select?: Prisma.ProductMediaSelect<ExtArgs> | null
+      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
       /**
-       * Omit specific fields from the ProductMedia
+       * Omit specific fields from the ProductVariantMedia
        */
-      omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: Prisma.ProductMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductMediaWhereInput
+      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
+      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * Image without action

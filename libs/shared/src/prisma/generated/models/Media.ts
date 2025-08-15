@@ -247,7 +247,7 @@ export type MediaWhereInput = {
   isStale?: Prisma.BoolFilter<"Media"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
-  product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
   delegate_aux_image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
   delegate_aux_video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
   delegate_aux_audio?: Prisma.XOR<Prisma.AudioNullableScalarRelationFilter, Prisma.AudioWhereInput> | null
@@ -265,7 +265,7 @@ export type MediaOrderByWithRelationInput = {
   isStale?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  product?: Prisma.ProductMediaOrderByWithRelationInput
+  product?: Prisma.ProductVariantMediaOrderByWithRelationInput
   delegate_aux_image?: Prisma.ImageOrderByWithRelationInput
   delegate_aux_video?: Prisma.VideoOrderByWithRelationInput
   delegate_aux_audio?: Prisma.AudioOrderByWithRelationInput
@@ -286,7 +286,7 @@ export type MediaWhereUniqueInput = Prisma.AtLeast<{
   isStale?: Prisma.BoolFilter<"Media"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
-  product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+  product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
   delegate_aux_image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
   delegate_aux_video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
   delegate_aux_audio?: Prisma.XOR<Prisma.AudioNullableScalarRelationFilter, Prisma.AudioWhereInput> | null
@@ -336,7 +336,7 @@ export type MediaCreateInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -354,7 +354,7 @@ export type MediaUncheckedCreateInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -372,7 +372,7 @@ export type MediaUpdateInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -390,7 +390,7 @@ export type MediaUncheckedUpdateInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -601,7 +601,7 @@ export type MediaCreateWithoutDelegate_aux_imageInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaCreateNestedOneWithoutMediaInput
   delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -618,7 +618,7 @@ export type MediaUncheckedCreateWithoutDelegate_aux_imageInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutMediaInput
   delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -651,7 +651,7 @@ export type MediaUpdateWithoutDelegate_aux_imageInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUpdateOneWithoutMediaNestedInput
   delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -668,7 +668,7 @@ export type MediaUncheckedUpdateWithoutDelegate_aux_imageInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutMediaNestedInput
   delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -685,7 +685,7 @@ export type MediaCreateWithoutDelegate_aux_videoInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -702,7 +702,7 @@ export type MediaUncheckedCreateWithoutDelegate_aux_videoInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -735,7 +735,7 @@ export type MediaUpdateWithoutDelegate_aux_videoInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -752,7 +752,7 @@ export type MediaUncheckedUpdateWithoutDelegate_aux_videoInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -769,7 +769,7 @@ export type MediaCreateWithoutDelegate_aux_audioInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -786,7 +786,7 @@ export type MediaUncheckedCreateWithoutDelegate_aux_audioInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -819,7 +819,7 @@ export type MediaUpdateWithoutDelegate_aux_audioInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -836,7 +836,7 @@ export type MediaUncheckedUpdateWithoutDelegate_aux_audioInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -853,7 +853,7 @@ export type MediaCreateWithoutDelegate_aux_documentInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -870,7 +870,7 @@ export type MediaUncheckedCreateWithoutDelegate_aux_documentInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -903,7 +903,7 @@ export type MediaUpdateWithoutDelegate_aux_documentInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -920,7 +920,7 @@ export type MediaUncheckedUpdateWithoutDelegate_aux_documentInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -937,7 +937,7 @@ export type MediaCreateWithoutDelegate_aux_fileInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -954,7 +954,7 @@ export type MediaUncheckedCreateWithoutDelegate_aux_fileInput = {
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutMediaInput
   delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
   delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
@@ -987,7 +987,7 @@ export type MediaUpdateWithoutDelegate_aux_fileInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -1004,7 +1004,7 @@ export type MediaUncheckedUpdateWithoutDelegate_aux_fileInput = {
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutMediaNestedInput
   delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
   delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
@@ -1166,7 +1166,7 @@ export type MediaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $MediaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Media"
   objects: {
-    product: Prisma.$ProductMediaPayload<ExtArgs> | null
+    product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
     delegate_aux_image: Prisma.$ImagePayload<ExtArgs> | null
     delegate_aux_video: Prisma.$VideoPayload<ExtArgs> | null
     delegate_aux_audio: Prisma.$AudioPayload<ExtArgs> | null
@@ -1577,7 +1577,7 @@ readonly fields: MediaFieldRefs;
  */
 export interface Prisma__MediaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  product<T extends Prisma.Media$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  product<T extends Prisma.Media$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   delegate_aux_image<T extends Prisma.Media$delegate_aux_imageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_imageArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   delegate_aux_video<T extends Prisma.Media$delegate_aux_videoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_videoArgs<ExtArgs>>): Prisma.Prisma__VideoClient<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   delegate_aux_audio<T extends Prisma.Media$delegate_aux_audioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_audioArgs<ExtArgs>>): Prisma.Prisma__AudioClient<runtime.Types.Result.GetResult<Prisma.$AudioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2013,18 +2013,18 @@ export type MediaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
  */
 export type Media$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the ProductMedia
+   * Select specific fields to fetch from the ProductVariantMedia
    */
-  select?: Prisma.ProductMediaSelect<ExtArgs> | null
+  select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the ProductMedia
+   * Omit specific fields from the ProductVariantMedia
    */
-  omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+  omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ProductMediaInclude<ExtArgs> | null
-  where?: Prisma.ProductMediaWhereInput
+  include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
+  where?: Prisma.ProductVariantMediaWhereInput
 }
 
 /**

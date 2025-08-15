@@ -231,7 +231,7 @@ export type AudioWhereInput = {
       createdAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
       duration?: Prisma.IntFilter<"Audio"> | number
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     };
 export type AudioOrderByWithRelationInput = {
       id?: Prisma.SortOrder
@@ -244,7 +244,7 @@ export type AudioOrderByWithRelationInput = {
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
-      product?: Prisma.ProductMediaOrderByWithRelationInput
+      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
     };
 export type AudioWhereUniqueInput = Prisma.AtLeast<{
       id?: string
@@ -260,7 +260,7 @@ export type AudioWhereUniqueInput = Prisma.AtLeast<{
       createdAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
       duration?: Prisma.IntFilter<"Audio"> | number
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     }, "id" | "bucketKey">;
 export type AudioOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
@@ -304,7 +304,7 @@ export type AudioCreateInput = {
       createdAt?: Date | string
       updatedAt?: Date | string
       duration: number
-      product?: Prisma.ProductMediaCreateNestedOneWithoutDelegate_aux_ProductMedia_media_AudioInput
+      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_2Input
     };
 export type AudioUncheckedCreateInput = {
       id?: string
@@ -316,7 +316,7 @@ export type AudioUncheckedCreateInput = {
       createdAt?: Date | string
       updatedAt?: Date | string
       duration: number
-      product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductMedia_media_AudioInput
+      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_2Input
     };
 export type AudioUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -328,7 +328,7 @@ export type AudioUpdateInput = {
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductMediaUpdateOneWithoutDelegate_aux_ProductMedia_media_AudioNestedInput
+      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_2NestedInput
     };
 export type AudioUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -340,7 +340,7 @@ export type AudioUncheckedUpdateInput = {
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductMediaUncheckedUpdateOneWithoutDelegate_aux_ProductMedia_media_AudioNestedInput
+      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_2NestedInput
     };
 export type AudioCreateManyInput = {
       id?: string
@@ -550,7 +550,7 @@ export type AudioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $AudioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "Audio"
       objects: {
-        product: Prisma.$ProductMediaPayload<ExtArgs> | null
+        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
@@ -914,7 +914,7 @@ export interface AudioDelegate<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export interface Prisma__AudioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.Audio$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Audio$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    product<T extends Prisma.Audio$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Audio$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1328,18 +1328,18 @@ export type AudioDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
  */
 export type Audio$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       /**
-       * Select specific fields to fetch from the ProductMedia
+       * Select specific fields to fetch from the ProductVariantMedia
        */
-      select?: Prisma.ProductMediaSelect<ExtArgs> | null
+      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
       /**
-       * Omit specific fields from the ProductMedia
+       * Omit specific fields from the ProductVariantMedia
        */
-      omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: Prisma.ProductMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductMediaWhereInput
+      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
+      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * Audio without action

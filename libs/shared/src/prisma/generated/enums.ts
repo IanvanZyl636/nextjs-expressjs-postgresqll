@@ -28,6 +28,16 @@ export const ImageSize = {
 export type ImageSize = (typeof ImageSize)[keyof typeof ImageSize]
 
 
+export const ProductStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type ProductStatus = (typeof ProductStatus)[keyof typeof ProductStatus]
+
+
 export const OrderStatus = {
   PENDING: 'PENDING',
   PAID: 'PAID',

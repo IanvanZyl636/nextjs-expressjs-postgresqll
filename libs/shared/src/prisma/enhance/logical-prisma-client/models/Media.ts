@@ -221,7 +221,7 @@ export type MediaWhereInput = {
       isStale?: Prisma.BoolFilter<"Media"> | boolean
       createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     };
 export type MediaOrderByWithRelationInput = {
       id?: Prisma.SortOrder
@@ -233,7 +233,7 @@ export type MediaOrderByWithRelationInput = {
       isStale?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
-      product?: Prisma.ProductMediaOrderByWithRelationInput
+      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
     };
 export type MediaWhereUniqueInput = Prisma.AtLeast<{
       id?: string
@@ -248,7 +248,7 @@ export type MediaWhereUniqueInput = Prisma.AtLeast<{
       isStale?: Prisma.BoolFilter<"Media"> | boolean
       createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     }, "id" | "bucketKey">;
 export type MediaOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
@@ -289,7 +289,7 @@ export type MediaCreateInput = {
       isStale?: boolean
       createdAt?: Date | string
       updatedAt?: Date | string
-      product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutMediaInput
     };
 export type MediaUncheckedCreateInput = {
       id?: string
@@ -300,7 +300,7 @@ export type MediaUncheckedCreateInput = {
       isStale?: boolean
       createdAt?: Date | string
       updatedAt?: Date | string
-      product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutMediaInput
     };
 export type MediaUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -311,7 +311,7 @@ export type MediaUpdateInput = {
       isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+      product?: Prisma.ProductVariantMediaUpdateOneWithoutMediaNestedInput
     };
 export type MediaUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -322,7 +322,7 @@ export type MediaUncheckedUpdateInput = {
       isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutMediaNestedInput
     };
 export type MediaCreateManyInput = {
       id?: string
@@ -817,7 +817,7 @@ export interface MediaDelegate<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export interface Prisma__MediaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.Media$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    product<T extends Prisma.Media$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1230,18 +1230,18 @@ export type MediaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
  */
 export type Media$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       /**
-       * Select specific fields to fetch from the ProductMedia
+       * Select specific fields to fetch from the ProductVariantMedia
        */
-      select?: Prisma.ProductMediaSelect<ExtArgs> | null
+      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
       /**
-       * Omit specific fields from the ProductMedia
+       * Omit specific fields from the ProductVariantMedia
        */
-      omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: Prisma.ProductMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductMediaWhereInput
+      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
+      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * Media without action

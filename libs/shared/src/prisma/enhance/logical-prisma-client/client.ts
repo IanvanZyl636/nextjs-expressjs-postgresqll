@@ -73,10 +73,15 @@ export type File = Prisma.FileModel
  */
 export type Product = Prisma.ProductModel
 /**
- * Model ProductMedia
+ * Model ProductVariant
  * 
  */
-export type ProductMedia = Prisma.ProductMediaModel
+export type ProductVariant = Prisma.ProductVariantModel
+/**
+ * Model ProductVariantMedia
+ * 
+ */
+export type ProductVariantMedia = Prisma.ProductVariantMediaModel
 /**
  * Model Order
  * @@allow('all', true)
@@ -118,10 +123,25 @@ export type User = Prisma.UserModel
  */
 export type Token = Prisma.TokenModel
 /**
+ * Model Rating
+ * 
+ */
+export type Rating = Prisma.RatingModel
+/**
  * Model Payment
  * @@allow('all', true)
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model Category
+ * 
+ */
+export type Category = Prisma.CategoryModel
+/**
+ * Model Tag
+ * 
+ */
+export type Tag = Prisma.TagModel
 /**
  * Model Log
  * @@allow('all', true)
@@ -133,6 +153,9 @@ export const MediaType = $Enums.MediaType
 
 export type ImageSize = $Enums.ImageSize
 export const ImageSize = $Enums.ImageSize
+
+export type ProductStatus = $Enums.ProductStatus
+export const ProductStatus = $Enums.ProductStatus
 
 export type OrderStatus = $Enums.OrderStatus
 export const OrderStatus = $Enums.OrderStatus

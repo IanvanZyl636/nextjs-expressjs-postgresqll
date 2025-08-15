@@ -1,0 +1,12 @@
+import "./product.zmodel"
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  slug      String    @unique
+  parentId  String?   // optional hierarchical categories
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  products  Product[] @relation("ProductCategories")
+}

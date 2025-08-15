@@ -10,6 +10,7 @@ import { allFieldsEqual } from "@zenstackhq/runtime/validation";
 import { type PolicyDef, type PermissionCheckerConstraint } from "@zenstackhq/runtime/enhancements/node";
 import { MediaType } from "../generated/client";
 import { ImageSize } from "../generated/client";
+import { ProductStatus } from "../generated/client";
 import { OrderStatus } from "../generated/client";
 import { Role } from "../generated/client";
 import { TokenType } from "../generated/client";
@@ -158,13 +159,33 @@ const policy: PolicyDef = {
             },
 
         },
-        productMedia: {
+        productVariant: {
             modelLevel: {
-                read: { guard: ProductMedia_read, },
-                create: { guard: ProductMedia_create, inputChecker: ProductMedia_create_input, },
-                update: { guard: ProductMedia_update, },
-                postUpdate: { guard: ProductMedia_postUpdate, },
-                delete: { guard: ProductMedia_delete, }
+                read: { guard: ProductVariant_read, },
+                create: { guard: ProductVariant_create, inputChecker: ProductVariant_create_input, },
+                update: { guard: ProductVariant_update, },
+                postUpdate: { guard: ProductVariant_postUpdate, },
+                delete: { guard: ProductVariant_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        productVariantMedia: {
+            modelLevel: {
+                read: { guard: ProductVariantMedia_read, },
+                create: { guard: ProductVariantMedia_create, inputChecker: ProductVariantMedia_create_input, },
+                update: { guard: ProductVariantMedia_update, },
+                postUpdate: { guard: ProductVariantMedia_postUpdate, },
+                delete: { guard: ProductVariantMedia_delete, }
             },
             fieldLevel: {
                 read:
@@ -338,6 +359,26 @@ const policy: PolicyDef = {
             },
 
         },
+        rating: {
+            modelLevel: {
+                read: { guard: Rating_read, },
+                create: { guard: Rating_create, inputChecker: Rating_create_input, },
+                update: { guard: Rating_update, },
+                postUpdate: { guard: Rating_postUpdate, },
+                delete: { guard: Rating_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
         payment: {
             modelLevel: {
                 read: { guard: Payment_read, },
@@ -345,6 +386,46 @@ const policy: PolicyDef = {
                 update: { guard: Payment_update, },
                 postUpdate: { guard: Payment_postUpdate, },
                 delete: { guard: Payment_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        category: {
+            modelLevel: {
+                read: { guard: Category_read, },
+                create: { guard: Category_create, inputChecker: Category_create_input, },
+                update: { guard: Category_update, },
+                postUpdate: { guard: Category_postUpdate, },
+                delete: { guard: Category_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        tag: {
+            modelLevel: {
+                read: { guard: Tag_read, },
+                create: { guard: Tag_create, inputChecker: Tag_create_input, },
+                update: { guard: Tag_update, },
+                postUpdate: { guard: Tag_postUpdate, },
+                delete: { guard: Tag_delete, }
             },
             fieldLevel: {
                 read:
@@ -387,7 +468,8 @@ const policy: PolicyDef = {
         document: { hasValidation: false },
         file: { hasValidation: false },
         product: { hasValidation: false },
-        productMedia: { hasValidation: false },
+        productVariant: { hasValidation: true },
+        productVariantMedia: { hasValidation: false },
         order: { hasValidation: false },
         orderItem: { hasValidation: false },
         customer: { hasValidation: false },
@@ -396,7 +478,10 @@ const policy: PolicyDef = {
         cartItem: { hasValidation: false },
         user: { hasValidation: false },
         token: { hasValidation: false },
+        rating: { hasValidation: false },
         payment: { hasValidation: false },
+        category: { hasValidation: false },
+        tag: { hasValidation: false },
         log: { hasValidation: false },
     },
 
@@ -766,47 +851,91 @@ function $check_Product_delete(input: any, context: QueryContext): any {
     return false;
 }
 
-function ProductMedia_read(context: QueryContext, db: CrudContract): any {
+function ProductVariant_read(context: QueryContext, db: CrudContract): any {
     return { OR: [] };
 }
 
-function $check_ProductMedia_read(input: any, context: QueryContext): any {
+function $check_ProductVariant_read(input: any, context: QueryContext): any {
     return false;
 }
 
-function ProductMedia_create(context: QueryContext, db: CrudContract): any {
+function ProductVariant_create(context: QueryContext, db: CrudContract): any {
     return { OR: [] };
 }
 
-function $check_ProductMedia_create(input: any, context: QueryContext): any {
+function $check_ProductVariant_create(input: any, context: QueryContext): any {
     return false;
 }
 
-function ProductMedia_create_input(input: any, context: QueryContext): boolean {
+function ProductVariant_create_input(input: any, context: QueryContext): boolean {
     return false;
 }
 
-function ProductMedia_update(context: QueryContext, db: CrudContract): any {
+function ProductVariant_update(context: QueryContext, db: CrudContract): any {
     return { OR: [] };
 }
 
-function $check_ProductMedia_update(input: any, context: QueryContext): any {
+function $check_ProductVariant_update(input: any, context: QueryContext): any {
     return false;
 }
 
-function ProductMedia_postUpdate(context: QueryContext, db: CrudContract): any {
+function ProductVariant_postUpdate(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_ProductMedia_postUpdate(input: any, context: QueryContext): any {
+function $check_ProductVariant_postUpdate(input: any, context: QueryContext): any {
     return true;
 }
 
-function ProductMedia_delete(context: QueryContext, db: CrudContract): any {
+function ProductVariant_delete(context: QueryContext, db: CrudContract): any {
     return { OR: [] };
 }
 
-function $check_ProductMedia_delete(input: any, context: QueryContext): any {
+function $check_ProductVariant_delete(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ProductVariantMedia_read(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductVariantMedia_read(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ProductVariantMedia_create(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductVariantMedia_create(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ProductVariantMedia_create_input(input: any, context: QueryContext): boolean {
+    return false;
+}
+
+function ProductVariantMedia_update(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductVariantMedia_update(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ProductVariantMedia_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ProductVariantMedia_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function ProductVariantMedia_delete(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductVariantMedia_delete(input: any, context: QueryContext): any {
     return false;
 }
 
@@ -1226,6 +1355,50 @@ function $check_Token_delete(input: any, context: QueryContext): any {
     return false;
 }
 
+function Rating_read(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Rating_read(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Rating_create(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Rating_create(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Rating_create_input(input: any, context: QueryContext): boolean {
+    return false;
+}
+
+function Rating_update(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Rating_update(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Rating_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Rating_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Rating_delete(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Rating_delete(input: any, context: QueryContext): any {
+    return false;
+}
+
 function Payment_read(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
@@ -1275,6 +1448,94 @@ function Payment_delete(context: QueryContext, db: CrudContract): any {
 function $check_Payment_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
+    return false;
+}
+
+function Category_read(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Category_read(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Category_create(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Category_create(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Category_create_input(input: any, context: QueryContext): boolean {
+    return false;
+}
+
+function Category_update(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Category_update(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Category_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Category_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Category_delete(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Category_delete(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Tag_read(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Tag_read(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Tag_create(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Tag_create(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Tag_create_input(input: any, context: QueryContext): boolean {
+    return false;
+}
+
+function Tag_update(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Tag_update(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Tag_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Tag_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Tag_delete(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Tag_delete(input: any, context: QueryContext): any {
     return false;
 }
 

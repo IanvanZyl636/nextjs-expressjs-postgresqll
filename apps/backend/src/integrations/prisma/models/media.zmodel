@@ -26,7 +26,7 @@ model Media {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
 
-  product   ProductMedia?
+  product   ProductVariantMedia?
 
   @@allow("all", true)
   @@delegate(mediaType)

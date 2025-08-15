@@ -1,28 +1,86 @@
 import "./order.zmodel"
 import "./cart.zmodel"
 import "./media.zmodel"
+import "./rating.zmodel"
+import "./category.zmodel"
+import "./tag.zmodel"
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+type Dimensions {
+  length Float
+  width  Float
+  height Float
+  unit   String @default("cm")
+}
 
 model Product {
-  id          String   @id @default(uuid())
+  id          String           @id @default(uuid())
+  slug        String           @unique
   name        String
   description String
-  price       Float
-  stock       Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 
-  orderItems  OrderItem[]
-  cartItems   CartItem[]
-  mediaItems  ProductMedia[]
+  status      ProductStatus    @default(DRAFT)
+
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  deletedAt   DateTime?
+
+  tags        Tag[]            @relation("ProductTags")
+  categories  Category[]       @relation("ProductCategories")
+  variants    ProductVariant[]
+  ratings     Rating[]
+
 
   @@allow('all', true)
 }
 
-model ProductMedia {
-  id        String @id @default(uuid())
-  productId String
-  mediaId   String @unique
+model ProductVariant {
+  id          String                @id @default(uuid())
+  productId   String
+  featured    Boolean               @default(false)
+  sku         String                @unique
+  slug        String                @unique
 
-  product Product @relation(fields: [productId], references: [id])
-  media   Media   @relation(fields: [mediaId], references: [id])
+  name        String
+  description String?
+
+  color       String?
+  weight      Float?
+  dimensions  Dimensions?           @json
+
+  price       Float
+  stock       Int
+  salePrice   Float?
+  saleStart   DateTime?
+  saleEnd     DateTime?
+
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  deletedAt   DateTime?
+
+  product     Product               @relation(fields: [productId], references: [id])
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+  mediaItems  ProductVariantMedia[]
+
+  @@index([slug])
+  @@index([sku])
+  @@index([productId])
+}
+
+model ProductVariantMedia {
+  id               String         @id @default(uuid())
+  isPrimary        Boolean        @default(false)
+  sortOrder        Int            @default(0)
+  productVariantId String
+  mediaId          String         @unique
+
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  media            Media          @relation(fields: [mediaId], references: [id])
 }

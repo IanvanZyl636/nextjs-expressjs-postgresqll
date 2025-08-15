@@ -5,3 +5,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
+export type Dimensions = {
+    length: number;
+    width: number;
+    height: number;
+    unit: string;
+};

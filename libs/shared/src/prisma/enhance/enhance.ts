@@ -9,7 +9,7 @@ import { type EnhancementContext, type EnhancementOptions, type ZodSchemas, type
 import { createEnhancement } from '@zenstackhq/runtime/enhancements/node';
 import modelMeta from './model-meta';
 import policy from './policy';
-const zodSchemas = undefined;
+import * as zodSchemas from './zod';
 
 import { Prisma as _Prisma, PrismaClient as _PrismaClient } from '../generated/client';
 import type { InternalArgs, DynamicClientExtensionThis } from '@prisma/client/runtime/library';

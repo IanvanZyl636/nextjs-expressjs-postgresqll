@@ -44,7 +44,7 @@ const metadata = {
                     attributes: [{ "name": "@updatedAt", "args": [] }],
                 }, product: {
                     name: "product",
-                    type: "ProductMedia",
+                    type: "ProductVariantMedia",
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
@@ -105,7 +105,7 @@ const metadata = {
                     inheritedFrom: "Media",
                 }, product: {
                     name: "product",
-                    type: "ProductMedia",
+                    type: "ProductVariantMedia",
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
@@ -176,7 +176,7 @@ const metadata = {
                     inheritedFrom: "Media",
                 }, product: {
                     name: "product",
-                    type: "ProductMedia",
+                    type: "ProductVariantMedia",
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
@@ -241,7 +241,7 @@ const metadata = {
                     inheritedFrom: "Media",
                 }, product: {
                     name: "product",
-                    type: "ProductMedia",
+                    type: "ProductVariantMedia",
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
@@ -306,7 +306,7 @@ const metadata = {
                     inheritedFrom: "Media",
                 }, product: {
                     name: "product",
-                    type: "ProductMedia",
+                    type: "ProductVariantMedia",
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
@@ -368,7 +368,7 @@ const metadata = {
                     inheritedFrom: "Media",
                 }, product: {
                     name: "product",
-                    type: "ProductMedia",
+                    type: "ProductVariantMedia",
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
@@ -392,22 +392,20 @@ const metadata = {
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, slug: {
+                    name: "slug",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
                 }, name: {
                     name: "name",
                     type: "String",
                 }, description: {
                     name: "description",
                     type: "String",
-                }, price: {
-                    name: "price",
-                    type: "Float",
-                }, stock: {
-                    name: "stock",
-                    type: "Int",
-                }, imageUrl: {
-                    name: "imageUrl",
-                    type: "String",
-                    isOptional: true,
+                }, status: {
+                    name: "status",
+                    type: "ProductStatus",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
                 }, createdAt: {
                     name: "createdAt",
                     type: "DateTime",
@@ -416,21 +414,33 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, orderItems: {
-                    name: "orderItems",
-                    type: "OrderItem",
+                }, deletedAt: {
+                    name: "deletedAt",
+                    type: "DateTime",
+                    isOptional: true,
+                }, tags: {
+                    name: "tags",
+                    type: "Tag",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ProductTags" }] }],
+                    backLink: 'products',
+                }, categories: {
+                    name: "categories",
+                    type: "Category",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ProductCategories" }] }],
+                    backLink: 'products',
+                }, variants: {
+                    name: "variants",
+                    type: "ProductVariant",
                     isDataModel: true,
                     isArray: true,
                     backLink: 'product',
-                }, cartItems: {
-                    name: "cartItems",
-                    type: "CartItem",
-                    isDataModel: true,
-                    isArray: true,
-                    backLink: 'product',
-                }, mediaItems: {
-                    name: "mediaItems",
-                    type: "ProductMedia",
+                }, ratings: {
+                    name: "ratings",
+                    type: "Rating",
                     isDataModel: true,
                     isArray: true,
                     backLink: 'product',
@@ -439,12 +449,15 @@ const metadata = {
                 id: {
                     name: "id",
                     fields: ["id"]
+                }, slug: {
+                    name: "slug",
+                    fields: ["slug"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
-        productMedia: {
-            name: 'ProductMedia', fields: {
+        productVariant: {
+            name: 'ProductVariant', fields: {
                 id: {
                     name: "id",
                     type: "String",
@@ -455,20 +468,144 @@ const metadata = {
                     type: "String",
                     isForeignKey: true,
                     relationField: 'product',
+                }, featured: {
+                    name: "featured",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": false }] }],
+                }, sku: {
+                    name: "sku",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                }, slug: {
+                    name: "slug",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                }, name: {
+                    name: "name",
+                    type: "String",
+                }, description: {
+                    name: "description",
+                    type: "String",
+                    isOptional: true,
+                }, color: {
+                    name: "color",
+                    type: "String",
+                    isOptional: true,
+                }, weight: {
+                    name: "weight",
+                    type: "Float",
+                    isOptional: true,
+                }, dimensions: {
+                    name: "dimensions",
+                    type: "Dimensions",
+                    isTypeDef: true,
+                    isOptional: true,
+                    attributes: [{ "name": "@json", "args": [] }],
+                }, price: {
+                    name: "price",
+                    type: "Float",
+                }, stock: {
+                    name: "stock",
+                    type: "Int",
+                }, salePrice: {
+                    name: "salePrice",
+                    type: "Float",
+                    isOptional: true,
+                }, saleStart: {
+                    name: "saleStart",
+                    type: "DateTime",
+                    isOptional: true,
+                }, saleEnd: {
+                    name: "saleEnd",
+                    type: "DateTime",
+                    isOptional: true,
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, deletedAt: {
+                    name: "deletedAt",
+                    type: "DateTime",
+                    isOptional: true,
+                }, product: {
+                    name: "product",
+                    type: "Product",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'variants',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "productId" },
+                }, orderItems: {
+                    name: "orderItems",
+                    type: "OrderItem",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'productVariant',
+                }, cartItems: {
+                    name: "cartItems",
+                    type: "CartItem",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'productVariant',
+                }, mediaItems: {
+                    name: "mediaItems",
+                    type: "ProductVariantMedia",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'productVariant',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, sku: {
+                    name: "sku",
+                    fields: ["sku"]
+                }, slug: {
+                    name: "slug",
+                    fields: ["slug"]
+                },
+            },
+            attributes: [{ "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }],
+        },
+        productVariantMedia: {
+            name: 'ProductVariantMedia', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, isPrimary: {
+                    name: "isPrimary",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": false }] }],
+                }, sortOrder: {
+                    name: "sortOrder",
+                    type: "Int",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": 0 }] }],
+                }, productVariantId: {
+                    name: "productVariantId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'productVariant',
                 }, mediaId: {
                     name: "mediaId",
                     type: "String",
                     attributes: [{ "name": "@unique", "args": [] }],
                     isForeignKey: true,
                     relationField: 'media',
-                }, product: {
-                    name: "product",
-                    type: "Product",
+                }, productVariant: {
+                    name: "productVariant",
+                    type: "ProductVariant",
                     isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
                     backLink: 'mediaItems',
                     isRelationOwner: true,
-                    foreignKeyMapping: { "id": "productId" },
+                    foreignKeyMapping: { "id": "productVariantId" },
                 }, media: {
                     name: "media",
                     type: "Media",
@@ -574,7 +711,7 @@ const metadata = {
                     name: "productId",
                     type: "String",
                     isForeignKey: true,
-                    relationField: 'product',
+                    relationField: 'productVariant',
                 }, quantity: {
                     name: "quantity",
                     type: "Int",
@@ -589,9 +726,9 @@ const metadata = {
                     backLink: 'orderItems',
                     isRelationOwner: true,
                     foreignKeyMapping: { "id": "orderId" },
-                }, product: {
-                    name: "product",
-                    type: "Product",
+                }, productVariant: {
+                    name: "productVariant",
+                    type: "ProductVariant",
                     isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
                     backLink: 'orderItems',
@@ -790,7 +927,7 @@ const metadata = {
                     name: "productId",
                     type: "String",
                     isForeignKey: true,
-                    relationField: 'product',
+                    relationField: 'productVariant',
                 }, quantity: {
                     name: "quantity",
                     type: "Int",
@@ -802,9 +939,9 @@ const metadata = {
                     backLink: 'cartItems',
                     isRelationOwner: true,
                     foreignKeyMapping: { "id": "cartId" },
-                }, product: {
-                    name: "product",
-                    type: "Product",
+                }, productVariant: {
+                    name: "productVariant",
+                    type: "ProductVariant",
                     isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
                     backLink: 'cartItems',
@@ -860,6 +997,12 @@ const metadata = {
                     type: "Customer",
                     isDataModel: true,
                     isOptional: true,
+                    backLink: 'user',
+                }, ratings: {
+                    name: "ratings",
+                    type: "Rating",
+                    isDataModel: true,
+                    isArray: true,
                     backLink: 'user',
                 },
             }, uniqueConstraints: {
@@ -931,6 +1074,66 @@ const metadata = {
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
+        rating: {
+            name: 'Rating', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, productId: {
+                    name: "productId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'product',
+                }, userId: {
+                    name: "userId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'user',
+                }, rating: {
+                    name: "rating",
+                    type: "Int",
+                }, review: {
+                    name: "review",
+                    type: "String",
+                    isOptional: true,
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, product: {
+                    name: "product",
+                    type: "Product",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'ratings',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "productId" },
+                }, user: {
+                    name: "user",
+                    type: "User",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'ratings',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "userId" },
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, productId_userId: {
+                    name: "productId_userId",
+                    fields: ["productId", "userId"]
+                },
+            },
+            attributes: [{ "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@unique", "args": [{ "name": "fields", "value": [null, null] }] }],
+        },
         payment: {
             name: 'Payment', fields: {
                 id: {
@@ -981,6 +1184,91 @@ const metadata = {
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
+        category: {
+            name: 'Category', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, name: {
+                    name: "name",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                }, slug: {
+                    name: "slug",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                }, parentId: {
+                    name: "parentId",
+                    type: "String",
+                    isOptional: true,
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, products: {
+                    name: "products",
+                    type: "Product",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ProductCategories" }] }],
+                    backLink: 'categories',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, name: {
+                    name: "name",
+                    fields: ["name"]
+                }, slug: {
+                    name: "slug",
+                    fields: ["slug"]
+                },
+            },
+        },
+        tag: {
+            name: 'Tag', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, name: {
+                    name: "name",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, products: {
+                    name: "products",
+                    type: "Product",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ProductTags" }] }],
+                    backLink: 'tags',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, name: {
+                    name: "name",
+                    fields: ["name"]
+                },
+            },
+        },
         log: {
             name: 'Log', fields: {
                 id: {
@@ -1011,6 +1299,27 @@ const metadata = {
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+
+    },
+    typeDefs: {
+        dimensions: {
+            name: 'Dimensions', fields: {
+                length: {
+                    name: "length",
+                    type: "Float",
+                }, width: {
+                    name: "width",
+                    type: "Float",
+                }, height: {
+                    name: "height",
+                    type: "Float",
+                }, unit: {
+                    name: "unit",
+                    type: "String",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": "cm" }] }],
+                },
+            },
         },
 
     },

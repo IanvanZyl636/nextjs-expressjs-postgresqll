@@ -219,7 +219,7 @@ export type DocumentWhereInput = {
       isStale?: Prisma.BoolFilter<"Document"> | boolean
       createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     };
 export type DocumentOrderByWithRelationInput = {
       id?: Prisma.SortOrder
@@ -231,7 +231,7 @@ export type DocumentOrderByWithRelationInput = {
       isStale?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
-      product?: Prisma.ProductMediaOrderByWithRelationInput
+      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
     };
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
       id?: string
@@ -246,7 +246,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
       isStale?: Prisma.BoolFilter<"Document"> | boolean
       createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
     }, "id" | "bucketKey">;
 export type DocumentOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
@@ -287,7 +287,7 @@ export type DocumentCreateInput = {
       isStale?: boolean
       createdAt?: Date | string
       updatedAt?: Date | string
-      product?: Prisma.ProductMediaCreateNestedOneWithoutDelegate_aux_ProductMedia_media_Docume_0Input
+      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_3Input
     };
 export type DocumentUncheckedCreateInput = {
       id?: string
@@ -298,7 +298,7 @@ export type DocumentUncheckedCreateInput = {
       isStale?: boolean
       createdAt?: Date | string
       updatedAt?: Date | string
-      product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductMedia_media_Docume_0Input
+      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_3Input
     };
 export type DocumentUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -309,7 +309,7 @@ export type DocumentUpdateInput = {
       isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductMediaUpdateOneWithoutDelegate_aux_ProductMedia_media_Docume_0NestedInput
+      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_3NestedInput
     };
 export type DocumentUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -320,7 +320,7 @@ export type DocumentUncheckedUpdateInput = {
       isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductMediaUncheckedUpdateOneWithoutDelegate_aux_ProductMedia_media_Docume_0NestedInput
+      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_3NestedInput
     };
 export type DocumentCreateManyInput = {
       id?: string
@@ -514,7 +514,7 @@ export type DocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "Document"
       objects: {
-        product: Prisma.$ProductMediaPayload<ExtArgs> | null
+        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
@@ -877,7 +877,7 @@ export interface DocumentDelegate<ExtArgs extends runtime.Types.Extensions.Inter
  */
 export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.Document$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    product<T extends Prisma.Document$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1290,18 +1290,18 @@ export type DocumentDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
  */
 export type Document$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       /**
-       * Select specific fields to fetch from the ProductMedia
+       * Select specific fields to fetch from the ProductVariantMedia
        */
-      select?: Prisma.ProductMediaSelect<ExtArgs> | null
+      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
       /**
-       * Omit specific fields from the ProductMedia
+       * Omit specific fields from the ProductVariantMedia
        */
-      omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
       /**
        * Choose, which related nodes to fetch as well
        */
-      include?: Prisma.ProductMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductMediaWhereInput
+      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
+      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * Document without action
