@@ -377,6 +377,13 @@ export type OrderListRelationFilter = {
 export type OrderOrderByRelationAggregateInput = {
       _count?: Prisma.SortOrder
     };
+export type FloatFieldUpdateOperationsInput = {
+      set?: number
+      increment?: number
+      decrement?: number
+      multiply?: number
+      divide?: number
+    };
 export type EnumOrderStatusFieldUpdateOperationsInput = {
       set?: $Enums.OrderStatus
     };

@@ -5,6 +5,7 @@ import { ImageSize } from '@nextjs-expressjs-postgresql/shared';
 import { prisma } from '../../integrations/prisma';
 import sanitizeFilename from 'sanitize-filename';
 import HttpError from '../../utils/error/http-error';
+import { getImageExtension } from '../../helpers/sharp.helper';
 
 export async function processAndUploadImagesService(
   file: Express.Multer.File
@@ -15,19 +16,19 @@ export async function processAndUploadImagesService(
     { enum: ImageSize.LARGE, width: 1000 },
   ];
   const uploadedFileIds: string[] = [];
-  const generatedFileName = randomUUID();
+  const generatedFileLocation = randomUUID();
   const cleanBuffer = await sharp(file.buffer)
     .withMetadata({ exif: undefined })
     .toBuffer();
   const sanitizedFileName = sanitizeFilename(file.originalname);
-  const originalMedia = await processImage(cleanBuffer, sanitizedFileName, generatedFileName, ImageSize.ORIGINAL);
+  const originalMedia = await processImage(cleanBuffer, sanitizedFileName, generatedFileLocation, ImageSize.ORIGINAL);
 
   uploadedFileIds.push(originalMedia.id);
 
   for (const size of sizes) {
     const resizedImage = await sharp(file.buffer).resize(size.width).webp();
     const buffer = await resizedImage.toBuffer();
-    const resizedMedia = await processImage(buffer, sanitizedFileName, generatedFileName, size.enum);
+    const resizedMedia = await processImage(buffer, sanitizedFileName, generatedFileLocation, size.enum);
 
     uploadedFileIds.push(resizedMedia.id);
   }
@@ -45,10 +46,11 @@ export async function downloadMediaService(fileId: string) {
   return await downloadMediaFromMinio(media.bucketKey);
 }
 
-async function processImage(buffer: Buffer<ArrayBufferLike>, sanitizedFileName: string, generatedFileName: string, imageSize: ImageSize) {
+async function processImage(buffer: Buffer<ArrayBufferLike>, sanitizedFileName: string, generatedFileLocation: string, imageSize: ImageSize) {
   const metadata = await sharp(buffer).metadata();
-  const fileName = `${generatedFileName}-${imageSize}.${metadata.format}`;
-  const extension = metadata.format;
+  const extension = await getImageExtension(metadata);
+  const fileName = `images/${generatedFileLocation}/${imageSize}.${extension}`;
+
   const mimeType = `image/${extension}`;
 
   const bucketKey = await uploadMediaToMinio(buffer, fileName, mimeType);

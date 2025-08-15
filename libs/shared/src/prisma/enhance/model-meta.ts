@@ -395,13 +395,16 @@ const metadata = {
                 }, slug: {
                     name: "slug",
                     type: "String",
+                    isOptional: true,
                     attributes: [{ "name": "@unique", "args": [] }],
                 }, name: {
                     name: "name",
                     type: "String",
+                    isOptional: true,
                 }, description: {
                     name: "description",
                     type: "String",
+                    isOptional: true,
                 }, status: {
                     name: "status",
                     type: "ProductStatus",
@@ -475,10 +478,12 @@ const metadata = {
                 }, sku: {
                     name: "sku",
                     type: "String",
+                    isOptional: true,
                     attributes: [{ "name": "@unique", "args": [] }],
                 }, slug: {
                     name: "slug",
                     type: "String",
+                    isOptional: true,
                     attributes: [{ "name": "@unique", "args": [] }],
                 }, name: {
                     name: "name",
@@ -504,9 +509,11 @@ const metadata = {
                 }, price: {
                     name: "price",
                     type: "Float",
+                    isOptional: true,
                 }, stock: {
                     name: "stock",
                     type: "Int",
+                    isOptional: true,
                 }, salePrice: {
                     name: "salePrice",
                     type: "Float",

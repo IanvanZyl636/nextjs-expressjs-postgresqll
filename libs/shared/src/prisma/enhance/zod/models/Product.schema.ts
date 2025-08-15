@@ -10,9 +10,9 @@ import { ProductStatus } from '../../models';
 import { ProductStatusSchema } from '../enums/ProductStatus.schema';
 const baseSchema = z.object({
     id: z.string(),
-    slug: z.string(),
-    name: z.string(),
-    description: z.string(),
+    slug: z.string().nullish(),
+    name: z.string().nullish(),
+    description: z.string().nullish(),
     status: ProductStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),
@@ -52,9 +52,9 @@ export const ProductPrismaCreateSchema = baseSchema.partial().passthrough();
  */
 export const ProductPrismaUpdateSchema = z.object({
     id: z.string(),
-    slug: z.string(),
-    name: z.string(),
-    description: z.string(),
+    slug: z.string().nullish(),
+    name: z.string().nullish(),
+    description: z.string().nullish(),
     status: ProductStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),

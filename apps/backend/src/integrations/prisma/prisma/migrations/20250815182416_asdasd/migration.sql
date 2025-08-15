@@ -1,0 +1,10 @@
+-- AlterTable
+ALTER TABLE "public"."Product" ALTER COLUMN "name" DROP NOT NULL,
+ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "slug" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "public"."ProductVariant" ALTER COLUMN "sku" DROP NOT NULL,
+ALTER COLUMN "slug" DROP NOT NULL,
+ALTER COLUMN "price" DROP NOT NULL,
+ALTER COLUMN "stock" DROP NOT NULL;

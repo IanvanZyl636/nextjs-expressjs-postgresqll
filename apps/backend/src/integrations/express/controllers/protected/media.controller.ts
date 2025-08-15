@@ -4,8 +4,9 @@ import { MulterImageRequest } from "../../models/muler-image-request.model";
 import HttpError from "../../../../utils/error/http-error";
 import { AuthenticatedRequest } from "../../models/authenticated-request.model";
 import sharp from "sharp";
+import { getImageExtension } from "../../../../helpers/sharp.helper";
 
-const ALLOWED_EXTENSIONS = ['jpeg', 'png', 'webp', 'tiff', 'gif', 'avif'];
+const ALLOWED_EXTENSIONS = ['jpg', 'png', 'webp', 'tiff', 'gif', 'avif'];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const MAX_FILENAME_LENGTH = 100;
 
@@ -47,7 +48,7 @@ async function validateUploadInput(file: Express.Multer.File | undefined) {
 
     const metadata = await sharp(file.buffer).metadata();    
 
-    if (!ALLOWED_EXTENSIONS.includes(metadata.format || '')) {
+    if (!ALLOWED_EXTENSIONS.includes(await getImageExtension(metadata) || '')) {
       throw new HttpError(400, 'Unsupported image format');
     }    
 }
