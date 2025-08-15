@@ -14,17 +14,13 @@ const metadata = {
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, type: {
-                    name: "type",
-                    type: "MediaType",
-                }, key: {
-                    name: "key",
+                }, bucketKey: {
+                    name: "bucketKey",
                     type: "String",
                     attributes: [{ "name": "@unique", "args": [] }],
-                }, imageSize: {
-                    name: "imageSize",
-                    type: "ImageSize",
-                    isOptional: true,
+                }, mediaType: {
+                    name: "mediaType",
+                    type: "MediaType",
                 }, fileName: {
                     name: "fileName",
                     type: "String",
@@ -34,18 +30,6 @@ const metadata = {
                 }, fileSize: {
                     name: "fileSize",
                     type: "Int",
-                }, duration: {
-                    name: "duration",
-                    type: "Int",
-                    isOptional: true,
-                }, width: {
-                    name: "width",
-                    type: "Int",
-                    isOptional: true,
-                }, height: {
-                    name: "height",
-                    type: "Int",
-                    isOptional: true,
                 }, isStale: {
                     name: "isStale",
                     type: "Boolean",
@@ -58,34 +42,372 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, product: {
+                    name: "product",
+                    type: "ProductMedia",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, key: {
-                    name: "key",
-                    fields: ["key"]
+                }, bucketKey: {
+                    name: "bucketKey",
+                    fields: ["bucketKey"]
                 },
             },
-            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }, { "name": "@@validate", "args": [{ "name": "value" }, { "name": "message", "value": "imageSize can only be set for images" }] }],
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }, { "name": "@@delegate", "args": [{ "name": "discriminator" }] }], discriminator: "mediaType",
         },
-        customer: {
-            name: 'Customer', fields: {
+        image: {
+            name: 'Image', baseTypes: ['Media'], fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, userId: {
-                    name: "userId",
+                }, bucketKey: {
+                    name: "bucketKey",
                     type: "String",
                     attributes: [{ "name": "@unique", "args": [] }],
-                    isForeignKey: true,
-                    relationField: 'user',
+                    inheritedFrom: "Media",
+                }, mediaType: {
+                    name: "mediaType",
+                    type: "MediaType",
+                    inheritedFrom: "Media",
+                }, fileName: {
+                    name: "fileName",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, mimeType: {
+                    name: "mimeType",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, fileSize: {
+                    name: "fileSize",
+                    type: "Int",
+                    inheritedFrom: "Media",
+                }, isStale: {
+                    name: "isStale",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
+                    inheritedFrom: "Media",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                    inheritedFrom: "Media",
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                    inheritedFrom: "Media",
+                }, product: {
+                    name: "product",
+                    type: "ProductMedia",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                    inheritedFrom: "Media",
+                }, width: {
+                    name: "width",
+                    type: "Int",
+                }, height: {
+                    name: "height",
+                    type: "Int",
+                }, imageSize: {
+                    name: "imageSize",
+                    type: "ImageSize",
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, bucketKey: {
+                    name: "bucketKey",
+                    fields: ["bucketKey"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        video: {
+            name: 'Video', baseTypes: ['Media'], fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, bucketKey: {
+                    name: "bucketKey",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    inheritedFrom: "Media",
+                }, mediaType: {
+                    name: "mediaType",
+                    type: "MediaType",
+                    inheritedFrom: "Media",
+                }, fileName: {
+                    name: "fileName",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, mimeType: {
+                    name: "mimeType",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, fileSize: {
+                    name: "fileSize",
+                    type: "Int",
+                    inheritedFrom: "Media",
+                }, isStale: {
+                    name: "isStale",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
+                    inheritedFrom: "Media",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                    inheritedFrom: "Media",
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                    inheritedFrom: "Media",
+                }, product: {
+                    name: "product",
+                    type: "ProductMedia",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                    inheritedFrom: "Media",
+                }, duration: {
+                    name: "duration",
+                    type: "Int",
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, bucketKey: {
+                    name: "bucketKey",
+                    fields: ["bucketKey"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        audio: {
+            name: 'Audio', baseTypes: ['Media'], fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, bucketKey: {
+                    name: "bucketKey",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    inheritedFrom: "Media",
+                }, mediaType: {
+                    name: "mediaType",
+                    type: "MediaType",
+                    inheritedFrom: "Media",
+                }, fileName: {
+                    name: "fileName",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, mimeType: {
+                    name: "mimeType",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, fileSize: {
+                    name: "fileSize",
+                    type: "Int",
+                    inheritedFrom: "Media",
+                }, isStale: {
+                    name: "isStale",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
+                    inheritedFrom: "Media",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                    inheritedFrom: "Media",
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                    inheritedFrom: "Media",
+                }, product: {
+                    name: "product",
+                    type: "ProductMedia",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                    inheritedFrom: "Media",
+                }, duration: {
+                    name: "duration",
+                    type: "Int",
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, bucketKey: {
+                    name: "bucketKey",
+                    fields: ["bucketKey"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        document: {
+            name: 'Document', baseTypes: ['Media'], fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, bucketKey: {
+                    name: "bucketKey",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    inheritedFrom: "Media",
+                }, mediaType: {
+                    name: "mediaType",
+                    type: "MediaType",
+                    inheritedFrom: "Media",
+                }, fileName: {
+                    name: "fileName",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, mimeType: {
+                    name: "mimeType",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, fileSize: {
+                    name: "fileSize",
+                    type: "Int",
+                    inheritedFrom: "Media",
+                }, isStale: {
+                    name: "isStale",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
+                    inheritedFrom: "Media",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                    inheritedFrom: "Media",
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                    inheritedFrom: "Media",
+                }, product: {
+                    name: "product",
+                    type: "ProductMedia",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                    inheritedFrom: "Media",
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, bucketKey: {
+                    name: "bucketKey",
+                    fields: ["bucketKey"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        file: {
+            name: 'File', baseTypes: ['Media'], fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, bucketKey: {
+                    name: "bucketKey",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    inheritedFrom: "Media",
+                }, mediaType: {
+                    name: "mediaType",
+                    type: "MediaType",
+                    inheritedFrom: "Media",
+                }, fileName: {
+                    name: "fileName",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, mimeType: {
+                    name: "mimeType",
+                    type: "String",
+                    inheritedFrom: "Media",
+                }, fileSize: {
+                    name: "fileSize",
+                    type: "Int",
+                    inheritedFrom: "Media",
+                }, isStale: {
+                    name: "isStale",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
+                    inheritedFrom: "Media",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                    inheritedFrom: "Media",
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                    inheritedFrom: "Media",
+                }, product: {
+                    name: "product",
+                    type: "ProductMedia",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                    inheritedFrom: "Media",
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, bucketKey: {
+                    name: "bucketKey",
+                    fields: ["bucketKey"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        product: {
+            name: 'Product', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
                 }, name: {
                     name: "name",
                     type: "String",
+                }, description: {
+                    name: "description",
+                    type: "String",
+                }, price: {
+                    name: "price",
+                    type: "Float",
+                }, stock: {
+                    name: "stock",
+                    type: "Int",
+                }, imageUrl: {
+                    name: "imageUrl",
+                    type: "String",
+                    isOptional: true,
                 }, createdAt: {
                     name: "createdAt",
                     type: "DateTime",
@@ -94,102 +416,77 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, addresses: {
-                    name: "addresses",
-                    type: "Address",
+                }, orderItems: {
+                    name: "orderItems",
+                    type: "OrderItem",
                     isDataModel: true,
                     isArray: true,
-                    backLink: 'customer',
-                }, orders: {
-                    name: "orders",
-                    type: "Order",
+                    backLink: 'product',
+                }, cartItems: {
+                    name: "cartItems",
+                    type: "CartItem",
                     isDataModel: true,
                     isArray: true,
-                    backLink: 'customer',
-                }, cart: {
-                    name: "cart",
-                    type: "Cart",
+                    backLink: 'product',
+                }, mediaItems: {
+                    name: "mediaItems",
+                    type: "ProductMedia",
                     isDataModel: true,
-                    isOptional: true,
-                    backLink: 'customer',
-                }, user: {
-                    name: "user",
-                    type: "User",
-                    isDataModel: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'customer',
-                    isRelationOwner: true,
-                    foreignKeyMapping: { "id": "userId" },
+                    isArray: true,
+                    backLink: 'product',
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, userId: {
-                    name: "userId",
-                    fields: ["userId"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
-        address: {
-            name: 'Address', fields: {
+        productMedia: {
+            name: 'ProductMedia', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, customerId: {
-                    name: "customerId",
+                }, productId: {
+                    name: "productId",
                     type: "String",
                     isForeignKey: true,
-                    relationField: 'customer',
-                }, street: {
-                    name: "street",
+                    relationField: 'product',
+                }, mediaId: {
+                    name: "mediaId",
                     type: "String",
-                }, city: {
-                    name: "city",
-                    type: "String",
-                }, state: {
-                    name: "state",
-                    type: "String",
-                }, postalCode: {
-                    name: "postalCode",
-                    type: "String",
-                }, country: {
-                    name: "country",
-                    type: "String",
-                }, createdAt: {
-                    name: "createdAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
-                }, updatedAt: {
-                    name: "updatedAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, customer: {
-                    name: "customer",
-                    type: "Customer",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'media',
+                }, product: {
+                    name: "product",
+                    type: "Product",
                     isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'addresses',
+                    backLink: 'mediaItems',
                     isRelationOwner: true,
-                    foreignKeyMapping: { "id": "customerId" },
-                }, orders: {
-                    name: "orders",
-                    type: "Order",
+                    foreignKeyMapping: { "id": "productId" },
+                }, media: {
+                    name: "media",
+                    type: "Media",
                     isDataModel: true,
-                    isArray: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ShippingAddress" }] }],
-                    backLink: 'shippingAddress',
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'product',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "mediaId" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
+                }, mediaId: {
+                    name: "mediaId",
+                    fields: ["mediaId"]
                 },
             },
-            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         order: {
             name: 'Order', fields: {
@@ -309,28 +606,22 @@ const metadata = {
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
-        payment: {
-            name: 'Payment', fields: {
+        customer: {
+            name: 'Customer', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, orderId: {
-                    name: "orderId",
+                }, userId: {
+                    name: "userId",
                     type: "String",
                     attributes: [{ "name": "@unique", "args": [] }],
                     isForeignKey: true,
-                    relationField: 'order',
-                }, amount: {
-                    name: "amount",
-                    type: "Float",
-                }, method: {
-                    name: "method",
-                    type: "PaymentMethod",
-                }, status: {
-                    name: "status",
-                    type: "PaymentStatus",
+                    relationField: 'user',
+                }, name: {
+                    name: "name",
+                    type: "String",
                 }, createdAt: {
                     name: "createdAt",
                     type: "DateTime",
@@ -339,49 +630,71 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, order: {
-                    name: "order",
+                }, addresses: {
+                    name: "addresses",
+                    type: "Address",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'customer',
+                }, orders: {
+                    name: "orders",
                     type: "Order",
                     isDataModel: true,
+                    isArray: true,
+                    backLink: 'customer',
+                }, cart: {
+                    name: "cart",
+                    type: "Cart",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'customer',
+                }, user: {
+                    name: "user",
+                    type: "User",
+                    isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'payment',
+                    backLink: 'customer',
                     isRelationOwner: true,
-                    foreignKeyMapping: { "id": "orderId" },
+                    foreignKeyMapping: { "id": "userId" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, orderId: {
-                    name: "orderId",
-                    fields: ["orderId"]
+                }, userId: {
+                    name: "userId",
+                    fields: ["userId"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
-        product: {
-            name: 'Product', fields: {
+        address: {
+            name: 'Address', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, name: {
-                    name: "name",
+                }, customerId: {
+                    name: "customerId",
                     type: "String",
-                }, description: {
-                    name: "description",
+                    isForeignKey: true,
+                    relationField: 'customer',
+                }, street: {
+                    name: "street",
                     type: "String",
-                }, price: {
-                    name: "price",
-                    type: "Float",
-                }, stock: {
-                    name: "stock",
-                    type: "Int",
-                }, imageUrl: {
-                    name: "imageUrl",
+                }, city: {
+                    name: "city",
                     type: "String",
-                    isOptional: true,
+                }, state: {
+                    name: "state",
+                    type: "String",
+                }, postalCode: {
+                    name: "postalCode",
+                    type: "String",
+                }, country: {
+                    name: "country",
+                    type: "String",
                 }, createdAt: {
                     name: "createdAt",
                     type: "DateTime",
@@ -390,18 +703,21 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, orderItems: {
-                    name: "orderItems",
-                    type: "OrderItem",
+                }, customer: {
+                    name: "customer",
+                    type: "Customer",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'addresses',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "customerId" },
+                }, orders: {
+                    name: "orders",
+                    type: "Order",
                     isDataModel: true,
                     isArray: true,
-                    backLink: 'product',
-                }, cartItems: {
-                    name: "cartItems",
-                    type: "CartItem",
-                    isDataModel: true,
-                    isArray: true,
-                    backLink: 'product',
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ShippingAddress" }] }],
+                    backLink: 'shippingAddress',
                 },
             }, uniqueConstraints: {
                 id: {
@@ -611,6 +927,56 @@ const metadata = {
                 }, token: {
                     name: "token",
                     fields: ["token"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        payment: {
+            name: 'Payment', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, orderId: {
+                    name: "orderId",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'order',
+                }, amount: {
+                    name: "amount",
+                    type: "Float",
+                }, method: {
+                    name: "method",
+                    type: "PaymentMethod",
+                }, status: {
+                    name: "status",
+                    type: "PaymentStatus",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, order: {
+                    name: "order",
+                    type: "Order",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'payment',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "orderId" },
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, orderId: {
+                    name: "orderId",
+                    fields: ["orderId"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],

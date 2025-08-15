@@ -1,9 +1,11 @@
+import "./product.zmodel"
+
 enum MediaType {
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-  OTHER
+  Image
+  Video
+  Audio
+  Document
+  File
 }
 
 enum ImageSize {
@@ -14,22 +16,39 @@ enum ImageSize {
 }
 
 model Media {
-  id          String     @id @default(uuid())
-  type        MediaType
-  key         String     @unique
-  imageSize   ImageSize?
-  fileName    String
-  mimeType    String
-  fileSize    Int
-  duration    Int?
-  width       Int?
-  height      Int?
-  isStale     Boolean    @default(true)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id        String        @id @default(uuid())
+  bucketKey String        @unique
+  mediaType MediaType
+  fileName  String
+  mimeType  String
+  fileSize  Int
+  isStale   Boolean       @default(true)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  product   ProductMedia?
 
   @@allow("all", true)
-  @@validate(imageSize != null && type == IMAGE, "imageSize can only be set for images")
-
+  @@delegate(mediaType)
 }
 
+model Image extends Media {
+  width     Int
+  height    Int
+  imageSize ImageSize
+  
+}
+
+model Video extends Media {
+  duration Int
+}
+
+model Audio extends Media {
+  duration Int
+}
+
+model Document extends Media {
+}
+
+model File extends Media {
+}

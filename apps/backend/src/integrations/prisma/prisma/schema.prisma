@@ -19,11 +19,11 @@ generator client {
 }
 
 enum MediaType {
-  IMAGE
-  VIDEO
-  AUDIO
-  DOCUMENT
-  OTHER
+  Image
+  Video
+  Audio
+  Document
+  File
 }
 
 enum ImageSize {
@@ -42,6 +42,17 @@ enum OrderStatus {
   RETURNED
 }
 
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+enum TokenType {
+  REFRESH
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
 enum PaymentStatus {
   PENDING
   COMPLETED
@@ -57,57 +68,74 @@ enum PaymentMethod {
   CASH_ON_DELIVERY
 }
 
-enum Role {
-  ADMIN
-  CLIENT
-}
-
-enum TokenType {
-  REFRESH
-  EMAIL_VERIFICATION
-  PASSWORD_RESET
-}
-
 model Media {
-  id        String     @id() @default(uuid())
-  type      MediaType
-  key       String     @unique()
-  imageSize ImageSize?
-  fileName  String
-  mimeType  String
-  fileSize  Int
-  duration  Int?
-  width     Int?
-  height    Int?
-  isStale   Boolean    @default(true)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt()
+  id                    String        @id() @default(uuid())
+  bucketKey             String        @unique()
+  mediaType             MediaType
+  fileName              String
+  mimeType              String
+  fileSize              Int
+  isStale               Boolean       @default(true)
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt()
+  product               ProductMedia?
+  delegate_aux_image    Image?
+  delegate_aux_video    Video?
+  delegate_aux_audio    Audio?
+  delegate_aux_document Document?
+  delegate_aux_file     File?
 }
 
-model Customer {
-  id        String    @id() @default(uuid())
-  userId    String    @unique()
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt()
-  addresses Address[]
-  orders    Order[]
-  cart      Cart?
-  user      User      @relation(fields: [userId], references: [id])
+model Image {
+  id                 String    @id()
+  width              Int
+  height             Int
+  imageSize          ImageSize
+  delegate_aux_media Media     @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model Address {
-  id         String   @id() @default(uuid())
-  customerId String
-  street     String
-  city       String
-  state      String
-  postalCode String
-  country    String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt()
-  customer   Customer @relation(fields: [customerId], references: [id])
-  orders     Order[]  @relation("ShippingAddress")
+model Video {
+  id                 String @id()
+  duration           Int
+  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Audio {
+  id                 String @id()
+  duration           Int
+  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Document {
+  id                 String @id()
+  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model File {
+  id                 String @id()
+  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Product {
+  id          String         @id() @default(uuid())
+  name        String
+  description String
+  price       Float
+  stock       Int
+  imageUrl    String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt()
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+  mediaItems  ProductMedia[]
+}
+
+model ProductMedia {
+  id        String  @id() @default(uuid())
+  productId String
+  mediaId   String  @unique()
+  product   Product @relation(fields: [productId], references: [id])
+  media     Media   @relation(fields: [mediaId], references: [id])
 }
 
 model Order {
@@ -134,28 +162,30 @@ model OrderItem {
   product   Product @relation(fields: [productId], references: [id])
 }
 
-model Payment {
-  id        String        @id() @default(uuid())
-  orderId   String        @unique()
-  amount    Float
-  method    PaymentMethod
-  status    PaymentStatus
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt()
-  order     Order         @relation(fields: [orderId], references: [id])
+model Customer {
+  id        String    @id() @default(uuid())
+  userId    String    @unique()
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt()
+  addresses Address[]
+  orders    Order[]
+  cart      Cart?
+  user      User      @relation(fields: [userId], references: [id])
 }
 
-model Product {
-  id          String      @id() @default(uuid())
-  name        String
-  description String
-  price       Float
-  stock       Int
-  imageUrl    String?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt()
-  orderItems  OrderItem[]
-  cartItems   CartItem[]
+model Address {
+  id         String   @id() @default(uuid())
+  customerId String
+  street     String
+  city       String
+  state      String
+  postalCode String
+  country    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt()
+  customer   Customer @relation(fields: [customerId], references: [id])
+  orders     Order[]  @relation("ShippingAddress")
 }
 
 model Cart {
@@ -199,6 +229,17 @@ model Token {
   revoked   Boolean   @default(false)
   ip        String?
   userAgent String?
+}
+
+model Payment {
+  id        String        @id() @default(uuid())
+  orderId   String        @unique()
+  amount    Float
+  method    PaymentMethod
+  status    PaymentStatus
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt()
+  order     Order         @relation(fields: [orderId], references: [id])
 }
 
 model Log {

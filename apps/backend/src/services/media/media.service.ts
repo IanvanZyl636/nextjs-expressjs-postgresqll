@@ -1,7 +1,7 @@
 import sharp from 'sharp';
 import { downloadMediaFromMinio, uploadMediaToMinio } from '../../integrations/s3-client';
 import { randomUUID } from 'crypto';
-import { ImageSize, MediaType } from '@nextjs-expressjs-postgresql/shared';
+import { ImageSize } from '@nextjs-expressjs-postgresql/shared';
 import { prisma } from '../../integrations/prisma';
 import sanitizeFilename from 'sanitize-filename';
 import HttpError from '../../utils/error/http-error';
@@ -42,7 +42,7 @@ export async function downloadMediaService(fileId: string) {
 
   if (!media) throw new HttpError(400, 'Media not found');
 
-  return await downloadMediaFromMinio(media.key);
+  return await downloadMediaFromMinio(media.bucketKey);
 }
 
 async function processImage(buffer: Buffer<ArrayBufferLike>, sanitizedFileName: string, generatedFileName: string, imageSize: ImageSize) {
@@ -51,14 +51,13 @@ async function processImage(buffer: Buffer<ArrayBufferLike>, sanitizedFileName: 
   const extension = metadata.format;
   const mimeType = `image/${extension}`;
 
-  const key = await uploadMediaToMinio(buffer, fileName, mimeType);
+  const bucketKey = await uploadMediaToMinio(buffer, fileName, mimeType);
 
-  return await prisma().media.create({
-    data: {
-      type: MediaType.IMAGE,
-      key,
+  return await prisma().image.create({
+    data: {      
+      bucketKey,
       fileName: sanitizedFileName,
-      mimeType,
+      mimeType,      
       fileSize: buffer.length,
       width: metadata.width,
       height: metadata.height,

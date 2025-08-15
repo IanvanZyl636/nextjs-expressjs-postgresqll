@@ -35,59 +35,41 @@ export type PrismaClient<ClientOptions extends Prisma.PrismaClientOptions = Pris
 export { Prisma }
 
 
-// file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node")
-path.join(process.cwd(), "libs/shared/src/prisma/generated/query_engine-windows.dll.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node")
-path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-debian-openssl-1.1.x.so.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node")
-path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-debian-openssl-3.0.x.so.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-linux-musl.so.node")
-path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-linux-musl.so.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node")
-path.join(process.cwd(), "libs/shared/src/prisma/generated/libquery_engine-linux-musl-openssl-3.0.x.so.node")
 
 /**
  * Model Media
- * 
+ * @@allow('all', true)
+ * @@delegate(mediaType)
  */
 export type Media = Prisma.MediaModel
 /**
  * Model Image
- * 
+ * @@allow('all', true)
  */
 export type Image = Prisma.ImageModel
 /**
  * Model Video
- * 
+ * @@allow('all', true)
  */
 export type Video = Prisma.VideoModel
 /**
  * Model Audio
- * 
+ * @@allow('all', true)
  */
 export type Audio = Prisma.AudioModel
 /**
  * Model Document
- * 
+ * @@allow('all', true)
  */
 export type Document = Prisma.DocumentModel
 /**
  * Model File
- * 
+ * @@allow('all', true)
  */
 export type File = Prisma.FileModel
 /**
  * Model Product
- * 
+ * @@allow('all', true)
  */
 export type Product = Prisma.ProductModel
 /**
@@ -97,52 +79,52 @@ export type Product = Prisma.ProductModel
 export type ProductMedia = Prisma.ProductMediaModel
 /**
  * Model Order
- * 
+ * @@allow('all', true)
  */
 export type Order = Prisma.OrderModel
 /**
  * Model OrderItem
- * 
+ * @@allow('all', true)
  */
 export type OrderItem = Prisma.OrderItemModel
 /**
  * Model Customer
- * 
+ * @@allow('all', true)
  */
 export type Customer = Prisma.CustomerModel
 /**
  * Model Address
- * 
+ * @@allow('all', true)
  */
 export type Address = Prisma.AddressModel
 /**
  * Model Cart
- * 
+ * @@allow('all', true)
  */
 export type Cart = Prisma.CartModel
 /**
  * Model CartItem
- * 
+ * @@allow('all', true)
  */
 export type CartItem = Prisma.CartItemModel
 /**
  * Model User
- * 
+ * @@allow('all', true)
  */
 export type User = Prisma.UserModel
 /**
  * Model Token
- * 
+ * @@allow('all', true)
  */
 export type Token = Prisma.TokenModel
 /**
  * Model Payment
- * 
+ * @@allow('all', true)
  */
 export type Payment = Prisma.PaymentModel
 /**
  * Model Log
- * 
+ * @@allow('all', true)
  */
 export type Log = Prisma.LogModel
 

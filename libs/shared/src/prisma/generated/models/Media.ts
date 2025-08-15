@@ -27,29 +27,19 @@ export type AggregateMedia = {
 
 export type MediaAvgAggregateOutputType = {
   fileSize: number | null
-  duration: number | null
-  width: number | null
-  height: number | null
 }
 
 export type MediaSumAggregateOutputType = {
   fileSize: number | null
-  duration: number | null
-  width: number | null
-  height: number | null
 }
 
 export type MediaMinAggregateOutputType = {
   id: string | null
-  type: $Enums.MediaType | null
-  key: string | null
-  imageSize: $Enums.ImageSize | null
+  bucketKey: string | null
+  mediaType: $Enums.MediaType | null
   fileName: string | null
   mimeType: string | null
   fileSize: number | null
-  duration: number | null
-  width: number | null
-  height: number | null
   isStale: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -57,15 +47,11 @@ export type MediaMinAggregateOutputType = {
 
 export type MediaMaxAggregateOutputType = {
   id: string | null
-  type: $Enums.MediaType | null
-  key: string | null
-  imageSize: $Enums.ImageSize | null
+  bucketKey: string | null
+  mediaType: $Enums.MediaType | null
   fileName: string | null
   mimeType: string | null
   fileSize: number | null
-  duration: number | null
-  width: number | null
-  height: number | null
   isStale: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -73,15 +59,11 @@ export type MediaMaxAggregateOutputType = {
 
 export type MediaCountAggregateOutputType = {
   id: number
-  type: number
-  key: number
-  imageSize: number
+  bucketKey: number
+  mediaType: number
   fileName: number
   mimeType: number
   fileSize: number
-  duration: number
-  width: number
-  height: number
   isStale: number
   createdAt: number
   updatedAt: number
@@ -91,29 +73,19 @@ export type MediaCountAggregateOutputType = {
 
 export type MediaAvgAggregateInputType = {
   fileSize?: true
-  duration?: true
-  width?: true
-  height?: true
 }
 
 export type MediaSumAggregateInputType = {
   fileSize?: true
-  duration?: true
-  width?: true
-  height?: true
 }
 
 export type MediaMinAggregateInputType = {
   id?: true
-  type?: true
-  key?: true
-  imageSize?: true
+  bucketKey?: true
+  mediaType?: true
   fileName?: true
   mimeType?: true
   fileSize?: true
-  duration?: true
-  width?: true
-  height?: true
   isStale?: true
   createdAt?: true
   updatedAt?: true
@@ -121,15 +93,11 @@ export type MediaMinAggregateInputType = {
 
 export type MediaMaxAggregateInputType = {
   id?: true
-  type?: true
-  key?: true
-  imageSize?: true
+  bucketKey?: true
+  mediaType?: true
   fileName?: true
   mimeType?: true
   fileSize?: true
-  duration?: true
-  width?: true
-  height?: true
   isStale?: true
   createdAt?: true
   updatedAt?: true
@@ -137,15 +105,11 @@ export type MediaMaxAggregateInputType = {
 
 export type MediaCountAggregateInputType = {
   id?: true
-  type?: true
-  key?: true
-  imageSize?: true
+  bucketKey?: true
+  mediaType?: true
   fileName?: true
   mimeType?: true
   fileSize?: true
-  duration?: true
-  width?: true
-  height?: true
   isStale?: true
   createdAt?: true
   updatedAt?: true
@@ -240,15 +204,11 @@ export type MediaGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 
 export type MediaGroupByOutputType = {
   id: string
-  type: $Enums.MediaType
-  key: string
-  imageSize: $Enums.ImageSize | null
+  bucketKey: string
+  mediaType: $Enums.MediaType
   fileName: string
   mimeType: string
   fileSize: number
-  duration: number | null
-  width: number | null
-  height: number | null
   isStale: boolean
   createdAt: Date
   updatedAt: Date
@@ -279,66 +239,68 @@ export type MediaWhereInput = {
   OR?: Prisma.MediaWhereInput[]
   NOT?: Prisma.MediaWhereInput | Prisma.MediaWhereInput[]
   id?: Prisma.StringFilter<"Media"> | string
-  type?: Prisma.EnumMediaTypeFilter<"Media"> | $Enums.MediaType
-  key?: Prisma.StringFilter<"Media"> | string
-  imageSize?: Prisma.EnumImageSizeNullableFilter<"Media"> | $Enums.ImageSize | null
+  bucketKey?: Prisma.StringFilter<"Media"> | string
+  mediaType?: Prisma.EnumMediaTypeFilter<"Media"> | $Enums.MediaType
   fileName?: Prisma.StringFilter<"Media"> | string
   mimeType?: Prisma.StringFilter<"Media"> | string
   fileSize?: Prisma.IntFilter<"Media"> | number
-  duration?: Prisma.IntNullableFilter<"Media"> | number | null
-  width?: Prisma.IntNullableFilter<"Media"> | number | null
-  height?: Prisma.IntNullableFilter<"Media"> | number | null
   isStale?: Prisma.BoolFilter<"Media"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
+  product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+  delegate_aux_image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  delegate_aux_video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
+  delegate_aux_audio?: Prisma.XOR<Prisma.AudioNullableScalarRelationFilter, Prisma.AudioWhereInput> | null
+  delegate_aux_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
+  delegate_aux_file?: Prisma.XOR<Prisma.FileNullableScalarRelationFilter, Prisma.FileWhereInput> | null
 }
 
 export type MediaOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  key?: Prisma.SortOrder
-  imageSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  bucketKey?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
-  duration?: Prisma.SortOrderInput | Prisma.SortOrder
-  width?: Prisma.SortOrderInput | Prisma.SortOrder
-  height?: Prisma.SortOrderInput | Prisma.SortOrder
   isStale?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  product?: Prisma.ProductMediaOrderByWithRelationInput
+  delegate_aux_image?: Prisma.ImageOrderByWithRelationInput
+  delegate_aux_video?: Prisma.VideoOrderByWithRelationInput
+  delegate_aux_audio?: Prisma.AudioOrderByWithRelationInput
+  delegate_aux_document?: Prisma.DocumentOrderByWithRelationInput
+  delegate_aux_file?: Prisma.FileOrderByWithRelationInput
 }
 
 export type MediaWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  key?: string
+  bucketKey?: string
   AND?: Prisma.MediaWhereInput | Prisma.MediaWhereInput[]
   OR?: Prisma.MediaWhereInput[]
   NOT?: Prisma.MediaWhereInput | Prisma.MediaWhereInput[]
-  type?: Prisma.EnumMediaTypeFilter<"Media"> | $Enums.MediaType
-  imageSize?: Prisma.EnumImageSizeNullableFilter<"Media"> | $Enums.ImageSize | null
+  mediaType?: Prisma.EnumMediaTypeFilter<"Media"> | $Enums.MediaType
   fileName?: Prisma.StringFilter<"Media"> | string
   mimeType?: Prisma.StringFilter<"Media"> | string
   fileSize?: Prisma.IntFilter<"Media"> | number
-  duration?: Prisma.IntNullableFilter<"Media"> | number | null
-  width?: Prisma.IntNullableFilter<"Media"> | number | null
-  height?: Prisma.IntNullableFilter<"Media"> | number | null
   isStale?: Prisma.BoolFilter<"Media"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Media"> | Date | string
-}, "id" | "key">
+  product?: Prisma.XOR<Prisma.ProductMediaNullableScalarRelationFilter, Prisma.ProductMediaWhereInput> | null
+  delegate_aux_image?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  delegate_aux_video?: Prisma.XOR<Prisma.VideoNullableScalarRelationFilter, Prisma.VideoWhereInput> | null
+  delegate_aux_audio?: Prisma.XOR<Prisma.AudioNullableScalarRelationFilter, Prisma.AudioWhereInput> | null
+  delegate_aux_document?: Prisma.XOR<Prisma.DocumentNullableScalarRelationFilter, Prisma.DocumentWhereInput> | null
+  delegate_aux_file?: Prisma.XOR<Prisma.FileNullableScalarRelationFilter, Prisma.FileWhereInput> | null
+}, "id" | "bucketKey">
 
 export type MediaOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  key?: Prisma.SortOrder
-  imageSize?: Prisma.SortOrderInput | Prisma.SortOrder
+  bucketKey?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
-  duration?: Prisma.SortOrderInput | Prisma.SortOrder
-  width?: Prisma.SortOrderInput | Prisma.SortOrder
-  height?: Prisma.SortOrderInput | Prisma.SortOrder
   isStale?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -354,15 +316,11 @@ export type MediaScalarWhereWithAggregatesInput = {
   OR?: Prisma.MediaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MediaScalarWhereWithAggregatesInput | Prisma.MediaScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Media"> | string
-  type?: Prisma.EnumMediaTypeWithAggregatesFilter<"Media"> | $Enums.MediaType
-  key?: Prisma.StringWithAggregatesFilter<"Media"> | string
-  imageSize?: Prisma.EnumImageSizeNullableWithAggregatesFilter<"Media"> | $Enums.ImageSize | null
+  bucketKey?: Prisma.StringWithAggregatesFilter<"Media"> | string
+  mediaType?: Prisma.EnumMediaTypeWithAggregatesFilter<"Media"> | $Enums.MediaType
   fileName?: Prisma.StringWithAggregatesFilter<"Media"> | string
   mimeType?: Prisma.StringWithAggregatesFilter<"Media"> | string
   fileSize?: Prisma.IntWithAggregatesFilter<"Media"> | number
-  duration?: Prisma.IntNullableWithAggregatesFilter<"Media"> | number | null
-  width?: Prisma.IntNullableWithAggregatesFilter<"Media"> | number | null
-  height?: Prisma.IntNullableWithAggregatesFilter<"Media"> | number | null
   isStale?: Prisma.BoolWithAggregatesFilter<"Media"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Media"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Media"> | Date | string
@@ -370,79 +328,83 @@ export type MediaScalarWhereWithAggregatesInput = {
 
 export type MediaCreateInput = {
   id?: string
-  type: $Enums.MediaType
-  key: string
-  imageSize?: $Enums.ImageSize | null
+  bucketKey: string
+  mediaType: $Enums.MediaType
   fileName: string
   mimeType: string
   fileSize: number
-  duration?: number | null
-  width?: number | null
-  height?: number | null
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileCreateNestedOneWithoutDelegate_aux_mediaInput
 }
 
 export type MediaUncheckedCreateInput = {
   id?: string
-  type: $Enums.MediaType
-  key: string
-  imageSize?: $Enums.ImageSize | null
+  bucketKey: string
+  mediaType: $Enums.MediaType
   fileName: string
   mimeType: string
   fileSize: number
-  duration?: number | null
-  width?: number | null
-  height?: number | null
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
 }
 
 export type MediaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
-  key?: Prisma.StringFieldUpdateOperationsInput | string
-  imageSize?: Prisma.NullableEnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize | null
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUpdateOneWithoutDelegate_aux_mediaNestedInput
 }
 
 export type MediaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
-  key?: Prisma.StringFieldUpdateOperationsInput | string
-  imageSize?: Prisma.NullableEnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize | null
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
 }
 
 export type MediaCreateManyInput = {
   id?: string
-  type: $Enums.MediaType
-  key: string
-  imageSize?: $Enums.ImageSize | null
+  bucketKey: string
+  mediaType: $Enums.MediaType
   fileName: string
   mimeType: string
   fileSize: number
-  duration?: number | null
-  width?: number | null
-  height?: number | null
   isStale?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -450,15 +412,11 @@ export type MediaCreateManyInput = {
 
 export type MediaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
-  key?: Prisma.StringFieldUpdateOperationsInput | string
-  imageSize?: Prisma.NullableEnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize | null
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -466,15 +424,11 @@ export type MediaUpdateManyMutationInput = {
 
 export type MediaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
-  key?: Prisma.StringFieldUpdateOperationsInput | string
-  imageSize?: Prisma.NullableEnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize | null
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   mimeType?: Prisma.StringFieldUpdateOperationsInput | string
   fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -482,15 +436,11 @@ export type MediaUncheckedUpdateManyInput = {
 
 export type MediaCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  key?: Prisma.SortOrder
-  imageSize?: Prisma.SortOrder
+  bucketKey?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
-  width?: Prisma.SortOrder
-  height?: Prisma.SortOrder
   isStale?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -498,22 +448,15 @@ export type MediaCountOrderByAggregateInput = {
 
 export type MediaAvgOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
-  width?: Prisma.SortOrder
-  height?: Prisma.SortOrder
 }
 
 export type MediaMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  key?: Prisma.SortOrder
-  imageSize?: Prisma.SortOrder
+  bucketKey?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
-  width?: Prisma.SortOrder
-  height?: Prisma.SortOrder
   isStale?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -521,15 +464,11 @@ export type MediaMaxOrderByAggregateInput = {
 
 export type MediaMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  type?: Prisma.SortOrder
-  key?: Prisma.SortOrder
-  imageSize?: Prisma.SortOrder
+  bucketKey?: Prisma.SortOrder
+  mediaType?: Prisma.SortOrder
   fileName?: Prisma.SortOrder
   mimeType?: Prisma.SortOrder
   fileSize?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
-  width?: Prisma.SortOrder
-  height?: Prisma.SortOrder
   isStale?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -537,9 +476,11 @@ export type MediaMinOrderByAggregateInput = {
 
 export type MediaSumOrderByAggregateInput = {
   fileSize?: Prisma.SortOrder
-  duration?: Prisma.SortOrder
-  width?: Prisma.SortOrder
-  height?: Prisma.SortOrder
+}
+
+export type MediaScalarRelationFilter = {
+  is?: Prisma.MediaWhereInput
+  isNot?: Prisma.MediaWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -550,20 +491,8 @@ export type EnumMediaTypeFieldUpdateOperationsInput = {
   set?: $Enums.MediaType
 }
 
-export type NullableEnumImageSizeFieldUpdateOperationsInput = {
-  set?: $Enums.ImageSize | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -578,35 +507,621 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type MediaCreateNestedOneWithoutDelegate_aux_imageInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_imageInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_imageInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_imageInput
+  connect?: Prisma.MediaWhereUniqueInput
+}
+
+export type MediaUpdateOneRequiredWithoutDelegate_aux_imageNestedInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_imageInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_imageInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_imageInput
+  upsert?: Prisma.MediaUpsertWithoutDelegate_aux_imageInput
+  connect?: Prisma.MediaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MediaUpdateToOneWithWhereWithoutDelegate_aux_imageInput, Prisma.MediaUpdateWithoutDelegate_aux_imageInput>, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_imageInput>
+}
+
+export type MediaCreateNestedOneWithoutDelegate_aux_videoInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_videoInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_videoInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_videoInput
+  connect?: Prisma.MediaWhereUniqueInput
+}
+
+export type MediaUpdateOneRequiredWithoutDelegate_aux_videoNestedInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_videoInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_videoInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_videoInput
+  upsert?: Prisma.MediaUpsertWithoutDelegate_aux_videoInput
+  connect?: Prisma.MediaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MediaUpdateToOneWithWhereWithoutDelegate_aux_videoInput, Prisma.MediaUpdateWithoutDelegate_aux_videoInput>, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_videoInput>
+}
+
+export type MediaCreateNestedOneWithoutDelegate_aux_audioInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_audioInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_audioInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_audioInput
+  connect?: Prisma.MediaWhereUniqueInput
+}
+
+export type MediaUpdateOneRequiredWithoutDelegate_aux_audioNestedInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_audioInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_audioInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_audioInput
+  upsert?: Prisma.MediaUpsertWithoutDelegate_aux_audioInput
+  connect?: Prisma.MediaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MediaUpdateToOneWithWhereWithoutDelegate_aux_audioInput, Prisma.MediaUpdateWithoutDelegate_aux_audioInput>, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_audioInput>
+}
+
+export type MediaCreateNestedOneWithoutDelegate_aux_documentInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_documentInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_documentInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_documentInput
+  connect?: Prisma.MediaWhereUniqueInput
+}
+
+export type MediaUpdateOneRequiredWithoutDelegate_aux_documentNestedInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_documentInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_documentInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_documentInput
+  upsert?: Prisma.MediaUpsertWithoutDelegate_aux_documentInput
+  connect?: Prisma.MediaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MediaUpdateToOneWithWhereWithoutDelegate_aux_documentInput, Prisma.MediaUpdateWithoutDelegate_aux_documentInput>, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_documentInput>
+}
+
+export type MediaCreateNestedOneWithoutDelegate_aux_fileInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_fileInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_fileInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_fileInput
+  connect?: Prisma.MediaWhereUniqueInput
+}
+
+export type MediaUpdateOneRequiredWithoutDelegate_aux_fileNestedInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_fileInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_fileInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutDelegate_aux_fileInput
+  upsert?: Prisma.MediaUpsertWithoutDelegate_aux_fileInput
+  connect?: Prisma.MediaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MediaUpdateToOneWithWhereWithoutDelegate_aux_fileInput, Prisma.MediaUpdateWithoutDelegate_aux_fileInput>, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_fileInput>
+}
+
+export type MediaCreateNestedOneWithoutProductInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutProductInput, Prisma.MediaUncheckedCreateWithoutProductInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutProductInput
+  connect?: Prisma.MediaWhereUniqueInput
+}
+
+export type MediaUpdateOneRequiredWithoutProductNestedInput = {
+  create?: Prisma.XOR<Prisma.MediaCreateWithoutProductInput, Prisma.MediaUncheckedCreateWithoutProductInput>
+  connectOrCreate?: Prisma.MediaCreateOrConnectWithoutProductInput
+  upsert?: Prisma.MediaUpsertWithoutProductInput
+  connect?: Prisma.MediaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MediaUpdateToOneWithWhereWithoutProductInput, Prisma.MediaUpdateWithoutProductInput>, Prisma.MediaUncheckedUpdateWithoutProductInput>
+}
+
+export type MediaCreateWithoutDelegate_aux_imageInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaUncheckedCreateWithoutDelegate_aux_imageInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaCreateOrConnectWithoutDelegate_aux_imageInput = {
+  where: Prisma.MediaWhereUniqueInput
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_imageInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_imageInput>
+}
+
+export type MediaUpsertWithoutDelegate_aux_imageInput = {
+  update: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_imageInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_imageInput>
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_imageInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_imageInput>
+  where?: Prisma.MediaWhereInput
+}
+
+export type MediaUpdateToOneWithWhereWithoutDelegate_aux_imageInput = {
+  where?: Prisma.MediaWhereInput
+  data: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_imageInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_imageInput>
+}
+
+export type MediaUpdateWithoutDelegate_aux_imageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaUncheckedUpdateWithoutDelegate_aux_imageInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaCreateWithoutDelegate_aux_videoInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaUncheckedCreateWithoutDelegate_aux_videoInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaCreateOrConnectWithoutDelegate_aux_videoInput = {
+  where: Prisma.MediaWhereUniqueInput
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_videoInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_videoInput>
+}
+
+export type MediaUpsertWithoutDelegate_aux_videoInput = {
+  update: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_videoInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_videoInput>
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_videoInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_videoInput>
+  where?: Prisma.MediaWhereInput
+}
+
+export type MediaUpdateToOneWithWhereWithoutDelegate_aux_videoInput = {
+  where?: Prisma.MediaWhereInput
+  data: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_videoInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_videoInput>
+}
+
+export type MediaUpdateWithoutDelegate_aux_videoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaUncheckedUpdateWithoutDelegate_aux_videoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaCreateWithoutDelegate_aux_audioInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaUncheckedCreateWithoutDelegate_aux_audioInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaCreateOrConnectWithoutDelegate_aux_audioInput = {
+  where: Prisma.MediaWhereUniqueInput
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_audioInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_audioInput>
+}
+
+export type MediaUpsertWithoutDelegate_aux_audioInput = {
+  update: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_audioInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_audioInput>
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_audioInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_audioInput>
+  where?: Prisma.MediaWhereInput
+}
+
+export type MediaUpdateToOneWithWhereWithoutDelegate_aux_audioInput = {
+  where?: Prisma.MediaWhereInput
+  data: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_audioInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_audioInput>
+}
+
+export type MediaUpdateWithoutDelegate_aux_audioInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaUncheckedUpdateWithoutDelegate_aux_audioInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaCreateWithoutDelegate_aux_documentInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaUncheckedCreateWithoutDelegate_aux_documentInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaCreateOrConnectWithoutDelegate_aux_documentInput = {
+  where: Prisma.MediaWhereUniqueInput
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_documentInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_documentInput>
+}
+
+export type MediaUpsertWithoutDelegate_aux_documentInput = {
+  update: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_documentInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_documentInput>
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_documentInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_documentInput>
+  where?: Prisma.MediaWhereInput
+}
+
+export type MediaUpdateToOneWithWhereWithoutDelegate_aux_documentInput = {
+  where?: Prisma.MediaWhereInput
+  data: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_documentInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_documentInput>
+}
+
+export type MediaUpdateWithoutDelegate_aux_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaUncheckedUpdateWithoutDelegate_aux_documentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaCreateWithoutDelegate_aux_fileInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaUncheckedCreateWithoutDelegate_aux_fileInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  product?: Prisma.ProductMediaUncheckedCreateNestedOneWithoutMediaInput
+  delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaCreateOrConnectWithoutDelegate_aux_fileInput = {
+  where: Prisma.MediaWhereUniqueInput
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_fileInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_fileInput>
+}
+
+export type MediaUpsertWithoutDelegate_aux_fileInput = {
+  update: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_fileInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_fileInput>
+  create: Prisma.XOR<Prisma.MediaCreateWithoutDelegate_aux_fileInput, Prisma.MediaUncheckedCreateWithoutDelegate_aux_fileInput>
+  where?: Prisma.MediaWhereInput
+}
+
+export type MediaUpdateToOneWithWhereWithoutDelegate_aux_fileInput = {
+  where?: Prisma.MediaWhereInput
+  data: Prisma.XOR<Prisma.MediaUpdateWithoutDelegate_aux_fileInput, Prisma.MediaUncheckedUpdateWithoutDelegate_aux_fileInput>
+}
+
+export type MediaUpdateWithoutDelegate_aux_fileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaUncheckedUpdateWithoutDelegate_aux_fileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product?: Prisma.ProductMediaUncheckedUpdateOneWithoutMediaNestedInput
+  delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaCreateWithoutProductInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  delegate_aux_image?: Prisma.ImageCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaUncheckedCreateWithoutProductInput = {
+  id?: string
+  bucketKey: string
+  mediaType: $Enums.MediaType
+  fileName: string
+  mimeType: string
+  fileSize: number
+  isStale?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  delegate_aux_image?: Prisma.ImageUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_video?: Prisma.VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_audio?: Prisma.AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_document?: Prisma.DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+  delegate_aux_file?: Prisma.FileUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput
+}
+
+export type MediaCreateOrConnectWithoutProductInput = {
+  where: Prisma.MediaWhereUniqueInput
+  create: Prisma.XOR<Prisma.MediaCreateWithoutProductInput, Prisma.MediaUncheckedCreateWithoutProductInput>
+}
+
+export type MediaUpsertWithoutProductInput = {
+  update: Prisma.XOR<Prisma.MediaUpdateWithoutProductInput, Prisma.MediaUncheckedUpdateWithoutProductInput>
+  create: Prisma.XOR<Prisma.MediaCreateWithoutProductInput, Prisma.MediaUncheckedCreateWithoutProductInput>
+  where?: Prisma.MediaWhereInput
+}
+
+export type MediaUpdateToOneWithWhereWithoutProductInput = {
+  where?: Prisma.MediaWhereInput
+  data: Prisma.XOR<Prisma.MediaUpdateWithoutProductInput, Prisma.MediaUncheckedUpdateWithoutProductInput>
+}
+
+export type MediaUpdateWithoutProductInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  delegate_aux_image?: Prisma.ImageUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
+export type MediaUncheckedUpdateWithoutProductInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
+  mediaType?: Prisma.EnumMediaTypeFieldUpdateOperationsInput | $Enums.MediaType
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  fileSize?: Prisma.IntFieldUpdateOperationsInput | number
+  isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  delegate_aux_image?: Prisma.ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_video?: Prisma.VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_audio?: Prisma.AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_document?: Prisma.DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+  delegate_aux_file?: Prisma.FileUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput
+}
+
 
 
 export type MediaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  type?: boolean
-  key?: boolean
-  imageSize?: boolean
+  bucketKey?: boolean
+  mediaType?: boolean
   fileName?: boolean
   mimeType?: boolean
   fileSize?: boolean
-  duration?: boolean
-  width?: boolean
-  height?: boolean
   isStale?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  product?: boolean | Prisma.Media$productArgs<ExtArgs>
+  delegate_aux_image?: boolean | Prisma.Media$delegate_aux_imageArgs<ExtArgs>
+  delegate_aux_video?: boolean | Prisma.Media$delegate_aux_videoArgs<ExtArgs>
+  delegate_aux_audio?: boolean | Prisma.Media$delegate_aux_audioArgs<ExtArgs>
+  delegate_aux_document?: boolean | Prisma.Media$delegate_aux_documentArgs<ExtArgs>
+  delegate_aux_file?: boolean | Prisma.Media$delegate_aux_fileArgs<ExtArgs>
 }, ExtArgs["result"]["media"]>
 
 export type MediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  type?: boolean
-  key?: boolean
-  imageSize?: boolean
+  bucketKey?: boolean
+  mediaType?: boolean
   fileName?: boolean
   mimeType?: boolean
   fileSize?: boolean
-  duration?: boolean
-  width?: boolean
-  height?: boolean
   isStale?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -614,15 +1129,11 @@ export type MediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type MediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  type?: boolean
-  key?: boolean
-  imageSize?: boolean
+  bucketKey?: boolean
+  mediaType?: boolean
   fileName?: boolean
   mimeType?: boolean
   fileSize?: boolean
-  duration?: boolean
-  width?: boolean
-  height?: boolean
   isStale?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -630,36 +1141,45 @@ export type MediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 
 export type MediaSelectScalar = {
   id?: boolean
-  type?: boolean
-  key?: boolean
-  imageSize?: boolean
+  bucketKey?: boolean
+  mediaType?: boolean
   fileName?: boolean
   mimeType?: boolean
   fileSize?: boolean
-  duration?: boolean
-  width?: boolean
-  height?: boolean
   isStale?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "key" | "imageSize" | "fileName" | "mimeType" | "fileSize" | "duration" | "width" | "height" | "isStale" | "createdAt" | "updatedAt", ExtArgs["result"]["media"]>
+export type MediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bucketKey" | "mediaType" | "fileName" | "mimeType" | "fileSize" | "isStale" | "createdAt" | "updatedAt", ExtArgs["result"]["media"]>
+export type MediaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  product?: boolean | Prisma.Media$productArgs<ExtArgs>
+  delegate_aux_image?: boolean | Prisma.Media$delegate_aux_imageArgs<ExtArgs>
+  delegate_aux_video?: boolean | Prisma.Media$delegate_aux_videoArgs<ExtArgs>
+  delegate_aux_audio?: boolean | Prisma.Media$delegate_aux_audioArgs<ExtArgs>
+  delegate_aux_document?: boolean | Prisma.Media$delegate_aux_documentArgs<ExtArgs>
+  delegate_aux_file?: boolean | Prisma.Media$delegate_aux_fileArgs<ExtArgs>
+}
+export type MediaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type MediaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $MediaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Media"
-  objects: {}
+  objects: {
+    product: Prisma.$ProductMediaPayload<ExtArgs> | null
+    delegate_aux_image: Prisma.$ImagePayload<ExtArgs> | null
+    delegate_aux_video: Prisma.$VideoPayload<ExtArgs> | null
+    delegate_aux_audio: Prisma.$AudioPayload<ExtArgs> | null
+    delegate_aux_document: Prisma.$DocumentPayload<ExtArgs> | null
+    delegate_aux_file: Prisma.$FilePayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    type: $Enums.MediaType
-    key: string
-    imageSize: $Enums.ImageSize | null
+    bucketKey: string
+    mediaType: $Enums.MediaType
     fileName: string
     mimeType: string
     fileSize: number
-    duration: number | null
-    width: number | null
-    height: number | null
     isStale: boolean
     createdAt: Date
     updatedAt: Date
@@ -1057,6 +1577,12 @@ readonly fields: MediaFieldRefs;
  */
 export interface Prisma__MediaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  product<T extends Prisma.Media$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$productArgs<ExtArgs>>): Prisma.Prisma__ProductMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  delegate_aux_image<T extends Prisma.Media$delegate_aux_imageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_imageArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  delegate_aux_video<T extends Prisma.Media$delegate_aux_videoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_videoArgs<ExtArgs>>): Prisma.Prisma__VideoClient<runtime.Types.Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  delegate_aux_audio<T extends Prisma.Media$delegate_aux_audioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_audioArgs<ExtArgs>>): Prisma.Prisma__AudioClient<runtime.Types.Result.GetResult<Prisma.$AudioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  delegate_aux_document<T extends Prisma.Media$delegate_aux_documentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_documentArgs<ExtArgs>>): Prisma.Prisma__DocumentClient<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  delegate_aux_file<T extends Prisma.Media$delegate_aux_fileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$delegate_aux_fileArgs<ExtArgs>>): Prisma.Prisma__FileClient<runtime.Types.Result.GetResult<Prisma.$FilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1087,15 +1613,11 @@ export interface Prisma__MediaClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface MediaFieldRefs {
   readonly id: Prisma.FieldRef<"Media", 'String'>
-  readonly type: Prisma.FieldRef<"Media", 'MediaType'>
-  readonly key: Prisma.FieldRef<"Media", 'String'>
-  readonly imageSize: Prisma.FieldRef<"Media", 'ImageSize'>
+  readonly bucketKey: Prisma.FieldRef<"Media", 'String'>
+  readonly mediaType: Prisma.FieldRef<"Media", 'MediaType'>
   readonly fileName: Prisma.FieldRef<"Media", 'String'>
   readonly mimeType: Prisma.FieldRef<"Media", 'String'>
   readonly fileSize: Prisma.FieldRef<"Media", 'Int'>
-  readonly duration: Prisma.FieldRef<"Media", 'Int'>
-  readonly width: Prisma.FieldRef<"Media", 'Int'>
-  readonly height: Prisma.FieldRef<"Media", 'Int'>
   readonly isStale: Prisma.FieldRef<"Media", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Media", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Media", 'DateTime'>
@@ -1116,6 +1638,10 @@ export type MediaFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  /**
    * Filter, which Media to fetch.
    */
   where: Prisma.MediaWhereUniqueInput
@@ -1134,6 +1660,10 @@ export type MediaFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  /**
    * Filter, which Media to fetch.
    */
   where: Prisma.MediaWhereUniqueInput
@@ -1151,6 +1681,10 @@ export type MediaFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Media
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
   /**
    * Filter, which Media to fetch.
    */
@@ -1200,6 +1734,10 @@ export type MediaFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  /**
    * Filter, which Media to fetch.
    */
   where?: Prisma.MediaWhereInput
@@ -1248,6 +1786,10 @@ export type MediaFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  /**
    * Filter, which Media to fetch.
    */
   where?: Prisma.MediaWhereInput
@@ -1290,6 +1832,10 @@ export type MediaCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Media
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
   /**
    * The data needed to create a Media.
    */
@@ -1338,6 +1884,10 @@ export type MediaUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the Media
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
   /**
    * The data needed to update a Media.
    */
@@ -1405,6 +1955,10 @@ export type MediaUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  /**
    * The filter to search for the Media to update in case it exists.
    */
   where: Prisma.MediaWhereUniqueInput
@@ -1431,6 +1985,10 @@ export type MediaDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  /**
    * Filter which Media to delete.
    */
   where: Prisma.MediaWhereUniqueInput
@@ -1451,6 +2009,120 @@ export type MediaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * Media.product
+ */
+export type Media$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductMedia
+   */
+  select?: Prisma.ProductMediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductMedia
+   */
+  omit?: Prisma.ProductMediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductMediaInclude<ExtArgs> | null
+  where?: Prisma.ProductMediaWhereInput
+}
+
+/**
+ * Media.delegate_aux_image
+ */
+export type Media$delegate_aux_imageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Image
+   */
+  select?: Prisma.ImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Image
+   */
+  omit?: Prisma.ImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ImageInclude<ExtArgs> | null
+  where?: Prisma.ImageWhereInput
+}
+
+/**
+ * Media.delegate_aux_video
+ */
+export type Media$delegate_aux_videoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Video
+   */
+  select?: Prisma.VideoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Video
+   */
+  omit?: Prisma.VideoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VideoInclude<ExtArgs> | null
+  where?: Prisma.VideoWhereInput
+}
+
+/**
+ * Media.delegate_aux_audio
+ */
+export type Media$delegate_aux_audioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Audio
+   */
+  select?: Prisma.AudioSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Audio
+   */
+  omit?: Prisma.AudioOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AudioInclude<ExtArgs> | null
+  where?: Prisma.AudioWhereInput
+}
+
+/**
+ * Media.delegate_aux_document
+ */
+export type Media$delegate_aux_documentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Document
+   */
+  select?: Prisma.DocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Document
+   */
+  omit?: Prisma.DocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentInclude<ExtArgs> | null
+  where?: Prisma.DocumentWhereInput
+}
+
+/**
+ * Media.delegate_aux_file
+ */
+export type Media$delegate_aux_fileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the File
+   */
+  select?: Prisma.FileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the File
+   */
+  omit?: Prisma.FileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FileInclude<ExtArgs> | null
+  where?: Prisma.FileWhereInput
+}
+
+/**
  * Media without action
  */
 export type MediaDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1462,4 +2134,8 @@ export type MediaDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Media
    */
   omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
 }

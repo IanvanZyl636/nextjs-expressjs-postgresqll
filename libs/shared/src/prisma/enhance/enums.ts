@@ -5,4 +5,4 @@
 /* eslint-disable */
 // @ts-nocheck
 
-export * from '../generated/enums';
+export * from './logical-prisma-client/enums';

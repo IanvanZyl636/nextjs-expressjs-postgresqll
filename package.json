@@ -18,9 +18,7 @@
     "prisma:push": "npx prisma db push --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:migrate": "npx prisma migrate dev --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:reset": "npx prisma migrate reset --schema=apps/backend/src/integrations/prisma/prisma",
-    "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",
-    "prisma:reset:test": "dotenv -e .env.test -- npx prisma migrate reset --schema=apps/backend/src/integrations/prisma/prisma",
-    "prisma:reset:force:test": "dotenv -e .env.test -- npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",
+    "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",    
     "prisma:deploy": "npx prisma migrate deploy --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:seed": "npx prisma db seed --schema=apps/backend/src/integrations/prisma/prisma"
   },

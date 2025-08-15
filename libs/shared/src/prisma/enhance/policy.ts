@@ -11,10 +11,10 @@ import { type PolicyDef, type PermissionCheckerConstraint } from "@zenstackhq/ru
 import { MediaType } from "../generated/client";
 import { ImageSize } from "../generated/client";
 import { OrderStatus } from "../generated/client";
-import { PaymentStatus } from "../generated/client";
-import { PaymentMethod } from "../generated/client";
 import { Role } from "../generated/client";
 import { TokenType } from "../generated/client";
+import { PaymentStatus } from "../generated/client";
+import { PaymentMethod } from "../generated/client";
 
 const policy: PolicyDef = {
     policy: {
@@ -38,13 +38,13 @@ const policy: PolicyDef = {
             },
 
         },
-        customer: {
+        image: {
             modelLevel: {
-                read: { guard: Customer_read, },
-                create: { guard: Customer_create, inputChecker: Customer_create_input, },
-                update: { guard: Customer_update, },
-                postUpdate: { guard: Customer_postUpdate, },
-                delete: { guard: Customer_delete, }
+                read: { guard: Image_read, },
+                create: { guard: Image_create, inputChecker: Image_create_input, },
+                update: { guard: Image_update, },
+                postUpdate: { guard: Image_postUpdate, },
+                delete: { guard: Image_delete, }
             },
             fieldLevel: {
                 read:
@@ -58,13 +58,113 @@ const policy: PolicyDef = {
             },
 
         },
-        address: {
+        video: {
             modelLevel: {
-                read: { guard: Address_read, },
-                create: { guard: Address_create, inputChecker: Address_create_input, },
-                update: { guard: Address_update, },
-                postUpdate: { guard: Address_postUpdate, },
-                delete: { guard: Address_delete, }
+                read: { guard: Video_read, },
+                create: { guard: Video_create, inputChecker: Video_create_input, },
+                update: { guard: Video_update, },
+                postUpdate: { guard: Video_postUpdate, },
+                delete: { guard: Video_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        audio: {
+            modelLevel: {
+                read: { guard: Audio_read, },
+                create: { guard: Audio_create, inputChecker: Audio_create_input, },
+                update: { guard: Audio_update, },
+                postUpdate: { guard: Audio_postUpdate, },
+                delete: { guard: Audio_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        document: {
+            modelLevel: {
+                read: { guard: Document_read, },
+                create: { guard: Document_create, inputChecker: Document_create_input, },
+                update: { guard: Document_update, },
+                postUpdate: { guard: Document_postUpdate, },
+                delete: { guard: Document_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        file: {
+            modelLevel: {
+                read: { guard: File_read, },
+                create: { guard: File_create, inputChecker: File_create_input, },
+                update: { guard: File_update, },
+                postUpdate: { guard: File_postUpdate, },
+                delete: { guard: File_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        product: {
+            modelLevel: {
+                read: { guard: Product_read, },
+                create: { guard: Product_create, inputChecker: Product_create_input, },
+                update: { guard: Product_update, },
+                postUpdate: { guard: Product_postUpdate, },
+                delete: { guard: Product_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        productMedia: {
+            modelLevel: {
+                read: { guard: ProductMedia_read, },
+                create: { guard: ProductMedia_create, inputChecker: ProductMedia_create_input, },
+                update: { guard: ProductMedia_update, },
+                postUpdate: { guard: ProductMedia_postUpdate, },
+                delete: { guard: ProductMedia_delete, }
             },
             fieldLevel: {
                 read:
@@ -118,13 +218,13 @@ const policy: PolicyDef = {
             },
 
         },
-        payment: {
+        customer: {
             modelLevel: {
-                read: { guard: Payment_read, },
-                create: { guard: Payment_create, inputChecker: Payment_create_input, },
-                update: { guard: Payment_update, },
-                postUpdate: { guard: Payment_postUpdate, },
-                delete: { guard: Payment_delete, }
+                read: { guard: Customer_read, },
+                create: { guard: Customer_create, inputChecker: Customer_create_input, },
+                update: { guard: Customer_update, },
+                postUpdate: { guard: Customer_postUpdate, },
+                delete: { guard: Customer_delete, }
             },
             fieldLevel: {
                 read:
@@ -138,13 +238,13 @@ const policy: PolicyDef = {
             },
 
         },
-        product: {
+        address: {
             modelLevel: {
-                read: { guard: Product_read, },
-                create: { guard: Product_create, inputChecker: Product_create_input, },
-                update: { guard: Product_update, },
-                postUpdate: { guard: Product_postUpdate, },
-                delete: { guard: Product_delete, }
+                read: { guard: Address_read, },
+                create: { guard: Address_create, inputChecker: Address_create_input, },
+                update: { guard: Address_update, },
+                postUpdate: { guard: Address_postUpdate, },
+                delete: { guard: Address_delete, }
             },
             fieldLevel: {
                 read:
@@ -238,6 +338,26 @@ const policy: PolicyDef = {
             },
 
         },
+        payment: {
+            modelLevel: {
+                read: { guard: Payment_read, },
+                create: { guard: Payment_create, inputChecker: Payment_create_input, },
+                update: { guard: Payment_update, },
+                postUpdate: { guard: Payment_postUpdate, },
+                delete: { guard: Payment_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
         log: {
             modelLevel: {
                 read: { guard: Log_read, },
@@ -260,17 +380,23 @@ const policy: PolicyDef = {
         },
     },
     validation: {
-        media: { hasValidation: true },
-        customer: { hasValidation: false },
-        address: { hasValidation: false },
+        media: { hasValidation: false },
+        image: { hasValidation: false },
+        video: { hasValidation: false },
+        audio: { hasValidation: false },
+        document: { hasValidation: false },
+        file: { hasValidation: false },
+        product: { hasValidation: false },
+        productMedia: { hasValidation: false },
         order: { hasValidation: false },
         orderItem: { hasValidation: false },
-        payment: { hasValidation: false },
-        product: { hasValidation: false },
+        customer: { hasValidation: false },
+        address: { hasValidation: false },
         cart: { hasValidation: false },
         cartItem: { hasValidation: false },
         user: { hasValidation: false },
         token: { hasValidation: false },
+        payment: { hasValidation: false },
         log: { hasValidation: false },
     },
 
@@ -328,107 +454,359 @@ function $check_Media_delete(input: any, context: QueryContext): any {
     return false;
 }
 
-function Customer_read(context: QueryContext, db: CrudContract): any {
+function Image_read(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Customer_read(input: any, context: QueryContext): any {
+function $check_Image_read(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Customer_create(context: QueryContext, db: CrudContract): any {
+function Image_create(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Customer_create(input: any, context: QueryContext): any {
+function $check_Image_create(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Customer_create_input(input: any, context: QueryContext): boolean {
+function Image_create_input(input: any, context: QueryContext): boolean {
     return true
 }
 
-function Customer_update(context: QueryContext, db: CrudContract): any {
+function Image_update(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Customer_update(input: any, context: QueryContext): any {
+function $check_Image_update(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Customer_postUpdate(context: QueryContext, db: CrudContract): any {
+function Image_postUpdate(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Customer_postUpdate(input: any, context: QueryContext): any {
+function $check_Image_postUpdate(input: any, context: QueryContext): any {
     return true;
 }
 
-function Customer_delete(context: QueryContext, db: CrudContract): any {
+function Image_delete(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Customer_delete(input: any, context: QueryContext): any {
+function $check_Image_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Address_read(context: QueryContext, db: CrudContract): any {
+function Video_read(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Address_read(input: any, context: QueryContext): any {
+function $check_Video_read(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Address_create(context: QueryContext, db: CrudContract): any {
+function Video_create(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Address_create(input: any, context: QueryContext): any {
+function $check_Video_create(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Address_create_input(input: any, context: QueryContext): boolean {
+function Video_create_input(input: any, context: QueryContext): boolean {
     return true
 }
 
-function Address_update(context: QueryContext, db: CrudContract): any {
+function Video_update(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Address_update(input: any, context: QueryContext): any {
+function $check_Video_update(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Address_postUpdate(context: QueryContext, db: CrudContract): any {
+function Video_postUpdate(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Address_postUpdate(input: any, context: QueryContext): any {
+function $check_Video_postUpdate(input: any, context: QueryContext): any {
     return true;
 }
 
-function Address_delete(context: QueryContext, db: CrudContract): any {
+function Video_delete(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Address_delete(input: any, context: QueryContext): any {
+function $check_Video_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
+    return false;
+}
+
+function Audio_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Audio_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Audio_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Audio_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Audio_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function Audio_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Audio_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Audio_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Audio_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Audio_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Audio_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Document_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Document_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Document_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Document_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Document_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function Document_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Document_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Document_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Document_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Document_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Document_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function File_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_File_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function File_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_File_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function File_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function File_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_File_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function File_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_File_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function File_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_File_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Product_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Product_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Product_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Product_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Product_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function Product_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Product_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Product_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Product_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Product_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Product_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ProductMedia_read(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductMedia_read(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ProductMedia_create(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductMedia_create(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ProductMedia_create_input(input: any, context: QueryContext): boolean {
+    return false;
+}
+
+function ProductMedia_update(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductMedia_update(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ProductMedia_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ProductMedia_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function ProductMedia_delete(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ProductMedia_delete(input: any, context: QueryContext): any {
     return false;
 }
 
@@ -536,105 +914,105 @@ function $check_OrderItem_delete(input: any, context: QueryContext): any {
     return false;
 }
 
-function Payment_read(context: QueryContext, db: CrudContract): any {
+function Customer_read(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Payment_read(input: any, context: QueryContext): any {
+function $check_Customer_read(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Payment_create(context: QueryContext, db: CrudContract): any {
+function Customer_create(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Payment_create(input: any, context: QueryContext): any {
+function $check_Customer_create(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Payment_create_input(input: any, context: QueryContext): boolean {
+function Customer_create_input(input: any, context: QueryContext): boolean {
     return true
 }
 
-function Payment_update(context: QueryContext, db: CrudContract): any {
+function Customer_update(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Payment_update(input: any, context: QueryContext): any {
+function $check_Customer_update(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Payment_postUpdate(context: QueryContext, db: CrudContract): any {
+function Customer_postUpdate(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Payment_postUpdate(input: any, context: QueryContext): any {
+function $check_Customer_postUpdate(input: any, context: QueryContext): any {
     return true;
 }
 
-function Payment_delete(context: QueryContext, db: CrudContract): any {
+function Customer_delete(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Payment_delete(input: any, context: QueryContext): any {
+function $check_Customer_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Product_read(context: QueryContext, db: CrudContract): any {
+function Address_read(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Product_read(input: any, context: QueryContext): any {
+function $check_Address_read(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Product_create(context: QueryContext, db: CrudContract): any {
+function Address_create(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Product_create(input: any, context: QueryContext): any {
+function $check_Address_create(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Product_create_input(input: any, context: QueryContext): boolean {
+function Address_create_input(input: any, context: QueryContext): boolean {
     return true
 }
 
-function Product_update(context: QueryContext, db: CrudContract): any {
+function Address_update(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Product_update(input: any, context: QueryContext): any {
+function $check_Address_update(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function Product_postUpdate(context: QueryContext, db: CrudContract): any {
+function Address_postUpdate(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Product_postUpdate(input: any, context: QueryContext): any {
+function $check_Address_postUpdate(input: any, context: QueryContext): any {
     return true;
 }
 
-function Product_delete(context: QueryContext, db: CrudContract): any {
+function Address_delete(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_Product_delete(input: any, context: QueryContext): any {
+function $check_Address_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
@@ -843,6 +1221,58 @@ function Token_delete(context: QueryContext, db: CrudContract): any {
 }
 
 function $check_Token_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Payment_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Payment_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Payment_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Payment_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Payment_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function Payment_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Payment_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Payment_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Payment_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Payment_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Payment_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;

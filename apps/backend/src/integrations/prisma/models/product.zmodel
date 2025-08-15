@@ -1,5 +1,6 @@
 import "./order.zmodel"
 import "./cart.zmodel"
+import "./media.zmodel"
 
 model Product {
   id          String   @id @default(uuid())
@@ -7,11 +8,21 @@ model Product {
   description String
   price       Float
   stock       Int
-  imageUrl    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
   orderItems  OrderItem[]
   cartItems   CartItem[]
+  mediaItems  ProductMedia[]
 
   @@allow('all', true)
+}
+
+model ProductMedia {
+  id        String @id @default(uuid())
+  productId String
+  mediaId   String @unique
+
+  product Product @relation(fields: [productId], references: [id])
+  media   Media   @relation(fields: [mediaId], references: [id])
 }

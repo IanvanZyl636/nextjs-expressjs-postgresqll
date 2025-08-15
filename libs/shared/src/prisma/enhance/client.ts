@@ -5,4 +5,4 @@
 /* eslint-disable */
 // @ts-nocheck
 
-export * from '../generated/client';
+export * from './logical-prisma-client/client';

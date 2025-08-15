@@ -5,5 +5,5 @@
 /* eslint-disable */
 // @ts-nocheck
 
-export * from '../generated/models';
+export * from './logical-prisma-client/models';
 export * from './json-types';
