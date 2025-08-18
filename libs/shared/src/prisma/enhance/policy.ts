@@ -852,30 +852,36 @@ function $check_Product_delete(input: any, context: QueryContext): any {
 }
 
 function ProductVariant_read(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariant_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function ProductVariant_create(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariant_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function ProductVariant_create_input(input: any, context: QueryContext): boolean {
-    return false;
+    return true
 }
 
 function ProductVariant_update(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariant_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -888,38 +894,46 @@ function $check_ProductVariant_postUpdate(input: any, context: QueryContext): an
 }
 
 function ProductVariant_delete(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariant_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function ProductVariantMedia_read(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariantMedia_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function ProductVariantMedia_create(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariantMedia_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function ProductVariantMedia_create_input(input: any, context: QueryContext): boolean {
-    return false;
+    return true
 }
 
 function ProductVariantMedia_update(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariantMedia_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -932,10 +946,12 @@ function $check_ProductVariantMedia_postUpdate(input: any, context: QueryContext
 }
 
 function ProductVariantMedia_delete(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ProductVariantMedia_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 

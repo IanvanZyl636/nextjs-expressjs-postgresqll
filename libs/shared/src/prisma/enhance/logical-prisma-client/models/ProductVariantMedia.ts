@@ -7,7 +7,8 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 /**
  * Model ProductVariantMedia
- *
+ * @
+ * @allow ('all', true)
  */
 export type ProductVariantMediaModel = runtime.Types.Result.DefaultSelection<Prisma.$ProductVariantMediaPayload>;
 export type AggregateProductVariantMedia = {

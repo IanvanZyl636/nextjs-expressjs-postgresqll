@@ -124,18 +124,18 @@ model File {
 }
 
 model Product {
-  id          String           @id() @default(uuid())
-  slug        String?          @unique()
-  name        String?
-  description String?
-  status      ProductStatus    @default(DRAFT)
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt()
-  deletedAt   DateTime?
-  tags        Tag[]            @relation("ProductTags")
-  categories  Category[]       @relation("ProductCategories")
-  variants    ProductVariant[]
-  ratings     Rating[]
+  id              String           @id() @default(uuid())
+  slug            String           @unique()
+  name            String
+  description     String?
+  status          ProductStatus    @default(DRAFT)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt()
+  deletedAt       DateTime?
+  tags            Tag[]            @relation("ProductTags")
+  categories      Category[]       @relation("ProductCategories")
+  productVariants ProductVariant[]
+  ratings         Rating[]
 }
 
 model ProductVariant {
@@ -143,14 +143,14 @@ model ProductVariant {
   productId   String
   featured    Boolean               @default(false)
   sku         String?               @unique()
-  slug        String?               @unique()
+  slug        String                @unique()
   name        String
   description String?
   color       String?
   weight      Float?
   dimensions  Json?
-  price       Float?
-  stock       Int?
+  price       Float
+  stock       Int
   salePrice   Float?
   saleStart   DateTime?
   saleEnd     DateTime?

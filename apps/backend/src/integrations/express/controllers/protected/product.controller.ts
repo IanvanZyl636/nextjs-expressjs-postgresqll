@@ -1,0 +1,13 @@
+import { ProductUpsertWithRulesSchema } from "@nextjs-expressjs-postgresql/shared";
+import { upsertProduct } from "../../../../services/product/product.service"
+import { AuthenticatedRequest } from "../../models/authenticated-request.model"
+import { Response } from "express";
+
+export async function createProductController(
+    req: AuthenticatedRequest,
+    res: Response
+){
+    const product = ProductUpsertWithRulesSchema.parse(req.body);
+
+    await upsertProduct(product);
+}

@@ -395,12 +395,10 @@ const metadata = {
                 }, slug: {
                     name: "slug",
                     type: "String",
-                    isOptional: true,
                     attributes: [{ "name": "@unique", "args": [] }],
                 }, name: {
                     name: "name",
                     type: "String",
-                    isOptional: true,
                 }, description: {
                     name: "description",
                     type: "String",
@@ -435,8 +433,8 @@ const metadata = {
                     isArray: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ProductCategories" }] }],
                     backLink: 'products',
-                }, variants: {
-                    name: "variants",
+                }, productVariants: {
+                    name: "productVariants",
                     type: "ProductVariant",
                     isDataModel: true,
                     isArray: true,
@@ -483,7 +481,6 @@ const metadata = {
                 }, slug: {
                     name: "slug",
                     type: "String",
-                    isOptional: true,
                     attributes: [{ "name": "@unique", "args": [] }],
                 }, name: {
                     name: "name",
@@ -509,11 +506,9 @@ const metadata = {
                 }, price: {
                     name: "price",
                     type: "Float",
-                    isOptional: true,
                 }, stock: {
                     name: "stock",
                     type: "Int",
-                    isOptional: true,
                 }, salePrice: {
                     name: "salePrice",
                     type: "Float",
@@ -543,7 +538,7 @@ const metadata = {
                     type: "Product",
                     isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'variants',
+                    backLink: 'productVariants',
                     isRelationOwner: true,
                     foreignKeyMapping: { "id": "productId" },
                 }, orderItems: {
@@ -577,7 +572,7 @@ const metadata = {
                     fields: ["slug"]
                 },
             },
-            attributes: [{ "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }],
+            attributes: [{ "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         productVariantMedia: {
             name: 'ProductVariantMedia', fields: {
@@ -631,6 +626,7 @@ const metadata = {
                     fields: ["mediaId"]
                 },
             },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         order: {
             name: 'Order', fields: {

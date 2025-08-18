@@ -269,14 +269,14 @@ export type ProductVariantGroupByOutputType = {
   productId: string
   featured: boolean
   sku: string | null
-  slug: string | null
+  slug: string
   name: string
   description: string | null
   color: string | null
   weight: number | null
   dimensions: runtime.JsonValue | null
-  price: number | null
-  stock: number | null
+  price: number
+  stock: number
   salePrice: number | null
   saleStart: Date | null
   saleEnd: Date | null
@@ -313,14 +313,14 @@ export type ProductVariantWhereInput = {
   productId?: Prisma.StringFilter<"ProductVariant"> | string
   featured?: Prisma.BoolFilter<"ProductVariant"> | boolean
   sku?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
-  slug?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
+  slug?: Prisma.StringFilter<"ProductVariant"> | string
   name?: Prisma.StringFilter<"ProductVariant"> | string
   description?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   color?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   weight?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
   dimensions?: Prisma.JsonNullableFilter<"ProductVariant">
-  price?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
-  stock?: Prisma.IntNullableFilter<"ProductVariant"> | number | null
+  price?: Prisma.FloatFilter<"ProductVariant"> | number
+  stock?: Prisma.IntFilter<"ProductVariant"> | number
   salePrice?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
   saleStart?: Prisma.DateTimeNullableFilter<"ProductVariant"> | Date | string | null
   saleEnd?: Prisma.DateTimeNullableFilter<"ProductVariant"> | Date | string | null
@@ -338,14 +338,14 @@ export type ProductVariantOrderByWithRelationInput = {
   productId?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   sku?: Prisma.SortOrderInput | Prisma.SortOrder
-  slug?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrderInput | Prisma.SortOrder
   dimensions?: Prisma.SortOrderInput | Prisma.SortOrder
-  price?: Prisma.SortOrderInput | Prisma.SortOrder
-  stock?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   salePrice?: Prisma.SortOrderInput | Prisma.SortOrder
   saleStart?: Prisma.SortOrderInput | Prisma.SortOrder
   saleEnd?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -372,8 +372,8 @@ export type ProductVariantWhereUniqueInput = Prisma.AtLeast<{
   color?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   weight?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
   dimensions?: Prisma.JsonNullableFilter<"ProductVariant">
-  price?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
-  stock?: Prisma.IntNullableFilter<"ProductVariant"> | number | null
+  price?: Prisma.FloatFilter<"ProductVariant"> | number
+  stock?: Prisma.IntFilter<"ProductVariant"> | number
   salePrice?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
   saleStart?: Prisma.DateTimeNullableFilter<"ProductVariant"> | Date | string | null
   saleEnd?: Prisma.DateTimeNullableFilter<"ProductVariant"> | Date | string | null
@@ -391,14 +391,14 @@ export type ProductVariantOrderByWithAggregationInput = {
   productId?: Prisma.SortOrder
   featured?: Prisma.SortOrder
   sku?: Prisma.SortOrderInput | Prisma.SortOrder
-  slug?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrderInput | Prisma.SortOrder
   dimensions?: Prisma.SortOrderInput | Prisma.SortOrder
-  price?: Prisma.SortOrderInput | Prisma.SortOrder
-  stock?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrder
+  stock?: Prisma.SortOrder
   salePrice?: Prisma.SortOrderInput | Prisma.SortOrder
   saleStart?: Prisma.SortOrderInput | Prisma.SortOrder
   saleEnd?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -420,14 +420,14 @@ export type ProductVariantScalarWhereWithAggregatesInput = {
   productId?: Prisma.StringWithAggregatesFilter<"ProductVariant"> | string
   featured?: Prisma.BoolWithAggregatesFilter<"ProductVariant"> | boolean
   sku?: Prisma.StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
-  slug?: Prisma.StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
+  slug?: Prisma.StringWithAggregatesFilter<"ProductVariant"> | string
   name?: Prisma.StringWithAggregatesFilter<"ProductVariant"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
   color?: Prisma.StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
   weight?: Prisma.FloatNullableWithAggregatesFilter<"ProductVariant"> | number | null
   dimensions?: Prisma.JsonNullableWithAggregatesFilter<"ProductVariant">
-  price?: Prisma.FloatNullableWithAggregatesFilter<"ProductVariant"> | number | null
-  stock?: Prisma.IntNullableWithAggregatesFilter<"ProductVariant"> | number | null
+  price?: Prisma.FloatWithAggregatesFilter<"ProductVariant"> | number
+  stock?: Prisma.IntWithAggregatesFilter<"ProductVariant"> | number
   salePrice?: Prisma.FloatNullableWithAggregatesFilter<"ProductVariant"> | number | null
   saleStart?: Prisma.DateTimeNullableWithAggregatesFilter<"ProductVariant"> | Date | string | null
   saleEnd?: Prisma.DateTimeNullableWithAggregatesFilter<"ProductVariant"> | Date | string | null
@@ -440,21 +440,21 @@ export type ProductVariantCreateInput = {
   id?: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
+  product: Prisma.ProductCreateNestedOneWithoutProductVariantsInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductVariantInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductVariantInput
   mediaItems?: Prisma.ProductVariantMediaCreateNestedManyWithoutProductVariantInput
@@ -465,14 +465,14 @@ export type ProductVariantUncheckedCreateInput = {
   productId: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -488,21 +488,21 @@ export type ProductVariantUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
+  product?: Prisma.ProductUpdateOneRequiredWithoutProductVariantsNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutProductVariantNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductVariantNestedInput
   mediaItems?: Prisma.ProductVariantMediaUpdateManyWithoutProductVariantNestedInput
@@ -513,14 +513,14 @@ export type ProductVariantUncheckedUpdateInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -537,14 +537,14 @@ export type ProductVariantCreateManyInput = {
   productId: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -557,14 +557,14 @@ export type ProductVariantUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -578,14 +578,14 @@ export type ProductVariantUncheckedUpdateManyInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -734,8 +734,8 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
   increment?: number
   decrement?: number
   multiply?: number
@@ -788,14 +788,14 @@ export type ProductVariantCreateWithoutProductInput = {
   id?: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -811,14 +811,14 @@ export type ProductVariantUncheckedCreateWithoutProductInput = {
   id?: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -864,14 +864,14 @@ export type ProductVariantScalarWhereInput = {
   productId?: Prisma.StringFilter<"ProductVariant"> | string
   featured?: Prisma.BoolFilter<"ProductVariant"> | boolean
   sku?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
-  slug?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
+  slug?: Prisma.StringFilter<"ProductVariant"> | string
   name?: Prisma.StringFilter<"ProductVariant"> | string
   description?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   color?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   weight?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
   dimensions?: Prisma.JsonNullableFilter<"ProductVariant">
-  price?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
-  stock?: Prisma.IntNullableFilter<"ProductVariant"> | number | null
+  price?: Prisma.FloatFilter<"ProductVariant"> | number
+  stock?: Prisma.IntFilter<"ProductVariant"> | number
   salePrice?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
   saleStart?: Prisma.DateTimeNullableFilter<"ProductVariant"> | Date | string | null
   saleEnd?: Prisma.DateTimeNullableFilter<"ProductVariant"> | Date | string | null
@@ -884,21 +884,21 @@ export type ProductVariantCreateWithoutMediaItemsInput = {
   id?: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
+  product: Prisma.ProductCreateNestedOneWithoutProductVariantsInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductVariantInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductVariantInput
 }
@@ -908,14 +908,14 @@ export type ProductVariantUncheckedCreateWithoutMediaItemsInput = {
   productId: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -946,21 +946,21 @@ export type ProductVariantUpdateWithoutMediaItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
+  product?: Prisma.ProductUpdateOneRequiredWithoutProductVariantsNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutProductVariantNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductVariantNestedInput
 }
@@ -970,14 +970,14 @@ export type ProductVariantUncheckedUpdateWithoutMediaItemsInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -992,21 +992,21 @@ export type ProductVariantCreateWithoutOrderItemsInput = {
   id?: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
+  product: Prisma.ProductCreateNestedOneWithoutProductVariantsInput
   cartItems?: Prisma.CartItemCreateNestedManyWithoutProductVariantInput
   mediaItems?: Prisma.ProductVariantMediaCreateNestedManyWithoutProductVariantInput
 }
@@ -1016,14 +1016,14 @@ export type ProductVariantUncheckedCreateWithoutOrderItemsInput = {
   productId: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -1054,21 +1054,21 @@ export type ProductVariantUpdateWithoutOrderItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
+  product?: Prisma.ProductUpdateOneRequiredWithoutProductVariantsNestedInput
   cartItems?: Prisma.CartItemUpdateManyWithoutProductVariantNestedInput
   mediaItems?: Prisma.ProductVariantMediaUpdateManyWithoutProductVariantNestedInput
 }
@@ -1078,14 +1078,14 @@ export type ProductVariantUncheckedUpdateWithoutOrderItemsInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1100,21 +1100,21 @@ export type ProductVariantCreateWithoutCartItemsInput = {
   id?: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  product: Prisma.ProductCreateNestedOneWithoutVariantsInput
+  product: Prisma.ProductCreateNestedOneWithoutProductVariantsInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductVariantInput
   mediaItems?: Prisma.ProductVariantMediaCreateNestedManyWithoutProductVariantInput
 }
@@ -1124,14 +1124,14 @@ export type ProductVariantUncheckedCreateWithoutCartItemsInput = {
   productId: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -1162,21 +1162,21 @@ export type ProductVariantUpdateWithoutCartItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  product?: Prisma.ProductUpdateOneRequiredWithoutVariantsNestedInput
+  product?: Prisma.ProductUpdateOneRequiredWithoutProductVariantsNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutProductVariantNestedInput
   mediaItems?: Prisma.ProductVariantMediaUpdateManyWithoutProductVariantNestedInput
 }
@@ -1186,14 +1186,14 @@ export type ProductVariantUncheckedUpdateWithoutCartItemsInput = {
   productId?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1208,14 +1208,14 @@ export type ProductVariantCreateManyProductInput = {
   id?: string
   featured?: boolean
   sku?: string | null
-  slug?: string | null
+  slug: string
   name: string
   description?: string | null
   color?: string | null
   weight?: number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: number | null
-  stock?: number | null
+  price: number
+  stock: number
   salePrice?: number | null
   saleStart?: Date | string | null
   saleEnd?: Date | string | null
@@ -1228,14 +1228,14 @@ export type ProductVariantUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1251,14 +1251,14 @@ export type ProductVariantUncheckedUpdateWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1274,14 +1274,14 @@ export type ProductVariantUncheckedUpdateManyWithoutProductInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
   sku?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
-  price?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  stock?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
   salePrice?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   saleStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   saleEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1458,14 +1458,14 @@ export type $ProductVariantPayload<ExtArgs extends runtime.Types.Extensions.Inte
     productId: string
     featured: boolean
     sku: string | null
-    slug: string | null
+    slug: string
     name: string
     description: string | null
     color: string | null
     weight: number | null
     dimensions: runtime.JsonValue | null
-    price: number | null
-    stock: number | null
+    price: number
+    stock: number
     salePrice: number | null
     saleStart: Date | null
     saleEnd: Date | null

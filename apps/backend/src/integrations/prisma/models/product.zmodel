@@ -20,21 +20,21 @@ type Dimensions {
 }
 
 model Product {
-  id          String           @id @default(uuid())
-  slug        String?           @unique
-  name        String?
-  description String?
+  id              String           @id @default(uuid())
+  slug            String           @unique
+  name            String
+  description     String?
 
-  status      ProductStatus    @default(DRAFT)
+  status          ProductStatus    @default(DRAFT)
 
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
-  deletedAt   DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  deletedAt       DateTime?
 
-  tags        Tag[]            @relation("ProductTags")
-  categories  Category[]       @relation("ProductCategories")
-  variants    ProductVariant[]
-  ratings     Rating[]
+  tags            Tag[]            @relation("ProductTags")
+  categories      Category[]       @relation("ProductCategories")
+  productVariants ProductVariant[]
+  ratings         Rating[]
 
 
   @@allow('all', true)
@@ -44,8 +44,8 @@ model ProductVariant {
   id          String                @id @default(uuid())
   productId   String
   featured    Boolean               @default(false)
-  sku         String?                @unique
-  slug        String?                @unique
+  sku         String?               @unique
+  slug        String                @unique
 
   name        String
   description String?
@@ -54,8 +54,8 @@ model ProductVariant {
   weight      Float?
   dimensions  Dimensions?           @json
 
-  price       Float?
-  stock       Int?
+  price       Float
+  stock       Int
   salePrice   Float?
   saleStart   DateTime?
   saleEnd     DateTime?
@@ -72,6 +72,8 @@ model ProductVariant {
   @@index([slug])
   @@index([sku])
   @@index([productId])
+
+  @@allow('all', true)
 }
 
 model ProductVariantMedia {
@@ -83,4 +85,6 @@ model ProductVariantMedia {
 
   productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
   media            Media          @relation(fields: [mediaId], references: [id])
+
+  @@allow('all', true)
 }

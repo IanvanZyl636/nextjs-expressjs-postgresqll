@@ -10,8 +10,8 @@ import { ProductStatus } from '../../models';
 import { ProductStatusSchema } from '../enums/ProductStatus.schema';
 const baseSchema = z.object({
     id: z.string(),
-    slug: z.string().nullish(),
-    name: z.string().nullish(),
+    slug: z.string(),
+    name: z.string(),
     description: z.string().nullish(),
     status: ProductStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),
@@ -22,7 +22,7 @@ const baseSchema = z.object({
 const relationSchema = z.object({
     tags: z.array(z.unknown()).optional(),
     categories: z.array(z.unknown()).optional(),
-    variants: z.array(z.unknown()).optional(),
+    productVariants: z.array(z.unknown()).optional(),
     ratings: z.array(z.unknown()).optional(),
 }
 );
@@ -52,8 +52,8 @@ export const ProductPrismaCreateSchema = baseSchema.partial().passthrough();
  */
 export const ProductPrismaUpdateSchema = z.object({
     id: z.string(),
-    slug: z.string().nullish(),
-    name: z.string().nullish(),
+    slug: z.string(),
+    name: z.string(),
     description: z.string().nullish(),
     status: ProductStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),

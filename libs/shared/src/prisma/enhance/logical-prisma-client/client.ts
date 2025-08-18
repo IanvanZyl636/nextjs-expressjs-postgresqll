@@ -74,12 +74,12 @@ export type File = Prisma.FileModel
 export type Product = Prisma.ProductModel
 /**
  * Model ProductVariant
- * 
+ * @@allow('all', true)
  */
 export type ProductVariant = Prisma.ProductVariantModel
 /**
  * Model ProductVariantMedia
- * 
+ * @@allow('all', true)
  */
 export type ProductVariantMedia = Prisma.ProductVariantMediaModel
 /**
