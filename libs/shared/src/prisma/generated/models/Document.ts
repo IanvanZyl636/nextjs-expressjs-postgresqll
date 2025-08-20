@@ -149,12 +149,12 @@ export type DocumentWhereInput = {
   OR?: Prisma.DocumentWhereInput[]
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   id?: Prisma.StringFilter<"Document"> | string
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }
 
 export type DocumentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  delegate_aux_media?: Prisma.MediaOrderByWithRelationInput
+  media?: Prisma.MediaOrderByWithRelationInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -162,7 +162,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   OR?: Prisma.DocumentWhereInput[]
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }, "id">
 
 export type DocumentOrderByWithAggregationInput = {
@@ -180,7 +180,7 @@ export type DocumentScalarWhereWithAggregatesInput = {
 }
 
 export type DocumentCreateInput = {
-  delegate_aux_media: Prisma.MediaCreateNestedOneWithoutDelegate_aux_documentInput
+  media: Prisma.MediaCreateNestedOneWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
@@ -188,7 +188,7 @@ export type DocumentUncheckedCreateInput = {
 }
 
 export type DocumentUpdateInput = {
-  delegate_aux_media?: Prisma.MediaUpdateOneRequiredWithoutDelegate_aux_documentNestedInput
+  media?: Prisma.MediaUpdateOneRequiredWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
@@ -224,67 +224,67 @@ export type DocumentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type DocumentCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.DocumentCreateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutDelegate_aux_mediaInput
+export type DocumentCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutMediaInput, Prisma.DocumentUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutMediaInput
   connect?: Prisma.DocumentWhereUniqueInput
 }
 
-export type DocumentUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.DocumentCreateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutDelegate_aux_mediaInput
+export type DocumentUncheckedCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutMediaInput, Prisma.DocumentUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutMediaInput
   connect?: Prisma.DocumentWhereUniqueInput
 }
 
-export type DocumentUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.DocumentCreateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.DocumentUpsertWithoutDelegate_aux_mediaInput
+export type DocumentUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutMediaInput, Prisma.DocumentUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.DocumentUpsertWithoutMediaInput
   disconnect?: Prisma.DocumentWhereInput | boolean
   delete?: Prisma.DocumentWhereInput | boolean
   connect?: Prisma.DocumentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.DocumentUpdateWithoutDelegate_aux_mediaInput>, Prisma.DocumentUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutMediaInput, Prisma.DocumentUpdateWithoutMediaInput>, Prisma.DocumentUncheckedUpdateWithoutMediaInput>
 }
 
-export type DocumentUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.DocumentCreateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.DocumentUpsertWithoutDelegate_aux_mediaInput
+export type DocumentUncheckedUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutMediaInput, Prisma.DocumentUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.DocumentUpsertWithoutMediaInput
   disconnect?: Prisma.DocumentWhereInput | boolean
   delete?: Prisma.DocumentWhereInput | boolean
   connect?: Prisma.DocumentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.DocumentUpdateWithoutDelegate_aux_mediaInput>, Prisma.DocumentUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutMediaInput, Prisma.DocumentUpdateWithoutMediaInput>, Prisma.DocumentUncheckedUpdateWithoutMediaInput>
 }
 
-export type DocumentCreateWithoutDelegate_aux_mediaInput = {
-
-}
-
-export type DocumentUncheckedCreateWithoutDelegate_aux_mediaInput = {
+export type DocumentCreateWithoutMediaInput = {
 
 }
 
-export type DocumentCreateOrConnectWithoutDelegate_aux_mediaInput = {
+export type DocumentUncheckedCreateWithoutMediaInput = {
+
+}
+
+export type DocumentCreateOrConnectWithoutMediaInput = {
   where: Prisma.DocumentWhereUniqueInput
-  create: Prisma.XOR<Prisma.DocumentCreateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedCreateWithoutDelegate_aux_mediaInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutMediaInput, Prisma.DocumentUncheckedCreateWithoutMediaInput>
 }
 
-export type DocumentUpsertWithoutDelegate_aux_mediaInput = {
-  update: Prisma.XOR<Prisma.DocumentUpdateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedUpdateWithoutDelegate_aux_mediaInput>
-  create: Prisma.XOR<Prisma.DocumentCreateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedCreateWithoutDelegate_aux_mediaInput>
+export type DocumentUpsertWithoutMediaInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutMediaInput, Prisma.DocumentUncheckedUpdateWithoutMediaInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutMediaInput, Prisma.DocumentUncheckedCreateWithoutMediaInput>
   where?: Prisma.DocumentWhereInput
 }
 
-export type DocumentUpdateToOneWithWhereWithoutDelegate_aux_mediaInput = {
+export type DocumentUpdateToOneWithWhereWithoutMediaInput = {
   where?: Prisma.DocumentWhereInput
-  data: Prisma.XOR<Prisma.DocumentUpdateWithoutDelegate_aux_mediaInput, Prisma.DocumentUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutMediaInput, Prisma.DocumentUncheckedUpdateWithoutMediaInput>
 }
 
-export type DocumentUpdateWithoutDelegate_aux_mediaInput = {
+export type DocumentUpdateWithoutMediaInput = {
 
 }
 
-export type DocumentUncheckedUpdateWithoutDelegate_aux_mediaInput = {
+export type DocumentUncheckedUpdateWithoutMediaInput = {
 
 }
 
@@ -292,17 +292,17 @@ export type DocumentUncheckedUpdateWithoutDelegate_aux_mediaInput = {
 
 export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectScalar = {
@@ -311,19 +311,19 @@ export type DocumentSelectScalar = {
 
 export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 
 export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Document"
   objects: {
-    delegate_aux_media: Prisma.$MediaPayload<ExtArgs>
+    media: Prisma.$MediaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -721,7 +721,7 @@ readonly fields: DocumentFieldRefs;
  */
 export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  delegate_aux_media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

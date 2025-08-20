@@ -76,54 +76,54 @@ enum PaymentMethod {
 }
 
 model Media {
-  id                    String               @id() @default(uuid())
-  bucketKey             String               @unique()
-  mediaType             MediaType
-  fileName              String
-  mimeType              String
-  fileSize              Int
-  isStale               Boolean              @default(true)
-  createdAt             DateTime             @default(now())
-  updatedAt             DateTime             @updatedAt()
-  product               ProductVariantMedia?
-  delegate_aux_image    Image?
-  delegate_aux_video    Video?
-  delegate_aux_audio    Audio?
-  delegate_aux_document Document?
-  delegate_aux_file     File?
+  id        String               @id() @default(uuid())
+  bucketKey String               @unique()
+  mediaType MediaType
+  fileName  String
+  mimeType  String
+  fileSize  Int
+  isStale   Boolean              @default(true)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt()
+  product   ProductVariantMedia?
+  image     Image?
+  video     Video?
+  audio     Audio?
+  document  Document?
+  file      File?
 }
 
 model Image {
-  id                 String    @id()
-  width              Int
-  height             Int
-  imageSize          ImageSize
-  parentId           String?
-  parent             Image?    @relation("ImageParent", fields: [parentId], references: [id])
-  children           Image[]   @relation("ImageParent")
-  delegate_aux_media Media     @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id        String    @id()
+  width     Int
+  height    Int
+  imageSize ImageSize
+  parentId  String?
+  parent    Image?    @relation("ImageParent", fields: [parentId], references: [id])
+  children  Image[]   @relation("ImageParent")
+  media     Media     @relation(fields: [id], references: [id])
 }
 
 model Video {
-  id                 String @id()
-  duration           Int
-  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id       String @id()
+  duration Int
+  media    Media  @relation(fields: [id], references: [id])
 }
 
 model Audio {
-  id                 String @id()
-  duration           Int
-  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id       String @id()
+  duration Int
+  media    Media  @relation(fields: [id], references: [id])
 }
 
 model Document {
-  id                 String @id()
-  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id    String @id()
+  media Media  @relation(fields: [id], references: [id])
 }
 
 model File {
-  id                 String @id()
-  delegate_aux_media Media  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  id    String @id()
+  media Media  @relation(fields: [id], references: [id])
 }
 
 model Product {

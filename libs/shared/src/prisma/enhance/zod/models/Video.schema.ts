@@ -6,22 +6,17 @@
 // @ts-nocheck
 
 import { z } from 'zod';
-import { MediaTypeSchema } from '../enums/MediaType.schema';
 const baseSchema = z.object({
     id: z.string(),
-    bucketKey: z.string(),
-    mediaType: MediaTypeSchema,
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.number(),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date(),
     duration: z.number(),
 }
 ).strict();
 const relationSchema = z.object({
-    product: z.record(z.unknown()).optional(),
+    media: z.record(z.unknown()),
+}
+);
+const fkSchema = z.object({
+    id: z.string(),
 }
 );
 
@@ -34,14 +29,14 @@ export const VideoScalarSchema = baseSchema;
 /**
  * `Video` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const VideoSchema = VideoScalarSchema.merge(relationSchema.partial());
+export const VideoSchema = VideoScalarSchema.merge(fkSchema).merge(relationSchema.partial());
 
 
 /**
  * Schema used for validating Prisma create input. For internal use only.
  * @private
  */
-export const VideoPrismaCreateSchema = baseSchema.omit({ mediaType: true }).partial().passthrough();
+export const VideoPrismaCreateSchema = baseSchema.partial().passthrough();
 
 
 /**
@@ -50,13 +45,6 @@ export const VideoPrismaCreateSchema = baseSchema.omit({ mediaType: true }).part
  */
 export const VideoPrismaUpdateSchema = z.object({
     id: z.string(),
-    bucketKey: z.string(),
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.union([z.number(), z.record(z.unknown())]),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date(),
     duration: z.union([z.number(), z.record(z.unknown())])
 }).partial().passthrough();
 
@@ -64,27 +52,23 @@ export const VideoPrismaUpdateSchema = z.object({
 /**
  * `Video` schema for create operations excluding foreign keys and relations.
  */
-export const VideoCreateScalarSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const VideoCreateScalarSchema = baseSchema;
 
 
 /**
  * `Video` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const VideoCreateSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const VideoCreateSchema = VideoCreateScalarSchema.merge(fkSchema);
 
 
 /**
  * `Video` schema for update operations excluding foreign keys and relations.
  */
-export const VideoUpdateScalarSchema = baseSchema.omit({ mediaType: true }).partial();
+export const VideoUpdateScalarSchema = baseSchema.partial();
 
 
 /**
  * `Video` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const VideoUpdateSchema = VideoUpdateScalarSchema;
+export const VideoUpdateSchema = VideoUpdateScalarSchema.merge(fkSchema.partial());
 

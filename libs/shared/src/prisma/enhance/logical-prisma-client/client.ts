@@ -39,7 +39,6 @@ export { Prisma }
 /**
  * Model Media
  * @@allow('all', true)
- * @@delegate(mediaType)
  */
 export type Media = Prisma.MediaModel
 /**

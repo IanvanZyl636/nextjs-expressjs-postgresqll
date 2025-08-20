@@ -48,6 +48,36 @@ const metadata = {
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
+                }, image: {
+                    name: "image",
+                    type: "Image",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                }, video: {
+                    name: "video",
+                    type: "Video",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                }, audio: {
+                    name: "audio",
+                    type: "Audio",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                }, document: {
+                    name: "document",
+                    type: "Document",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                }, file: {
+                    name: "file",
+                    type: "File",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
                 },
             }, uniqueConstraints: {
                 id: {
@@ -58,58 +88,17 @@ const metadata = {
                     fields: ["bucketKey"]
                 },
             },
-            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }, { "name": "@@delegate", "args": [{ "name": "discriminator" }] }], discriminator: "mediaType",
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         image: {
-            name: 'Image', baseTypes: ['Media'], fields: {
+            name: 'Image', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
-                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, bucketKey: {
-                    name: "bucketKey",
-                    type: "String",
-                    attributes: [{ "name": "@unique", "args": [] }],
-                    inheritedFrom: "Media",
-                }, mediaType: {
-                    name: "mediaType",
-                    type: "MediaType",
-                    inheritedFrom: "Media",
-                }, fileName: {
-                    name: "fileName",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, mimeType: {
-                    name: "mimeType",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, fileSize: {
-                    name: "fileSize",
-                    type: "Int",
-                    inheritedFrom: "Media",
-                }, isStale: {
-                    name: "isStale",
-                    type: "Boolean",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
-                    inheritedFrom: "Media",
-                }, createdAt: {
-                    name: "createdAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
-                    inheritedFrom: "Media",
-                }, updatedAt: {
-                    name: "updatedAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@updatedAt", "args": [] }],
-                    inheritedFrom: "Media",
-                }, product: {
-                    name: "product",
-                    type: "ProductVariantMedia",
-                    isDataModel: true,
-                    isOptional: true,
-                    backLink: 'media',
-                    inheritedFrom: "Media",
+                    attributes: [{ "name": "@id", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'media',
                 }, width: {
                     name: "width",
                     type: "Int",
@@ -141,268 +130,129 @@ const metadata = {
                     isArray: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ImageParent" }] }],
                     backLink: 'parent',
+                }, media: {
+                    name: "media",
+                    type: "Media",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'image',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "id" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, bucketKey: {
-                    name: "bucketKey",
-                    fields: ["bucketKey"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         video: {
-            name: 'Video', baseTypes: ['Media'], fields: {
+            name: 'Video', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
-                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, bucketKey: {
-                    name: "bucketKey",
-                    type: "String",
-                    attributes: [{ "name": "@unique", "args": [] }],
-                    inheritedFrom: "Media",
-                }, mediaType: {
-                    name: "mediaType",
-                    type: "MediaType",
-                    inheritedFrom: "Media",
-                }, fileName: {
-                    name: "fileName",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, mimeType: {
-                    name: "mimeType",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, fileSize: {
-                    name: "fileSize",
-                    type: "Int",
-                    inheritedFrom: "Media",
-                }, isStale: {
-                    name: "isStale",
-                    type: "Boolean",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
-                    inheritedFrom: "Media",
-                }, createdAt: {
-                    name: "createdAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
-                    inheritedFrom: "Media",
-                }, updatedAt: {
-                    name: "updatedAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@updatedAt", "args": [] }],
-                    inheritedFrom: "Media",
-                }, product: {
-                    name: "product",
-                    type: "ProductVariantMedia",
-                    isDataModel: true,
-                    isOptional: true,
-                    backLink: 'media',
-                    inheritedFrom: "Media",
+                    attributes: [{ "name": "@id", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'media',
                 }, duration: {
                     name: "duration",
                     type: "Int",
+                }, media: {
+                    name: "media",
+                    type: "Media",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'video',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "id" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, bucketKey: {
-                    name: "bucketKey",
-                    fields: ["bucketKey"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         audio: {
-            name: 'Audio', baseTypes: ['Media'], fields: {
+            name: 'Audio', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
-                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, bucketKey: {
-                    name: "bucketKey",
-                    type: "String",
-                    attributes: [{ "name": "@unique", "args": [] }],
-                    inheritedFrom: "Media",
-                }, mediaType: {
-                    name: "mediaType",
-                    type: "MediaType",
-                    inheritedFrom: "Media",
-                }, fileName: {
-                    name: "fileName",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, mimeType: {
-                    name: "mimeType",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, fileSize: {
-                    name: "fileSize",
-                    type: "Int",
-                    inheritedFrom: "Media",
-                }, isStale: {
-                    name: "isStale",
-                    type: "Boolean",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
-                    inheritedFrom: "Media",
-                }, createdAt: {
-                    name: "createdAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
-                    inheritedFrom: "Media",
-                }, updatedAt: {
-                    name: "updatedAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@updatedAt", "args": [] }],
-                    inheritedFrom: "Media",
-                }, product: {
-                    name: "product",
-                    type: "ProductVariantMedia",
-                    isDataModel: true,
-                    isOptional: true,
-                    backLink: 'media',
-                    inheritedFrom: "Media",
+                    attributes: [{ "name": "@id", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'media',
                 }, duration: {
                     name: "duration",
                     type: "Int",
+                }, media: {
+                    name: "media",
+                    type: "Media",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'audio',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "id" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, bucketKey: {
-                    name: "bucketKey",
-                    fields: ["bucketKey"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         document: {
-            name: 'Document', baseTypes: ['Media'], fields: {
+            name: 'Document', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
-                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, bucketKey: {
-                    name: "bucketKey",
-                    type: "String",
-                    attributes: [{ "name": "@unique", "args": [] }],
-                    inheritedFrom: "Media",
-                }, mediaType: {
-                    name: "mediaType",
-                    type: "MediaType",
-                    inheritedFrom: "Media",
-                }, fileName: {
-                    name: "fileName",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, mimeType: {
-                    name: "mimeType",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, fileSize: {
-                    name: "fileSize",
-                    type: "Int",
-                    inheritedFrom: "Media",
-                }, isStale: {
-                    name: "isStale",
-                    type: "Boolean",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
-                    inheritedFrom: "Media",
-                }, createdAt: {
-                    name: "createdAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
-                    inheritedFrom: "Media",
-                }, updatedAt: {
-                    name: "updatedAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@updatedAt", "args": [] }],
-                    inheritedFrom: "Media",
-                }, product: {
-                    name: "product",
-                    type: "ProductVariantMedia",
+                    attributes: [{ "name": "@id", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'media',
+                }, media: {
+                    name: "media",
+                    type: "Media",
                     isDataModel: true,
-                    isOptional: true,
-                    backLink: 'media',
-                    inheritedFrom: "Media",
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'document',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "id" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, bucketKey: {
-                    name: "bucketKey",
-                    fields: ["bucketKey"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         file: {
-            name: 'File', baseTypes: ['Media'], fields: {
+            name: 'File', fields: {
                 id: {
                     name: "id",
                     type: "String",
                     isId: true,
-                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, bucketKey: {
-                    name: "bucketKey",
-                    type: "String",
-                    attributes: [{ "name": "@unique", "args": [] }],
-                    inheritedFrom: "Media",
-                }, mediaType: {
-                    name: "mediaType",
-                    type: "MediaType",
-                    inheritedFrom: "Media",
-                }, fileName: {
-                    name: "fileName",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, mimeType: {
-                    name: "mimeType",
-                    type: "String",
-                    inheritedFrom: "Media",
-                }, fileSize: {
-                    name: "fileSize",
-                    type: "Int",
-                    inheritedFrom: "Media",
-                }, isStale: {
-                    name: "isStale",
-                    type: "Boolean",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
-                    inheritedFrom: "Media",
-                }, createdAt: {
-                    name: "createdAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
-                    inheritedFrom: "Media",
-                }, updatedAt: {
-                    name: "updatedAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@updatedAt", "args": [] }],
-                    inheritedFrom: "Media",
-                }, product: {
-                    name: "product",
-                    type: "ProductVariantMedia",
+                    attributes: [{ "name": "@id", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'media',
+                }, media: {
+                    name: "media",
+                    type: "Media",
                     isDataModel: true,
-                    isOptional: true,
-                    backLink: 'media',
-                    inheritedFrom: "Media",
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'file',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "id" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, bucketKey: {
-                    name: "bucketKey",
-                    fields: ["bucketKey"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],

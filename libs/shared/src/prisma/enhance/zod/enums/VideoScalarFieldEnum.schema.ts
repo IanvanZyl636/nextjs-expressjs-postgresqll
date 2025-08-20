@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const VideoScalarFieldEnumSchema = z.enum(["id", "bucketKey", "mediaType", "fileName", "mimeType", "fileSize", "isStale", "createdAt", "updatedAt", "duration"])
+export const VideoScalarFieldEnumSchema = z.enum(["id", "duration"])

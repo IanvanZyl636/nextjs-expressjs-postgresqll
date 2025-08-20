@@ -21,6 +21,11 @@ const baseSchema = z.object({
 ).strict();
 const relationSchema = z.object({
     product: z.record(z.unknown()).optional(),
+    image: z.record(z.unknown()).optional(),
+    video: z.record(z.unknown()).optional(),
+    audio: z.record(z.unknown()).optional(),
+    document: z.record(z.unknown()).optional(),
+    file: z.record(z.unknown()).optional(),
 }
 );
 
@@ -40,7 +45,7 @@ export const MediaSchema = MediaScalarSchema.merge(relationSchema.partial());
  * Schema used for validating Prisma create input. For internal use only.
  * @private
  */
-export const MediaPrismaCreateSchema = baseSchema.omit({ mediaType: true }).partial().passthrough();
+export const MediaPrismaCreateSchema = baseSchema.partial().passthrough();
 
 
 /**
@@ -50,6 +55,7 @@ export const MediaPrismaCreateSchema = baseSchema.omit({ mediaType: true }).part
 export const MediaPrismaUpdateSchema = z.object({
     id: z.string(),
     bucketKey: z.string(),
+    mediaType: MediaTypeSchema,
     fileName: z.string(),
     mimeType: z.string(),
     fileSize: z.union([z.number(), z.record(z.unknown())]),
@@ -62,7 +68,7 @@ export const MediaPrismaUpdateSchema = z.object({
 /**
  * `Media` schema for create operations excluding foreign keys and relations.
  */
-export const MediaCreateScalarSchema = baseSchema.omit({ mediaType: true }).partial({
+export const MediaCreateScalarSchema = baseSchema.partial({
     id: true, isStale: true, createdAt: true, updatedAt: true
 });
 
@@ -70,7 +76,7 @@ export const MediaCreateScalarSchema = baseSchema.omit({ mediaType: true }).part
 /**
  * `Media` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const MediaCreateSchema = baseSchema.omit({ mediaType: true }).partial({
+export const MediaCreateSchema = baseSchema.partial({
     id: true, isStale: true, createdAt: true, updatedAt: true
 });
 
@@ -78,7 +84,7 @@ export const MediaCreateSchema = baseSchema.omit({ mediaType: true }).partial({
 /**
  * `Media` schema for update operations excluding foreign keys and relations.
  */
-export const MediaUpdateScalarSchema = baseSchema.omit({ mediaType: true }).partial();
+export const MediaUpdateScalarSchema = baseSchema.partial();
 
 
 /**

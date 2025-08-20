@@ -6,21 +6,16 @@
 // @ts-nocheck
 
 import { z } from 'zod';
-import { MediaTypeSchema } from '../enums/MediaType.schema';
 const baseSchema = z.object({
     id: z.string(),
-    bucketKey: z.string(),
-    mediaType: MediaTypeSchema,
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.number(),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date(),
 }
 ).strict();
 const relationSchema = z.object({
-    product: z.record(z.unknown()).optional(),
+    media: z.record(z.unknown()),
+}
+);
+const fkSchema = z.object({
+    id: z.string(),
 }
 );
 
@@ -33,14 +28,14 @@ export const DocumentScalarSchema = baseSchema;
 /**
  * `Document` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const DocumentSchema = DocumentScalarSchema.merge(relationSchema.partial());
+export const DocumentSchema = DocumentScalarSchema.merge(fkSchema).merge(relationSchema.partial());
 
 
 /**
  * Schema used for validating Prisma create input. For internal use only.
  * @private
  */
-export const DocumentPrismaCreateSchema = baseSchema.omit({ mediaType: true }).partial().passthrough();
+export const DocumentPrismaCreateSchema = baseSchema.partial().passthrough();
 
 
 /**
@@ -48,41 +43,30 @@ export const DocumentPrismaCreateSchema = baseSchema.omit({ mediaType: true }).p
  * @private
  */
 export const DocumentPrismaUpdateSchema = z.object({
-    id: z.string(),
-    bucketKey: z.string(),
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.union([z.number(), z.record(z.unknown())]),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date()
+    id: z.string()
 }).partial().passthrough();
 
 
 /**
  * `Document` schema for create operations excluding foreign keys and relations.
  */
-export const DocumentCreateScalarSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const DocumentCreateScalarSchema = baseSchema;
 
 
 /**
  * `Document` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const DocumentCreateSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const DocumentCreateSchema = DocumentCreateScalarSchema.merge(fkSchema);
 
 
 /**
  * `Document` schema for update operations excluding foreign keys and relations.
  */
-export const DocumentUpdateScalarSchema = baseSchema.omit({ mediaType: true }).partial();
+export const DocumentUpdateScalarSchema = baseSchema.partial();
 
 
 /**
  * `Document` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const DocumentUpdateSchema = DocumentUpdateScalarSchema;
+export const DocumentUpdateSchema = DocumentUpdateScalarSchema.merge(fkSchema.partial());
 

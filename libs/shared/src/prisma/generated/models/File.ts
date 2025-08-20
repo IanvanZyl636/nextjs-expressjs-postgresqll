@@ -149,12 +149,12 @@ export type FileWhereInput = {
   OR?: Prisma.FileWhereInput[]
   NOT?: Prisma.FileWhereInput | Prisma.FileWhereInput[]
   id?: Prisma.StringFilter<"File"> | string
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }
 
 export type FileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  delegate_aux_media?: Prisma.MediaOrderByWithRelationInput
+  media?: Prisma.MediaOrderByWithRelationInput
 }
 
 export type FileWhereUniqueInput = Prisma.AtLeast<{
@@ -162,7 +162,7 @@ export type FileWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FileWhereInput | Prisma.FileWhereInput[]
   OR?: Prisma.FileWhereInput[]
   NOT?: Prisma.FileWhereInput | Prisma.FileWhereInput[]
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }, "id">
 
 export type FileOrderByWithAggregationInput = {
@@ -180,7 +180,7 @@ export type FileScalarWhereWithAggregatesInput = {
 }
 
 export type FileCreateInput = {
-  delegate_aux_media: Prisma.MediaCreateNestedOneWithoutDelegate_aux_fileInput
+  media: Prisma.MediaCreateNestedOneWithoutFileInput
 }
 
 export type FileUncheckedCreateInput = {
@@ -188,7 +188,7 @@ export type FileUncheckedCreateInput = {
 }
 
 export type FileUpdateInput = {
-  delegate_aux_media?: Prisma.MediaUpdateOneRequiredWithoutDelegate_aux_fileNestedInput
+  media?: Prisma.MediaUpdateOneRequiredWithoutFileNestedInput
 }
 
 export type FileUncheckedUpdateInput = {
@@ -224,67 +224,67 @@ export type FileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type FileCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.FileCreateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.FileCreateOrConnectWithoutDelegate_aux_mediaInput
+export type FileCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
   connect?: Prisma.FileWhereUniqueInput
 }
 
-export type FileUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.FileCreateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.FileCreateOrConnectWithoutDelegate_aux_mediaInput
+export type FileUncheckedCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
   connect?: Prisma.FileWhereUniqueInput
 }
 
-export type FileUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.FileCreateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.FileCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.FileUpsertWithoutDelegate_aux_mediaInput
+export type FileUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.FileUpsertWithoutMediaInput
   disconnect?: Prisma.FileWhereInput | boolean
   delete?: Prisma.FileWhereInput | boolean
   connect?: Prisma.FileWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.FileUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.FileUpdateWithoutDelegate_aux_mediaInput>, Prisma.FileUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FileUpdateToOneWithWhereWithoutMediaInput, Prisma.FileUpdateWithoutMediaInput>, Prisma.FileUncheckedUpdateWithoutMediaInput>
 }
 
-export type FileUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.FileCreateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.FileCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.FileUpsertWithoutDelegate_aux_mediaInput
+export type FileUncheckedUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.FileUpsertWithoutMediaInput
   disconnect?: Prisma.FileWhereInput | boolean
   delete?: Prisma.FileWhereInput | boolean
   connect?: Prisma.FileWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.FileUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.FileUpdateWithoutDelegate_aux_mediaInput>, Prisma.FileUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FileUpdateToOneWithWhereWithoutMediaInput, Prisma.FileUpdateWithoutMediaInput>, Prisma.FileUncheckedUpdateWithoutMediaInput>
 }
 
-export type FileCreateWithoutDelegate_aux_mediaInput = {
-
-}
-
-export type FileUncheckedCreateWithoutDelegate_aux_mediaInput = {
+export type FileCreateWithoutMediaInput = {
 
 }
 
-export type FileCreateOrConnectWithoutDelegate_aux_mediaInput = {
+export type FileUncheckedCreateWithoutMediaInput = {
+
+}
+
+export type FileCreateOrConnectWithoutMediaInput = {
   where: Prisma.FileWhereUniqueInput
-  create: Prisma.XOR<Prisma.FileCreateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedCreateWithoutDelegate_aux_mediaInput>
+  create: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
 }
 
-export type FileUpsertWithoutDelegate_aux_mediaInput = {
-  update: Prisma.XOR<Prisma.FileUpdateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedUpdateWithoutDelegate_aux_mediaInput>
-  create: Prisma.XOR<Prisma.FileCreateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedCreateWithoutDelegate_aux_mediaInput>
+export type FileUpsertWithoutMediaInput = {
+  update: Prisma.XOR<Prisma.FileUpdateWithoutMediaInput, Prisma.FileUncheckedUpdateWithoutMediaInput>
+  create: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
   where?: Prisma.FileWhereInput
 }
 
-export type FileUpdateToOneWithWhereWithoutDelegate_aux_mediaInput = {
+export type FileUpdateToOneWithWhereWithoutMediaInput = {
   where?: Prisma.FileWhereInput
-  data: Prisma.XOR<Prisma.FileUpdateWithoutDelegate_aux_mediaInput, Prisma.FileUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  data: Prisma.XOR<Prisma.FileUpdateWithoutMediaInput, Prisma.FileUncheckedUpdateWithoutMediaInput>
 }
 
-export type FileUpdateWithoutDelegate_aux_mediaInput = {
+export type FileUpdateWithoutMediaInput = {
 
 }
 
-export type FileUncheckedUpdateWithoutDelegate_aux_mediaInput = {
+export type FileUncheckedUpdateWithoutMediaInput = {
 
 }
 
@@ -292,17 +292,17 @@ export type FileUncheckedUpdateWithoutDelegate_aux_mediaInput = {
 
 export type FileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["file"]>
 
 export type FileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["file"]>
 
 export type FileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["file"]>
 
 export type FileSelectScalar = {
@@ -311,19 +311,19 @@ export type FileSelectScalar = {
 
 export type FileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["file"]>
 export type FileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type FileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type FileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 
 export type $FilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "File"
   objects: {
-    delegate_aux_media: Prisma.$MediaPayload<ExtArgs>
+    media: Prisma.$MediaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -721,7 +721,7 @@ readonly fields: FileFieldRefs;
  */
 export interface Prisma__FileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  delegate_aux_media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

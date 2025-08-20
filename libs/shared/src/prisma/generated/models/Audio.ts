@@ -191,13 +191,13 @@ export type AudioWhereInput = {
   NOT?: Prisma.AudioWhereInput | Prisma.AudioWhereInput[]
   id?: Prisma.StringFilter<"Audio"> | string
   duration?: Prisma.IntFilter<"Audio"> | number
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }
 
 export type AudioOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   duration?: Prisma.SortOrder
-  delegate_aux_media?: Prisma.MediaOrderByWithRelationInput
+  media?: Prisma.MediaOrderByWithRelationInput
 }
 
 export type AudioWhereUniqueInput = Prisma.AtLeast<{
@@ -206,7 +206,7 @@ export type AudioWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.AudioWhereInput[]
   NOT?: Prisma.AudioWhereInput | Prisma.AudioWhereInput[]
   duration?: Prisma.IntFilter<"Audio"> | number
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }, "id">
 
 export type AudioOrderByWithAggregationInput = {
@@ -229,7 +229,7 @@ export type AudioScalarWhereWithAggregatesInput = {
 
 export type AudioCreateInput = {
   duration: number
-  delegate_aux_media: Prisma.MediaCreateNestedOneWithoutDelegate_aux_audioInput
+  media: Prisma.MediaCreateNestedOneWithoutAudioInput
 }
 
 export type AudioUncheckedCreateInput = {
@@ -239,7 +239,7 @@ export type AudioUncheckedCreateInput = {
 
 export type AudioUpdateInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
-  delegate_aux_media?: Prisma.MediaUpdateOneRequiredWithoutDelegate_aux_audioNestedInput
+  media?: Prisma.MediaUpdateOneRequiredWithoutAudioNestedInput
 }
 
 export type AudioUncheckedUpdateInput = {
@@ -289,67 +289,67 @@ export type AudioSumOrderByAggregateInput = {
   duration?: Prisma.SortOrder
 }
 
-export type AudioCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.AudioCreateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutDelegate_aux_mediaInput
+export type AudioCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
   connect?: Prisma.AudioWhereUniqueInput
 }
 
-export type AudioUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.AudioCreateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutDelegate_aux_mediaInput
+export type AudioUncheckedCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
   connect?: Prisma.AudioWhereUniqueInput
 }
 
-export type AudioUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.AudioCreateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.AudioUpsertWithoutDelegate_aux_mediaInput
+export type AudioUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.AudioUpsertWithoutMediaInput
   disconnect?: Prisma.AudioWhereInput | boolean
   delete?: Prisma.AudioWhereInput | boolean
   connect?: Prisma.AudioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AudioUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.AudioUpdateWithoutDelegate_aux_mediaInput>, Prisma.AudioUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AudioUpdateToOneWithWhereWithoutMediaInput, Prisma.AudioUpdateWithoutMediaInput>, Prisma.AudioUncheckedUpdateWithoutMediaInput>
 }
 
-export type AudioUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.AudioCreateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.AudioUpsertWithoutDelegate_aux_mediaInput
+export type AudioUncheckedUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.AudioUpsertWithoutMediaInput
   disconnect?: Prisma.AudioWhereInput | boolean
   delete?: Prisma.AudioWhereInput | boolean
   connect?: Prisma.AudioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AudioUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.AudioUpdateWithoutDelegate_aux_mediaInput>, Prisma.AudioUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AudioUpdateToOneWithWhereWithoutMediaInput, Prisma.AudioUpdateWithoutMediaInput>, Prisma.AudioUncheckedUpdateWithoutMediaInput>
 }
 
-export type AudioCreateWithoutDelegate_aux_mediaInput = {
+export type AudioCreateWithoutMediaInput = {
   duration: number
 }
 
-export type AudioUncheckedCreateWithoutDelegate_aux_mediaInput = {
+export type AudioUncheckedCreateWithoutMediaInput = {
   duration: number
 }
 
-export type AudioCreateOrConnectWithoutDelegate_aux_mediaInput = {
+export type AudioCreateOrConnectWithoutMediaInput = {
   where: Prisma.AudioWhereUniqueInput
-  create: Prisma.XOR<Prisma.AudioCreateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedCreateWithoutDelegate_aux_mediaInput>
+  create: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
 }
 
-export type AudioUpsertWithoutDelegate_aux_mediaInput = {
-  update: Prisma.XOR<Prisma.AudioUpdateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedUpdateWithoutDelegate_aux_mediaInput>
-  create: Prisma.XOR<Prisma.AudioCreateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedCreateWithoutDelegate_aux_mediaInput>
+export type AudioUpsertWithoutMediaInput = {
+  update: Prisma.XOR<Prisma.AudioUpdateWithoutMediaInput, Prisma.AudioUncheckedUpdateWithoutMediaInput>
+  create: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
   where?: Prisma.AudioWhereInput
 }
 
-export type AudioUpdateToOneWithWhereWithoutDelegate_aux_mediaInput = {
+export type AudioUpdateToOneWithWhereWithoutMediaInput = {
   where?: Prisma.AudioWhereInput
-  data: Prisma.XOR<Prisma.AudioUpdateWithoutDelegate_aux_mediaInput, Prisma.AudioUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  data: Prisma.XOR<Prisma.AudioUpdateWithoutMediaInput, Prisma.AudioUncheckedUpdateWithoutMediaInput>
 }
 
-export type AudioUpdateWithoutDelegate_aux_mediaInput = {
+export type AudioUpdateWithoutMediaInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type AudioUncheckedUpdateWithoutDelegate_aux_mediaInput = {
+export type AudioUncheckedUpdateWithoutMediaInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -358,19 +358,19 @@ export type AudioUncheckedUpdateWithoutDelegate_aux_mediaInput = {
 export type AudioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   duration?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["audio"]>
 
 export type AudioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   duration?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["audio"]>
 
 export type AudioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   duration?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["audio"]>
 
 export type AudioSelectScalar = {
@@ -380,19 +380,19 @@ export type AudioSelectScalar = {
 
 export type AudioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "duration", ExtArgs["result"]["audio"]>
 export type AudioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type AudioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type AudioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 
 export type $AudioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Audio"
   objects: {
-    delegate_aux_media: Prisma.$MediaPayload<ExtArgs>
+    media: Prisma.$MediaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -791,7 +791,7 @@ readonly fields: AudioFieldRefs;
  */
 export interface Prisma__AudioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  delegate_aux_media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

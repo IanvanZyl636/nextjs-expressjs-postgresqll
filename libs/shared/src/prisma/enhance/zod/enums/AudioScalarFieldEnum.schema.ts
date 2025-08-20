@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const AudioScalarFieldEnumSchema = z.enum(["id", "bucketKey", "mediaType", "fileName", "mimeType", "fileSize", "isStale", "createdAt", "updatedAt", "duration"])
+export const AudioScalarFieldEnumSchema = z.enum(["id", "duration"])

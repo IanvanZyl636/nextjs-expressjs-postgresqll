@@ -6,22 +6,17 @@
 // @ts-nocheck
 
 import { z } from 'zod';
-import { MediaTypeSchema } from '../enums/MediaType.schema';
 const baseSchema = z.object({
     id: z.string(),
-    bucketKey: z.string(),
-    mediaType: MediaTypeSchema,
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.number(),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date(),
     duration: z.number(),
 }
 ).strict();
 const relationSchema = z.object({
-    product: z.record(z.unknown()).optional(),
+    media: z.record(z.unknown()),
+}
+);
+const fkSchema = z.object({
+    id: z.string(),
 }
 );
 
@@ -34,14 +29,14 @@ export const AudioScalarSchema = baseSchema;
 /**
  * `Audio` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const AudioSchema = AudioScalarSchema.merge(relationSchema.partial());
+export const AudioSchema = AudioScalarSchema.merge(fkSchema).merge(relationSchema.partial());
 
 
 /**
  * Schema used for validating Prisma create input. For internal use only.
  * @private
  */
-export const AudioPrismaCreateSchema = baseSchema.omit({ mediaType: true }).partial().passthrough();
+export const AudioPrismaCreateSchema = baseSchema.partial().passthrough();
 
 
 /**
@@ -50,13 +45,6 @@ export const AudioPrismaCreateSchema = baseSchema.omit({ mediaType: true }).part
  */
 export const AudioPrismaUpdateSchema = z.object({
     id: z.string(),
-    bucketKey: z.string(),
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.union([z.number(), z.record(z.unknown())]),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date(),
     duration: z.union([z.number(), z.record(z.unknown())])
 }).partial().passthrough();
 
@@ -64,27 +52,23 @@ export const AudioPrismaUpdateSchema = z.object({
 /**
  * `Audio` schema for create operations excluding foreign keys and relations.
  */
-export const AudioCreateScalarSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const AudioCreateScalarSchema = baseSchema;
 
 
 /**
  * `Audio` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const AudioCreateSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const AudioCreateSchema = AudioCreateScalarSchema.merge(fkSchema);
 
 
 /**
  * `Audio` schema for update operations excluding foreign keys and relations.
  */
-export const AudioUpdateScalarSchema = baseSchema.omit({ mediaType: true }).partial();
+export const AudioUpdateScalarSchema = baseSchema.partial();
 
 
 /**
  * `Audio` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const AudioUpdateSchema = AudioUpdateScalarSchema;
+export const AudioUpdateSchema = AudioUpdateScalarSchema.merge(fkSchema.partial());
 

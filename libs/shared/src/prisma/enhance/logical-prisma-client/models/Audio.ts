@@ -19,92 +19,40 @@ export type AggregateAudio = {
       _max: AudioMaxAggregateOutputType | null
     };
 export type AudioAvgAggregateOutputType = {
-      fileSize: number | null
       duration: number | null
     };
 export type AudioSumAggregateOutputType = {
-      fileSize: number | null
       duration: number | null
     };
 export type AudioMinAggregateOutputType = {
       id: string | null
-      bucketKey: string | null
-      mediaType: $Enums.MediaType | null
-      fileName: string | null
-      mimeType: string | null
-      fileSize: number | null
-      isStale: boolean | null
-      createdAt: Date | null
-      updatedAt: Date | null
       duration: number | null
     };
 export type AudioMaxAggregateOutputType = {
       id: string | null
-      bucketKey: string | null
-      mediaType: $Enums.MediaType | null
-      fileName: string | null
-      mimeType: string | null
-      fileSize: number | null
-      isStale: boolean | null
-      createdAt: Date | null
-      updatedAt: Date | null
       duration: number | null
     };
 export type AudioCountAggregateOutputType = {
       id: number
-      bucketKey: number
-      mediaType: number
-      fileName: number
-      mimeType: number
-      fileSize: number
-      isStale: number
-      createdAt: number
-      updatedAt: number
       duration: number
       _all: number
     };
 export type AudioAvgAggregateInputType = {
-      fileSize?: true
       duration?: true
     };
 export type AudioSumAggregateInputType = {
-      fileSize?: true
       duration?: true
     };
 export type AudioMinAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
       duration?: true
     };
 export type AudioMaxAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
       duration?: true
     };
 export type AudioCountAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
       duration?: true
       _all?: true
     };
@@ -190,14 +138,6 @@ export type AudioGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
     };
 export type AudioGroupByOutputType = {
       id: string
-      bucketKey: string
-      mediaType: $Enums.MediaType
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale: boolean
-      createdAt: Date
-      updatedAt: Date
       duration: number
       _count: AudioCountAggregateOutputType | null
       _avg: AudioAvgAggregateOutputType | null
@@ -222,56 +162,24 @@ export type AudioWhereInput = {
       OR?: Prisma.AudioWhereInput[]
       NOT?: Prisma.AudioWhereInput | Prisma.AudioWhereInput[]
       id?: Prisma.StringFilter<"Audio"> | string
-      bucketKey?: Prisma.StringFilter<"Audio"> | string
-      mediaType?: Prisma.EnumMediaTypeFilter<"Audio"> | $Enums.MediaType
-      fileName?: Prisma.StringFilter<"Audio"> | string
-      mimeType?: Prisma.StringFilter<"Audio"> | string
-      fileSize?: Prisma.IntFilter<"Audio"> | number
-      isStale?: Prisma.BoolFilter<"Audio"> | boolean
-      createdAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
-      updatedAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
       duration?: Prisma.IntFilter<"Audio"> | number
-      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
+      media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
     };
 export type AudioOrderByWithRelationInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
-      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
+      media?: Prisma.MediaOrderByWithRelationInput
     };
 export type AudioWhereUniqueInput = Prisma.AtLeast<{
       id?: string
-      bucketKey?: string
       AND?: Prisma.AudioWhereInput | Prisma.AudioWhereInput[]
       OR?: Prisma.AudioWhereInput[]
       NOT?: Prisma.AudioWhereInput | Prisma.AudioWhereInput[]
-      mediaType?: Prisma.EnumMediaTypeFilter<"Audio"> | $Enums.MediaType
-      fileName?: Prisma.StringFilter<"Audio"> | string
-      mimeType?: Prisma.StringFilter<"Audio"> | string
-      fileSize?: Prisma.IntFilter<"Audio"> | number
-      isStale?: Prisma.BoolFilter<"Audio"> | boolean
-      createdAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
-      updatedAt?: Prisma.DateTimeFilter<"Audio"> | Date | string
       duration?: Prisma.IntFilter<"Audio"> | number
-      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
-    }, "id" | "bucketKey">;
+      media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+    }, "id">;
 export type AudioOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
       _count?: Prisma.AudioCountOrderByAggregateInput
       _avg?: Prisma.AudioAvgOrderByAggregateInput
@@ -284,284 +192,146 @@ export type AudioScalarWhereWithAggregatesInput = {
       OR?: Prisma.AudioScalarWhereWithAggregatesInput[]
       NOT?: Prisma.AudioScalarWhereWithAggregatesInput | Prisma.AudioScalarWhereWithAggregatesInput[]
       id?: Prisma.StringWithAggregatesFilter<"Audio"> | string
-      bucketKey?: Prisma.StringWithAggregatesFilter<"Audio"> | string
-      mediaType?: Prisma.EnumMediaTypeWithAggregatesFilter<"Audio"> | $Enums.MediaType
-      fileName?: Prisma.StringWithAggregatesFilter<"Audio"> | string
-      mimeType?: Prisma.StringWithAggregatesFilter<"Audio"> | string
-      fileSize?: Prisma.IntWithAggregatesFilter<"Audio"> | number
-      isStale?: Prisma.BoolWithAggregatesFilter<"Audio"> | boolean
-      createdAt?: Prisma.DateTimeWithAggregatesFilter<"Audio"> | Date | string
-      updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Audio"> | Date | string
       duration?: Prisma.IntWithAggregatesFilter<"Audio"> | number
     };
 export type AudioCreateInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
       duration: number
-      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_2Input
+      media: Prisma.MediaCreateNestedOneWithoutAudioInput
     };
 export type AudioUncheckedCreateInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+      id: string
       duration: number
-      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_2Input
     };
 export type AudioUpdateInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_2NestedInput
+      media?: Prisma.MediaUpdateOneRequiredWithoutAudioNestedInput
     };
 export type AudioUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_2NestedInput
     };
 export type AudioCreateManyInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+      id: string
       duration: number
     };
 export type AudioUpdateManyMutationInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
     };
 export type AudioUncheckedUpdateManyInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
+    };
+export type AudioNullableScalarRelationFilter = {
+      is?: Prisma.AudioWhereInput | null
+      isNot?: Prisma.AudioWhereInput | null
     };
 export type AudioCountOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type AudioAvgOrderByAggregateInput = {
-      fileSize?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type AudioMaxOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type AudioMinOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type AudioSumOrderByAggregateInput = {
-      fileSize?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
-export type AudioScalarRelationFilter = {
-      is?: Prisma.AudioWhereInput
-      isNot?: Prisma.AudioWhereInput
-    };
-export type AudioCreateNestedOneWithoutProductInput = {
-      create?: Prisma.XOR<Prisma.AudioCreateWithoutProductInput, Prisma.AudioUncheckedCreateWithoutProductInput>
-      connectOrCreate?: Prisma.AudioCreateOrConnectWithoutProductInput
+export type AudioCreateNestedOneWithoutMediaInput = {
+      create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
       connect?: Prisma.AudioWhereUniqueInput
     };
-export type AudioUpdateOneRequiredWithoutProductNestedInput = {
-      create?: Prisma.XOR<Prisma.AudioCreateWithoutProductInput, Prisma.AudioUncheckedCreateWithoutProductInput>
-      connectOrCreate?: Prisma.AudioCreateOrConnectWithoutProductInput
-      upsert?: Prisma.AudioUpsertWithoutProductInput
+export type AudioUncheckedCreateNestedOneWithoutMediaInput = {
+      create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
       connect?: Prisma.AudioWhereUniqueInput
-      update?: Prisma.XOR<Prisma.XOR<Prisma.AudioUpdateToOneWithWhereWithoutProductInput, Prisma.AudioUpdateWithoutProductInput>, Prisma.AudioUncheckedUpdateWithoutProductInput>
     };
-export type AudioCreateWithoutProductInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+export type AudioUpdateOneWithoutMediaNestedInput = {
+      create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
+      upsert?: Prisma.AudioUpsertWithoutMediaInput
+      disconnect?: Prisma.AudioWhereInput | boolean
+      delete?: Prisma.AudioWhereInput | boolean
+      connect?: Prisma.AudioWhereUniqueInput
+      update?: Prisma.XOR<Prisma.XOR<Prisma.AudioUpdateToOneWithWhereWithoutMediaInput, Prisma.AudioUpdateWithoutMediaInput>, Prisma.AudioUncheckedUpdateWithoutMediaInput>
+    };
+export type AudioUncheckedUpdateOneWithoutMediaNestedInput = {
+      create?: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.AudioCreateOrConnectWithoutMediaInput
+      upsert?: Prisma.AudioUpsertWithoutMediaInput
+      disconnect?: Prisma.AudioWhereInput | boolean
+      delete?: Prisma.AudioWhereInput | boolean
+      connect?: Prisma.AudioWhereUniqueInput
+      update?: Prisma.XOR<Prisma.XOR<Prisma.AudioUpdateToOneWithWhereWithoutMediaInput, Prisma.AudioUpdateWithoutMediaInput>, Prisma.AudioUncheckedUpdateWithoutMediaInput>
+    };
+export type AudioCreateWithoutMediaInput = {
       duration: number
     };
-export type AudioUncheckedCreateWithoutProductInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+export type AudioUncheckedCreateWithoutMediaInput = {
       duration: number
     };
-export type AudioCreateOrConnectWithoutProductInput = {
+export type AudioCreateOrConnectWithoutMediaInput = {
       where: Prisma.AudioWhereUniqueInput
-      create: Prisma.XOR<Prisma.AudioCreateWithoutProductInput, Prisma.AudioUncheckedCreateWithoutProductInput>
+      create: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
     };
-export type AudioUpsertWithoutProductInput = {
-      update: Prisma.XOR<Prisma.AudioUpdateWithoutProductInput, Prisma.AudioUncheckedUpdateWithoutProductInput>
-      create: Prisma.XOR<Prisma.AudioCreateWithoutProductInput, Prisma.AudioUncheckedCreateWithoutProductInput>
+export type AudioUpsertWithoutMediaInput = {
+      update: Prisma.XOR<Prisma.AudioUpdateWithoutMediaInput, Prisma.AudioUncheckedUpdateWithoutMediaInput>
+      create: Prisma.XOR<Prisma.AudioCreateWithoutMediaInput, Prisma.AudioUncheckedCreateWithoutMediaInput>
       where?: Prisma.AudioWhereInput
     };
-export type AudioUpdateToOneWithWhereWithoutProductInput = {
+export type AudioUpdateToOneWithWhereWithoutMediaInput = {
       where?: Prisma.AudioWhereInput
-      data: Prisma.XOR<Prisma.AudioUpdateWithoutProductInput, Prisma.AudioUncheckedUpdateWithoutProductInput>
+      data: Prisma.XOR<Prisma.AudioUpdateWithoutMediaInput, Prisma.AudioUncheckedUpdateWithoutMediaInput>
     };
-export type AudioUpdateWithoutProductInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type AudioUpdateWithoutMediaInput = {
       duration?: Prisma.IntFieldUpdateOperationsInput | number
     };
-export type AudioUncheckedUpdateWithoutProductInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type AudioUncheckedUpdateWithoutMediaInput = {
       duration?: Prisma.IntFieldUpdateOperationsInput | number
     };
 export type AudioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
-      product?: boolean | Prisma.Audio$productArgs<ExtArgs>
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["audio"]>;
 export type AudioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["audio"]>;
 export type AudioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["audio"]>;
 export type AudioSelectScalar = {
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
     };
-export type AudioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bucketKey" | "mediaType" | "fileName" | "mimeType" | "fileSize" | "isStale" | "createdAt" | "updatedAt" | "duration", ExtArgs["result"]["audio"]>;
+export type AudioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "duration", ExtArgs["result"]["audio"]>;
 export type AudioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      product?: boolean | Prisma.Audio$productArgs<ExtArgs>
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     };
-export type AudioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
-export type AudioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
+export type AudioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+    };
+export type AudioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+    };
 export type $AudioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "Audio"
       objects: {
-        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
+        media: Prisma.$MediaPayload<ExtArgs>
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
-        bucketKey: string
-        mediaType: $Enums.MediaType
-        fileName: string
-        mimeType: string
-        fileSize: number
-        isStale: boolean
-        createdAt: Date
-        updatedAt: Date
         duration: number
       }, ExtArgs["result"]["audio"]>
       composites: {}
@@ -914,7 +684,7 @@ export interface AudioDelegate<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export interface Prisma__AudioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.Audio$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Audio$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -942,14 +712,6 @@ export interface Prisma__AudioClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface AudioFieldRefs {
     readonly id: Prisma.FieldRef<"Audio", 'String'>;
-    readonly bucketKey: Prisma.FieldRef<"Audio", 'String'>;
-    readonly mediaType: Prisma.FieldRef<"Audio", 'MediaType'>;
-    readonly fileName: Prisma.FieldRef<"Audio", 'String'>;
-    readonly mimeType: Prisma.FieldRef<"Audio", 'String'>;
-    readonly fileSize: Prisma.FieldRef<"Audio", 'Int'>;
-    readonly isStale: Prisma.FieldRef<"Audio", 'Boolean'>;
-    readonly createdAt: Prisma.FieldRef<"Audio", 'DateTime'>;
-    readonly updatedAt: Prisma.FieldRef<"Audio", 'DateTime'>;
     readonly duration: Prisma.FieldRef<"Audio", 'Int'>;
 }
 
@@ -1192,6 +954,10 @@ export type AudioCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
        */
       data: Prisma.AudioCreateManyInput | Prisma.AudioCreateManyInput[]
       skipDuplicates?: boolean
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: Prisma.AudioIncludeCreateManyAndReturn<ExtArgs> | null
     };
 /**
  * Audio update
@@ -1259,6 +1025,10 @@ export type AudioUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
        * Limit how many Audio to update.
        */
       limit?: number
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: Prisma.AudioIncludeUpdateManyAndReturn<ExtArgs> | null
     };
 /**
  * Audio upsert
@@ -1322,24 +1092,6 @@ export type AudioDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
        * Limit how many Audio to delete.
        */
       limit?: number
-    };
-/**
- * Audio.product
- */
-export type Audio$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      /**
-       * Select specific fields to fetch from the ProductVariantMedia
-       */
-      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
-      /**
-       * Omit specific fields from the ProductVariantMedia
-       */
-      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
-      /**
-       * Choose, which related nodes to fetch as well
-       */
-      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * Audio without action

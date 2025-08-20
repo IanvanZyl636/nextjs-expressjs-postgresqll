@@ -191,13 +191,13 @@ export type VideoWhereInput = {
   NOT?: Prisma.VideoWhereInput | Prisma.VideoWhereInput[]
   id?: Prisma.StringFilter<"Video"> | string
   duration?: Prisma.IntFilter<"Video"> | number
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }
 
 export type VideoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   duration?: Prisma.SortOrder
-  delegate_aux_media?: Prisma.MediaOrderByWithRelationInput
+  media?: Prisma.MediaOrderByWithRelationInput
 }
 
 export type VideoWhereUniqueInput = Prisma.AtLeast<{
@@ -206,7 +206,7 @@ export type VideoWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.VideoWhereInput[]
   NOT?: Prisma.VideoWhereInput | Prisma.VideoWhereInput[]
   duration?: Prisma.IntFilter<"Video"> | number
-  delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }, "id">
 
 export type VideoOrderByWithAggregationInput = {
@@ -229,7 +229,7 @@ export type VideoScalarWhereWithAggregatesInput = {
 
 export type VideoCreateInput = {
   duration: number
-  delegate_aux_media: Prisma.MediaCreateNestedOneWithoutDelegate_aux_videoInput
+  media: Prisma.MediaCreateNestedOneWithoutVideoInput
 }
 
 export type VideoUncheckedCreateInput = {
@@ -239,7 +239,7 @@ export type VideoUncheckedCreateInput = {
 
 export type VideoUpdateInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
-  delegate_aux_media?: Prisma.MediaUpdateOneRequiredWithoutDelegate_aux_videoNestedInput
+  media?: Prisma.MediaUpdateOneRequiredWithoutVideoNestedInput
 }
 
 export type VideoUncheckedUpdateInput = {
@@ -289,67 +289,67 @@ export type VideoSumOrderByAggregateInput = {
   duration?: Prisma.SortOrder
 }
 
-export type VideoCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.VideoCreateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutDelegate_aux_mediaInput
+export type VideoCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
   connect?: Prisma.VideoWhereUniqueInput
 }
 
-export type VideoUncheckedCreateNestedOneWithoutDelegate_aux_mediaInput = {
-  create?: Prisma.XOR<Prisma.VideoCreateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutDelegate_aux_mediaInput
+export type VideoUncheckedCreateNestedOneWithoutMediaInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
   connect?: Prisma.VideoWhereUniqueInput
 }
 
-export type VideoUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.VideoCreateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.VideoUpsertWithoutDelegate_aux_mediaInput
+export type VideoUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.VideoUpsertWithoutMediaInput
   disconnect?: Prisma.VideoWhereInput | boolean
   delete?: Prisma.VideoWhereInput | boolean
   connect?: Prisma.VideoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.VideoUpdateWithoutDelegate_aux_mediaInput>, Prisma.VideoUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutMediaInput, Prisma.VideoUpdateWithoutMediaInput>, Prisma.VideoUncheckedUpdateWithoutMediaInput>
 }
 
-export type VideoUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput = {
-  create?: Prisma.XOR<Prisma.VideoCreateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedCreateWithoutDelegate_aux_mediaInput>
-  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutDelegate_aux_mediaInput
-  upsert?: Prisma.VideoUpsertWithoutDelegate_aux_mediaInput
+export type VideoUncheckedUpdateOneWithoutMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+  connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
+  upsert?: Prisma.VideoUpsertWithoutMediaInput
   disconnect?: Prisma.VideoWhereInput | boolean
   delete?: Prisma.VideoWhereInput | boolean
   connect?: Prisma.VideoWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.VideoUpdateWithoutDelegate_aux_mediaInput>, Prisma.VideoUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutMediaInput, Prisma.VideoUpdateWithoutMediaInput>, Prisma.VideoUncheckedUpdateWithoutMediaInput>
 }
 
-export type VideoCreateWithoutDelegate_aux_mediaInput = {
+export type VideoCreateWithoutMediaInput = {
   duration: number
 }
 
-export type VideoUncheckedCreateWithoutDelegate_aux_mediaInput = {
+export type VideoUncheckedCreateWithoutMediaInput = {
   duration: number
 }
 
-export type VideoCreateOrConnectWithoutDelegate_aux_mediaInput = {
+export type VideoCreateOrConnectWithoutMediaInput = {
   where: Prisma.VideoWhereUniqueInput
-  create: Prisma.XOR<Prisma.VideoCreateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedCreateWithoutDelegate_aux_mediaInput>
+  create: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
 }
 
-export type VideoUpsertWithoutDelegate_aux_mediaInput = {
-  update: Prisma.XOR<Prisma.VideoUpdateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedUpdateWithoutDelegate_aux_mediaInput>
-  create: Prisma.XOR<Prisma.VideoCreateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedCreateWithoutDelegate_aux_mediaInput>
+export type VideoUpsertWithoutMediaInput = {
+  update: Prisma.XOR<Prisma.VideoUpdateWithoutMediaInput, Prisma.VideoUncheckedUpdateWithoutMediaInput>
+  create: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
   where?: Prisma.VideoWhereInput
 }
 
-export type VideoUpdateToOneWithWhereWithoutDelegate_aux_mediaInput = {
+export type VideoUpdateToOneWithWhereWithoutMediaInput = {
   where?: Prisma.VideoWhereInput
-  data: Prisma.XOR<Prisma.VideoUpdateWithoutDelegate_aux_mediaInput, Prisma.VideoUncheckedUpdateWithoutDelegate_aux_mediaInput>
+  data: Prisma.XOR<Prisma.VideoUpdateWithoutMediaInput, Prisma.VideoUncheckedUpdateWithoutMediaInput>
 }
 
-export type VideoUpdateWithoutDelegate_aux_mediaInput = {
+export type VideoUpdateWithoutMediaInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type VideoUncheckedUpdateWithoutDelegate_aux_mediaInput = {
+export type VideoUncheckedUpdateWithoutMediaInput = {
   duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -358,19 +358,19 @@ export type VideoUncheckedUpdateWithoutDelegate_aux_mediaInput = {
 export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   duration?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["video"]>
 
 export type VideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   duration?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["video"]>
 
 export type VideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   duration?: boolean
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["video"]>
 
 export type VideoSelectScalar = {
@@ -380,19 +380,19 @@ export type VideoSelectScalar = {
 
 export type VideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "duration", ExtArgs["result"]["video"]>
 export type VideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type VideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type VideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 
 export type $VideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Video"
   objects: {
-    delegate_aux_media: Prisma.$MediaPayload<ExtArgs>
+    media: Prisma.$MediaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -791,7 +791,7 @@ readonly fields: VideoFieldRefs;
  */
 export interface Prisma__VideoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  delegate_aux_media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

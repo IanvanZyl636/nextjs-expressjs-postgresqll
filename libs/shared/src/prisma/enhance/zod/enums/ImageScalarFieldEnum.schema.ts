@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const ImageScalarFieldEnumSchema = z.enum(["id", "bucketKey", "mediaType", "fileName", "mimeType", "fileSize", "isStale", "createdAt", "updatedAt", "width", "height", "imageSize", "parentId"])
+export const ImageScalarFieldEnumSchema = z.enum(["id", "width", "height", "imageSize", "parentId"])

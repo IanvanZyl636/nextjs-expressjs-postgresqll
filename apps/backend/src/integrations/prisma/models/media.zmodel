@@ -16,42 +16,70 @@ enum ImageSize {
 }
 
 model Media {
-  id        String        @id @default(uuid())
-  bucketKey String        @unique
+  id        String               @id @default(uuid())
+  bucketKey String               @unique
   mediaType MediaType
   fileName  String
   mimeType  String
   fileSize  Int
-  isStale   Boolean       @default(true)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  isStale   Boolean              @default(true)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
 
   product   ProductVariantMedia?
+  image     Image?
+  video     Video?
+  audio     Audio?
+  document  Document?
+  file      File?
 
-  @@allow("all", true)
-  @@delegate(mediaType)
+  @@allow("all", true)  
 }
 
-model Image extends Media {
+model Image {
+  id        String    @id
   width     Int
   height    Int
   imageSize ImageSize
-  
-  parentId  String? 
-  parent    Image?        @relation("ImageParent", fields: [parentId], references: [id])
-  children  Image[]       @relation("ImageParent")
+
+  parentId  String?
+  parent    Image?    @relation("ImageParent", fields: [parentId], references: [id])
+  children  Image[]   @relation("ImageParent")
+  media     Media     @relation(fields: [id], references: [id])
+
+  @@allow("all", true) 
 }
 
-model Video extends Media {
+model Video {
+  id       String @id
   duration Int
+
+  media    Media  @relation(fields: [id], references: [id])
+
+  @@allow("all", true) 
 }
 
-model Audio extends Media {
+model Audio {
+  id       String @id
   duration Int
+
+  media    Media  @relation(fields: [id], references: [id])
+
+  @@allow("all", true) 
 }
 
-model Document extends Media {
+model Document {
+  id    String @id
+
+  media Media  @relation(fields: [id], references: [id])
+
+  @@allow("all", true) 
 }
 
-model File extends Media {
+model File {
+  id    String @id
+
+  media Media  @relation(fields: [id], references: [id])
+
+  @@allow("all", true) 
 }

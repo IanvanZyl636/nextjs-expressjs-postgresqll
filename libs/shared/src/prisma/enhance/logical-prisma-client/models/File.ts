@@ -13,89 +13,27 @@ import type * as Prisma from "../internal/prismaNamespace"
 export type FileModel = runtime.Types.Result.DefaultSelection<Prisma.$FilePayload>;
 export type AggregateFile = {
       _count: FileCountAggregateOutputType | null
-      _avg: FileAvgAggregateOutputType | null
-      _sum: FileSumAggregateOutputType | null
       _min: FileMinAggregateOutputType | null
       _max: FileMaxAggregateOutputType | null
     };
-export type FileAvgAggregateOutputType = {
-      fileSize: number | null
-    };
-export type FileSumAggregateOutputType = {
-      fileSize: number | null
-    };
 export type FileMinAggregateOutputType = {
       id: string | null
-      bucketKey: string | null
-      mediaType: $Enums.MediaType | null
-      fileName: string | null
-      mimeType: string | null
-      fileSize: number | null
-      isStale: boolean | null
-      createdAt: Date | null
-      updatedAt: Date | null
     };
 export type FileMaxAggregateOutputType = {
       id: string | null
-      bucketKey: string | null
-      mediaType: $Enums.MediaType | null
-      fileName: string | null
-      mimeType: string | null
-      fileSize: number | null
-      isStale: boolean | null
-      createdAt: Date | null
-      updatedAt: Date | null
     };
 export type FileCountAggregateOutputType = {
       id: number
-      bucketKey: number
-      mediaType: number
-      fileName: number
-      mimeType: number
-      fileSize: number
-      isStale: number
-      createdAt: number
-      updatedAt: number
       _all: number
-    };
-export type FileAvgAggregateInputType = {
-      fileSize?: true
-    };
-export type FileSumAggregateInputType = {
-      fileSize?: true
     };
 export type FileMinAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
     };
 export type FileMaxAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
     };
 export type FileCountAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
       _all?: true
     };
 export type FileAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -136,18 +74,6 @@ export type FileAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
       /**
        * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
        * 
-       * Select which fields to average
-      **/
-      _avg?: FileAvgAggregateInputType
-      /**
-       * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-       * 
-       * Select which fields to sum
-      **/
-      _sum?: FileSumAggregateInputType
-      /**
-       * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-       * 
        * Select which fields to find the minimum value
       **/
       _min?: FileMinAggregateInputType
@@ -173,24 +99,12 @@ export type FileGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
       take?: number
       skip?: number
       _count?: FileCountAggregateInputType | true
-      _avg?: FileAvgAggregateInputType
-      _sum?: FileSumAggregateInputType
       _min?: FileMinAggregateInputType
       _max?: FileMaxAggregateInputType
     };
 export type FileGroupByOutputType = {
       id: string
-      bucketKey: string
-      mediaType: $Enums.MediaType
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale: boolean
-      createdAt: Date
-      updatedAt: Date
       _count: FileCountAggregateOutputType | null
-      _avg: FileAvgAggregateOutputType | null
-      _sum: FileSumAggregateOutputType | null
       _min: FileMinAggregateOutputType | null
       _max: FileMaxAggregateOutputType | null
     };
@@ -211,321 +125,150 @@ export type FileWhereInput = {
       OR?: Prisma.FileWhereInput[]
       NOT?: Prisma.FileWhereInput | Prisma.FileWhereInput[]
       id?: Prisma.StringFilter<"File"> | string
-      bucketKey?: Prisma.StringFilter<"File"> | string
-      mediaType?: Prisma.EnumMediaTypeFilter<"File"> | $Enums.MediaType
-      fileName?: Prisma.StringFilter<"File"> | string
-      mimeType?: Prisma.StringFilter<"File"> | string
-      fileSize?: Prisma.IntFilter<"File"> | number
-      isStale?: Prisma.BoolFilter<"File"> | boolean
-      createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
-      updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
+      media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
     };
 export type FileOrderByWithRelationInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
-      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
+      media?: Prisma.MediaOrderByWithRelationInput
     };
 export type FileWhereUniqueInput = Prisma.AtLeast<{
       id?: string
-      bucketKey?: string
       AND?: Prisma.FileWhereInput | Prisma.FileWhereInput[]
       OR?: Prisma.FileWhereInput[]
       NOT?: Prisma.FileWhereInput | Prisma.FileWhereInput[]
-      mediaType?: Prisma.EnumMediaTypeFilter<"File"> | $Enums.MediaType
-      fileName?: Prisma.StringFilter<"File"> | string
-      mimeType?: Prisma.StringFilter<"File"> | string
-      fileSize?: Prisma.IntFilter<"File"> | number
-      isStale?: Prisma.BoolFilter<"File"> | boolean
-      createdAt?: Prisma.DateTimeFilter<"File"> | Date | string
-      updatedAt?: Prisma.DateTimeFilter<"File"> | Date | string
-      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
-    }, "id" | "bucketKey">;
+      media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+    }, "id">;
 export type FileOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       _count?: Prisma.FileCountOrderByAggregateInput
-      _avg?: Prisma.FileAvgOrderByAggregateInput
       _max?: Prisma.FileMaxOrderByAggregateInput
       _min?: Prisma.FileMinOrderByAggregateInput
-      _sum?: Prisma.FileSumOrderByAggregateInput
     };
 export type FileScalarWhereWithAggregatesInput = {
       AND?: Prisma.FileScalarWhereWithAggregatesInput | Prisma.FileScalarWhereWithAggregatesInput[]
       OR?: Prisma.FileScalarWhereWithAggregatesInput[]
       NOT?: Prisma.FileScalarWhereWithAggregatesInput | Prisma.FileScalarWhereWithAggregatesInput[]
       id?: Prisma.StringWithAggregatesFilter<"File"> | string
-      bucketKey?: Prisma.StringWithAggregatesFilter<"File"> | string
-      mediaType?: Prisma.EnumMediaTypeWithAggregatesFilter<"File"> | $Enums.MediaType
-      fileName?: Prisma.StringWithAggregatesFilter<"File"> | string
-      mimeType?: Prisma.StringWithAggregatesFilter<"File"> | string
-      fileSize?: Prisma.IntWithAggregatesFilter<"File"> | number
-      isStale?: Prisma.BoolWithAggregatesFilter<"File"> | boolean
-      createdAt?: Prisma.DateTimeWithAggregatesFilter<"File"> | Date | string
-      updatedAt?: Prisma.DateTimeWithAggregatesFilter<"File"> | Date | string
     };
 export type FileCreateInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
-      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_4Input
+      media: Prisma.MediaCreateNestedOneWithoutFileInput
     };
 export type FileUncheckedCreateInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
-      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_4Input
+      id: string
     };
 export type FileUpdateInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_4NestedInput
+      media?: Prisma.MediaUpdateOneRequiredWithoutFileNestedInput
     };
 export type FileUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_4NestedInput
     };
 export type FileCreateManyInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+      id: string
     };
 export type FileUpdateManyMutationInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+
     };
 export type FileUncheckedUpdateManyInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+    };
+export type FileNullableScalarRelationFilter = {
+      is?: Prisma.FileWhereInput | null
+      isNot?: Prisma.FileWhereInput | null
     };
 export type FileCountOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
-    };
-export type FileAvgOrderByAggregateInput = {
-      fileSize?: Prisma.SortOrder
     };
 export type FileMaxOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
     };
 export type FileMinOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
     };
-export type FileSumOrderByAggregateInput = {
-      fileSize?: Prisma.SortOrder
-    };
-export type FileScalarRelationFilter = {
-      is?: Prisma.FileWhereInput
-      isNot?: Prisma.FileWhereInput
-    };
-export type FileCreateNestedOneWithoutProductInput = {
-      create?: Prisma.XOR<Prisma.FileCreateWithoutProductInput, Prisma.FileUncheckedCreateWithoutProductInput>
-      connectOrCreate?: Prisma.FileCreateOrConnectWithoutProductInput
+export type FileCreateNestedOneWithoutMediaInput = {
+      create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
       connect?: Prisma.FileWhereUniqueInput
     };
-export type FileUpdateOneRequiredWithoutProductNestedInput = {
-      create?: Prisma.XOR<Prisma.FileCreateWithoutProductInput, Prisma.FileUncheckedCreateWithoutProductInput>
-      connectOrCreate?: Prisma.FileCreateOrConnectWithoutProductInput
-      upsert?: Prisma.FileUpsertWithoutProductInput
+export type FileUncheckedCreateNestedOneWithoutMediaInput = {
+      create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
       connect?: Prisma.FileWhereUniqueInput
-      update?: Prisma.XOR<Prisma.XOR<Prisma.FileUpdateToOneWithWhereWithoutProductInput, Prisma.FileUpdateWithoutProductInput>, Prisma.FileUncheckedUpdateWithoutProductInput>
     };
-export type FileCreateWithoutProductInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+export type FileUpdateOneWithoutMediaNestedInput = {
+      create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
+      upsert?: Prisma.FileUpsertWithoutMediaInput
+      disconnect?: Prisma.FileWhereInput | boolean
+      delete?: Prisma.FileWhereInput | boolean
+      connect?: Prisma.FileWhereUniqueInput
+      update?: Prisma.XOR<Prisma.XOR<Prisma.FileUpdateToOneWithWhereWithoutMediaInput, Prisma.FileUpdateWithoutMediaInput>, Prisma.FileUncheckedUpdateWithoutMediaInput>
     };
-export type FileUncheckedCreateWithoutProductInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+export type FileUncheckedUpdateOneWithoutMediaNestedInput = {
+      create?: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.FileCreateOrConnectWithoutMediaInput
+      upsert?: Prisma.FileUpsertWithoutMediaInput
+      disconnect?: Prisma.FileWhereInput | boolean
+      delete?: Prisma.FileWhereInput | boolean
+      connect?: Prisma.FileWhereUniqueInput
+      update?: Prisma.XOR<Prisma.XOR<Prisma.FileUpdateToOneWithWhereWithoutMediaInput, Prisma.FileUpdateWithoutMediaInput>, Prisma.FileUncheckedUpdateWithoutMediaInput>
     };
-export type FileCreateOrConnectWithoutProductInput = {
+export type FileCreateWithoutMediaInput = {
+
+    };
+export type FileUncheckedCreateWithoutMediaInput = {
+
+    };
+export type FileCreateOrConnectWithoutMediaInput = {
       where: Prisma.FileWhereUniqueInput
-      create: Prisma.XOR<Prisma.FileCreateWithoutProductInput, Prisma.FileUncheckedCreateWithoutProductInput>
+      create: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
     };
-export type FileUpsertWithoutProductInput = {
-      update: Prisma.XOR<Prisma.FileUpdateWithoutProductInput, Prisma.FileUncheckedUpdateWithoutProductInput>
-      create: Prisma.XOR<Prisma.FileCreateWithoutProductInput, Prisma.FileUncheckedCreateWithoutProductInput>
+export type FileUpsertWithoutMediaInput = {
+      update: Prisma.XOR<Prisma.FileUpdateWithoutMediaInput, Prisma.FileUncheckedUpdateWithoutMediaInput>
+      create: Prisma.XOR<Prisma.FileCreateWithoutMediaInput, Prisma.FileUncheckedCreateWithoutMediaInput>
       where?: Prisma.FileWhereInput
     };
-export type FileUpdateToOneWithWhereWithoutProductInput = {
+export type FileUpdateToOneWithWhereWithoutMediaInput = {
       where?: Prisma.FileWhereInput
-      data: Prisma.XOR<Prisma.FileUpdateWithoutProductInput, Prisma.FileUncheckedUpdateWithoutProductInput>
+      data: Prisma.XOR<Prisma.FileUpdateWithoutMediaInput, Prisma.FileUncheckedUpdateWithoutMediaInput>
     };
-export type FileUpdateWithoutProductInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type FileUpdateWithoutMediaInput = {
+
     };
-export type FileUncheckedUpdateWithoutProductInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type FileUncheckedUpdateWithoutMediaInput = {
+
     };
 export type FileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
-      product?: boolean | Prisma.File$productArgs<ExtArgs>
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["file"]>;
 export type FileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["file"]>;
 export type FileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["file"]>;
 export type FileSelectScalar = {
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
     };
-export type FileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bucketKey" | "mediaType" | "fileName" | "mimeType" | "fileSize" | "isStale" | "createdAt" | "updatedAt", ExtArgs["result"]["file"]>;
+export type FileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["file"]>;
 export type FileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      product?: boolean | Prisma.File$productArgs<ExtArgs>
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     };
-export type FileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
-export type FileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
+export type FileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+    };
+export type FileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+    };
 export type $FilePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "File"
       objects: {
-        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
+        media: Prisma.$MediaPayload<ExtArgs>
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
-        bucketKey: string
-        mediaType: $Enums.MediaType
-        fileName: string
-        mimeType: string
-        fileSize: number
-        isStale: boolean
-        createdAt: Date
-        updatedAt: Date
       }, ExtArgs["result"]["file"]>
       composites: {}
     };
@@ -877,7 +620,7 @@ export interface FileDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
  */
 export interface Prisma__FileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.File$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.File$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -905,14 +648,6 @@ export interface Prisma__FileClient<T, Null = never, ExtArgs extends runtime.Typ
  */
 export interface FileFieldRefs {
     readonly id: Prisma.FieldRef<"File", 'String'>;
-    readonly bucketKey: Prisma.FieldRef<"File", 'String'>;
-    readonly mediaType: Prisma.FieldRef<"File", 'MediaType'>;
-    readonly fileName: Prisma.FieldRef<"File", 'String'>;
-    readonly mimeType: Prisma.FieldRef<"File", 'String'>;
-    readonly fileSize: Prisma.FieldRef<"File", 'Int'>;
-    readonly isStale: Prisma.FieldRef<"File", 'Boolean'>;
-    readonly createdAt: Prisma.FieldRef<"File", 'DateTime'>;
-    readonly updatedAt: Prisma.FieldRef<"File", 'DateTime'>;
 }
 
 // Custom InputTypes
@@ -1154,6 +889,10 @@ export type FileCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
        */
       data: Prisma.FileCreateManyInput | Prisma.FileCreateManyInput[]
       skipDuplicates?: boolean
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: Prisma.FileIncludeCreateManyAndReturn<ExtArgs> | null
     };
 /**
  * File update
@@ -1221,6 +960,10 @@ export type FileUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
        * Limit how many Files to update.
        */
       limit?: number
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: Prisma.FileIncludeUpdateManyAndReturn<ExtArgs> | null
     };
 /**
  * File upsert
@@ -1284,24 +1027,6 @@ export type FileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
        * Limit how many Files to delete.
        */
       limit?: number
-    };
-/**
- * File.product
- */
-export type File$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      /**
-       * Select specific fields to fetch from the ProductVariantMedia
-       */
-      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
-      /**
-       * Omit specific fields from the ProductVariantMedia
-       */
-      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
-      /**
-       * Choose, which related nodes to fetch as well
-       */
-      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * File without action

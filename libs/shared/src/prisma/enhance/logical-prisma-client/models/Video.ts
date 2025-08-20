@@ -19,92 +19,40 @@ export type AggregateVideo = {
       _max: VideoMaxAggregateOutputType | null
     };
 export type VideoAvgAggregateOutputType = {
-      fileSize: number | null
       duration: number | null
     };
 export type VideoSumAggregateOutputType = {
-      fileSize: number | null
       duration: number | null
     };
 export type VideoMinAggregateOutputType = {
       id: string | null
-      bucketKey: string | null
-      mediaType: $Enums.MediaType | null
-      fileName: string | null
-      mimeType: string | null
-      fileSize: number | null
-      isStale: boolean | null
-      createdAt: Date | null
-      updatedAt: Date | null
       duration: number | null
     };
 export type VideoMaxAggregateOutputType = {
       id: string | null
-      bucketKey: string | null
-      mediaType: $Enums.MediaType | null
-      fileName: string | null
-      mimeType: string | null
-      fileSize: number | null
-      isStale: boolean | null
-      createdAt: Date | null
-      updatedAt: Date | null
       duration: number | null
     };
 export type VideoCountAggregateOutputType = {
       id: number
-      bucketKey: number
-      mediaType: number
-      fileName: number
-      mimeType: number
-      fileSize: number
-      isStale: number
-      createdAt: number
-      updatedAt: number
       duration: number
       _all: number
     };
 export type VideoAvgAggregateInputType = {
-      fileSize?: true
       duration?: true
     };
 export type VideoSumAggregateInputType = {
-      fileSize?: true
       duration?: true
     };
 export type VideoMinAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
       duration?: true
     };
 export type VideoMaxAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
       duration?: true
     };
 export type VideoCountAggregateInputType = {
       id?: true
-      bucketKey?: true
-      mediaType?: true
-      fileName?: true
-      mimeType?: true
-      fileSize?: true
-      isStale?: true
-      createdAt?: true
-      updatedAt?: true
       duration?: true
       _all?: true
     };
@@ -190,14 +138,6 @@ export type VideoGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
     };
 export type VideoGroupByOutputType = {
       id: string
-      bucketKey: string
-      mediaType: $Enums.MediaType
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale: boolean
-      createdAt: Date
-      updatedAt: Date
       duration: number
       _count: VideoCountAggregateOutputType | null
       _avg: VideoAvgAggregateOutputType | null
@@ -222,56 +162,24 @@ export type VideoWhereInput = {
       OR?: Prisma.VideoWhereInput[]
       NOT?: Prisma.VideoWhereInput | Prisma.VideoWhereInput[]
       id?: Prisma.StringFilter<"Video"> | string
-      bucketKey?: Prisma.StringFilter<"Video"> | string
-      mediaType?: Prisma.EnumMediaTypeFilter<"Video"> | $Enums.MediaType
-      fileName?: Prisma.StringFilter<"Video"> | string
-      mimeType?: Prisma.StringFilter<"Video"> | string
-      fileSize?: Prisma.IntFilter<"Video"> | number
-      isStale?: Prisma.BoolFilter<"Video"> | boolean
-      createdAt?: Prisma.DateTimeFilter<"Video"> | Date | string
-      updatedAt?: Prisma.DateTimeFilter<"Video"> | Date | string
       duration?: Prisma.IntFilter<"Video"> | number
-      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
+      media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
     };
 export type VideoOrderByWithRelationInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
-      product?: Prisma.ProductVariantMediaOrderByWithRelationInput
+      media?: Prisma.MediaOrderByWithRelationInput
     };
 export type VideoWhereUniqueInput = Prisma.AtLeast<{
       id?: string
-      bucketKey?: string
       AND?: Prisma.VideoWhereInput | Prisma.VideoWhereInput[]
       OR?: Prisma.VideoWhereInput[]
       NOT?: Prisma.VideoWhereInput | Prisma.VideoWhereInput[]
-      mediaType?: Prisma.EnumMediaTypeFilter<"Video"> | $Enums.MediaType
-      fileName?: Prisma.StringFilter<"Video"> | string
-      mimeType?: Prisma.StringFilter<"Video"> | string
-      fileSize?: Prisma.IntFilter<"Video"> | number
-      isStale?: Prisma.BoolFilter<"Video"> | boolean
-      createdAt?: Prisma.DateTimeFilter<"Video"> | Date | string
-      updatedAt?: Prisma.DateTimeFilter<"Video"> | Date | string
       duration?: Prisma.IntFilter<"Video"> | number
-      product?: Prisma.XOR<Prisma.ProductVariantMediaNullableScalarRelationFilter, Prisma.ProductVariantMediaWhereInput> | null
-    }, "id" | "bucketKey">;
+      media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
+    }, "id">;
 export type VideoOrderByWithAggregationInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
       _count?: Prisma.VideoCountOrderByAggregateInput
       _avg?: Prisma.VideoAvgOrderByAggregateInput
@@ -284,284 +192,146 @@ export type VideoScalarWhereWithAggregatesInput = {
       OR?: Prisma.VideoScalarWhereWithAggregatesInput[]
       NOT?: Prisma.VideoScalarWhereWithAggregatesInput | Prisma.VideoScalarWhereWithAggregatesInput[]
       id?: Prisma.StringWithAggregatesFilter<"Video"> | string
-      bucketKey?: Prisma.StringWithAggregatesFilter<"Video"> | string
-      mediaType?: Prisma.EnumMediaTypeWithAggregatesFilter<"Video"> | $Enums.MediaType
-      fileName?: Prisma.StringWithAggregatesFilter<"Video"> | string
-      mimeType?: Prisma.StringWithAggregatesFilter<"Video"> | string
-      fileSize?: Prisma.IntWithAggregatesFilter<"Video"> | number
-      isStale?: Prisma.BoolWithAggregatesFilter<"Video"> | boolean
-      createdAt?: Prisma.DateTimeWithAggregatesFilter<"Video"> | Date | string
-      updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Video"> | Date | string
       duration?: Prisma.IntWithAggregatesFilter<"Video"> | number
     };
 export type VideoCreateInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
       duration: number
-      product?: Prisma.ProductVariantMediaCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_1Input
+      media: Prisma.MediaCreateNestedOneWithoutVideoInput
     };
 export type VideoUncheckedCreateInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+      id: string
       duration: number
-      product?: Prisma.ProductVariantMediaUncheckedCreateNestedOneWithoutDelegate_aux_ProductVariantMedia_media_1Input
     };
 export type VideoUpdateInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductVariantMediaUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_1NestedInput
+      media?: Prisma.MediaUpdateOneRequiredWithoutVideoNestedInput
     };
 export type VideoUncheckedUpdateInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
-      product?: Prisma.ProductVariantMediaUncheckedUpdateOneWithoutDelegate_aux_ProductVariantMedia_media_1NestedInput
     };
 export type VideoCreateManyInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+      id: string
       duration: number
     };
 export type VideoUpdateManyMutationInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
     };
 export type VideoUncheckedUpdateManyInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       duration?: Prisma.IntFieldUpdateOperationsInput | number
+    };
+export type VideoNullableScalarRelationFilter = {
+      is?: Prisma.VideoWhereInput | null
+      isNot?: Prisma.VideoWhereInput | null
     };
 export type VideoCountOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type VideoAvgOrderByAggregateInput = {
-      fileSize?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type VideoMaxOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type VideoMinOrderByAggregateInput = {
       id?: Prisma.SortOrder
-      bucketKey?: Prisma.SortOrder
-      mediaType?: Prisma.SortOrder
-      fileName?: Prisma.SortOrder
-      mimeType?: Prisma.SortOrder
-      fileSize?: Prisma.SortOrder
-      isStale?: Prisma.SortOrder
-      createdAt?: Prisma.SortOrder
-      updatedAt?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
 export type VideoSumOrderByAggregateInput = {
-      fileSize?: Prisma.SortOrder
       duration?: Prisma.SortOrder
     };
-export type VideoScalarRelationFilter = {
-      is?: Prisma.VideoWhereInput
-      isNot?: Prisma.VideoWhereInput
-    };
-export type VideoCreateNestedOneWithoutProductInput = {
-      create?: Prisma.XOR<Prisma.VideoCreateWithoutProductInput, Prisma.VideoUncheckedCreateWithoutProductInput>
-      connectOrCreate?: Prisma.VideoCreateOrConnectWithoutProductInput
+export type VideoCreateNestedOneWithoutMediaInput = {
+      create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
       connect?: Prisma.VideoWhereUniqueInput
     };
-export type VideoUpdateOneRequiredWithoutProductNestedInput = {
-      create?: Prisma.XOR<Prisma.VideoCreateWithoutProductInput, Prisma.VideoUncheckedCreateWithoutProductInput>
-      connectOrCreate?: Prisma.VideoCreateOrConnectWithoutProductInput
-      upsert?: Prisma.VideoUpsertWithoutProductInput
+export type VideoUncheckedCreateNestedOneWithoutMediaInput = {
+      create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
       connect?: Prisma.VideoWhereUniqueInput
-      update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutProductInput, Prisma.VideoUpdateWithoutProductInput>, Prisma.VideoUncheckedUpdateWithoutProductInput>
     };
-export type VideoCreateWithoutProductInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+export type VideoUpdateOneWithoutMediaNestedInput = {
+      create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
+      upsert?: Prisma.VideoUpsertWithoutMediaInput
+      disconnect?: Prisma.VideoWhereInput | boolean
+      delete?: Prisma.VideoWhereInput | boolean
+      connect?: Prisma.VideoWhereUniqueInput
+      update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutMediaInput, Prisma.VideoUpdateWithoutMediaInput>, Prisma.VideoUncheckedUpdateWithoutMediaInput>
+    };
+export type VideoUncheckedUpdateOneWithoutMediaNestedInput = {
+      create?: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
+      connectOrCreate?: Prisma.VideoCreateOrConnectWithoutMediaInput
+      upsert?: Prisma.VideoUpsertWithoutMediaInput
+      disconnect?: Prisma.VideoWhereInput | boolean
+      delete?: Prisma.VideoWhereInput | boolean
+      connect?: Prisma.VideoWhereUniqueInput
+      update?: Prisma.XOR<Prisma.XOR<Prisma.VideoUpdateToOneWithWhereWithoutMediaInput, Prisma.VideoUpdateWithoutMediaInput>, Prisma.VideoUncheckedUpdateWithoutMediaInput>
+    };
+export type VideoCreateWithoutMediaInput = {
       duration: number
     };
-export type VideoUncheckedCreateWithoutProductInput = {
-      id?: string
-      bucketKey: string
-      fileName: string
-      mimeType: string
-      fileSize: number
-      isStale?: boolean
-      createdAt?: Date | string
-      updatedAt?: Date | string
+export type VideoUncheckedCreateWithoutMediaInput = {
       duration: number
     };
-export type VideoCreateOrConnectWithoutProductInput = {
+export type VideoCreateOrConnectWithoutMediaInput = {
       where: Prisma.VideoWhereUniqueInput
-      create: Prisma.XOR<Prisma.VideoCreateWithoutProductInput, Prisma.VideoUncheckedCreateWithoutProductInput>
+      create: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
     };
-export type VideoUpsertWithoutProductInput = {
-      update: Prisma.XOR<Prisma.VideoUpdateWithoutProductInput, Prisma.VideoUncheckedUpdateWithoutProductInput>
-      create: Prisma.XOR<Prisma.VideoCreateWithoutProductInput, Prisma.VideoUncheckedCreateWithoutProductInput>
+export type VideoUpsertWithoutMediaInput = {
+      update: Prisma.XOR<Prisma.VideoUpdateWithoutMediaInput, Prisma.VideoUncheckedUpdateWithoutMediaInput>
+      create: Prisma.XOR<Prisma.VideoCreateWithoutMediaInput, Prisma.VideoUncheckedCreateWithoutMediaInput>
       where?: Prisma.VideoWhereInput
     };
-export type VideoUpdateToOneWithWhereWithoutProductInput = {
+export type VideoUpdateToOneWithWhereWithoutMediaInput = {
       where?: Prisma.VideoWhereInput
-      data: Prisma.XOR<Prisma.VideoUpdateWithoutProductInput, Prisma.VideoUncheckedUpdateWithoutProductInput>
+      data: Prisma.XOR<Prisma.VideoUpdateWithoutMediaInput, Prisma.VideoUncheckedUpdateWithoutMediaInput>
     };
-export type VideoUpdateWithoutProductInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type VideoUpdateWithoutMediaInput = {
       duration?: Prisma.IntFieldUpdateOperationsInput | number
     };
-export type VideoUncheckedUpdateWithoutProductInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      bucketKey?: Prisma.StringFieldUpdateOperationsInput | string
-      fileName?: Prisma.StringFieldUpdateOperationsInput | string
-      mimeType?: Prisma.StringFieldUpdateOperationsInput | string
-      fileSize?: Prisma.IntFieldUpdateOperationsInput | number
-      isStale?: Prisma.BoolFieldUpdateOperationsInput | boolean
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type VideoUncheckedUpdateWithoutMediaInput = {
       duration?: Prisma.IntFieldUpdateOperationsInput | number
     };
 export type VideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
-      product?: boolean | Prisma.Video$productArgs<ExtArgs>
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["video"]>;
 export type VideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["video"]>;
 export type VideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["video"]>;
 export type VideoSelectScalar = {
       id?: boolean
-      bucketKey?: boolean
-      mediaType?: boolean
-      fileName?: boolean
-      mimeType?: boolean
-      fileSize?: boolean
-      isStale?: boolean
-      createdAt?: boolean
-      updatedAt?: boolean
       duration?: boolean
     };
-export type VideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bucketKey" | "mediaType" | "fileName" | "mimeType" | "fileSize" | "isStale" | "createdAt" | "updatedAt" | "duration", ExtArgs["result"]["video"]>;
+export type VideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "duration", ExtArgs["result"]["video"]>;
 export type VideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      product?: boolean | Prisma.Video$productArgs<ExtArgs>
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
     };
-export type VideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
-export type VideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
+export type VideoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+    };
+export type VideoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+      media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+    };
 export type $VideoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "Video"
       objects: {
-        product: Prisma.$ProductVariantMediaPayload<ExtArgs> | null
+        media: Prisma.$MediaPayload<ExtArgs>
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
         id: string
-        bucketKey: string
-        mediaType: $Enums.MediaType
-        fileName: string
-        mimeType: string
-        fileSize: number
-        isStale: boolean
-        createdAt: Date
-        updatedAt: Date
         duration: number
       }, ExtArgs["result"]["video"]>
       composites: {}
@@ -914,7 +684,7 @@ export interface VideoDelegate<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export interface Prisma__VideoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    product<T extends Prisma.Video$productArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Video$productArgs<ExtArgs>>): Prisma.Prisma__ProductVariantMediaClient<runtime.Types.Result.GetResult<Prisma.$ProductVariantMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
+    media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -942,14 +712,6 @@ export interface Prisma__VideoClient<T, Null = never, ExtArgs extends runtime.Ty
  */
 export interface VideoFieldRefs {
     readonly id: Prisma.FieldRef<"Video", 'String'>;
-    readonly bucketKey: Prisma.FieldRef<"Video", 'String'>;
-    readonly mediaType: Prisma.FieldRef<"Video", 'MediaType'>;
-    readonly fileName: Prisma.FieldRef<"Video", 'String'>;
-    readonly mimeType: Prisma.FieldRef<"Video", 'String'>;
-    readonly fileSize: Prisma.FieldRef<"Video", 'Int'>;
-    readonly isStale: Prisma.FieldRef<"Video", 'Boolean'>;
-    readonly createdAt: Prisma.FieldRef<"Video", 'DateTime'>;
-    readonly updatedAt: Prisma.FieldRef<"Video", 'DateTime'>;
     readonly duration: Prisma.FieldRef<"Video", 'Int'>;
 }
 
@@ -1192,6 +954,10 @@ export type VideoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
        */
       data: Prisma.VideoCreateManyInput | Prisma.VideoCreateManyInput[]
       skipDuplicates?: boolean
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: Prisma.VideoIncludeCreateManyAndReturn<ExtArgs> | null
     };
 /**
  * Video update
@@ -1259,6 +1025,10 @@ export type VideoUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
        * Limit how many Videos to update.
        */
       limit?: number
+      /**
+       * Choose, which related nodes to fetch as well
+       */
+      include?: Prisma.VideoIncludeUpdateManyAndReturn<ExtArgs> | null
     };
 /**
  * Video upsert
@@ -1322,24 +1092,6 @@ export type VideoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
        * Limit how many Videos to delete.
        */
       limit?: number
-    };
-/**
- * Video.product
- */
-export type Video$productArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      /**
-       * Select specific fields to fetch from the ProductVariantMedia
-       */
-      select?: Prisma.ProductVariantMediaSelect<ExtArgs> | null
-      /**
-       * Omit specific fields from the ProductVariantMedia
-       */
-      omit?: Prisma.ProductVariantMediaOmit<ExtArgs> | null
-      /**
-       * Choose, which related nodes to fetch as well
-       */
-      include?: Prisma.ProductVariantMediaInclude<ExtArgs> | null
-      where?: Prisma.ProductVariantMediaWhereInput
     };
 /**
  * Video without action

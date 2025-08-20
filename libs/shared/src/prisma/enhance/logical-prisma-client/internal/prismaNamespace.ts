@@ -1973,14 +1973,6 @@ export const MediaScalarFieldEnum = {
 export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
 export const ImageScalarFieldEnum = {
       id: 'id',
-      bucketKey: 'bucketKey',
-      mediaType: 'mediaType',
-      fileName: 'fileName',
-      mimeType: 'mimeType',
-      fileSize: 'fileSize',
-      isStale: 'isStale',
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
       width: 'width',
       height: 'height',
       imageSize: 'imageSize',
@@ -1989,52 +1981,20 @@ export const ImageScalarFieldEnum = {
 export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
 export const VideoScalarFieldEnum = {
       id: 'id',
-      bucketKey: 'bucketKey',
-      mediaType: 'mediaType',
-      fileName: 'fileName',
-      mimeType: 'mimeType',
-      fileSize: 'fileSize',
-      isStale: 'isStale',
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
       duration: 'duration'
     } as const;
 export type VideoScalarFieldEnum = (typeof VideoScalarFieldEnum)[keyof typeof VideoScalarFieldEnum]
 export const AudioScalarFieldEnum = {
       id: 'id',
-      bucketKey: 'bucketKey',
-      mediaType: 'mediaType',
-      fileName: 'fileName',
-      mimeType: 'mimeType',
-      fileSize: 'fileSize',
-      isStale: 'isStale',
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
       duration: 'duration'
     } as const;
 export type AudioScalarFieldEnum = (typeof AudioScalarFieldEnum)[keyof typeof AudioScalarFieldEnum]
 export const DocumentScalarFieldEnum = {
-      id: 'id',
-      bucketKey: 'bucketKey',
-      mediaType: 'mediaType',
-      fileName: 'fileName',
-      mimeType: 'mimeType',
-      fileSize: 'fileSize',
-      isStale: 'isStale',
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt'
+      id: 'id'
     } as const;
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
 export const FileScalarFieldEnum = {
-      id: 'id',
-      bucketKey: 'bucketKey',
-      mediaType: 'mediaType',
-      fileName: 'fileName',
-      mimeType: 'mimeType',
-      fileSize: 'fileSize',
-      isStale: 'isStale',
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt'
+      id: 'id'
     } as const;
 export type FileScalarFieldEnum = (typeof FileScalarFieldEnum)[keyof typeof FileScalarFieldEnum]
 export const ProductScalarFieldEnum = {
@@ -2074,7 +2034,7 @@ export const ProductVariantMediaScalarFieldEnum = {
       isPrimary: 'isPrimary',
       sortOrder: 'sortOrder',
       productVariantId: 'productVariantId',
-      mediaId: 'mediaId',
+      mediaId: 'mediaId'
     } as const;
 export type ProductVariantMediaScalarFieldEnum = (typeof ProductVariantMediaScalarFieldEnum)[keyof typeof ProductVariantMediaScalarFieldEnum]
 export const OrderScalarFieldEnum = {

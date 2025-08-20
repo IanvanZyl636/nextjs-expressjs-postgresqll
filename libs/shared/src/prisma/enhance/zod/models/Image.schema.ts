@@ -6,30 +6,22 @@
 // @ts-nocheck
 
 import { z } from 'zod';
-import { MediaTypeSchema } from '../enums/MediaType.schema';
 import { ImageSizeSchema } from '../enums/ImageSize.schema';
 const baseSchema = z.object({
     id: z.string(),
-    bucketKey: z.string(),
-    mediaType: MediaTypeSchema,
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.number(),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date(),
     width: z.number(),
     height: z.number(),
     imageSize: ImageSizeSchema,
 }
 ).strict();
 const relationSchema = z.object({
-    product: z.record(z.unknown()).optional(),
     parent: z.record(z.unknown()).optional(),
     children: z.array(z.unknown()).optional(),
+    media: z.record(z.unknown()),
 }
 );
 const fkSchema = z.object({
+    id: z.string(),
     parentId: z.string().nullish(),
 }
 );
@@ -50,7 +42,7 @@ export const ImageSchema = ImageScalarSchema.merge(fkSchema).merge(relationSchem
  * Schema used for validating Prisma create input. For internal use only.
  * @private
  */
-export const ImagePrismaCreateSchema = baseSchema.omit({ mediaType: true }).partial().passthrough();
+export const ImagePrismaCreateSchema = baseSchema.partial().passthrough();
 
 
 /**
@@ -59,13 +51,6 @@ export const ImagePrismaCreateSchema = baseSchema.omit({ mediaType: true }).part
  */
 export const ImagePrismaUpdateSchema = z.object({
     id: z.string(),
-    bucketKey: z.string(),
-    fileName: z.string(),
-    mimeType: z.string(),
-    fileSize: z.union([z.number(), z.record(z.unknown())]),
-    isStale: z.boolean().default(true),
-    createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date(),
     width: z.union([z.number(), z.record(z.unknown())]),
     height: z.union([z.number(), z.record(z.unknown())]),
     imageSize: ImageSizeSchema
@@ -75,9 +60,7 @@ export const ImagePrismaUpdateSchema = z.object({
 /**
  * `Image` schema for create operations excluding foreign keys and relations.
  */
-export const ImageCreateScalarSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const ImageCreateScalarSchema = baseSchema;
 
 
 /**
@@ -89,7 +72,7 @@ export const ImageCreateSchema = ImageCreateScalarSchema.merge(fkSchema);
 /**
  * `Image` schema for update operations excluding foreign keys and relations.
  */
-export const ImageUpdateScalarSchema = baseSchema.omit({ mediaType: true }).partial();
+export const ImageUpdateScalarSchema = baseSchema.partial();
 
 
 /**
