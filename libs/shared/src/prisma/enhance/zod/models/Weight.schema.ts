@@ -6,5 +6,9 @@
 // @ts-nocheck
 
 import { z } from 'zod';
-
-export const ImageScalarFieldEnumSchema = z.enum(["id", "bucketKey", "mediaType", "fileName", "mimeType", "fileSize", "isStale", "createdAt", "updatedAt", "width", "height", "imageSize", "parentId"])
+const baseSchema = z.object({
+    value: z.number(),
+    unit: z.string().default("g"),
+}
+).strict();
+export const WeightSchema = baseSchema;

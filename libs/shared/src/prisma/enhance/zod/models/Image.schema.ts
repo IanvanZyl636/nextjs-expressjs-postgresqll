@@ -25,6 +25,12 @@ const baseSchema = z.object({
 ).strict();
 const relationSchema = z.object({
     product: z.record(z.unknown()).optional(),
+    parent: z.record(z.unknown()).optional(),
+    children: z.array(z.unknown()).optional(),
+}
+);
+const fkSchema = z.object({
+    parentId: z.string().nullish(),
 }
 );
 
@@ -37,7 +43,7 @@ export const ImageScalarSchema = baseSchema;
 /**
  * `Image` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const ImageSchema = ImageScalarSchema.merge(relationSchema.partial());
+export const ImageSchema = ImageScalarSchema.merge(fkSchema).merge(relationSchema.partial());
 
 
 /**
@@ -77,9 +83,7 @@ export const ImageCreateScalarSchema = baseSchema.omit({ mediaType: true }).part
 /**
  * `Image` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const ImageCreateSchema = baseSchema.omit({ mediaType: true }).partial({
-    id: true, isStale: true, createdAt: true, updatedAt: true
-});
+export const ImageCreateSchema = ImageCreateScalarSchema.merge(fkSchema);
 
 
 /**
@@ -91,5 +95,5 @@ export const ImageUpdateScalarSchema = baseSchema.omit({ mediaType: true }).part
 /**
  * `Image` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const ImageUpdateSchema = ImageUpdateScalarSchema;
+export const ImageUpdateSchema = ImageUpdateScalarSchema.merge(fkSchema.partial());
 

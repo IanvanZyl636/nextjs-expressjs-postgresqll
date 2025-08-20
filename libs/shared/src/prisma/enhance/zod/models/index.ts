@@ -27,4 +27,5 @@ export * from './Payment.schema';
 export * from './Category.schema';
 export * from './Tag.schema';
 export * from './Log.schema';
+export * from './Weight.schema';
 export * from './Dimensions.schema';

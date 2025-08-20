@@ -40,6 +40,7 @@ export type ImageMinAggregateOutputType = {
   width: number | null
   height: number | null
   imageSize: $Enums.ImageSize | null
+  parentId: string | null
 }
 
 export type ImageMaxAggregateOutputType = {
@@ -47,6 +48,7 @@ export type ImageMaxAggregateOutputType = {
   width: number | null
   height: number | null
   imageSize: $Enums.ImageSize | null
+  parentId: string | null
 }
 
 export type ImageCountAggregateOutputType = {
@@ -54,6 +56,7 @@ export type ImageCountAggregateOutputType = {
   width: number
   height: number
   imageSize: number
+  parentId: number
   _all: number
 }
 
@@ -73,6 +76,7 @@ export type ImageMinAggregateInputType = {
   width?: true
   height?: true
   imageSize?: true
+  parentId?: true
 }
 
 export type ImageMaxAggregateInputType = {
@@ -80,6 +84,7 @@ export type ImageMaxAggregateInputType = {
   width?: true
   height?: true
   imageSize?: true
+  parentId?: true
 }
 
 export type ImageCountAggregateInputType = {
@@ -87,6 +92,7 @@ export type ImageCountAggregateInputType = {
   width?: true
   height?: true
   imageSize?: true
+  parentId?: true
   _all?: true
 }
 
@@ -181,6 +187,7 @@ export type ImageGroupByOutputType = {
   width: number
   height: number
   imageSize: $Enums.ImageSize
+  parentId: string | null
   _count: ImageCountAggregateOutputType | null
   _avg: ImageAvgAggregateOutputType | null
   _sum: ImageSumAggregateOutputType | null
@@ -211,6 +218,9 @@ export type ImageWhereInput = {
   width?: Prisma.IntFilter<"Image"> | number
   height?: Prisma.IntFilter<"Image"> | number
   imageSize?: Prisma.EnumImageSizeFilter<"Image"> | $Enums.ImageSize
+  parentId?: Prisma.StringNullableFilter<"Image"> | string | null
+  parent?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  children?: Prisma.ImageListRelationFilter
   delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }
 
@@ -219,6 +229,9 @@ export type ImageOrderByWithRelationInput = {
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   imageSize?: Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  parent?: Prisma.ImageOrderByWithRelationInput
+  children?: Prisma.ImageOrderByRelationAggregateInput
   delegate_aux_media?: Prisma.MediaOrderByWithRelationInput
 }
 
@@ -230,6 +243,9 @@ export type ImageWhereUniqueInput = Prisma.AtLeast<{
   width?: Prisma.IntFilter<"Image"> | number
   height?: Prisma.IntFilter<"Image"> | number
   imageSize?: Prisma.EnumImageSizeFilter<"Image"> | $Enums.ImageSize
+  parentId?: Prisma.StringNullableFilter<"Image"> | string | null
+  parent?: Prisma.XOR<Prisma.ImageNullableScalarRelationFilter, Prisma.ImageWhereInput> | null
+  children?: Prisma.ImageListRelationFilter
   delegate_aux_media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }, "id">
 
@@ -238,6 +254,7 @@ export type ImageOrderByWithAggregationInput = {
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   imageSize?: Prisma.SortOrder
+  parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ImageCountOrderByAggregateInput
   _avg?: Prisma.ImageAvgOrderByAggregateInput
   _max?: Prisma.ImageMaxOrderByAggregateInput
@@ -253,12 +270,15 @@ export type ImageScalarWhereWithAggregatesInput = {
   width?: Prisma.IntWithAggregatesFilter<"Image"> | number
   height?: Prisma.IntWithAggregatesFilter<"Image"> | number
   imageSize?: Prisma.EnumImageSizeWithAggregatesFilter<"Image"> | $Enums.ImageSize
+  parentId?: Prisma.StringNullableWithAggregatesFilter<"Image"> | string | null
 }
 
 export type ImageCreateInput = {
   width: number
   height: number
   imageSize: $Enums.ImageSize
+  parent?: Prisma.ImageCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ImageCreateNestedManyWithoutParentInput
   delegate_aux_media: Prisma.MediaCreateNestedOneWithoutDelegate_aux_imageInput
 }
 
@@ -267,12 +287,16 @@ export type ImageUncheckedCreateInput = {
   width: number
   height: number
   imageSize: $Enums.ImageSize
+  parentId?: string | null
+  children?: Prisma.ImageUncheckedCreateNestedManyWithoutParentInput
 }
 
 export type ImageUpdateInput = {
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  parent?: Prisma.ImageUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ImageUpdateManyWithoutParentNestedInput
   delegate_aux_media?: Prisma.MediaUpdateOneRequiredWithoutDelegate_aux_imageNestedInput
 }
 
@@ -281,6 +305,8 @@ export type ImageUncheckedUpdateInput = {
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  children?: Prisma.ImageUncheckedUpdateManyWithoutParentNestedInput
 }
 
 export type ImageCreateManyInput = {
@@ -288,6 +314,7 @@ export type ImageCreateManyInput = {
   width: number
   height: number
   imageSize: $Enums.ImageSize
+  parentId?: string | null
 }
 
 export type ImageUpdateManyMutationInput = {
@@ -301,6 +328,7 @@ export type ImageUncheckedUpdateManyInput = {
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ImageNullableScalarRelationFilter = {
@@ -308,11 +336,22 @@ export type ImageNullableScalarRelationFilter = {
   isNot?: Prisma.ImageWhereInput | null
 }
 
+export type ImageListRelationFilter = {
+  every?: Prisma.ImageWhereInput
+  some?: Prisma.ImageWhereInput
+  none?: Prisma.ImageWhereInput
+}
+
+export type ImageOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type ImageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   imageSize?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
 }
 
 export type ImageAvgOrderByAggregateInput = {
@@ -325,6 +364,7 @@ export type ImageMaxOrderByAggregateInput = {
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   imageSize?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
 }
 
 export type ImageMinOrderByAggregateInput = {
@@ -332,6 +372,7 @@ export type ImageMinOrderByAggregateInput = {
   width?: Prisma.SortOrder
   height?: Prisma.SortOrder
   imageSize?: Prisma.SortOrder
+  parentId?: Prisma.SortOrder
 }
 
 export type ImageSumOrderByAggregateInput = {
@@ -371,20 +412,86 @@ export type ImageUncheckedUpdateOneWithoutDelegate_aux_mediaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ImageUpdateToOneWithWhereWithoutDelegate_aux_mediaInput, Prisma.ImageUpdateWithoutDelegate_aux_mediaInput>, Prisma.ImageUncheckedUpdateWithoutDelegate_aux_mediaInput>
 }
 
+export type ImageCreateNestedOneWithoutChildrenInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutChildrenInput, Prisma.ImageUncheckedCreateWithoutChildrenInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutChildrenInput
+  connect?: Prisma.ImageWhereUniqueInput
+}
+
+export type ImageCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutParentInput, Prisma.ImageUncheckedCreateWithoutParentInput> | Prisma.ImageCreateWithoutParentInput[] | Prisma.ImageUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutParentInput | Prisma.ImageCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.ImageCreateManyParentInputEnvelope
+  connect?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+}
+
+export type ImageUncheckedCreateNestedManyWithoutParentInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutParentInput, Prisma.ImageUncheckedCreateWithoutParentInput> | Prisma.ImageCreateWithoutParentInput[] | Prisma.ImageUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutParentInput | Prisma.ImageCreateOrConnectWithoutParentInput[]
+  createMany?: Prisma.ImageCreateManyParentInputEnvelope
+  connect?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+}
+
 export type EnumImageSizeFieldUpdateOperationsInput = {
   set?: $Enums.ImageSize
+}
+
+export type ImageUpdateOneWithoutChildrenNestedInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutChildrenInput, Prisma.ImageUncheckedCreateWithoutChildrenInput>
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutChildrenInput
+  upsert?: Prisma.ImageUpsertWithoutChildrenInput
+  disconnect?: Prisma.ImageWhereInput | boolean
+  delete?: Prisma.ImageWhereInput | boolean
+  connect?: Prisma.ImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ImageUpdateToOneWithWhereWithoutChildrenInput, Prisma.ImageUpdateWithoutChildrenInput>, Prisma.ImageUncheckedUpdateWithoutChildrenInput>
+}
+
+export type ImageUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutParentInput, Prisma.ImageUncheckedCreateWithoutParentInput> | Prisma.ImageCreateWithoutParentInput[] | Prisma.ImageUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutParentInput | Prisma.ImageCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.ImageUpsertWithWhereUniqueWithoutParentInput | Prisma.ImageUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.ImageCreateManyParentInputEnvelope
+  set?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  disconnect?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  delete?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  connect?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  update?: Prisma.ImageUpdateWithWhereUniqueWithoutParentInput | Prisma.ImageUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.ImageUpdateManyWithWhereWithoutParentInput | Prisma.ImageUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.ImageScalarWhereInput | Prisma.ImageScalarWhereInput[]
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type ImageUncheckedUpdateManyWithoutParentNestedInput = {
+  create?: Prisma.XOR<Prisma.ImageCreateWithoutParentInput, Prisma.ImageUncheckedCreateWithoutParentInput> | Prisma.ImageCreateWithoutParentInput[] | Prisma.ImageUncheckedCreateWithoutParentInput[]
+  connectOrCreate?: Prisma.ImageCreateOrConnectWithoutParentInput | Prisma.ImageCreateOrConnectWithoutParentInput[]
+  upsert?: Prisma.ImageUpsertWithWhereUniqueWithoutParentInput | Prisma.ImageUpsertWithWhereUniqueWithoutParentInput[]
+  createMany?: Prisma.ImageCreateManyParentInputEnvelope
+  set?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  disconnect?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  delete?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  connect?: Prisma.ImageWhereUniqueInput | Prisma.ImageWhereUniqueInput[]
+  update?: Prisma.ImageUpdateWithWhereUniqueWithoutParentInput | Prisma.ImageUpdateWithWhereUniqueWithoutParentInput[]
+  updateMany?: Prisma.ImageUpdateManyWithWhereWithoutParentInput | Prisma.ImageUpdateManyWithWhereWithoutParentInput[]
+  deleteMany?: Prisma.ImageScalarWhereInput | Prisma.ImageScalarWhereInput[]
 }
 
 export type ImageCreateWithoutDelegate_aux_mediaInput = {
   width: number
   height: number
   imageSize: $Enums.ImageSize
+  parent?: Prisma.ImageCreateNestedOneWithoutChildrenInput
+  children?: Prisma.ImageCreateNestedManyWithoutParentInput
 }
 
 export type ImageUncheckedCreateWithoutDelegate_aux_mediaInput = {
   width: number
   height: number
   imageSize: $Enums.ImageSize
+  parentId?: string | null
+  children?: Prisma.ImageUncheckedCreateNestedManyWithoutParentInput
 }
 
 export type ImageCreateOrConnectWithoutDelegate_aux_mediaInput = {
@@ -407,14 +514,178 @@ export type ImageUpdateWithoutDelegate_aux_mediaInput = {
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  parent?: Prisma.ImageUpdateOneWithoutChildrenNestedInput
+  children?: Prisma.ImageUpdateManyWithoutParentNestedInput
 }
 
 export type ImageUncheckedUpdateWithoutDelegate_aux_mediaInput = {
   width?: Prisma.IntFieldUpdateOperationsInput | number
   height?: Prisma.IntFieldUpdateOperationsInput | number
   imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  children?: Prisma.ImageUncheckedUpdateManyWithoutParentNestedInput
 }
 
+export type ImageCreateWithoutChildrenInput = {
+  width: number
+  height: number
+  imageSize: $Enums.ImageSize
+  parent?: Prisma.ImageCreateNestedOneWithoutChildrenInput
+  delegate_aux_media: Prisma.MediaCreateNestedOneWithoutDelegate_aux_imageInput
+}
+
+export type ImageUncheckedCreateWithoutChildrenInput = {
+  id: string
+  width: number
+  height: number
+  imageSize: $Enums.ImageSize
+  parentId?: string | null
+}
+
+export type ImageCreateOrConnectWithoutChildrenInput = {
+  where: Prisma.ImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.ImageCreateWithoutChildrenInput, Prisma.ImageUncheckedCreateWithoutChildrenInput>
+}
+
+export type ImageCreateWithoutParentInput = {
+  width: number
+  height: number
+  imageSize: $Enums.ImageSize
+  children?: Prisma.ImageCreateNestedManyWithoutParentInput
+  delegate_aux_media: Prisma.MediaCreateNestedOneWithoutDelegate_aux_imageInput
+}
+
+export type ImageUncheckedCreateWithoutParentInput = {
+  id: string
+  width: number
+  height: number
+  imageSize: $Enums.ImageSize
+  children?: Prisma.ImageUncheckedCreateNestedManyWithoutParentInput
+}
+
+export type ImageCreateOrConnectWithoutParentInput = {
+  where: Prisma.ImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.ImageCreateWithoutParentInput, Prisma.ImageUncheckedCreateWithoutParentInput>
+}
+
+export type ImageCreateManyParentInputEnvelope = {
+  data: Prisma.ImageCreateManyParentInput | Prisma.ImageCreateManyParentInput[]
+  skipDuplicates?: boolean
+}
+
+export type ImageUpsertWithoutChildrenInput = {
+  update: Prisma.XOR<Prisma.ImageUpdateWithoutChildrenInput, Prisma.ImageUncheckedUpdateWithoutChildrenInput>
+  create: Prisma.XOR<Prisma.ImageCreateWithoutChildrenInput, Prisma.ImageUncheckedCreateWithoutChildrenInput>
+  where?: Prisma.ImageWhereInput
+}
+
+export type ImageUpdateToOneWithWhereWithoutChildrenInput = {
+  where?: Prisma.ImageWhereInput
+  data: Prisma.XOR<Prisma.ImageUpdateWithoutChildrenInput, Prisma.ImageUncheckedUpdateWithoutChildrenInput>
+}
+
+export type ImageUpdateWithoutChildrenInput = {
+  width?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  parent?: Prisma.ImageUpdateOneWithoutChildrenNestedInput
+  delegate_aux_media?: Prisma.MediaUpdateOneRequiredWithoutDelegate_aux_imageNestedInput
+}
+
+export type ImageUncheckedUpdateWithoutChildrenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  width?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ImageUpsertWithWhereUniqueWithoutParentInput = {
+  where: Prisma.ImageWhereUniqueInput
+  update: Prisma.XOR<Prisma.ImageUpdateWithoutParentInput, Prisma.ImageUncheckedUpdateWithoutParentInput>
+  create: Prisma.XOR<Prisma.ImageCreateWithoutParentInput, Prisma.ImageUncheckedCreateWithoutParentInput>
+}
+
+export type ImageUpdateWithWhereUniqueWithoutParentInput = {
+  where: Prisma.ImageWhereUniqueInput
+  data: Prisma.XOR<Prisma.ImageUpdateWithoutParentInput, Prisma.ImageUncheckedUpdateWithoutParentInput>
+}
+
+export type ImageUpdateManyWithWhereWithoutParentInput = {
+  where: Prisma.ImageScalarWhereInput
+  data: Prisma.XOR<Prisma.ImageUpdateManyMutationInput, Prisma.ImageUncheckedUpdateManyWithoutParentInput>
+}
+
+export type ImageScalarWhereInput = {
+  AND?: Prisma.ImageScalarWhereInput | Prisma.ImageScalarWhereInput[]
+  OR?: Prisma.ImageScalarWhereInput[]
+  NOT?: Prisma.ImageScalarWhereInput | Prisma.ImageScalarWhereInput[]
+  id?: Prisma.StringFilter<"Image"> | string
+  width?: Prisma.IntFilter<"Image"> | number
+  height?: Prisma.IntFilter<"Image"> | number
+  imageSize?: Prisma.EnumImageSizeFilter<"Image"> | $Enums.ImageSize
+  parentId?: Prisma.StringNullableFilter<"Image"> | string | null
+}
+
+export type ImageCreateManyParentInput = {
+  id: string
+  width: number
+  height: number
+  imageSize: $Enums.ImageSize
+}
+
+export type ImageUpdateWithoutParentInput = {
+  width?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  children?: Prisma.ImageUpdateManyWithoutParentNestedInput
+  delegate_aux_media?: Prisma.MediaUpdateOneRequiredWithoutDelegate_aux_imageNestedInput
+}
+
+export type ImageUncheckedUpdateWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  width?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+  children?: Prisma.ImageUncheckedUpdateManyWithoutParentNestedInput
+}
+
+export type ImageUncheckedUpdateManyWithoutParentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  width?: Prisma.IntFieldUpdateOperationsInput | number
+  height?: Prisma.IntFieldUpdateOperationsInput | number
+  imageSize?: Prisma.EnumImageSizeFieldUpdateOperationsInput | $Enums.ImageSize
+}
+
+
+/**
+ * Count Type ImageCountOutputType
+ */
+
+export type ImageCountOutputType = {
+  children: number
+}
+
+export type ImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  children?: boolean | ImageCountOutputTypeCountChildrenArgs
+}
+
+/**
+ * ImageCountOutputType without action
+ */
+export type ImageCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ImageCountOutputType
+   */
+  select?: Prisma.ImageCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ImageCountOutputType without action
+ */
+export type ImageCountOutputTypeCountChildrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ImageWhereInput
+}
 
 
 export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -422,7 +693,11 @@ export type ImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   width?: boolean
   height?: boolean
   imageSize?: boolean
+  parentId?: boolean
+  parent?: boolean | Prisma.Image$parentArgs<ExtArgs>
+  children?: boolean | Prisma.Image$childrenArgs<ExtArgs>
   delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
 
 export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -430,6 +705,8 @@ export type ImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   width?: boolean
   height?: boolean
   imageSize?: boolean
+  parentId?: boolean
+  parent?: boolean | Prisma.Image$parentArgs<ExtArgs>
   delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
 
@@ -438,6 +715,8 @@ export type ImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   width?: boolean
   height?: boolean
   imageSize?: boolean
+  parentId?: boolean
+  parent?: boolean | Prisma.Image$parentArgs<ExtArgs>
   delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["image"]>
 
@@ -446,22 +725,30 @@ export type ImageSelectScalar = {
   width?: boolean
   height?: boolean
   imageSize?: boolean
+  parentId?: boolean
 }
 
-export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "width" | "height" | "imageSize", ExtArgs["result"]["image"]>
+export type ImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "width" | "height" | "imageSize" | "parentId", ExtArgs["result"]["image"]>
 export type ImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parent?: boolean | Prisma.Image$parentArgs<ExtArgs>
+  children?: boolean | Prisma.Image$childrenArgs<ExtArgs>
   delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.ImageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parent?: boolean | Prisma.Image$parentArgs<ExtArgs>
   delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type ImageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  parent?: boolean | Prisma.Image$parentArgs<ExtArgs>
   delegate_aux_media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 
 export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Image"
   objects: {
+    parent: Prisma.$ImagePayload<ExtArgs> | null
+    children: Prisma.$ImagePayload<ExtArgs>[]
     delegate_aux_media: Prisma.$MediaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -469,6 +756,7 @@ export type $ImagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     width: number
     height: number
     imageSize: $Enums.ImageSize
+    parentId: string | null
   }, ExtArgs["result"]["image"]>
   composites: {}
 }
@@ -863,6 +1151,8 @@ readonly fields: ImageFieldRefs;
  */
 export interface Prisma__ImageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  parent<T extends Prisma.Image$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$parentArgs<ExtArgs>>): Prisma.Prisma__ImageClient<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  children<T extends Prisma.Image$childrenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Image$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   delegate_aux_media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -897,6 +1187,7 @@ export interface ImageFieldRefs {
   readonly width: Prisma.FieldRef<"Image", 'Int'>
   readonly height: Prisma.FieldRef<"Image", 'Int'>
   readonly imageSize: Prisma.FieldRef<"Image", 'ImageSize'>
+  readonly parentId: Prisma.FieldRef<"Image", 'String'>
 }
     
 
@@ -1290,6 +1581,49 @@ export type ImageDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Images to delete.
    */
   limit?: number
+}
+
+/**
+ * Image.parent
+ */
+export type Image$parentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Image
+   */
+  select?: Prisma.ImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Image
+   */
+  omit?: Prisma.ImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ImageInclude<ExtArgs> | null
+  where?: Prisma.ImageWhereInput
+}
+
+/**
+ * Image.children
+ */
+export type Image$childrenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Image
+   */
+  select?: Prisma.ImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Image
+   */
+  omit?: Prisma.ImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ImageInclude<ExtArgs> | null
+  where?: Prisma.ImageWhereInput
+  orderBy?: Prisma.ImageOrderByWithRelationInput | Prisma.ImageOrderByWithRelationInput[]
+  cursor?: Prisma.ImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ImageScalarFieldEnum | Prisma.ImageScalarFieldEnum[]
 }
 
 /**

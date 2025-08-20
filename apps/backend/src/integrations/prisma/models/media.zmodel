@@ -37,6 +37,9 @@ model Image extends Media {
   height    Int
   imageSize ImageSize
   
+  parentId  String? 
+  parent    Image?        @relation("ImageParent", fields: [parentId], references: [id])
+  children  Image[]       @relation("ImageParent")
 }
 
 model Video extends Media {

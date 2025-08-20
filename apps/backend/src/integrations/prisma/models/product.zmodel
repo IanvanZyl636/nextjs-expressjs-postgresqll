@@ -12,6 +12,11 @@ enum ProductStatus {
   ARCHIVED
 }
 
+type Weight {
+  value Float
+  unit  String @default("g")
+}
+
 type Dimensions {
   length Float
   width  Float
@@ -51,7 +56,7 @@ model ProductVariant {
   description String?
 
   color       String?
-  weight      Float?
+  weight      Weight?               @json
   dimensions  Dimensions?           @json
 
   price       Float

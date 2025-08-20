@@ -1,17 +1,50 @@
-import { Prisma } from "@nextjs-expressjs-postgresql/shared";
+import { ProductUpsertArgs } from "@nextjs-expressjs-postgresql/shared";
 import { prisma } from "../../integrations/prisma";
 
-export async function upsertProduct(
-  data: Prisma.ProductUpsertArgs
-) {
-  return prisma().product.upsert({
+export async function upsertProduct(data: ProductUpsertArgs) {
+  const product = await prisma().product.upsert({
     ...data,
     include: {
       tags: true,
       categories: true,
-      productVariants: true,
-    },
-  });
+      productVariants: {
+        include: {
+          mediaItems: {
+            include: {
+              media: true
+              },
+            },
+          },
+        },
+      },
+    });   
+  
+  const mediaUpdates: string[] = [];
+
+  for (const variant of product.productVariants) {
+    for (const mediaItem of variant.mediaItems) {
+      const ids = [mediaItem.mediaId];
+
+      if (mediaItem.media.mediaType === "Image") {
+        const children = await prisma().image.findMany({
+          where: { parentId: mediaItem.mediaId },
+          select: { id: true },
+        });
+        ids.push(...children.map(c => c.id));
+      }
+
+      mediaUpdates.push(...ids);
+    }
+  }
+
+  if (mediaUpdates.length > 0) {
+    await prisma().media.updateMany({
+      where: { id: { in: mediaUpdates } },
+      data: { isStale: false },
+    });
+  }
+
+  return product;
 }
 
 export async function getProducts(options?: {

@@ -6,6 +6,7 @@
 // @ts-nocheck
 
 import { z } from 'zod';
+import { WeightSchema } from './Weight.schema';
 import { DimensionsSchema } from './Dimensions.schema';
 const baseSchema = z.object({
     id: z.string(),
@@ -15,7 +16,7 @@ const baseSchema = z.object({
     name: z.string(),
     description: z.string().nullish(),
     color: z.string().nullish(),
-    weight: z.number().nullish(),
+    weight: z.lazy(() => WeightSchema).nullish(),
     dimensions: z.lazy(() => DimensionsSchema).nullish(),
     price: z.number(),
     stock: z.number(),
@@ -70,7 +71,7 @@ export const ProductVariantPrismaUpdateSchema = z.object({
     name: z.string(),
     description: z.string().nullish(),
     color: z.string().nullish(),
-    weight: z.union([z.number().nullish(), z.record(z.unknown())]),
+    weight: z.lazy(() => WeightSchema).nullish(),
     dimensions: z.lazy(() => DimensionsSchema).nullish(),
     price: z.union([z.number(), z.record(z.unknown())]),
     stock: z.union([z.number(), z.record(z.unknown())]),

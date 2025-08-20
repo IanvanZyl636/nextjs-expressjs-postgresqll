@@ -98,6 +98,9 @@ model Image {
   width              Int
   height             Int
   imageSize          ImageSize
+  parentId           String?
+  parent             Image?    @relation("ImageParent", fields: [parentId], references: [id])
+  children           Image[]   @relation("ImageParent")
   delegate_aux_media Media     @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
@@ -147,7 +150,7 @@ model ProductVariant {
   name        String
   description String?
   color       String?
-  weight      Float?
+  weight      Json?
   dimensions  Json?
   price       Float
   stock       Int

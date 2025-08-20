@@ -2,25 +2,46 @@ import { z } from 'zod';
 import { ProductCreateSchema } from '../prisma/enhance/zod/models/Product.schema';
 import { ProductVariantCreateSchema } from '../prisma/enhance/zod/models/ProductVariant.schema';
 import { ProductStatusSchema } from '../prisma/enhance/zod/enums/ProductStatus.schema';
+import { MediaTypeSchema } from '../prisma/enhance/zod/enums/MediaType.schema';
+import { ProductUpsertArgs, ProductVariantCreateWithoutProductInput, ProductVariantUpdateManyWithoutProductNestedInput } from '../prisma/enhance/models';
 
-const VariantsSchema = z.array(ProductVariantCreateSchema.extend({
-  id: z.string().optional(),
-  productId: z.string().optional()
-}))
-
-export const DraftCreate = ProductCreateSchema.extend({
-  id: z.string().optional(),
-  status: z.literal(ProductStatusSchema.enum.DRAFT),
-  productVariants: VariantsSchema
+const MediaLinkSchema = z.object({
+  id: z.string().uuid(),
+  mediaType: MediaTypeSchema,
 });
 
+const VariantsSchema = ProductVariantCreateSchema.extend({
+  id: z.string().uuid().optional(),
+  productId: z.string().optional(),
+});
+
+export const DraftCreate = ProductCreateSchema.extend({
+  id: z.string().uuid().optional(),
+  status: z.literal(ProductStatusSchema.enum.DRAFT),
+  productVariants: z.array(VariantsSchema.extend({
+    mediaItems: z.array(MediaLinkSchema).optional()
+  })).optional()
+});
+
+const requireImageOrVideo = (items: { mediaType: keyof typeof MediaTypeSchema.Enum }[], ctx: z.RefinementCtx) => {
+  if (!items.some(m => ['Image', 'Video'].includes(m.mediaType))) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Must include at least one image or video",
+      path: ["mediaItems"]
+    });
+  }
+};
+
 export const NonDraftCreate = ProductCreateSchema.extend({
-  id: z.string().optional(),
+  id: z.string().uuid().optional(),
   status: z.enum([ProductStatusSchema.enum.ACTIVE, ProductStatusSchema.enum.INACTIVE, ProductStatusSchema.enum.ARCHIVED]),
   name: z.string(),
   slug: z.string(),
   description: z.string().min(1, 'Description is required'),
-  productVariants: VariantsSchema.nonempty('At least one product variant is required')
+  productVariants: z.array(VariantsSchema.extend({
+    mediaItems: z.array(MediaLinkSchema).superRefine(requireImageOrVideo)
+  }))
 });
 
 const ProductDiscriminatedWithRulesSchema = z.discriminatedUnion('status', [
@@ -30,27 +51,69 @@ const ProductDiscriminatedWithRulesSchema = z.discriminatedUnion('status', [
 
 export const ProductWithRulesSchema = ProductDiscriminatedWithRulesSchema;
 
-export type ProductModel = z.infer<typeof ProductWithRulesSchema>;
+export type ProductViewModel = z.infer<typeof ProductWithRulesSchema>;
 
-export const ProductUpsertWithRulesSchema = ProductDiscriminatedWithRulesSchema
-  .transform((product) => ({
-    where: { id: product.id ?? '' },
-    update: {
-      ...product,
-      productVariants: product.productVariants
-        ? {
-          upsert: product.productVariants.map((variant) => ({
-            where: { id: variant.id ?? '' },
-            update: variant,
-            create: variant,
-          })),
+type VariantModel = NonNullable<ProductViewModel['productVariants']>[number];
+
+const withMediaConnect = (variant: VariantModel): ProductVariantCreateWithoutProductInput => ({
+  ...variant,
+  mediaItems: variant.mediaItems
+    ? {
+      create: variant.mediaItems.map(({ id }, index) => ({      
+        sortOrder: index,
+        isPrimary: index === 0,
+        media: {
+          connect: { id }          
         }
-        : undefined,
-    },
-    create: {
-      ...product,
-      productVariants: product.productVariants
-        ? { create: product.productVariants }
-        : undefined,
+      }))
     }
-  }));
+    : undefined,
+});
+
+function mapVariants(
+  variants: VariantModel[],
+  action: 'UPSERT'
+): ProductVariantUpdateManyWithoutProductNestedInput['upsert'];
+
+function mapVariants(
+  variants: VariantModel[],
+  action: 'CREATE'
+): ProductVariantUpdateManyWithoutProductNestedInput['create'];
+
+function mapVariants(
+  variants: VariantModel[],
+  action: 'UPSERT' | 'CREATE'
+): ProductVariantUpdateManyWithoutProductNestedInput['upsert']
+  | ProductVariantUpdateManyWithoutProductNestedInput['create'] {
+  if (action === 'UPSERT') {
+    return variants.map((variant) => ({
+      where: { id: variant.id ?? '' },
+      update: withMediaConnect(variant),
+      create: withMediaConnect(variant),
+    }));
+  }
+
+  if (action === 'CREATE') {
+    return variants.map((variant) => withMediaConnect(variant));
+  }
+
+  throw new Error('Unsupported action');
+}
+
+
+export const ProductUpsertWithRulesSchema =
+  ProductDiscriminatedWithRulesSchema.transform<ProductUpsertArgs>((product) => {
+    const variantsUpsert = product.productVariants
+      ? { upsert: mapVariants(product.productVariants, 'UPSERT') }
+      : undefined;
+
+    const variantsCreate = product.productVariants
+      ? { create: mapVariants(product.productVariants, 'CREATE') }
+      : undefined;
+
+    return {
+      where: { id: product.id ?? '' },
+      update: { ...product, productVariants: variantsUpsert },
+      create: { ...product, productVariants: variantsCreate },
+    };
+  }).pipe(z.custom<ProductUpsertArgs>());

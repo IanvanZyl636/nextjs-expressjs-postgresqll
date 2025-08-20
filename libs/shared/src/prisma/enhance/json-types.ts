@@ -5,6 +5,10 @@
 /* eslint-disable */
 // @ts-nocheck
 
+export type Weight = {
+    value: number;
+    unit: string;
+};
 export type Dimensions = {
     length: number;
     width: number;

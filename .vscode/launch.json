@@ -1,6 +1,6 @@
 {
   "version": "0.2.0",
-  "configurations": [
+  "configurations": [    
     {
       "name": "Debug Backend with Nodemon and ts-node",
       "type": "node",
@@ -14,7 +14,8 @@
       "skipFiles": ["<node_internals>/**"],
       "autoAttachChildProcesses": true,
       "sourceMaps": true,
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "preLaunchTask": "build"
     },
     
     {
@@ -31,7 +32,8 @@
       "internalConsoleOptions": "neverOpen",
       "cwd": "${workspaceFolder}/apps/backend",    
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "preLaunchTask": "build"
     }
   ]
 }

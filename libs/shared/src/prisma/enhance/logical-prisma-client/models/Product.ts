@@ -371,9 +371,6 @@ export type ProductListRelationFilter = {
 export type ProductOrderByRelationAggregateInput = {
       _count?: Prisma.SortOrder
     };
-export type NullableStringFieldUpdateOperationsInput = {
-      set?: string | null
-    };
 export type EnumProductStatusFieldUpdateOperationsInput = {
       set?: $Enums.ProductStatus
     };

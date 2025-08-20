@@ -26,14 +26,12 @@ export type AggregateProductVariant = {
 }
 
 export type ProductVariantAvgAggregateOutputType = {
-  weight: number | null
   price: number | null
   stock: number | null
   salePrice: number | null
 }
 
 export type ProductVariantSumAggregateOutputType = {
-  weight: number | null
   price: number | null
   stock: number | null
   salePrice: number | null
@@ -48,7 +46,6 @@ export type ProductVariantMinAggregateOutputType = {
   name: string | null
   description: string | null
   color: string | null
-  weight: number | null
   price: number | null
   stock: number | null
   salePrice: number | null
@@ -68,7 +65,6 @@ export type ProductVariantMaxAggregateOutputType = {
   name: string | null
   description: string | null
   color: string | null
-  weight: number | null
   price: number | null
   stock: number | null
   salePrice: number | null
@@ -103,14 +99,12 @@ export type ProductVariantCountAggregateOutputType = {
 
 
 export type ProductVariantAvgAggregateInputType = {
-  weight?: true
   price?: true
   stock?: true
   salePrice?: true
 }
 
 export type ProductVariantSumAggregateInputType = {
-  weight?: true
   price?: true
   stock?: true
   salePrice?: true
@@ -125,7 +119,6 @@ export type ProductVariantMinAggregateInputType = {
   name?: true
   description?: true
   color?: true
-  weight?: true
   price?: true
   stock?: true
   salePrice?: true
@@ -145,7 +138,6 @@ export type ProductVariantMaxAggregateInputType = {
   name?: true
   description?: true
   color?: true
-  weight?: true
   price?: true
   stock?: true
   salePrice?: true
@@ -273,7 +265,7 @@ export type ProductVariantGroupByOutputType = {
   name: string
   description: string | null
   color: string | null
-  weight: number | null
+  weight: runtime.JsonValue | null
   dimensions: runtime.JsonValue | null
   price: number
   stock: number
@@ -317,7 +309,7 @@ export type ProductVariantWhereInput = {
   name?: Prisma.StringFilter<"ProductVariant"> | string
   description?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   color?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
-  weight?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
+  weight?: Prisma.JsonNullableFilter<"ProductVariant">
   dimensions?: Prisma.JsonNullableFilter<"ProductVariant">
   price?: Prisma.FloatFilter<"ProductVariant"> | number
   stock?: Prisma.IntFilter<"ProductVariant"> | number
@@ -370,7 +362,7 @@ export type ProductVariantWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"ProductVariant"> | string
   description?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   color?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
-  weight?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
+  weight?: Prisma.JsonNullableFilter<"ProductVariant">
   dimensions?: Prisma.JsonNullableFilter<"ProductVariant">
   price?: Prisma.FloatFilter<"ProductVariant"> | number
   stock?: Prisma.IntFilter<"ProductVariant"> | number
@@ -424,7 +416,7 @@ export type ProductVariantScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"ProductVariant"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
   color?: Prisma.StringNullableWithAggregatesFilter<"ProductVariant"> | string | null
-  weight?: Prisma.FloatNullableWithAggregatesFilter<"ProductVariant"> | number | null
+  weight?: Prisma.JsonNullableWithAggregatesFilter<"ProductVariant">
   dimensions?: Prisma.JsonNullableWithAggregatesFilter<"ProductVariant">
   price?: Prisma.FloatWithAggregatesFilter<"ProductVariant"> | number
   stock?: Prisma.IntWithAggregatesFilter<"ProductVariant"> | number
@@ -444,7 +436,7 @@ export type ProductVariantCreateInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -469,7 +461,7 @@ export type ProductVariantUncheckedCreateInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -492,7 +484,7 @@ export type ProductVariantUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -517,7 +509,7 @@ export type ProductVariantUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -541,7 +533,7 @@ export type ProductVariantCreateManyInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -561,7 +553,7 @@ export type ProductVariantUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -582,7 +574,7 @@ export type ProductVariantUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -626,7 +618,6 @@ export type ProductVariantCountOrderByAggregateInput = {
 }
 
 export type ProductVariantAvgOrderByAggregateInput = {
-  weight?: Prisma.SortOrder
   price?: Prisma.SortOrder
   stock?: Prisma.SortOrder
   salePrice?: Prisma.SortOrder
@@ -641,7 +632,6 @@ export type ProductVariantMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   color?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   price?: Prisma.SortOrder
   stock?: Prisma.SortOrder
   salePrice?: Prisma.SortOrder
@@ -661,7 +651,6 @@ export type ProductVariantMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   color?: Prisma.SortOrder
-  weight?: Prisma.SortOrder
   price?: Prisma.SortOrder
   stock?: Prisma.SortOrder
   salePrice?: Prisma.SortOrder
@@ -673,7 +662,6 @@ export type ProductVariantMinOrderByAggregateInput = {
 }
 
 export type ProductVariantSumOrderByAggregateInput = {
-  weight?: Prisma.SortOrder
   price?: Prisma.SortOrder
   stock?: Prisma.SortOrder
   salePrice?: Prisma.SortOrder
@@ -726,16 +714,16 @@ export type ProductVariantUncheckedUpdateManyWithoutProductNestedInput = {
   deleteMany?: Prisma.ProductVariantScalarWhereInput | Prisma.ProductVariantScalarWhereInput[]
 }
 
-export type NullableFloatFieldUpdateOperationsInput = {
-  set?: number | null
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -792,7 +780,7 @@ export type ProductVariantCreateWithoutProductInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -815,7 +803,7 @@ export type ProductVariantUncheckedCreateWithoutProductInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -868,7 +856,7 @@ export type ProductVariantScalarWhereInput = {
   name?: Prisma.StringFilter<"ProductVariant"> | string
   description?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
   color?: Prisma.StringNullableFilter<"ProductVariant"> | string | null
-  weight?: Prisma.FloatNullableFilter<"ProductVariant"> | number | null
+  weight?: Prisma.JsonNullableFilter<"ProductVariant">
   dimensions?: Prisma.JsonNullableFilter<"ProductVariant">
   price?: Prisma.FloatFilter<"ProductVariant"> | number
   stock?: Prisma.IntFilter<"ProductVariant"> | number
@@ -888,7 +876,7 @@ export type ProductVariantCreateWithoutMediaItemsInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -912,7 +900,7 @@ export type ProductVariantUncheckedCreateWithoutMediaItemsInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -950,7 +938,7 @@ export type ProductVariantUpdateWithoutMediaItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -974,7 +962,7 @@ export type ProductVariantUncheckedUpdateWithoutMediaItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -996,7 +984,7 @@ export type ProductVariantCreateWithoutOrderItemsInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -1020,7 +1008,7 @@ export type ProductVariantUncheckedCreateWithoutOrderItemsInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -1058,7 +1046,7 @@ export type ProductVariantUpdateWithoutOrderItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1082,7 +1070,7 @@ export type ProductVariantUncheckedUpdateWithoutOrderItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1104,7 +1092,7 @@ export type ProductVariantCreateWithoutCartItemsInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -1128,7 +1116,7 @@ export type ProductVariantUncheckedCreateWithoutCartItemsInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -1166,7 +1154,7 @@ export type ProductVariantUpdateWithoutCartItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1190,7 +1178,7 @@ export type ProductVariantUncheckedUpdateWithoutCartItemsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1212,7 +1200,7 @@ export type ProductVariantCreateManyProductInput = {
   name: string
   description?: string | null
   color?: string | null
-  weight?: number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price: number
   stock: number
@@ -1232,7 +1220,7 @@ export type ProductVariantUpdateWithoutProductInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1255,7 +1243,7 @@ export type ProductVariantUncheckedUpdateWithoutProductInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1278,7 +1266,7 @@ export type ProductVariantUncheckedUpdateManyWithoutProductInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  weight?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  weight?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   dimensions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   stock?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1462,7 +1450,7 @@ export type $ProductVariantPayload<ExtArgs extends runtime.Types.Extensions.Inte
     name: string
     description: string | null
     color: string | null
-    weight: number | null
+    weight: runtime.JsonValue | null
     dimensions: runtime.JsonValue | null
     price: number
     stock: number
@@ -1907,7 +1895,7 @@ export interface ProductVariantFieldRefs {
   readonly name: Prisma.FieldRef<"ProductVariant", 'String'>
   readonly description: Prisma.FieldRef<"ProductVariant", 'String'>
   readonly color: Prisma.FieldRef<"ProductVariant", 'String'>
-  readonly weight: Prisma.FieldRef<"ProductVariant", 'Float'>
+  readonly weight: Prisma.FieldRef<"ProductVariant", 'Json'>
   readonly dimensions: Prisma.FieldRef<"ProductVariant", 'Json'>
   readonly price: Prisma.FieldRef<"ProductVariant", 'Float'>
   readonly stock: Prisma.FieldRef<"ProductVariant", 'Int'>

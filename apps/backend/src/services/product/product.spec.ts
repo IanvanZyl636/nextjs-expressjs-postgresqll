@@ -1,46 +1,32 @@
 import { prisma } from '../../integrations/prisma';
-import { ProductModel, ProductUpsertWithRulesSchema } from "@nextjs-expressjs-postgresql/shared";
+import { ProductUpsertWithRulesSchema, ProductViewModel } from "@nextjs-expressjs-postgresql/shared";
 import {upsertProduct} from './product.service'
 
-const sampleProduct:ProductModel = {
+const draftProduct:ProductViewModel = {
   slug: "rebel-shoe",
   name: "Rebel Shoe",
-  status: "DRAFT",
-  productVariants: [
+  status: "DRAFT" 
+};
+
+const activeProduct:ProductViewModel = {
+  slug: "rebel-boot",
+  name: "Rebel Boot",
+  description:'Boot',
+  status: "ACTIVE",
+  productVariants:[
     {
-      slug: "rebel-shoe-size-9",
-      name: "Rebel Shoe Size 9",
-      price: 1200,
-      stock: 50,     
-      featured: true,
-      sku: "RBL-SHOE-9",
-      description: "Comfortable running shoe, size 9",
-      color: "Black",
-      weight: 1.2,
-      dimensions: {
-        length: 30,
-        width: 12,
-        height: 10,
-        unit: "cm",
-      }          
-    },
-    {
-      slug: "rebel-shoe-size-10",
-      name: "Rebel Shoe Size 10",
-      price: 1200,
-      stock: 30,  
-      sku: "RBL-SHOE-10",
-      description: "Comfortable running shoe, size 10",
-      color: "Blue",
-      weight: 1.3,
-      dimensions: {
-        length: 31,
-        width: 13,
-        height: 11,
-        unit: "cm",
-      }
-    },
-  ],
+        slug:'asds',
+        name:'asd',
+        price:12,
+        stock:2,
+       mediaItems:[
+        {
+            id:'1d28975a-5e7e-46e1-87c6-ddaab4e0322a',
+            mediaType: 'Image'
+        }
+       ]
+    }
+  ]
 };
 
 
@@ -49,8 +35,18 @@ beforeAll(async () => {
 });
 
 describe('Upsert Product', () => {
-  test('upsert product', async () => {   
-    const product = ProductUpsertWithRulesSchema.parse(sampleProduct);
+  test('draft product', async () => {   
+    const product = ProductUpsertWithRulesSchema.parse(draftProduct);
+
+    await upsertProduct(product);
+  },50000); 
+
+  test.only('draft product', async () => {  
+    await prisma().productVariantMedia.deleteMany();
+    await prisma().productVariant.deleteMany();
+    await prisma().product.deleteMany();
+
+    const product = ProductUpsertWithRulesSchema.parse(activeProduct);
 
     await upsertProduct(product);
   },50000); 

@@ -119,6 +119,28 @@ const metadata = {
                 }, imageSize: {
                     name: "imageSize",
                     type: "ImageSize",
+                }, parentId: {
+                    name: "parentId",
+                    type: "String",
+                    isOptional: true,
+                    isForeignKey: true,
+                    relationField: 'parent',
+                }, parent: {
+                    name: "parent",
+                    type: "Image",
+                    isDataModel: true,
+                    isOptional: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ImageParent" }, { "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'children',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "parentId" },
+                }, children: {
+                    name: "children",
+                    type: "Image",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ImageParent" }] }],
+                    backLink: 'parent',
                 },
             }, uniqueConstraints: {
                 id: {
@@ -495,8 +517,10 @@ const metadata = {
                     isOptional: true,
                 }, weight: {
                     name: "weight",
-                    type: "Float",
+                    type: "Weight",
+                    isTypeDef: true,
                     isOptional: true,
+                    attributes: [{ "name": "@json", "args": [] }],
                 }, dimensions: {
                     name: "dimensions",
                     type: "Dimensions",
@@ -1306,6 +1330,18 @@ const metadata = {
 
     },
     typeDefs: {
+        weight: {
+            name: 'Weight', fields: {
+                value: {
+                    name: "value",
+                    type: "Float",
+                }, unit: {
+                    name: "unit",
+                    type: "String",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": "g" }] }],
+                },
+            },
+        },
         dimensions: {
             name: 'Dimensions', fields: {
                 length: {
