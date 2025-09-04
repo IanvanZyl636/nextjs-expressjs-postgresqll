@@ -5,9 +5,16 @@ import { ProductStatusSchema } from '../prisma/enhance/zod/enums/ProductStatus.s
 import { MediaTypeSchema } from '../prisma/enhance/zod/enums/MediaType.schema';
 import { ProductUpsertArgs, ProductVariantCreateWithoutProductInput, ProductVariantUpdateManyWithoutProductNestedInput } from '../prisma/enhance/models';
 
-const MediaLinkSchema = z.object({
+const mediaTypes = MediaTypeSchema.Values;
+
+const GalleryMediaSchema = z.object({
   id: z.string().uuid(),
-  mediaType: MediaTypeSchema,
+  mediaType: z.enum([mediaTypes.Image, mediaTypes.Video]),
+});
+
+const AttachmentSchema = z.object({
+  id: z.string().uuid(),
+  mediaType: z.enum([mediaTypes.Audio, mediaTypes.Document, mediaTypes.File]),
 });
 
 const VariantsSchema = ProductVariantCreateSchema.extend({
@@ -19,19 +26,10 @@ export const DraftCreate = ProductCreateSchema.extend({
   id: z.string().uuid().optional(),
   status: z.literal(ProductStatusSchema.enum.DRAFT),
   productVariants: z.array(VariantsSchema.extend({
-    mediaItems: z.array(MediaLinkSchema).optional()
+    galleryMedia: z.array(GalleryMediaSchema),
+    attachments: z.array(AttachmentSchema).optional()
   })).optional()
 });
-
-const requireImageOrVideo = (items: { mediaType: keyof typeof MediaTypeSchema.Enum }[], ctx: z.RefinementCtx) => {
-  if (!items.some(m => ['Image', 'Video'].includes(m.mediaType))) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      message: "Must include at least one image or video",
-      path: ["mediaItems"]
-    });
-  }
-};
 
 export const NonDraftCreate = ProductCreateSchema.extend({
   id: z.string().uuid().optional(),
@@ -40,7 +38,8 @@ export const NonDraftCreate = ProductCreateSchema.extend({
   slug: z.string(),
   description: z.string().min(1, 'Description is required'),
   productVariants: z.array(VariantsSchema.extend({
-    mediaItems: z.array(MediaLinkSchema).superRefine(requireImageOrVideo)
+    galleryMedia: z.array(GalleryMediaSchema).nonempty({ message: "Gallery must contain at least one image or video" }),
+    attachments: z.array(AttachmentSchema).optional()
   }))
 });
 
@@ -57,9 +56,20 @@ type VariantModel = NonNullable<ProductViewModel['productVariants']>[number];
 
 const withMediaConnect = (variant: VariantModel): ProductVariantCreateWithoutProductInput => ({
   ...variant,
-  mediaItems: variant.mediaItems
+  galleryMedia: variant.galleryMedia
     ? {
-      create: variant.mediaItems.map(({ id }, index) => ({      
+      create: variant.galleryMedia.map(({ id }, index) => ({      
+        sortOrder: index,
+        isPrimary: index === 0,
+        media: {
+          connect: { id }          
+        }
+      }))
+    }
+    : undefined,
+  attachments: variant.attachments
+    ? {
+      create: variant.attachments.map(({ id }, index) => ({      
         sortOrder: index,
         isPrimary: index === 0,
         media: {

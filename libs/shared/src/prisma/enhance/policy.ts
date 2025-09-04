@@ -179,13 +179,33 @@ const policy: PolicyDef = {
             },
 
         },
-        productVariantMedia: {
+        productVariantGalleryMedia: {
             modelLevel: {
-                read: { guard: ProductVariantMedia_read, },
-                create: { guard: ProductVariantMedia_create, inputChecker: ProductVariantMedia_create_input, },
-                update: { guard: ProductVariantMedia_update, },
-                postUpdate: { guard: ProductVariantMedia_postUpdate, },
-                delete: { guard: ProductVariantMedia_delete, }
+                read: { guard: ProductVariantGalleryMedia_read, },
+                create: { guard: ProductVariantGalleryMedia_create, inputChecker: ProductVariantGalleryMedia_create_input, },
+                update: { guard: ProductVariantGalleryMedia_update, },
+                postUpdate: { guard: ProductVariantGalleryMedia_postUpdate, },
+                delete: { guard: ProductVariantGalleryMedia_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        productVariantAttachment: {
+            modelLevel: {
+                read: { guard: ProductVariantAttachment_read, },
+                create: { guard: ProductVariantAttachment_create, inputChecker: ProductVariantAttachment_create_input, },
+                update: { guard: ProductVariantAttachment_update, },
+                postUpdate: { guard: ProductVariantAttachment_postUpdate, },
+                delete: { guard: ProductVariantAttachment_delete, }
             },
             fieldLevel: {
                 read:
@@ -469,7 +489,8 @@ const policy: PolicyDef = {
         file: { hasValidation: false },
         product: { hasValidation: false },
         productVariant: { hasValidation: true },
-        productVariantMedia: { hasValidation: false },
+        productVariantGalleryMedia: { hasValidation: false },
+        productVariantAttachment: { hasValidation: false },
         order: { hasValidation: false },
         orderItem: { hasValidation: false },
         customer: { hasValidation: false },
@@ -903,53 +924,105 @@ function $check_ProductVariant_delete(input: any, context: QueryContext): any {
     return false;
 }
 
-function ProductVariantMedia_read(context: QueryContext, db: CrudContract): any {
+function ProductVariantGalleryMedia_read(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_ProductVariantMedia_read(input: any, context: QueryContext): any {
+function $check_ProductVariantGalleryMedia_read(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function ProductVariantMedia_create(context: QueryContext, db: CrudContract): any {
+function ProductVariantGalleryMedia_create(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_ProductVariantMedia_create(input: any, context: QueryContext): any {
+function $check_ProductVariantGalleryMedia_create(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function ProductVariantMedia_create_input(input: any, context: QueryContext): boolean {
+function ProductVariantGalleryMedia_create_input(input: any, context: QueryContext): boolean {
     return true
 }
 
-function ProductVariantMedia_update(context: QueryContext, db: CrudContract): any {
+function ProductVariantGalleryMedia_update(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_ProductVariantMedia_update(input: any, context: QueryContext): any {
+function $check_ProductVariantGalleryMedia_update(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;
 }
 
-function ProductVariantMedia_postUpdate(context: QueryContext, db: CrudContract): any {
+function ProductVariantGalleryMedia_postUpdate(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_ProductVariantMedia_postUpdate(input: any, context: QueryContext): any {
+function $check_ProductVariantGalleryMedia_postUpdate(input: any, context: QueryContext): any {
     return true;
 }
 
-function ProductVariantMedia_delete(context: QueryContext, db: CrudContract): any {
+function ProductVariantGalleryMedia_delete(context: QueryContext, db: CrudContract): any {
     return { AND: [] };
 }
 
-function $check_ProductVariantMedia_delete(input: any, context: QueryContext): any {
+function $check_ProductVariantGalleryMedia_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ProductVariantAttachment_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ProductVariantAttachment_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ProductVariantAttachment_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ProductVariantAttachment_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ProductVariantAttachment_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function ProductVariantAttachment_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ProductVariantAttachment_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ProductVariantAttachment_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ProductVariantAttachment_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function ProductVariantAttachment_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ProductVariantAttachment_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
     return false;

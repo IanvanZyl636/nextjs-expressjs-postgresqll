@@ -42,12 +42,6 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, product: {
-                    name: "product",
-                    type: "ProductVariantMedia",
-                    isDataModel: true,
-                    isOptional: true,
-                    backLink: 'media',
                 }, image: {
                     name: "image",
                     type: "Image",
@@ -75,6 +69,18 @@ const metadata = {
                 }, file: {
                     name: "file",
                     type: "File",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                }, productVariantGalleryMedia: {
+                    name: "productVariantGalleryMedia",
+                    type: "ProductVariantGalleryMedia",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'media',
+                }, productVariantAttachment: {
+                    name: "productVariantAttachment",
+                    type: "ProductVariantAttachment",
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'media',
@@ -427,9 +433,15 @@ const metadata = {
                     isDataModel: true,
                     isArray: true,
                     backLink: 'productVariant',
-                }, mediaItems: {
-                    name: "mediaItems",
-                    type: "ProductVariantMedia",
+                }, galleryMedia: {
+                    name: "galleryMedia",
+                    type: "ProductVariantGalleryMedia",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'productVariant',
+                }, attachments: {
+                    name: "attachments",
+                    type: "ProductVariantAttachment",
                     isDataModel: true,
                     isArray: true,
                     backLink: 'productVariant',
@@ -448,8 +460,8 @@ const metadata = {
             },
             attributes: [{ "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
-        productVariantMedia: {
-            name: 'ProductVariantMedia', fields: {
+        productVariantGalleryMedia: {
+            name: 'ProductVariantGalleryMedia', fields: {
                 id: {
                     name: "id",
                     type: "String",
@@ -479,7 +491,7 @@ const metadata = {
                     type: "ProductVariant",
                     isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'mediaItems',
+                    backLink: 'galleryMedia',
                     isRelationOwner: true,
                     foreignKeyMapping: { "id": "productVariantId" },
                 }, media: {
@@ -487,7 +499,53 @@ const metadata = {
                     type: "Media",
                     isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'product',
+                    backLink: 'productVariantGalleryMedia',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "mediaId" },
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, mediaId: {
+                    name: "mediaId",
+                    fields: ["mediaId"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        productVariantAttachment: {
+            name: 'ProductVariantAttachment', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, productVariantId: {
+                    name: "productVariantId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'productVariant',
+                }, mediaId: {
+                    name: "mediaId",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'media',
+                }, productVariant: {
+                    name: "productVariant",
+                    type: "ProductVariant",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'attachments',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "productVariantId" },
+                }, media: {
+                    name: "media",
+                    type: "Media",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'productVariantAttachment',
                     isRelationOwner: true,
                     foreignKeyMapping: { "id": "mediaId" },
                 },

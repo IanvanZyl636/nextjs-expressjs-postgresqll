@@ -20,12 +20,13 @@ const baseSchema = z.object({
 }
 ).strict();
 const relationSchema = z.object({
-    product: z.record(z.unknown()).optional(),
     image: z.record(z.unknown()).optional(),
     video: z.record(z.unknown()).optional(),
     audio: z.record(z.unknown()).optional(),
     document: z.record(z.unknown()).optional(),
     file: z.record(z.unknown()).optional(),
+    productVariantGalleryMedia: z.record(z.unknown()).optional(),
+    productVariantAttachment: z.record(z.unknown()).optional(),
 }
 );
 

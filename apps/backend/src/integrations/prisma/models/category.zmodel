@@ -4,9 +4,12 @@ model Category {
   id        String    @id @default(uuid())
   name      String    @unique
   slug      String    @unique
-  parentId  String?   // optional hierarchical categories
+  parentId  String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
   products  Product[] @relation("ProductCategories")
+
+  parent    Category?    @relation("CategoryParent", fields: [parentId], references: [id])
+  children  Category[]   @relation("CategoryParent")
 }

@@ -77,10 +77,15 @@ export type Product = Prisma.ProductModel
  */
 export type ProductVariant = Prisma.ProductVariantModel
 /**
- * Model ProductVariantMedia
+ * Model ProductVariantGalleryMedia
  * @@allow('all', true)
  */
-export type ProductVariantMedia = Prisma.ProductVariantMediaModel
+export type ProductVariantGalleryMedia = Prisma.ProductVariantGalleryMediaModel
+/**
+ * Model ProductVariantAttachment
+ * @@allow('all', true)
+ */
+export type ProductVariantAttachment = Prisma.ProductVariantAttachmentModel
 /**
  * Model Order
  * @@allow('all', true)

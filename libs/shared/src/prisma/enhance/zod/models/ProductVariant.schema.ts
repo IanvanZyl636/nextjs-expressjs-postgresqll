@@ -32,7 +32,8 @@ const relationSchema = z.object({
     product: z.record(z.unknown()),
     orderItems: z.array(z.unknown()).optional(),
     cartItems: z.array(z.unknown()).optional(),
-    mediaItems: z.array(z.unknown()).optional(),
+    galleryMedia: z.array(z.unknown()).optional(),
+    attachments: z.array(z.unknown()).optional(),
 }
 );
 const fkSchema = z.object({

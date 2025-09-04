@@ -19,12 +19,12 @@ const activeProduct:ProductViewModel = {
         name:'asd',
         price:12,
         stock:2,
-       mediaItems:[
-        {
-            id:'1d28975a-5e7e-46e1-87c6-ddaab4e0322a',
+        galleryMedia:[
+          {
+            id:'b81e990d-c9f1-4ed5-9f05-94ef2984fda6',
             mediaType: 'Image'
-        }
-       ]
+          }
+        ]      
     }
   ]
 };
@@ -42,7 +42,8 @@ describe('Upsert Product', () => {
   },50000); 
 
   test.only('draft product', async () => {  
-    await prisma().productVariantMedia.deleteMany();
+    await prisma().productVariantGalleryMedia.deleteMany();
+    await prisma().productVariantAttachment.deleteMany();
     await prisma().productVariant.deleteMany();
     await prisma().product.deleteMany();
 

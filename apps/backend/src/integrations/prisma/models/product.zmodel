@@ -46,33 +46,38 @@ model Product {
 }
 
 model ProductVariant {
-  id          String                @id @default(uuid())
-  productId   String
-  featured    Boolean               @default(false)
-  sku         String?               @unique
-  slug        String                @unique
+  id           String                       @id @default(uuid())
+  productId    String
+  featured     Boolean                      @default(false)
+  sku          String?                      @unique
+  slug         String                       @unique
 
-  name        String
-  description String?
+  name         String
+  description  String?
 
-  color       String?
-  weight      Weight?               @json
-  dimensions  Dimensions?           @json
+  color        String?
+  weight       Weight?                      @json
+  dimensions   Dimensions?                  @json
 
-  price       Float
-  stock       Int
-  salePrice   Float?
-  saleStart   DateTime?
-  saleEnd     DateTime?
+  price        Float
+  stock        Int
+  salePrice    Float?
+  saleStart    DateTime?
+  saleEnd      DateTime?
 
-  createdAt   DateTime              @default(now())
-  updatedAt   DateTime              @updatedAt
-  deletedAt   DateTime?
+  createdAt    DateTime                     @default(now())
+  updatedAt    DateTime                     @updatedAt
+  deletedAt    DateTime?
 
-  product     Product               @relation(fields: [productId], references: [id])
-  orderItems  OrderItem[]
-  cartItems   CartItem[]
-  mediaItems  ProductVariantMedia[]
+  product      Product                      @relation(fields: [productId], references: [id])
+  orderItems   OrderItem[]
+  cartItems    CartItem[]
+
+  // Carousel (images & videos only)
+  galleryMedia ProductVariantGalleryMedia[]
+
+  // Attachments (pdf, docs, etc.)
+  attachments  ProductVariantAttachment[]
 
   @@index([slug])
   @@index([sku])
@@ -81,10 +86,21 @@ model ProductVariant {
   @@allow('all', true)
 }
 
-model ProductVariantMedia {
+model ProductVariantGalleryMedia {
   id               String         @id @default(uuid())
   isPrimary        Boolean        @default(false)
   sortOrder        Int            @default(0)
+  productVariantId String
+  mediaId          String         @unique
+
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  media            Media          @relation(fields: [mediaId], references: [id])
+
+  @@allow('all', true)
+}
+
+model ProductVariantAttachment {
+  id               String         @id @default(uuid())
   productVariantId String
   mediaId          String         @unique
 

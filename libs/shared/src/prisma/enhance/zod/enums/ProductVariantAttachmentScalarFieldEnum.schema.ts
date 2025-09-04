@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const ProductVariantMediaScalarFieldEnumSchema = z.enum(["id", "isPrimary", "sortOrder", "productVariantId", "mediaId"])
+export const ProductVariantAttachmentScalarFieldEnumSchema = z.enum(["id", "productVariantId", "mediaId"])

@@ -9,28 +9,41 @@ export async function upsertProduct(data: ProductUpsertArgs) {
       categories: true,
       productVariants: {
         include: {
-          mediaItems: {
+          galleryMedia: {
             include: {
-              media: true
-              },
+              media: {
+                include: {
+                  image: { include: { children: true } },
+                  video: true,
+
+                }
+              }
             },
           },
+          attachments: {
+            include: {
+              media: {
+                include: {
+                  audio: true,
+                  document: true,
+                  file: true,
+                }
+              }
+            }
+          }
         },
       },
-    });   
-  
+    },
+  });
+
   const mediaUpdates: string[] = [];
 
   for (const variant of product.productVariants) {
-    for (const mediaItem of variant.mediaItems) {
+    for (const mediaItem of variant.galleryMedia) {
       const ids = [mediaItem.mediaId];
 
-      if (mediaItem.media.mediaType === "Image") {
-        const children = await prisma().image.findMany({
-          where: { parentId: mediaItem.mediaId },
-          select: { id: true },
-        });
-        ids.push(...children.map(c => c.id));
+      if (mediaItem.media.mediaType === "Image" && mediaItem.media.image) {
+        ids.push(...mediaItem.media.image.children.map(c => c.id));
       }
 
       mediaUpdates.push(...ids);
@@ -80,9 +93,16 @@ export async function getProductById(id: string) {
       categories: true,
       productVariants: {
         include: {
-          mediaItems: {
-            include: { media: true },
+          galleryMedia: {
+            include: {
+              media: {
+                include: {
+                  image: { include: { children: true } }
+                }
+              }
+            },
           },
+          attachments: true
         },
       },
     },

@@ -96,10 +96,15 @@ export type Product = Prisma.ProductModel
  */
 export type ProductVariant = Prisma.ProductVariantModel
 /**
- * Model ProductVariantMedia
+ * Model ProductVariantGalleryMedia
  * 
  */
-export type ProductVariantMedia = Prisma.ProductVariantMediaModel
+export type ProductVariantGalleryMedia = Prisma.ProductVariantGalleryMediaModel
+/**
+ * Model ProductVariantAttachment
+ * 
+ */
+export type ProductVariantAttachment = Prisma.ProductVariantAttachmentModel
 /**
  * Model Order
  * 
