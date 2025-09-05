@@ -1,4 +1,4 @@
-import { ProductUpsertArgs } from "@nextjs-expressjs-postgresql/shared";
+import { ProductQueryParams, ProductUpsertArgs } from "@nextjs-expressjs-postgresql/shared";
 import { prisma } from "../../integrations/prisma";
 
 export async function upsertProduct(data: ProductUpsertArgs) {
@@ -60,21 +60,16 @@ export async function upsertProduct(data: ProductUpsertArgs) {
   return product;
 }
 
-export async function getProducts(options?: {
-  skip?: number;
-  take?: number;
-  search?: string;
-  status?: string;
-}) {
+export async function getProducts(params: ProductQueryParams = {}) {  
+  const { limit = 50, offset = 0, q } = params;
+
   return prisma().product.findMany({
-    skip: options?.skip,
-    take: options?.take,
+    skip: offset,
+    take: limit,
     where: {
       deletedAt: null,
-      ...(options?.search
-        ? { name: { contains: options.search, mode: 'insensitive' } }
-        : {}),
-      ...(options?.status ? { status: options.status as any } : {}),
+      ...(q ? { name: { contains: q, mode: 'insensitive' } } : {}),
+      ...(params?.status ? { status: params.status } : {}),
     },
     include: {
       tags: true,

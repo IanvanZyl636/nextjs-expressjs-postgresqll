@@ -1541,30 +1541,36 @@ function $check_Payment_delete(input: any, context: QueryContext): any {
 }
 
 function Category_read(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Category_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function Category_create(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Category_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function Category_create_input(input: any, context: QueryContext): boolean {
-    return false;
+    return true
 }
 
 function Category_update(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Category_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -1577,10 +1583,12 @@ function $check_Category_postUpdate(input: any, context: QueryContext): any {
 }
 
 function Category_delete(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Category_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 

@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import errorLoggerMiddleware from './middleware/error-logger.middleware';
 import { swaggerSpec } from '../swagger';
 import { authenticateTokenMiddleware } from './middleware/authenticate-token.middleware';
+import { protectedCategoryRouter } from './routers/protected/category.router';
 
 export const initializeExpress = async () => new Promise<void>(resolve => {
   const app = express();
@@ -23,7 +24,7 @@ export const initializeExpress = async () => new Promise<void>(resolve => {
   app.use('/api/protected', authenticateTokenMiddleware);
   app.use('/api/protected', protectedUserRouter);
   app.use('/api/protected', protectedMediaRouter);
-  
+  app.use('/api/protected', protectedCategoryRouter);
 
   app.use(errorLoggerMiddleware);
 

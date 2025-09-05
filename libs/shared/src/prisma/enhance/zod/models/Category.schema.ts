@@ -10,13 +10,18 @@ const baseSchema = z.object({
     id: z.string(),
     name: z.string(),
     slug: z.string(),
-    parentId: z.string().nullish(),
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),
 }
 ).strict();
 const relationSchema = z.object({
     products: z.array(z.unknown()).optional(),
+    parent: z.record(z.unknown()).optional(),
+    children: z.array(z.unknown()).optional(),
+}
+);
+const fkSchema = z.object({
+    parentId: z.string().nullish(),
 }
 );
 
@@ -29,7 +34,7 @@ export const CategoryScalarSchema = baseSchema;
 /**
  * `Category` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const CategorySchema = CategoryScalarSchema.merge(relationSchema.partial());
+export const CategorySchema = CategoryScalarSchema.merge(fkSchema).merge(relationSchema.partial());
 
 
 /**
@@ -47,7 +52,6 @@ export const CategoryPrismaUpdateSchema = z.object({
     id: z.string(),
     name: z.string(),
     slug: z.string(),
-    parentId: z.string().nullish(),
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date()
 }).partial().passthrough();
@@ -64,9 +68,7 @@ export const CategoryCreateScalarSchema = baseSchema.partial({
 /**
  * `Category` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const CategoryCreateSchema = baseSchema.partial({
-    id: true, createdAt: true, updatedAt: true
-});
+export const CategoryCreateSchema = CategoryCreateScalarSchema.merge(fkSchema);
 
 
 /**
@@ -78,5 +80,5 @@ export const CategoryUpdateScalarSchema = baseSchema.partial();
 /**
  * `Category` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const CategoryUpdateSchema = CategoryUpdateScalarSchema;
+export const CategoryUpdateSchema = CategoryUpdateScalarSchema.merge(fkSchema.partial());
 

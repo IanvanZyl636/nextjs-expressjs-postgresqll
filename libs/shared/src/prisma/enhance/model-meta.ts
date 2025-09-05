@@ -1138,6 +1138,8 @@ const metadata = {
                     name: "parentId",
                     type: "String",
                     isOptional: true,
+                    isForeignKey: true,
+                    relationField: 'parent',
                 }, createdAt: {
                     name: "createdAt",
                     type: "DateTime",
@@ -1153,6 +1155,22 @@ const metadata = {
                     isArray: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ProductCategories" }] }],
                     backLink: 'categories',
+                }, parent: {
+                    name: "parent",
+                    type: "Category",
+                    isDataModel: true,
+                    isOptional: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "CategoryParent" }, { "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'children',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "parentId" },
+                }, children: {
+                    name: "children",
+                    type: "Category",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "CategoryParent" }] }],
+                    backLink: 'parent',
                 },
             }, uniqueConstraints: {
                 id: {
@@ -1166,6 +1184,7 @@ const metadata = {
                     fields: ["slug"]
                 },
             },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         tag: {
             name: 'Tag', fields: {

@@ -12,6 +12,10 @@ const GalleryMediaSchema = z.object({
   mediaType: z.enum([mediaTypes.Image, mediaTypes.Video]),
 });
 
+const EntityLinkSchema = z.object({
+  id: z.string().uuid(),
+});
+
 const AttachmentSchema = z.object({
   id: z.string().uuid(),
   mediaType: z.enum([mediaTypes.Audio, mediaTypes.Document, mediaTypes.File]),
@@ -25,6 +29,8 @@ const VariantsSchema = ProductVariantCreateSchema.extend({
 export const DraftCreate = ProductCreateSchema.extend({
   id: z.string().uuid().optional(),
   status: z.literal(ProductStatusSchema.enum.DRAFT),
+  categories: z.array(EntityLinkSchema).optional(),
+  tags: z.array(EntityLinkSchema).optional(),
   productVariants: z.array(VariantsSchema.extend({
     galleryMedia: z.array(GalleryMediaSchema),
     attachments: z.array(AttachmentSchema).optional()
@@ -37,6 +43,8 @@ export const NonDraftCreate = ProductCreateSchema.extend({
   name: z.string(),
   slug: z.string(),
   description: z.string().min(1, 'Description is required'),
+  categories: z.array(EntityLinkSchema).nonempty('At least one category is required'),
+  tags: z.array(EntityLinkSchema).nonempty('At least one tag is required'),
   productVariants: z.array(VariantsSchema.extend({
     galleryMedia: z.array(GalleryMediaSchema).nonempty({ message: "Gallery must contain at least one image or video" }),
     attachments: z.array(AttachmentSchema).optional()
@@ -121,9 +129,15 @@ export const ProductUpsertWithRulesSchema =
       ? { create: mapVariants(product.productVariants, 'CREATE') }
       : undefined;
 
+    const productCreate = {
+      ...product,
+      categories: { connect: product.categories?.map((category) => ({ id: category.id })) },
+      tags: { connect: product.tags?.map((tag) => ({ id: tag.id })) }
+    };
+
     return {
       where: { id: product.id ?? '' },
-      update: { ...product, productVariants: variantsUpsert },
-      create: { ...product, productVariants: variantsCreate },
+      update: { ...productCreate, productVariants: variantsUpsert },
+      create: { ...productCreate, productVariants: variantsCreate },
     };
   }).pipe(z.custom<ProductUpsertArgs>());

@@ -12,4 +12,6 @@ model Category {
 
   parent    Category?    @relation("CategoryParent", fields: [parentId], references: [id])
   children  Category[]   @relation("CategoryParent")
+
+  @@allow('all', true)
 }

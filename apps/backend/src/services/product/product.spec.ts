@@ -13,6 +13,16 @@ const activeProduct:ProductViewModel = {
   name: "Rebel Boot",
   description:'Boot',
   status: "ACTIVE",
+  categories:[
+    {
+        id:'b81e990d-c9f1-4ed5-9f05-94ef2984fda6'
+    }
+  ],
+  tags:[
+    {
+        id:'b81e990d-c9f1-4ed5-9f05-94ef2984fda6'
+    }
+  ],
   productVariants:[
     {
         slug:'asds',

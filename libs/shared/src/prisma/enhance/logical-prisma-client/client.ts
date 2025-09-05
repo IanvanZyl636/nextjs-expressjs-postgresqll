@@ -138,7 +138,7 @@ export type Rating = Prisma.RatingModel
 export type Payment = Prisma.PaymentModel
 /**
  * Model Category
- * 
+ * @@allow('all', true)
  */
 export type Category = Prisma.CategoryModel
 /**
