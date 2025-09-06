@@ -1,9 +1,19 @@
+@config "../tailwind.config.js";
+@tailwind utilities;
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  :root {
+    --menu-height:75px;
+
+    --background: #f7f4f1;
+    --content: #ffffff;
+    --content-foreground: #000000;
+    --primary:#e10600;
+    --primary-foreground:#ffffff;
+    --secondary: #f3f3f3;
+    --secondary-foreground:#ffffff
+  }
 
 @theme inline {
   --color-background: var(--background);
