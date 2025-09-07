@@ -1,11 +1,11 @@
+@import "tailwindcss";
 @config "../tailwind.config.js";
 
 @plugin "tailwindcss-animate";
 @tailwind utilities;
 
-@import "tailwindcss";
-
 @import "tw-animate-css";
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -157,9 +157,3 @@
   .menu-height{
     height:var(--menu-height);
   }
-
-  @layer base {
-  * {
-    @apply border-border outline-ring/50;}
-  body {
-    @apply bg-background text-foreground;}}
