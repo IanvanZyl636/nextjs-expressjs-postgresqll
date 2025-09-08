@@ -1,6 +1,6 @@
 'use client'
 
-import { CredentialInputSchema  } from "@nextjs-expressjs-postgresql/shared/zod/Auth.schema";
+import { CredentialInputModel, CredentialInputSchema } from "@nextjs-expressjs-postgresql/shared/zod/Auth.schema";
 import ValidationForm, { ValidationFormControlProps } from "../validation-form/validation-form";
 import { LoginAction } from "@/app/actions/auth.action";
 import {useEffect, useState} from "react";
@@ -9,6 +9,7 @@ import { Input } from "../ui/input";
 import { siteConfig } from "@/global/siteConfig";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";  
+
 
 function LoginFormControls({
                                  values,
@@ -19,7 +20,7 @@ function LoginFormControls({
                                  handleChange,
                                  handleBlur,
                                  resetForm
-                             }: ValidationFormControlProps<any>) {    
+                             }: ValidationFormControlProps<CredentialInputModel>) {    
     const [loading, setLoading] = useState<boolean>(false);    
 
     useEffect(() => {
@@ -44,8 +45,7 @@ function LoginFormControls({
     }, [state, toast]);
 
     return (
-        <>
-        {testfunc()}
+        <>        
             <form action={handleAction} onReset={resetForm}>
                 <div className="flex flex-col gap-4">                    
                     <div>
@@ -87,7 +87,7 @@ function LoginFormControls({
                             <Loader2 className="animate-spin"/>
                             Please wait
                         </Button>
-                        <Button className={!loading?'visible':'hidden'} type={'submit'} onClick={() => setLoading(true)}>Call me back </Button>
+                        <Button className={!loading?'visible':'hidden'} type={'submit'} onClick={() => setLoading(true)}>Login</Button>
 
                 </div>
             </form>            
@@ -98,7 +98,8 @@ function LoginFormControls({
 export default function LoginComponent() {
 
   return (    
-    <div>        
+    <div className="flex flex-row justify-center">
+        <div className="w-lg">
       <ValidationForm
         initialValue={{
           email: "",
@@ -111,6 +112,7 @@ export default function LoginComponent() {
           return <LoginFormControls {...props} />;
         }}
       </ValidationForm>
+      </div>
     </div>
   );
 }
