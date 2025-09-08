@@ -1,7 +1,8 @@
-import { CategoryUpsertSchema, PaginationParams } from "@nextjs-expressjs-postgresql/shared";
 import { Response } from "express";
 import { upsertCategory, getCategoryById, listCategories, deleteCategory } from "../../../../services/category/category.service";
 import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
+import { CategoryUpsertSchema } from "@nextjs-expressjs-postgresql/shared/zod/Category.schema";
 
 export async function upsertCategoryController(req: AuthenticatedRequest, res: Response) {    
     const category = CategoryUpsertSchema.parse(req.body);

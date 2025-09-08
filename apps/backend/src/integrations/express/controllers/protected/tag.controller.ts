@@ -1,7 +1,9 @@
-import { TagUpsertSchema, PaginationParams } from "@nextjs-expressjs-postgresql/shared";
+
 import { Response } from "express";
 import { upsertTag, getTagById, listTags, deleteTag } from "../../../../services/tag/tag.service";
 import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
+import { TagUpsertSchema } from "@nextjs-expressjs-postgresql/shared/zod/Tag.schema";
 
 export async function upsertTagController(req: AuthenticatedRequest, res: Response) {
     const tag = TagUpsertSchema.parse(req.body);

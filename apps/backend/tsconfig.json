@@ -3,16 +3,10 @@
   "compilerOptions": {
     "outDir": "dist",
     "types": ["node", "express", "jest"],
-    "rootDir": "src",
-    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
-    "paths": {
-      "@nextjs-expressjs-postgresql/shared": ["../../libs/shared/src"]
-    }
+    "rootDir": "src",    
   },
   "references": [
-    {
-      "path": "../../libs/shared"
-    },
+    { "path": "../../libs/shared" }
   ],
   "include": ["src/**/*.ts"],
   "exclude": [

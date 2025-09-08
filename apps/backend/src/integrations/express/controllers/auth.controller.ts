@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { loginService, logoutService, refreshTokenService, registerService } from '../../../services/auth/auth.service';
-import { AuthProvider } from '@nextjs-expressjs-postgresql/shared';
 import { getRequestIpUserAgent } from '../util';
 import HttpError from '../../../utils/error/http-error';
+import { AuthProvider } from '@nextjs-expressjs-postgresql/shared/constants/auth-provider.constants';
 
 export const registerController = async (
   req: Request,

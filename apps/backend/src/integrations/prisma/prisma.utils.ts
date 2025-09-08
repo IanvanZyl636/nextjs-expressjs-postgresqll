@@ -1,4 +1,4 @@
-import { Prisma } from '@nextjs-expressjs-postgresql/shared';
+import { Prisma } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/client";
 
 export async function safeUpsertOrFindUnique<
   Delegate extends {

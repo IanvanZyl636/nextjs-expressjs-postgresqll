@@ -1,5 +1,4 @@
-
-import { ResponseModel } from "../models/response.model";
+import { ResponseModel } from "@nextjs-expressjs-postgresql/shared";
 import { formatZodIssues } from "./formet-zod-issues.helper";
 import { ZodError } from "zod";
 

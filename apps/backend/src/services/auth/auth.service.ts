@@ -1,5 +1,4 @@
 import HttpError from "../../utils/error/http-error";
-import {AuthProvider, AuthResult, CredentialInput, ProviderInput, RegisterResult, Role, TokenType} from '@nextjs-expressjs-postgresql/shared'
 import { loginWithCredentials, registerCredentials } from "./providers/credential-auth.service";
 import { verifyRefreshToken, generateAccessToken, generateRefreshToken } from './utils/jwt.util';
 import ms, { StringValue } from "ms";
@@ -8,6 +7,9 @@ import crypto from "crypto";
 import bcrypt from "bcrypt";
 import { sendEmail } from "../../integrations/nodemailer";
 import { MailTemplateType } from "../../integrations/nodemailer/constants/mail-template.constants";
+import { Role, TokenType } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/enums";
+import { AuthResult, CredentialInput, ProviderInput, RegisterResult } from "@nextjs-expressjs-postgresql/shared/types/auth-provider.types";
+import { AuthProvider } from "@nextjs-expressjs-postgresql/shared/constants/auth-provider.constants";
 
 export async function registerService(input: ProviderInput, role:Role = Role.CLIENT): Promise<RegisterResult> {
   switch (input.provider) {

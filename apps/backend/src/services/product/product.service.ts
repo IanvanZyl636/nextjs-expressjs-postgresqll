@@ -1,5 +1,8 @@
-import { ProductQueryParams, ProductUpsertArgs } from "@nextjs-expressjs-postgresql/shared";
+
+
+import { ProductUpsertArgs } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/models";
 import { prisma } from "../../integrations/prisma";
+import { ProductQueryParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
 
 export async function upsertProduct(data: ProductUpsertArgs) {
   const product = await prisma().product.upsert({

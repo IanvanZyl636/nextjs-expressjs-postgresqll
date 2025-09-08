@@ -1,4 +1,5 @@
-import { TagCreateSchema, TagUpsertArgs } from "../prisma";
+import { TagUpsertArgs } from '../prisma/enhance/logical-prisma-client/models/Tag';
+import { TagCreateSchema } from '../prisma/enhance/zod/models/Tag.schema';
 import { z } from 'zod';
 
 export const TagModelSchema = TagCreateSchema.extend({

@@ -1,4 +1,4 @@
-import { Role } from '@nextjs-expressjs-postgresql/shared';
+import { Role } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/enums';
 import jwt from 'jsonwebtoken';
 import { StringValue } from 'ms';
 

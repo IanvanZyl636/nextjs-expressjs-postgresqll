@@ -1,4 +1,6 @@
-import { GeneratedPrismaClient, PrismaClient, enhance } from '@nextjs-expressjs-postgresql/shared';
+import { enhance } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/enhance";
+import { PrismaClient } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/client";
+import { PrismaClient as GeneratedPrismaClient } from "@nextjs-expressjs-postgresql/shared/prisma/generated/client";
 
 const prismaClient = new GeneratedPrismaClient();
 

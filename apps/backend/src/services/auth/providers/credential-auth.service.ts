@@ -1,10 +1,12 @@
 
 import bcrypt from 'bcrypt';
 import { prisma } from '../../../integrations/prisma';
-import { AuthResult, CredentialInput, RegisterResult, Role, TokenType } from '@nextjs-expressjs-postgresql/shared';
+
 import HttpError from '../../../utils/error/http-error';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
 import ms, { StringValue } from 'ms';
+import { AuthResult, CredentialInput, RegisterResult } from '@nextjs-expressjs-postgresql/shared/types/auth-provider.types';
+import { Role, TokenType } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/enums';
 
 
 export async function loginWithCredentials(input: CredentialInput, role: Role): Promise<AuthResult> {

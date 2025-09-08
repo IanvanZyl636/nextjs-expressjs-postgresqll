@@ -1,4 +1,6 @@
-import { RatingCreateSchema, RatingUpsertArgs } from "../prisma";
+
+import { RatingCreateSchema } from '../prisma/enhance/zod/models/Rating.schema';
+import { RatingUpsertArgs } from '../prisma/enhance/logical-prisma-client/models/Rating';
 import { z } from 'zod';
 
 export const RatingModelSchema = RatingCreateSchema.extend({

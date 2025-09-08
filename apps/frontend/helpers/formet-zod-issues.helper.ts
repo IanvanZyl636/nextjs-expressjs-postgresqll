@@ -1,4 +1,4 @@
-import { ErrorsModel } from "../models/errors.model";
+import { ErrorsModel } from "@nextjs-expressjs-postgresql/shared";
 import { ZodIssue } from "zod";
 
 export function formatZodIssues<T>(issues: ZodIssue[]){

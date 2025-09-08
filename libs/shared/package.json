@@ -1,18 +1,19 @@
 {
   "name": "@nextjs-expressjs-postgresql/shared",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "commonjs",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
-      "development": "./src/index.ts",
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },    
+    "./*": {
+      "import": "./dist/*.js",
+      "require": "./dist/*.js",
+      "types": "./dist/*.d.ts"
     }
   },
   "dependencies": {

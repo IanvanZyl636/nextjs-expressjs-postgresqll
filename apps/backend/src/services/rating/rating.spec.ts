@@ -1,5 +1,5 @@
 import { prisma } from '../../integrations/prisma';
-import { RatingUpsertSchema, RatingViewModel } from "@nextjs-expressjs-postgresql/shared";
+import { RatingViewModel, RatingUpsertSchema } from "@nextjs-expressjs-postgresql/shared/zod/Rating.schema";
 import { upsertRating } from "./rating.service";
 
 const ratingData: RatingViewModel = {

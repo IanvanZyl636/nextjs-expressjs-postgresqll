@@ -1,11 +1,11 @@
 import sharp from 'sharp';
 import { downloadMediaFromMinio, uploadMediaToMinio } from '../../integrations/s3-client';
 import { randomUUID } from 'crypto';
-import { ImageSize, MediaType } from '@nextjs-expressjs-postgresql/shared';
 import { prisma } from '../../integrations/prisma';
 import sanitizeFilename from 'sanitize-filename';
 import HttpError from '../../utils/error/http-error';
 import { getImageExtension } from '../../helpers/sharp.helper';
+import { ImageSize, MediaType } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/client';
 
 type ProcessImage = {
   bucketKey: string;

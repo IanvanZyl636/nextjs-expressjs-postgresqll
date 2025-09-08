@@ -1,5 +1,7 @@
-import { CategoryUpsertArgs, CategoryWhereInput, PaginationParams } from "@nextjs-expressjs-postgresql/shared";
+
+import { CategoryUpsertArgs, CategoryWhereInput } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/models";
 import { prisma } from "../../integrations/prisma";
+import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
 
 
 export async function upsertCategory(data: CategoryUpsertArgs) {

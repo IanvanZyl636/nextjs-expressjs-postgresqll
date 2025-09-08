@@ -1,5 +1,8 @@
-import { PaginationParams, RatingUpsertArgs, RatingWhereInput } from "@nextjs-expressjs-postgresql/shared";
+
+
+import { RatingUpsertArgs, RatingWhereInput } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/models";
 import { prisma } from "../../integrations/prisma";
+import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
 
 
 export async function upsertRating(data: RatingUpsertArgs) {

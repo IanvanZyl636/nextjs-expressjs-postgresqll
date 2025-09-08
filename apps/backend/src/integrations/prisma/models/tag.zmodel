@@ -7,4 +7,6 @@ model Tag {
   updatedAt DateTime  @updatedAt
 
   products  Product[] @relation("ProductTags")
+
+  @@allow('all', true)
 }

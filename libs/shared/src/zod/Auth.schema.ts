@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { AuthProvider } from "../constants/auth-provider.constants";
+import { z } from "zod";
 
 // CredentialInput schema (only require email + password)
 export const CredentialInputSchema = z.object({

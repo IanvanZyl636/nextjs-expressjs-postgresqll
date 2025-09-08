@@ -1,7 +1,9 @@
-import { PaginationParams, RatingUpsertSchema } from "@nextjs-expressjs-postgresql/shared";
+
 import { Response } from "express";
 import { upsertRating, getRatingById, listRatings, deleteRating } from "../../../../services/rating/rating.service";
 import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import { RatingUpsertSchema } from "@nextjs-expressjs-postgresql/shared/zod/Rating.schema";
+import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
 
 export async function upsertRatingController(req: AuthenticatedRequest, res: Response) {
     const rating = RatingUpsertSchema.parse(req.body);

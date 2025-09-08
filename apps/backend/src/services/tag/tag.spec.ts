@@ -1,5 +1,5 @@
 import { prisma } from '../../integrations/prisma';
-import { TagUpsertSchema, TagViewModel } from "@nextjs-expressjs-postgresql/shared";
+import { TagUpsertSchema, TagViewModel } from "@nextjs-expressjs-postgresql/shared/zod/Tag.schema";
 import { upsertTag } from "./tag.service";
 
 const tagData: TagViewModel = {

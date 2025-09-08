@@ -1,4 +1,4 @@
-import { ProductUpsertWithRulesSchema } from "@nextjs-expressjs-postgresql/shared";
+import { ProductUpsertWithRulesSchema } from "@nextjs-expressjs-postgresql/shared/zod/Product.schema";
 import { upsertProduct } from "../../../../services/product/product.service"
 import { AuthenticatedRequest } from "../../models/authenticated-request.model"
 import { Response } from "express";

@@ -1,5 +1,5 @@
 import { prisma } from '../../integrations/prisma';
-import { ProductUpsertWithRulesSchema, ProductViewModel } from "@nextjs-expressjs-postgresql/shared";
+import { ProductViewModel, ProductUpsertWithRulesSchema } from "@nextjs-expressjs-postgresql/shared/zod/Product.schema";
 import {upsertProduct} from './product.service'
 
 const draftProduct:ProductViewModel = {
