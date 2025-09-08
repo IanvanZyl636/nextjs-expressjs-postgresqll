@@ -1,5 +1,5 @@
-import { errorHandler, ResponseModel } from "@nextjs-expressjs-postgresql/shared";
-
+import { errorHandler } from "@nextjs-expressjs-postgresql/shared/helpers/error-handler.helper";
+import { ResponseModel } from "@nextjs-expressjs-postgresql/shared/models/response.model";
 
 
 export default async function requestHandler(action:(()=>Promise<void>) | (()=> void)){

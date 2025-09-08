@@ -20,6 +20,7 @@ export const initializeExpress = async () => new Promise<void>(resolve => {
   });
   app.use('/api', authRouter);
   app.use('/api', mediaRouter);
+  app.get('/api/health', (_, res) => res.json({'OK': 'Working'}));
 
   app.use('/api/protected', authenticateTokenMiddleware);
   app.use('/api/protected', protectedUserRouter);
