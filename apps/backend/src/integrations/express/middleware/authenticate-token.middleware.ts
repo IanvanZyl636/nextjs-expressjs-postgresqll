@@ -12,9 +12,9 @@ export function authenticateTokenMiddleware(req: AuthenticatedRequest, res: Resp
   if (!token) throw new HttpError(401, 'No token provided');
 
   const user = verifyAccessToken(token);
-  const { ip, userAgent } = getRequestIpUserAgent(req);
+  const { userAgent } = getRequestIpUserAgent(req);
 
-  if (user.ip !== ip || user.userAgent !== userAgent) throw new HttpError(403, 'Token IP or User-Agent mismatch');
+  if (user.userAgent !== userAgent) throw new HttpError(403, 'User-Agent mismatch');
 
   req.userId = user.userId;
   next();

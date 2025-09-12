@@ -4,6 +4,7 @@
     "outDir": "dist",
     "types": ["node", "express", "jest"],
     "rootDir": "src",    
+    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
   },
   "references": [
     { "path": "../../libs/shared" }

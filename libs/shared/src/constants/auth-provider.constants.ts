@@ -1,7 +1,7 @@
-enum AuthProvider {
+enum AUTH_PROVIDER {
     CREDENTIALS = 'credentials',
     GOOGLE = 'google',
     MAGIC_LINK = 'magic_link',
 }
 
-export {AuthProvider};
+export {AUTH_PROVIDER};

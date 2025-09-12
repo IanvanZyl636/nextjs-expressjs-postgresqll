@@ -8,12 +8,12 @@ import ValidationForm, {
   ValidationFormControlProps,
 } from "../validation-form/validation-form";
 import { LoginAction } from "@/app/actions/auth.action";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import { Input } from "../ui/input";
 import { siteConfig } from "@/global/siteConfig";
-import { Button } from "../ui/button";
-import { Loader2 } from "lucide-react";
+import { SubmitButton } from "../ui/submit-button";
+import { useSession } from "@/providers/session-provider";
 
 function LoginFormControls({
   values,
@@ -25,10 +25,11 @@ function LoginFormControls({
   handleBlur,
   resetForm,
 }: ValidationFormControlProps<CredentialInputModel>) {
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
+   const {fetchSession: refreshSession} = useSession();
+  
+  useEffect(() => {    
     if (state.status === "success") {
+      refreshSession();
       toast.success("Successfully submitted!", {
         duration: 3000,
       });
@@ -48,9 +49,7 @@ function LoginFormControls({
         ),
         duration: 6000,
       });
-    }
-
-    setLoading(false);
+    } 
   }, [state, toast]);
 
   return (
@@ -94,17 +93,7 @@ function LoginFormControls({
             )}
           </div>
 
-          <Button className={loading ? "visible" : "hidden"} disabled>
-            <Loader2 className="animate-spin" />
-            Please wait
-          </Button>
-          <Button
-            className={!loading ? "visible" : "hidden"}
-            type={"submit"}
-            onClick={() => setLoading(true)}
-          >
-            Login
-          </Button>
+          <SubmitButton>Login</SubmitButton>
         </div>
       </form>
     </>

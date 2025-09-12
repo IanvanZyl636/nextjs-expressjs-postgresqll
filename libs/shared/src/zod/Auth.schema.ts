@@ -1,4 +1,4 @@
-import { AuthProvider } from "../constants/auth-provider.constants";
+import { AUTH_PROVIDER } from "../constants/auth-provider.constants";
 import { z } from "zod";
 
 // CredentialInput schema (only require email + password)
@@ -30,15 +30,15 @@ export const MagicLinkInputSchema = z.object({
 // ProviderInput schema (discriminated union)
 export const ProviderInputSchema = z.discriminatedUnion("provider", [
   z.object({
-    provider: z.literal(AuthProvider.CREDENTIALS),
+    provider: z.literal(AUTH_PROVIDER.CREDENTIALS),
     data: CredentialInputSchema,
   }),
   z.object({
-    provider: z.literal(AuthProvider.GOOGLE),
+    provider: z.literal(AUTH_PROVIDER.GOOGLE),
     data: GoogleInputSchema,
   }),
   z.object({
-    provider: z.literal(AuthProvider.MAGIC_LINK),
+    provider: z.literal(AUTH_PROVIDER.MAGIC_LINK),
     data: MagicLinkInputSchema,
   }),
 ]);

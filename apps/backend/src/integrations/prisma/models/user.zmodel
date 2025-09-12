@@ -36,9 +36,20 @@ model Token {
   userId     String
   createdAt  DateTime  @default(now())
   expiresAt  DateTime
-  revoked    Boolean   @default(false)
+  revokedAt  DateTime   @default(now())
   ip         String?
   userAgent  String?
+
+  sessionId String
+  session   Session @relation(fields: [sessionId], references: [id])
+
+  @@allow('all', true)
+}
+
+model Session {
+  id        String   @id @default(uuid())  
+
+  tokens    Token[]
 
   @@allow('all', true)
 }

@@ -9,15 +9,15 @@ import { sendEmail } from "../../integrations/nodemailer";
 import { MailTemplateType } from "../../integrations/nodemailer/constants/mail-template.constants";
 import { Role, TokenType } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/enums";
 import { AuthResult, CredentialInput, ProviderInput, RegisterResult } from "@nextjs-expressjs-postgresql/shared/types/auth-provider.types";
-import { AuthProvider } from "@nextjs-expressjs-postgresql/shared/constants/auth-provider.constants";
+import { AUTH_PROVIDER } from "@nextjs-expressjs-postgresql/shared/constants/auth-provider.constants";
 
 export async function registerService(input: ProviderInput, role:Role = Role.CLIENT): Promise<RegisterResult> {
   switch (input.provider) {
-    case AuthProvider.CREDENTIALS:
+    case AUTH_PROVIDER.CREDENTIALS:
       return registerCredentials(input.data as CredentialInput, role);
-    case AuthProvider.GOOGLE:
+    case AUTH_PROVIDER.GOOGLE:
       // return loginWithGoogle(input.data);
-    case AuthProvider.MAGIC_LINK:
+    case AUTH_PROVIDER.MAGIC_LINK:
       // return loginWithMagicLink(input.data);
     default:
       throw new HttpError(400, 'Unsupported register provider')      
@@ -26,11 +26,11 @@ export async function registerService(input: ProviderInput, role:Role = Role.CLI
 
 export async function loginService(input: ProviderInput, role:Role = Role.CLIENT): Promise<AuthResult> {
   switch (input.provider) {
-    case AuthProvider.CREDENTIALS:
+    case AUTH_PROVIDER.CREDENTIALS:
       return loginWithCredentials(input.data as CredentialInput, role);
-    case AuthProvider.GOOGLE:
+    case AUTH_PROVIDER.GOOGLE:
       // return loginWithGoogle(input.data);
-    case AuthProvider.MAGIC_LINK:
+    case AUTH_PROVIDER.MAGIC_LINK:
       // return loginWithMagicLink(input.data);
     default:
       throw new HttpError(400, 'Unsupported login provider')      
@@ -58,7 +58,7 @@ export async function refreshTokenService(refreshToken: string, ip: string, user
         ip,
         userAgent
     } 
-});
+  });
 
   if (!storedToken || storedToken.revoked || storedToken.expiresAt < new Date()) {
     throw new HttpError(400, 'Invalid or expired refresh token');

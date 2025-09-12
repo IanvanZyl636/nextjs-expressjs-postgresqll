@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [    
     {
-      "name": "Debug Backend with Nodemon and ts-node",
+      "name": "Backend: debug",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "nodemon",
@@ -19,7 +19,7 @@
     },
     
     {
-      "name": "Debug single Jest file in Backend",
+      "name": "Backend: debug single Jest file",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
@@ -75,5 +75,12 @@
         "webRoot": "${workspaceFolder}/apps/frontend"
       }
     }  
+  ],
+  "compounds": [
+    {
+      "name": "Run All",
+      "configurations": ["Backend: debug", "Next.js: debug server-side"],
+      "stopAll": true
+    }
   ]
 }
