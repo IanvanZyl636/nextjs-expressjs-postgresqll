@@ -117,14 +117,23 @@ CREATE TABLE "public"."ProductVariant" (
 );
 
 -- CreateTable
-CREATE TABLE "public"."ProductVariantMedia" (
+CREATE TABLE "public"."ProductVariantGalleryMedia" (
     "id" TEXT NOT NULL,
     "isPrimary" BOOLEAN NOT NULL DEFAULT false,
     "sortOrder" INTEGER NOT NULL DEFAULT 0,
     "productVariantId" TEXT NOT NULL,
     "mediaId" TEXT NOT NULL,
 
-    CONSTRAINT "ProductVariantMedia_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "ProductVariantGalleryMedia_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."ProductVariantAttachment" (
+    "id" TEXT NOT NULL,
+    "productVariantId" TEXT NOT NULL,
+    "mediaId" TEXT NOT NULL,
+
+    CONSTRAINT "ProductVariantAttachment_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -218,11 +227,19 @@ CREATE TABLE "public"."Token" (
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "expiresAt" TIMESTAMP(3) NOT NULL,
-    "revoked" BOOLEAN NOT NULL DEFAULT false,
+    "revokedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "ip" TEXT,
     "userAgent" TEXT,
+    "sessionId" TEXT NOT NULL,
 
     CONSTRAINT "Token_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."Session" (
+    "id" TEXT NOT NULL,
+
+    CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -322,7 +339,10 @@ CREATE INDEX "ProductVariant_sku_idx" ON "public"."ProductVariant"("sku");
 CREATE INDEX "ProductVariant_productId_idx" ON "public"."ProductVariant"("productId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "ProductVariantMedia_mediaId_key" ON "public"."ProductVariantMedia"("mediaId");
+CREATE UNIQUE INDEX "ProductVariantGalleryMedia_mediaId_key" ON "public"."ProductVariantGalleryMedia"("mediaId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ProductVariantAttachment_mediaId_key" ON "public"."ProductVariantAttachment"("mediaId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Customer_userId_key" ON "public"."Customer"("userId");
@@ -385,10 +405,16 @@ ALTER TABLE "public"."File" ADD CONSTRAINT "File_id_fkey" FOREIGN KEY ("id") REF
 ALTER TABLE "public"."ProductVariant" ADD CONSTRAINT "ProductVariant_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."ProductVariantMedia" ADD CONSTRAINT "ProductVariantMedia_productVariantId_fkey" FOREIGN KEY ("productVariantId") REFERENCES "public"."ProductVariant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."ProductVariantGalleryMedia" ADD CONSTRAINT "ProductVariantGalleryMedia_productVariantId_fkey" FOREIGN KEY ("productVariantId") REFERENCES "public"."ProductVariant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."ProductVariantMedia" ADD CONSTRAINT "ProductVariantMedia_mediaId_fkey" FOREIGN KEY ("mediaId") REFERENCES "public"."Media"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."ProductVariantGalleryMedia" ADD CONSTRAINT "ProductVariantGalleryMedia_mediaId_fkey" FOREIGN KEY ("mediaId") REFERENCES "public"."Media"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."ProductVariantAttachment" ADD CONSTRAINT "ProductVariantAttachment_productVariantId_fkey" FOREIGN KEY ("productVariantId") REFERENCES "public"."ProductVariant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."ProductVariantAttachment" ADD CONSTRAINT "ProductVariantAttachment_mediaId_fkey" FOREIGN KEY ("mediaId") REFERENCES "public"."Media"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."Order" ADD CONSTRAINT "Order_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "public"."Customer"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -421,6 +447,9 @@ ALTER TABLE "public"."CartItem" ADD CONSTRAINT "CartItem_productId_fkey" FOREIGN
 ALTER TABLE "public"."Token" ADD CONSTRAINT "Token_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "public"."Token" ADD CONSTRAINT "Token_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "public"."Session"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "public"."Rating" ADD CONSTRAINT "Rating_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -428,6 +457,9 @@ ALTER TABLE "public"."Rating" ADD CONSTRAINT "Rating_userId_fkey" FOREIGN KEY ("
 
 -- AddForeignKey
 ALTER TABLE "public"."Payment" ADD CONSTRAINT "Payment_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "public"."Order"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."Category" ADD CONSTRAINT "Category_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "public"."Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."_ProductTags" ADD CONSTRAINT "_ProductTags_A_fkey" FOREIGN KEY ("A") REFERENCES "public"."Product"("id") ON DELETE CASCADE ON UPDATE CASCADE;

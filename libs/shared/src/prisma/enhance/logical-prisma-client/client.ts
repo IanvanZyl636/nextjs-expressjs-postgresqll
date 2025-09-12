@@ -127,6 +127,11 @@ export type User = Prisma.UserModel
  */
 export type Token = Prisma.TokenModel
 /**
+ * Model Session
+ * @@allow('all', true)
+ */
+export type Session = Prisma.SessionModel
+/**
  * Model Rating
  * 
  */
@@ -143,7 +148,7 @@ export type Payment = Prisma.PaymentModel
 export type Category = Prisma.CategoryModel
 /**
  * Model Tag
- * 
+ * @@allow('all', true)
  */
 export type Tag = Prisma.TagModel
 /**

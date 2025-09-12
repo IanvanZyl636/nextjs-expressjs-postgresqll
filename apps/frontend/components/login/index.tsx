@@ -27,16 +27,22 @@ function LoginFormControls({
 }: ValidationFormControlProps<CredentialInputModel>) {
    const {fetchSession: refreshSession} = useSession();
   
-  useEffect(() => {    
-    if (state.status === "success") {
-      refreshSession();
-      toast.success("Successfully submitted!", {
+  useEffect(() => { 
+    switch (state.status) {
+      case 'success':
+        refreshSession();
+        toast.success("Successfully logged in!", {
+          duration: 3000,
+        });
+        break;
+    
+      case 'error':
+        toast.error(state.message,{       
         duration: 3000,
       });
-    }
-
-    if (state.status === "server-error") {
-      toast.error('Uh oh! Something went wrong.',{                
+      break;
+      case 'server-error':
+        toast.error('Uh oh! Something went wrong.',{                
         description: (
           <div>        
             There was a problem with your request.
@@ -47,9 +53,10 @@ function LoginFormControls({
             </a>
           </div>
         ),
-        duration: 6000,
+        duration: 3000,
       });
-    } 
+      break;
+    }       
   }, [state, toast]);
 
   return (

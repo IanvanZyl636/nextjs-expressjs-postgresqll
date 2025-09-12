@@ -4,7 +4,7 @@ import { serverApiFetch } from "@/lib/api/server-api-client";
 import { TestButton } from "./test";
 
 export default async function Home() {   
-  const user = await (await serverApiFetch("/api/protected/user")).json();  
+  const user = await (await serverApiFetch("/api/protected/user", {forwardClientHeaders:true})).json();  
 
   return (
     <div>   

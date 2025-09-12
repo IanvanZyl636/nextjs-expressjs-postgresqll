@@ -279,9 +279,16 @@ model Token {
   userId    String
   createdAt DateTime  @default(now())
   expiresAt DateTime
-  revoked   Boolean   @default(false)
+  revokedAt DateTime?
   ip        String?
   userAgent String?
+  sessionId String?
+  session   Session?  @relation(fields: [sessionId], references: [id])
+}
+
+model Session {
+  id     String  @id() @default(uuid())
+  tokens Token[]
 }
 
 model Rating {

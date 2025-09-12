@@ -146,6 +146,11 @@ export type User = Prisma.UserModel
  */
 export type Token = Prisma.TokenModel
 /**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
  * Model Rating
  * 
  */

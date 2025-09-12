@@ -1,5 +1,6 @@
 "use client";
 import { ClientSession } from "@/models/client-session.model";
+import { useRouter } from "next/navigation";
 import {
   createContext,
   Dispatch,
@@ -21,38 +22,40 @@ const SessionContext = createContext<{
   fetchSession: async () => {},
 });
 
-export function SessionProvider({
-  session: initialSession,
-  children,
-}: {
-  session: ClientSession | undefined;
-  children: React.ReactNode;
-}) {
-  const [session, setSession] = useState<ClientSession | undefined>(
-    initialSession
-  );
+export function SessionProvider({ children }: { children: React.ReactNode }) {
+  const [session, setSession] = useState<ClientSession | undefined>(undefined);
+  const router = useRouter();
 
   async function fetchSession() {
     const res = await fetch("/api/auth/session");
 
-    if (!res.ok) return;
+    if (!res.ok) {
+      router.refresh();
+      setSession(undefined);
+
+      return;
+    }
 
     const data = await res.json();
 
     setSession(data);
   }
 
-  useEffect(() => {    
-    const onFocus = () => fetchSession();
+  useEffect(() => {
+    fetchSession();
+  }, []);
+
+  useEffect(() => {
+    const onFocus = () => {
+      if (!!session) fetchSession();
+    };
     window.addEventListener("focus", onFocus);
 
     return () => window.removeEventListener("focus", onFocus);
-  }, []);
+  }, [session]);
 
   return (
-    <SessionContext.Provider
-      value={{ session, setSession, fetchSession }}
-    >
+    <SessionContext.Provider value={{ session, setSession, fetchSession }}>
       {children}
     </SessionContext.Provider>
   );

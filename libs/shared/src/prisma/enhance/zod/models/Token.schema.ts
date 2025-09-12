@@ -13,17 +13,19 @@ const baseSchema = z.object({
     type: TokenTypeSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     expiresAt: z.coerce.date(),
-    revoked: z.boolean().default(false),
+    revokedAt: z.coerce.date().nullish(),
     ip: z.string().nullish(),
     userAgent: z.string().nullish(),
 }
 ).strict();
 const relationSchema = z.object({
     user: z.record(z.unknown()),
+    session: z.record(z.unknown()).optional(),
 }
 );
 const fkSchema = z.object({
     userId: z.string(),
+    sessionId: z.string().nullish(),
 }
 );
 
@@ -56,7 +58,7 @@ export const TokenPrismaUpdateSchema = z.object({
     type: TokenTypeSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     expiresAt: z.coerce.date(),
-    revoked: z.boolean().default(false),
+    revokedAt: z.coerce.date().nullish(),
     ip: z.string().nullish(),
     userAgent: z.string().nullish()
 }).partial().passthrough();
@@ -66,7 +68,7 @@ export const TokenPrismaUpdateSchema = z.object({
  * `Token` schema for create operations excluding foreign keys and relations.
  */
 export const TokenCreateScalarSchema = baseSchema.partial({
-    id: true, createdAt: true, revoked: true
+    id: true, createdAt: true
 });
 
 

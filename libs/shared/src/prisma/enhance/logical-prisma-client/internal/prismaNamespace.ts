@@ -277,6 +277,7 @@ export const ModelName = {
       CartItem: 'CartItem',
       User: 'User',
       Token: 'Token',
+      Session: 'Session',
       Rating: 'Rating',
       Payment: 'Payment',
       Category: 'Category',
@@ -293,7 +294,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "media" | "image" | "video" | "audio" | "document" | "file" | "product" | "productVariant" | "productVariantGalleryMedia" | "productVariantAttachment" | "order" | "orderItem" | "customer" | "address" | "cart" | "cartItem" | "user" | "token" | "rating" | "payment" | "category" | "tag" | "log"
+    modelProps: "media" | "image" | "video" | "audio" | "document" | "file" | "product" | "productVariant" | "productVariantGalleryMedia" | "productVariantAttachment" | "order" | "orderItem" | "customer" | "address" | "cart" | "cartItem" | "user" | "token" | "session" | "rating" | "payment" | "category" | "tag" | "log"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1629,6 +1630,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Session: {
+      payload: Prisma.$SessionPayload<ExtArgs>
+      fields: Prisma.SessionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SessionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SessionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        findFirst: {
+          args: Prisma.SessionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SessionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        findMany: {
+          args: Prisma.SessionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        create: {
+          args: Prisma.SessionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        createMany: {
+          args: Prisma.SessionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        delete: {
+          args: Prisma.SessionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        update: {
+          args: Prisma.SessionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        deleteMany: {
+          args: Prisma.SessionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SessionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SessionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>[]
+        }
+        upsert: {
+          args: Prisma.SessionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SessionPayload>
+        }
+        aggregate: {
+          args: Prisma.SessionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSession>
+        }
+        groupBy: {
+          args: Prisma.SessionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SessionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SessionCountAggregateOutputType> | number
+        }
+      }
+    }
     Rating: {
       payload: Prisma.$RatingPayload<ExtArgs>
       fields: Prisma.RatingFieldRefs
@@ -2187,11 +2262,16 @@ export const TokenScalarFieldEnum = {
       userId: 'userId',
       createdAt: 'createdAt',
       expiresAt: 'expiresAt',
-      revoked: 'revoked',
+      revokedAt: 'revokedAt',
       ip: 'ip',
-      userAgent: 'userAgent'
+      userAgent: 'userAgent',
+      sessionId: 'sessionId'
     } as const;
 export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
+export const SessionScalarFieldEnum = {
+      id: 'id'
+    } as const;
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 export const RatingScalarFieldEnum = {
       id: 'id',
       productId: 'productId',
@@ -2388,6 +2468,7 @@ export type GlobalOmitConfig = {
   cartItem?: Prisma.CartItemOmit
   user?: Prisma.UserOmit
   token?: Prisma.TokenOmit
+  session?: Prisma.SessionOmit
   rating?: Prisma.RatingOmit
   payment?: Prisma.PaymentOmit
   category?: Prisma.CategoryOmit

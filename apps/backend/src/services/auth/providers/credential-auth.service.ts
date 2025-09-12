@@ -1,7 +1,6 @@
 
 import bcrypt from 'bcrypt';
 import { prisma } from '../../../integrations/prisma';
-
 import HttpError from '../../../utils/error/http-error';
 import { generateAccessToken, generateRefreshToken } from '../utils/jwt.util';
 import ms, { StringValue } from 'ms';
@@ -19,6 +18,8 @@ export async function loginWithCredentials(input: CredentialInput, role: Role): 
   const accessToken = generateAccessToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
   const refreshToken = generateRefreshToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
 
+  const session = await prisma().session.create({data:{}});
+
   await prisma().token.create({
     data: {
       type: TokenType.REFRESH,
@@ -27,8 +28,9 @@ export async function loginWithCredentials(input: CredentialInput, role: Role): 
       ip: input.ip,
       userAgent: input.userAgent,
       expiresAt: new Date(Date.now() + ms(process.env.BACKEND_JWT_REFRESH_EXPIRATION as StringValue)),
+      sessionId: session.id,      
     }
-  });
+  });   
 
   return { accessToken, refreshToken, user: { email: user.email } };
 };

@@ -12,6 +12,7 @@ export async function LoginAction(prevState: ResponseModel, formData: FormData) 
     const loginModel = CredentialInputSchema.parse(loginFormData);    
 
     const res = await serverApiFetch("/api/auth/login", {
+      forwardClientHeaders:true,
       method: "POST",
       headers: {        
         "Content-Type": "application/json",

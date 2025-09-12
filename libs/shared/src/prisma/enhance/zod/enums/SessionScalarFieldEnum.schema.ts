@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const TokenScalarFieldEnumSchema = z.enum(["id", "token", "type", "userId", "createdAt", "expiresAt", "revokedAt", "ip", "userAgent", "sessionId"])
+export const SessionScalarFieldEnumSchema = z.enum(["id"])

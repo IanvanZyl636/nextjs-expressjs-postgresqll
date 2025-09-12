@@ -20,6 +20,7 @@ function isJwtExpired(token: string | undefined): boolean {
 
 async function refreshJwt(refreshToken: string){
     const res = await serverApiFetch("/api/auth/refresh", {
+      forwardClientHeaders:true,
       method: "POST",
       headers: {
         "Content-Type": "application/json",

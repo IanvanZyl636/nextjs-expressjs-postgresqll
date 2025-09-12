@@ -23,6 +23,7 @@ export * from './Cart.schema';
 export * from './CartItem.schema';
 export * from './User.schema';
 export * from './Token.schema';
+export * from './Session.schema';
 export * from './Rating.schema';
 export * from './Payment.schema';
 export * from './Category.schema';

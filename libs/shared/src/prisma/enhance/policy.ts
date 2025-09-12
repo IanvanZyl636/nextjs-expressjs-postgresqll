@@ -379,6 +379,26 @@ const policy: PolicyDef = {
             },
 
         },
+        session: {
+            modelLevel: {
+                read: { guard: Session_read, },
+                create: { guard: Session_create, inputChecker: Session_create_input, },
+                update: { guard: Session_update, },
+                postUpdate: { guard: Session_postUpdate, },
+                delete: { guard: Session_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
         rating: {
             modelLevel: {
                 read: { guard: Rating_read, },
@@ -499,6 +519,7 @@ const policy: PolicyDef = {
         cartItem: { hasValidation: false },
         user: { hasValidation: false },
         token: { hasValidation: false },
+        session: { hasValidation: false },
         rating: { hasValidation: false },
         payment: { hasValidation: false },
         category: { hasValidation: false },
@@ -1444,6 +1465,58 @@ function $check_Token_delete(input: any, context: QueryContext): any {
     return false;
 }
 
+function Session_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Session_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Session_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Session_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Session_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function Session_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Session_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Session_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Session_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Session_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Session_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
 function Rating_read(context: QueryContext, db: CrudContract): any {
     return { OR: [] };
 }
@@ -1593,30 +1666,36 @@ function $check_Category_delete(input: any, context: QueryContext): any {
 }
 
 function Tag_read(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Tag_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function Tag_create(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Tag_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function Tag_create_input(input: any, context: QueryContext): boolean {
-    return false;
+    return true
 }
 
 function Tag_update(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Tag_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -1629,10 +1708,12 @@ function $check_Tag_postUpdate(input: any, context: QueryContext): any {
 }
 
 function Tag_delete(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Tag_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 

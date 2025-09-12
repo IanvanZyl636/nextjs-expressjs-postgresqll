@@ -24,6 +24,7 @@ export * from './CartScalarFieldEnum.schema';
 export * from './CartItemScalarFieldEnum.schema';
 export * from './UserScalarFieldEnum.schema';
 export * from './TokenScalarFieldEnum.schema';
+export * from './SessionScalarFieldEnum.schema';
 export * from './RatingScalarFieldEnum.schema';
 export * from './PaymentScalarFieldEnum.schema';
 export * from './CategoryScalarFieldEnum.schema';

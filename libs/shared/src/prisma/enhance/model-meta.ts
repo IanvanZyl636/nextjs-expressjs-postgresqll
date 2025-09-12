@@ -985,10 +985,10 @@ const metadata = {
                 }, expiresAt: {
                     name: "expiresAt",
                     type: "DateTime",
-                }, revoked: {
-                    name: "revoked",
-                    type: "Boolean",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": false }] }],
+                }, revokedAt: {
+                    name: "revokedAt",
+                    type: "DateTime",
+                    isOptional: true,
                 }, ip: {
                     name: "ip",
                     type: "String",
@@ -997,6 +997,21 @@ const metadata = {
                     name: "userAgent",
                     type: "String",
                     isOptional: true,
+                }, sessionId: {
+                    name: "sessionId",
+                    type: "String",
+                    isOptional: true,
+                    isForeignKey: true,
+                    relationField: 'session',
+                }, session: {
+                    name: "session",
+                    type: "Session",
+                    isDataModel: true,
+                    isOptional: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'tokens',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "sessionId" },
                 },
             }, uniqueConstraints: {
                 id: {
@@ -1005,6 +1020,28 @@ const metadata = {
                 }, token: {
                     name: "token",
                     fields: ["token"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        session: {
+            name: 'Session', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, tokens: {
+                    name: "tokens",
+                    type: "Token",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'session',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
@@ -1222,6 +1259,7 @@ const metadata = {
                     fields: ["name"]
                 },
             },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         log: {
             name: 'Log', fields: {

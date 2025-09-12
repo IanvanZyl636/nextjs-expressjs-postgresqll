@@ -5,7 +5,6 @@ import HttpError from '../../../utils/error/http-error';
 import { AUTH_PROVIDER } from '@nextjs-expressjs-postgresql/shared/constants/auth-provider.constants';
 import ms, { StringValue } from 'ms';
 import { COOKIES } from '@nextjs-expressjs-postgresql/shared/constants/cookies.constants';
-import { ResponseModel } from '@nextjs-expressjs-postgresql/shared/models/response.model';
 import { createResponse } from '../helpers/create-reponse';
 
 export const registerController = async (
@@ -30,7 +29,7 @@ export const registerController = async (
 export const loginController = async (
   req: Request,
   res: Response
-):Promise<Response<ResponseModel<{ test: string }>>> => {
+ ) => {
   const { ip, userAgent } = getRequestIpUserAgent(req);
 
   const loginResult = await loginService({ 

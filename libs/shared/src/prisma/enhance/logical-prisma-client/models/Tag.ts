@@ -7,7 +7,8 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 /**
  * Model Tag
- *
+ * @
+ * @allow ('all', true)
  */
 export type TagModel = runtime.Types.Result.DefaultSelection<Prisma.$TagPayload>;
 export type AggregateTag = {
