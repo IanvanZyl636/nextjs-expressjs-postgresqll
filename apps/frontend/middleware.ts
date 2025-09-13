@@ -12,11 +12,11 @@ export default async function middleware(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
 
-  if ((path === "/admin" || path.startsWith("/admin/")) && (!session?.userId || session?.role !== Role.ADMIN)) {
+  if (path.startsWith("/admin") && (!session?.userId || session?.role !== Role.ADMIN)) {
     return NextResponse.redirect(new URL('/auth/unauthorized', request.nextUrl));
   }
 
-  if ((path === "/client" || path.startsWith("/client/")) && (!session?.userId || (session?.role !== Role.CLIENT && session?.role !== Role.ADMIN))) {
+  if (path.startsWith("/client") && (!session?.userId || (session?.role !== Role.CLIENT && session?.role !== Role.ADMIN))) {
     return NextResponse.redirect(new URL('/auth/unauthorized', request.nextUrl));
   }
 
