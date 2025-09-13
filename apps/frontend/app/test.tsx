@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export function TestButton(){
     const [test, setTest] = useState<string>('');
-    const {session, setSession} = useSession();    
+    const {session} = useSession();    
 
     const clickfunc = async () => {
         const resp = await fetch('/api/protected/user');
@@ -14,6 +14,7 @@ export function TestButton(){
     }
 
     return (<>
+
         {session?.userId}
         {test}
         <div onClick={clickfunc}>CLICK</div>

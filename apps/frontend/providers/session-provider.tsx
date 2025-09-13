@@ -11,39 +11,33 @@ import {
 } from "react";
 
 const SessionContext = createContext<{
-  session?: ClientSession;
+  session?: ClientSession; 
   setSession: Dispatch<SetStateAction<ClientSession | undefined>>;
   fetchSession: () => Promise<void>;
 }>({
   session: undefined,
-  setSession: () => {
-    return undefined;
-  },
+  setSession: () => {return undefined},
   fetchSession: async () => {},
 });
 
-export function SessionProvider({ children }: { children: React.ReactNode }) {
-  const [session, setSession] = useState<ClientSession | undefined>(undefined);
+export function SessionProvider({session:initialSession, children }: { session?: ClientSession, children: React.ReactNode }) {
+  const [session, setSession] = useState<ClientSession | undefined>(initialSession);  
   const router = useRouter();
 
-  async function fetchSession() {
+  async function fetchSession() {        
     const res = await fetch("/api/auth/session");
 
     if (!res.ok) {
       router.refresh();
-      setSession(undefined);
-
+      setSession(undefined);     
       return;
     }
 
     const data = await res.json();
 
-    setSession(data);
+    setSession(data);     
   }
 
-  useEffect(() => {
-    fetchSession();
-  }, []);
 
   useEffect(() => {
     const onFocus = () => {

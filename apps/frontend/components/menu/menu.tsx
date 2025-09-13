@@ -2,12 +2,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import MenuLink from './components/menu-link';
+import { MenuUser } from './components/menu-user';
 
 const navItems = [
   { name: 'Home', href: '/' },
+  { name: 'Admin', href: '/admin' },
+  { name: 'Client', href: '/client' },
 ];
 
-export default function Menu() {
+export default async function Menu() {  
   return (
     <header className="bg-primary text-primary-foreground shadow-md menu-height sticky top-0 z-50">
       <Link href="#main" className="sr-only focus:not-sr-only">
@@ -31,6 +34,9 @@ export default function Menu() {
           aria-label="Primary Navigation"
         >
           <ul className="flex space-x-8">
+            <li>
+              <MenuUser/>
+            </li>
             {navItems.map((item,index) => (
               <li key={`menu-item-${index}`}>
                 <MenuLink href={item.href}>{item.name}</MenuLink>
