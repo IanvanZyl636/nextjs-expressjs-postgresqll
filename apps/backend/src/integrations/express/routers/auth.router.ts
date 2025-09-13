@@ -30,6 +30,9 @@ const authRouter = Router();
  *                 type: string
  *                 format: password
  *                 example: secret123
+ *               role:
+ *                 type: string
+ *                 example: ADMIN
  *     responses:
  *       200:
  *         description: Successful login

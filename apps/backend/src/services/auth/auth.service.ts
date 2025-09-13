@@ -24,10 +24,10 @@ export async function registerService(input: ProviderInput, role:Role = Role.CLI
   }
 }
 
-export async function loginService(input: ProviderInput, role:Role = Role.CLIENT): Promise<AuthResult> {
+export async function loginService(input: ProviderInput): Promise<AuthResult> {
   switch (input.provider) {
     case AUTH_PROVIDER.CREDENTIALS:
-      return loginWithCredentials(input.data as CredentialInput, role);
+      return loginWithCredentials(input.data as CredentialInput);
     case AUTH_PROVIDER.GOOGLE:
       // return loginWithGoogle(input.data);
     case AUTH_PROVIDER.MAGIC_LINK:

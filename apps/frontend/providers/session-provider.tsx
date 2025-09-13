@@ -38,7 +38,6 @@ export function SessionProvider({session:initialSession, children }: { session?:
     setSession(data);     
   }
 
-
   useEffect(() => {
     const onFocus = () => {
       if (!!session) fetchSession();
@@ -57,4 +56,14 @@ export function SessionProvider({session:initialSession, children }: { session?:
 
 export function useSession() {
   return useContext(SessionContext);
+}
+
+export function SetClientSession({session}:{session?: ClientSession}){
+  const clientSession = useSession();
+
+  useEffect(()=>{
+    clientSession.setSession(session);
+  }, [session])
+  
+  return <></>;
 }

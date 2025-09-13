@@ -8,8 +8,8 @@ import { AuthResult, CredentialInput, RegisterResult } from '@nextjs-expressjs-p
 import { Role, TokenType } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/enums';
 
 
-export async function loginWithCredentials(input: CredentialInput, role: Role): Promise<AuthResult> {
-  const user = await prisma().user.findUnique({ where: { email: input.email, role } });
+export async function loginWithCredentials(input: CredentialInput): Promise<AuthResult> {
+  const user = await prisma().user.findUnique({ where: { email: input.email } });
 
   if (!user || !(await bcrypt.compare(input.password, user.password))) {
     throw new HttpError(401, 'Invalid credentials');

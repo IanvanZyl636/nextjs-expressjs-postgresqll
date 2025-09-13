@@ -21,7 +21,7 @@ export const registerController = async (
       ip,
       userAgent
     } 
-  });
+  }, req.body.role);
 
   return res.status(201).json(createResponse('success', undefined, 'User registered successfully'));
 };
