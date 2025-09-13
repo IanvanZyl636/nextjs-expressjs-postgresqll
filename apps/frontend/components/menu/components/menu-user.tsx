@@ -1,9 +1,7 @@
-'use client'
+import { getSession } from "@/lib/auth";
 
-import { useSession } from "@/providers/session-provider"
-
-export function MenuUser(){    
-    const {session} = useSession();
+export async function MenuUser(){    
+    const session = await getSession();
      
     return (<>
         Session: {session?.userId}
