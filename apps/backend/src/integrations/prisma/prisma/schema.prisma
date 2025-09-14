@@ -155,8 +155,8 @@ model Product {
   categories      Category[]       @relation("ProductCategories")
   productVariants ProductVariant[]
   ratings         Rating[]
-  vendorId        String?
-  vendor          Vendor?          @relation(fields: [vendorId], references: [id])
+  vendorId        String
+  vendor          Vendor           @relation(fields: [vendorId], references: [id])
 }
 
 model ProductVariant {

@@ -130,7 +130,8 @@ export const ProductUpsertWithRulesSchema =
       : undefined;
 
     const productCreate = {
-      ...product,
+      ...product,      
+      vendorId: product.vendorId,
       categories: { connect: product.categories?.map((category) => ({ id: category.id })) },
       tags: { connect: product.tags?.map((tag) => ({ id: tag.id })) }
     };

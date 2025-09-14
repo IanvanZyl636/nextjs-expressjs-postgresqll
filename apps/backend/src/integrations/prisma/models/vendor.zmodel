@@ -23,10 +23,8 @@ model Vendor {
   owner       User       @relation("VendorOwner", fields: [ownerId], references: [id])
   ownerId     String
 
-  // workspace members: users who can manage this vendor
   users       VendorUser[]
 
-  // products listed under this vendor
   products    Product[]
 
   status      VendorStatus @default(PENDING)

@@ -326,14 +326,12 @@ const metadata = {
                 }, vendorId: {
                     name: "vendorId",
                     type: "String",
-                    isOptional: true,
                     isForeignKey: true,
                     relationField: 'vendor',
                 }, vendor: {
                     name: "vendor",
                     type: "Vendor",
                     isDataModel: true,
-                    isOptional: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
                     backLink: 'products',
                     isRelationOwner: true,

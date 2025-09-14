@@ -77,6 +77,7 @@ export async function getProducts(params: ProductQueryParams = {}) {
     include: {
       tags: true,
       categories: true,
+      vendor: true,
       productVariants: true,
     },
     orderBy: { createdAt: 'desc' },
@@ -89,6 +90,7 @@ export async function getProductById(id: string) {
     include: {
       tags: true,
       categories: true,
+      vendor: true,
       productVariants: {
         include: {
           galleryMedia: {

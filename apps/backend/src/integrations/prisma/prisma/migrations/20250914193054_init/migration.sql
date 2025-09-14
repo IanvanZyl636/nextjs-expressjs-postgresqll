@@ -11,10 +11,16 @@ CREATE TYPE "public"."ProductStatus" AS ENUM ('DRAFT', 'ACTIVE', 'INACTIVE', 'AR
 CREATE TYPE "public"."OrderStatus" AS ENUM ('PENDING', 'PAID', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED');
 
 -- CreateEnum
-CREATE TYPE "public"."Role" AS ENUM ('ADMIN', 'CLIENT');
+CREATE TYPE "public"."Role" AS ENUM ('ADMIN', 'CLIENT', 'VENDOR');
 
 -- CreateEnum
 CREATE TYPE "public"."TokenType" AS ENUM ('REFRESH', 'EMAIL_VERIFICATION', 'PASSWORD_RESET');
+
+-- CreateEnum
+CREATE TYPE "public"."VendorStatus" AS ENUM ('PENDING', 'ACTIVE', 'SUSPENDED', 'DEACTIVATED');
+
+-- CreateEnum
+CREATE TYPE "public"."VendorUserRole" AS ENUM ('OWNER', 'MANAGER', 'STAFF', 'VIEWER');
 
 -- CreateEnum
 CREATE TYPE "public"."PaymentStatus" AS ENUM ('PENDING', 'COMPLETED', 'FAILED', 'REFUNDED', 'CANCELLED');
@@ -88,6 +94,7 @@ CREATE TABLE "public"."Product" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "deletedAt" TIMESTAMP(3),
+    "vendorId" TEXT NOT NULL,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
@@ -227,10 +234,10 @@ CREATE TABLE "public"."Token" (
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "expiresAt" TIMESTAMP(3) NOT NULL,
-    "revokedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "revokedAt" TIMESTAMP(3),
     "ip" TEXT,
     "userAgent" TEXT,
-    "sessionId" TEXT NOT NULL,
+    "sessionId" TEXT,
 
     CONSTRAINT "Token_pkey" PRIMARY KEY ("id")
 );
@@ -253,6 +260,31 @@ CREATE TABLE "public"."Rating" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Rating_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."Vendor" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "description" TEXT,
+    "ownerId" TEXT NOT NULL,
+    "status" "public"."VendorStatus" NOT NULL DEFAULT 'PENDING',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Vendor_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "public"."VendorUser" (
+    "id" TEXT NOT NULL,
+    "vendorId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "role" "public"."VendorUserRole" NOT NULL DEFAULT 'MANAGER',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "VendorUser_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -366,6 +398,12 @@ CREATE INDEX "Rating_userId_idx" ON "public"."Rating"("userId");
 CREATE UNIQUE INDEX "Rating_productId_userId_key" ON "public"."Rating"("productId", "userId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Vendor_slug_key" ON "public"."Vendor"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "VendorUser_vendorId_userId_key" ON "public"."VendorUser"("vendorId", "userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Payment_orderId_key" ON "public"."Payment"("orderId");
 
 -- CreateIndex
@@ -400,6 +438,9 @@ ALTER TABLE "public"."Document" ADD CONSTRAINT "Document_id_fkey" FOREIGN KEY ("
 
 -- AddForeignKey
 ALTER TABLE "public"."File" ADD CONSTRAINT "File_id_fkey" FOREIGN KEY ("id") REFERENCES "public"."Media"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."Product" ADD CONSTRAINT "Product_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "public"."Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."ProductVariant" ADD CONSTRAINT "ProductVariant_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -447,13 +488,22 @@ ALTER TABLE "public"."CartItem" ADD CONSTRAINT "CartItem_productId_fkey" FOREIGN
 ALTER TABLE "public"."Token" ADD CONSTRAINT "Token_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."Token" ADD CONSTRAINT "Token_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "public"."Session"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."Token" ADD CONSTRAINT "Token_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "public"."Session"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."Rating" ADD CONSTRAINT "Rating_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."Rating" ADD CONSTRAINT "Rating_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."Vendor" ADD CONSTRAINT "Vendor_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."VendorUser" ADD CONSTRAINT "VendorUser_vendorId_fkey" FOREIGN KEY ("vendorId") REFERENCES "public"."Vendor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."VendorUser" ADD CONSTRAINT "VendorUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."Payment" ADD CONSTRAINT "Payment_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "public"."Order"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

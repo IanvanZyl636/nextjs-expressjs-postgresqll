@@ -317,9 +317,9 @@ export type VendorUncheckedUpdateManyInput = {
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
     };
-export type VendorNullableScalarRelationFilter = {
-      is?: Prisma.VendorWhereInput | null
-      isNot?: Prisma.VendorWhereInput | null
+export type VendorScalarRelationFilter = {
+      is?: Prisma.VendorWhereInput
+      isNot?: Prisma.VendorWhereInput
     };
 export type VendorListRelationFilter = {
       every?: Prisma.VendorWhereInput
@@ -359,21 +359,15 @@ export type VendorMinOrderByAggregateInput = {
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
     };
-export type VendorScalarRelationFilter = {
-      is?: Prisma.VendorWhereInput
-      isNot?: Prisma.VendorWhereInput
-    };
 export type VendorCreateNestedOneWithoutProductsInput = {
       create?: Prisma.XOR<Prisma.VendorCreateWithoutProductsInput, Prisma.VendorUncheckedCreateWithoutProductsInput>
       connectOrCreate?: Prisma.VendorCreateOrConnectWithoutProductsInput
       connect?: Prisma.VendorWhereUniqueInput
     };
-export type VendorUpdateOneWithoutProductsNestedInput = {
+export type VendorUpdateOneRequiredWithoutProductsNestedInput = {
       create?: Prisma.XOR<Prisma.VendorCreateWithoutProductsInput, Prisma.VendorUncheckedCreateWithoutProductsInput>
       connectOrCreate?: Prisma.VendorCreateOrConnectWithoutProductsInput
       upsert?: Prisma.VendorUpsertWithoutProductsInput
-      disconnect?: Prisma.VendorWhereInput | boolean
-      delete?: Prisma.VendorWhereInput | boolean
       connect?: Prisma.VendorWhereUniqueInput
       update?: Prisma.XOR<Prisma.XOR<Prisma.VendorUpdateToOneWithWhereWithoutProductsInput, Prisma.VendorUpdateWithoutProductsInput>, Prisma.VendorUncheckedUpdateWithoutProductsInput>
     };

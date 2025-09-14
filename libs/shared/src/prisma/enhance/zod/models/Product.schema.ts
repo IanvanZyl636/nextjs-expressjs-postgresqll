@@ -24,11 +24,11 @@ const relationSchema = z.object({
     categories: z.array(z.unknown()).optional(),
     productVariants: z.array(z.unknown()).optional(),
     ratings: z.array(z.unknown()).optional(),
-    vendor: z.record(z.unknown()).optional(),
+    vendor: z.record(z.unknown()),
 }
 );
 const fkSchema = z.object({
-    vendorId: z.string().nullish(),
+    vendorId: z.string(),
 }
 );
 
