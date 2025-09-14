@@ -8,6 +8,7 @@ import "./models/payment.zmodel"
 import "./models/product.zmodel"
 import "./models/system.zmodel"
 import "./models/rating.zmodel"
+import "./models/vendor.zmodel"
 
 generator client {
   provider               = "prisma-client"

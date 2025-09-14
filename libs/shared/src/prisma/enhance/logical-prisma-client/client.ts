@@ -137,6 +137,16 @@ export type Session = Prisma.SessionModel
  */
 export type Rating = Prisma.RatingModel
 /**
+ * Model Vendor
+ * @@allow('all', true)
+ */
+export type Vendor = Prisma.VendorModel
+/**
+ * Model VendorUser
+ * @@allow('all', true)
+ */
+export type VendorUser = Prisma.VendorUserModel
+/**
  * Model Payment
  * @@allow('all', true)
  */
@@ -174,6 +184,12 @@ export const Role = $Enums.Role
 
 export type TokenType = $Enums.TokenType
 export const TokenType = $Enums.TokenType
+
+export type VendorStatus = $Enums.VendorStatus
+export const VendorStatus = $Enums.VendorStatus
+
+export type VendorUserRole = $Enums.VendorUserRole
+export const VendorUserRole = $Enums.VendorUserRole
 
 export type PaymentStatus = $Enums.PaymentStatus
 export const PaymentStatus = $Enums.PaymentStatus

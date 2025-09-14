@@ -22,6 +22,8 @@ const relationSchema = z.object({
     refreshTokens: z.array(z.unknown()).optional(),
     customer: z.record(z.unknown()).optional(),
     ratings: z.array(z.unknown()).optional(),
+    ownedVendors: z.array(z.unknown()).optional(),
+    vendorMemberships: z.array(z.unknown()).optional(),
 }
 );
 

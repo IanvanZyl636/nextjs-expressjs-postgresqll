@@ -25,6 +25,8 @@ export * from './User.schema';
 export * from './Token.schema';
 export * from './Session.schema';
 export * from './Rating.schema';
+export * from './Vendor.schema';
+export * from './VendorUser.schema';
 export * from './Payment.schema';
 export * from './Category.schema';
 export * from './Tag.schema';

@@ -4,6 +4,7 @@ import "./media.zmodel"
 import "./rating.zmodel"
 import "./category.zmodel"
 import "./tag.zmodel"
+import "./vendor.zmodel"
 
 enum ProductStatus {
   DRAFT
@@ -40,6 +41,10 @@ model Product {
   categories      Category[]       @relation("ProductCategories")
   productVariants ProductVariant[]
   ratings         Rating[]
+  
+  // optional vendor ownership
+  vendorId        String?
+  vendor          Vendor?          @relation(fields: [vendorId], references: [id])
 
 
   @@allow('all', true)

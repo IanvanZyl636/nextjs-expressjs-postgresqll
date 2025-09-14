@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const RoleSchema = z.enum(["ADMIN", "CLIENT", "VENDOR"])
+export const VendorStatusSchema = z.enum(["PENDING", "ACTIVE", "SUSPENDED", "DEACTIVATED"])

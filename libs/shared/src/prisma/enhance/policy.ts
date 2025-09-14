@@ -14,6 +14,8 @@ import { ProductStatus } from "../generated/client";
 import { OrderStatus } from "../generated/client";
 import { Role } from "../generated/client";
 import { TokenType } from "../generated/client";
+import { VendorStatus } from "../generated/client";
+import { VendorUserRole } from "../generated/client";
 import { PaymentStatus } from "../generated/client";
 import { PaymentMethod } from "../generated/client";
 
@@ -419,6 +421,46 @@ const policy: PolicyDef = {
             },
 
         },
+        vendor: {
+            modelLevel: {
+                read: { guard: Vendor_read, },
+                create: { guard: Vendor_create, inputChecker: Vendor_create_input, },
+                update: { guard: Vendor_update, },
+                postUpdate: { guard: Vendor_postUpdate, },
+                delete: { guard: Vendor_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        vendorUser: {
+            modelLevel: {
+                read: { guard: VendorUser_read, },
+                create: { guard: VendorUser_create, inputChecker: VendorUser_create_input, },
+                update: { guard: VendorUser_update, },
+                postUpdate: { guard: VendorUser_postUpdate, },
+                delete: { guard: VendorUser_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
         payment: {
             modelLevel: {
                 read: { guard: Payment_read, },
@@ -521,6 +563,8 @@ const policy: PolicyDef = {
         token: { hasValidation: false },
         session: { hasValidation: false },
         rating: { hasValidation: false },
+        vendor: { hasValidation: false },
+        vendorUser: { hasValidation: false },
         payment: { hasValidation: false },
         category: { hasValidation: false },
         tag: { hasValidation: false },
@@ -1558,6 +1602,110 @@ function Rating_delete(context: QueryContext, db: CrudContract): any {
 }
 
 function $check_Rating_delete(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Vendor_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Vendor_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Vendor_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Vendor_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Vendor_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function Vendor_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Vendor_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Vendor_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Vendor_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Vendor_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Vendor_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function VendorUser_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_VendorUser_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function VendorUser_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_VendorUser_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function VendorUser_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function VendorUser_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_VendorUser_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function VendorUser_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_VendorUser_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function VendorUser_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_VendorUser_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 

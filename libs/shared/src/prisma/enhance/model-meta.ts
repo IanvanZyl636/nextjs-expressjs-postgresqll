@@ -323,6 +323,21 @@ const metadata = {
                     isDataModel: true,
                     isArray: true,
                     backLink: 'product',
+                }, vendorId: {
+                    name: "vendorId",
+                    type: "String",
+                    isOptional: true,
+                    isForeignKey: true,
+                    relationField: 'vendor',
+                }, vendor: {
+                    name: "vendor",
+                    type: "Vendor",
+                    isDataModel: true,
+                    isOptional: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'products',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "vendorId" },
                 },
             }, uniqueConstraints: {
                 id: {
@@ -939,6 +954,20 @@ const metadata = {
                     isDataModel: true,
                     isArray: true,
                     backLink: 'user',
+                }, ownedVendors: {
+                    name: "ownedVendors",
+                    type: "Vendor",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "VendorOwner" }] }],
+                    backLink: 'owner',
+                }, vendorMemberships: {
+                    name: "vendorMemberships",
+                    type: "VendorUser",
+                    isDataModel: true,
+                    isArray: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "VendorUserMembership" }] }],
+                    backLink: 'user',
                 },
             }, uniqueConstraints: {
                 id: {
@@ -1105,6 +1134,126 @@ const metadata = {
                 },
             },
             attributes: [{ "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }, { "name": "@@unique", "args": [{ "name": "fields", "value": [null, null] }] }],
+        },
+        vendor: {
+            name: 'Vendor', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, name: {
+                    name: "name",
+                    type: "String",
+                }, slug: {
+                    name: "slug",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                }, description: {
+                    name: "description",
+                    type: "String",
+                    isOptional: true,
+                }, owner: {
+                    name: "owner",
+                    type: "User",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "VendorOwner" }, { "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'ownedVendors',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "ownerId" },
+                }, ownerId: {
+                    name: "ownerId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'owner',
+                }, users: {
+                    name: "users",
+                    type: "VendorUser",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'vendor',
+                }, products: {
+                    name: "products",
+                    type: "Product",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'vendor',
+                }, status: {
+                    name: "status",
+                    type: "VendorStatus",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, slug: {
+                    name: "slug",
+                    fields: ["slug"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        vendorUser: {
+            name: 'VendorUser', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, vendor: {
+                    name: "vendor",
+                    type: "Vendor",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'users',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "vendorId" },
+                }, vendorId: {
+                    name: "vendorId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'vendor',
+                }, user: {
+                    name: "user",
+                    type: "User",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "VendorUserMembership" }, { "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'vendorMemberships',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "userId" },
+                }, userId: {
+                    name: "userId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'user',
+                }, role: {
+                    name: "role",
+                    type: "VendorUserRole",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, vendorId_userId: {
+                    name: "vendorId_userId",
+                    fields: ["vendorId", "userId"]
+                },
+            },
+            attributes: [{ "name": "@@unique", "args": [{ "name": "fields", "value": [null, null] }] }, { "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         payment: {
             name: 'Payment', fields: {

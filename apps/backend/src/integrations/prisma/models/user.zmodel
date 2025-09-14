@@ -1,9 +1,11 @@
 import "./customer.zmodel"
 import "./rating.zmodel"
+import "./vendor.zmodel"
 
 enum Role {
   ADMIN
   CLIENT
+  VENDOR
 }
 
 enum TokenType {
@@ -24,6 +26,12 @@ model User {
 
   customer       Customer?
   ratings        Rating[]
+  
+  // vendors owned by this user
+  ownedVendors   Vendor[] @relation("VendorOwner")
+
+  // memberships in vendor workspaces
+  vendorMemberships VendorUser[] @relation("VendorUserMembership")
 
   @@allow('all', true)
 }

@@ -381,6 +381,40 @@ export type EnumTokenTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumTokenTypeFilter<$PrismaModel>
 }
 
+export type EnumVendorStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorStatus | Prisma.EnumVendorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel> | $Enums.VendorStatus
+}
+
+export type EnumVendorStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorStatus | Prisma.EnumVendorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorStatusWithAggregatesFilter<$PrismaModel> | $Enums.VendorStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
+}
+
+export type EnumVendorUserRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorUserRole | Prisma.EnumVendorUserRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorUserRoleFilter<$PrismaModel> | $Enums.VendorUserRole
+}
+
+export type EnumVendorUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorUserRole | Prisma.EnumVendorUserRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.VendorUserRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVendorUserRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVendorUserRoleFilter<$PrismaModel>
+}
+
 export type EnumPaymentMethodFilter<$PrismaModel = never> = {
   equals?: $Enums.PaymentMethod | Prisma.EnumPaymentMethodFieldRefInput<$PrismaModel>
   in?: $Enums.PaymentMethod[] | Prisma.ListEnumPaymentMethodFieldRefInput<$PrismaModel>
@@ -756,6 +790,40 @@ export type NestedEnumTokenTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTokenTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTokenTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumVendorStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorStatus | Prisma.EnumVendorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel> | $Enums.VendorStatus
+}
+
+export type NestedEnumVendorStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorStatus | Prisma.EnumVendorStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorStatus[] | Prisma.ListEnumVendorStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorStatusWithAggregatesFilter<$PrismaModel> | $Enums.VendorStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVendorStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumVendorUserRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorUserRole | Prisma.EnumVendorUserRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorUserRoleFilter<$PrismaModel> | $Enums.VendorUserRole
+}
+
+export type NestedEnumVendorUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.VendorUserRole | Prisma.EnumVendorUserRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.VendorUserRole[] | Prisma.ListEnumVendorUserRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumVendorUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.VendorUserRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumVendorUserRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumVendorUserRoleFilter<$PrismaModel>
 }
 
 export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {

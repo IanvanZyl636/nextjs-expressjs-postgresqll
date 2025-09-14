@@ -52,7 +52,8 @@ export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 
 export const Role = {
   ADMIN: 'ADMIN',
-  CLIENT: 'CLIENT'
+  CLIENT: 'CLIENT',
+  VENDOR: 'VENDOR'
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -65,6 +66,26 @@ export const TokenType = {
 } as const
 
 export type TokenType = (typeof TokenType)[keyof typeof TokenType]
+
+
+export const VendorStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  DEACTIVATED: 'DEACTIVATED'
+} as const
+
+export type VendorStatus = (typeof VendorStatus)[keyof typeof VendorStatus]
+
+
+export const VendorUserRole = {
+  OWNER: 'OWNER',
+  MANAGER: 'MANAGER',
+  STAFF: 'STAFF',
+  VIEWER: 'VIEWER'
+} as const
+
+export type VendorUserRole = (typeof VendorUserRole)[keyof typeof VendorUserRole]
 
 
 export const PaymentStatus = {

@@ -24,6 +24,11 @@ const relationSchema = z.object({
     categories: z.array(z.unknown()).optional(),
     productVariants: z.array(z.unknown()).optional(),
     ratings: z.array(z.unknown()).optional(),
+    vendor: z.record(z.unknown()).optional(),
+}
+);
+const fkSchema = z.object({
+    vendorId: z.string().nullish(),
 }
 );
 
@@ -36,7 +41,7 @@ export const ProductScalarSchema = baseSchema;
 /**
  * `Product` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const ProductSchema = ProductScalarSchema.merge(relationSchema.partial());
+export const ProductSchema = ProductScalarSchema.merge(fkSchema).merge(relationSchema.partial());
 
 
 /**
@@ -73,9 +78,7 @@ export const ProductCreateScalarSchema = baseSchema.partial({
 /**
  * `Product` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const ProductCreateSchema = baseSchema.partial({
-    id: true, status: true, createdAt: true, updatedAt: true
-});
+export const ProductCreateSchema = ProductCreateScalarSchema.merge(fkSchema);
 
 
 /**
@@ -87,5 +90,5 @@ export const ProductUpdateScalarSchema = baseSchema.partial();
 /**
  * `Product` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const ProductUpdateSchema = ProductUpdateScalarSchema;
+export const ProductUpdateSchema = ProductUpdateScalarSchema.merge(fkSchema.partial());
 

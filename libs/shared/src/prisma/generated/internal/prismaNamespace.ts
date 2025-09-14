@@ -414,6 +414,8 @@ export const ModelName = {
   Token: 'Token',
   Session: 'Session',
   Rating: 'Rating',
+  Vendor: 'Vendor',
+  VendorUser: 'VendorUser',
   Payment: 'Payment',
   Category: 'Category',
   Tag: 'Tag',
@@ -433,7 +435,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "media" | "image" | "video" | "audio" | "document" | "file" | "product" | "productVariant" | "productVariantGalleryMedia" | "productVariantAttachment" | "order" | "orderItem" | "customer" | "address" | "cart" | "cartItem" | "user" | "token" | "session" | "rating" | "payment" | "category" | "tag" | "log"
+    modelProps: "media" | "image" | "video" | "audio" | "document" | "file" | "product" | "productVariant" | "productVariantGalleryMedia" | "productVariantAttachment" | "order" | "orderItem" | "customer" | "address" | "cart" | "cartItem" | "user" | "token" | "session" | "rating" | "vendor" | "vendorUser" | "payment" | "category" | "tag" | "log"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1917,6 +1919,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Vendor: {
+      payload: Prisma.$VendorPayload<ExtArgs>
+      fields: Prisma.VendorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VendorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VendorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>
+        }
+        findFirst: {
+          args: Prisma.VendorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VendorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>
+        }
+        findMany: {
+          args: Prisma.VendorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>[]
+        }
+        create: {
+          args: Prisma.VendorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>
+        }
+        createMany: {
+          args: Prisma.VendorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VendorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>[]
+        }
+        delete: {
+          args: Prisma.VendorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>
+        }
+        update: {
+          args: Prisma.VendorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>
+        }
+        deleteMany: {
+          args: Prisma.VendorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VendorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VendorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>[]
+        }
+        upsert: {
+          args: Prisma.VendorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorPayload>
+        }
+        aggregate: {
+          args: Prisma.VendorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVendor>
+        }
+        groupBy: {
+          args: Prisma.VendorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VendorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorCountAggregateOutputType> | number
+        }
+      }
+    }
+    VendorUser: {
+      payload: Prisma.$VendorUserPayload<ExtArgs>
+      fields: Prisma.VendorUserFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VendorUserFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VendorUserFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>
+        }
+        findFirst: {
+          args: Prisma.VendorUserFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VendorUserFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>
+        }
+        findMany: {
+          args: Prisma.VendorUserFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>[]
+        }
+        create: {
+          args: Prisma.VendorUserCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>
+        }
+        createMany: {
+          args: Prisma.VendorUserCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VendorUserCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>[]
+        }
+        delete: {
+          args: Prisma.VendorUserDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>
+        }
+        update: {
+          args: Prisma.VendorUserUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>
+        }
+        deleteMany: {
+          args: Prisma.VendorUserDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VendorUserUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VendorUserUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>[]
+        }
+        upsert: {
+          args: Prisma.VendorUserUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorUserPayload>
+        }
+        aggregate: {
+          args: Prisma.VendorUserAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVendorUser>
+        }
+        groupBy: {
+          args: Prisma.VendorUserGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorUserGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VendorUserCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorUserCountAggregateOutputType> | number
+        }
+      }
+    }
     Payment: {
       payload: Prisma.$PaymentPayload<ExtArgs>
       fields: Prisma.PaymentFieldRefs
@@ -2316,7 +2466,8 @@ export const ProductScalarFieldEnum = {
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt'
+  deletedAt: 'deletedAt',
+  vendorId: 'vendorId'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -2483,6 +2634,31 @@ export const RatingScalarFieldEnum = {
 } as const
 
 export type RatingScalarFieldEnum = (typeof RatingScalarFieldEnum)[keyof typeof RatingScalarFieldEnum]
+
+
+export const VendorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  ownerId: 'ownerId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
+
+
+export const VendorUserScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  userId: 'userId',
+  role: 'role',
+  createdAt: 'createdAt'
+} as const
+
+export type VendorUserScalarFieldEnum = (typeof VendorUserScalarFieldEnum)[keyof typeof VendorUserScalarFieldEnum]
 
 
 export const PaymentScalarFieldEnum = {
@@ -2740,6 +2916,34 @@ export type ListEnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
 
 
 /**
+ * Reference to a field of type 'VendorStatus'
+ */
+export type EnumVendorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VendorStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'VendorStatus[]'
+ */
+export type ListEnumVendorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VendorStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'VendorUserRole'
+ */
+export type EnumVendorUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VendorUserRole'>
+    
+
+
+/**
+ * Reference to a field of type 'VendorUserRole[]'
+ */
+export type ListEnumVendorUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VendorUserRole[]'>
+    
+
+
+/**
  * Reference to a field of type 'PaymentMethod'
  */
 export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
@@ -2869,6 +3073,8 @@ export type GlobalOmitConfig = {
   token?: Prisma.TokenOmit
   session?: Prisma.SessionOmit
   rating?: Prisma.RatingOmit
+  vendor?: Prisma.VendorOmit
+  vendorUser?: Prisma.VendorUserOmit
   payment?: Prisma.PaymentOmit
   category?: Prisma.CategoryOmit
   tag?: Prisma.TagOmit
