@@ -1,7 +1,7 @@
 
 import { Response } from "express";
-import { upsertTag, getTagById, listTags, deleteTag } from "../../../../services/tag/tag.service";
-import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import { upsertTag, getTagById, listTags, deleteTag } from "../../../services/tag/tag.service";
+import { AuthenticatedRequest } from "../models/authenticated-request.model";
 import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
 import { TagUpsertSchema } from "@nextjs-expressjs-postgresql/shared/zod/Tag.schema";
 

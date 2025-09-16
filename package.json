@@ -1,8 +1,8 @@
 {
   "name": "@nextjs-expressjs-postgresql/root",
   "scripts": {
-    "build":"tsc -b",
-    "shared:build":"tsc -b libs/shared",
+    "build": "tsc -b",
+    "shared:build": "tsc -b libs/shared",
     "backend:dev": "dotenv -e .env -- npm run dev --workspace=@nextjs-expressjs-postgresql/backend",
     "backend:build": "tsc -b",
     "backend:build:minify": "npm run build:minify --workspace=@nextjs-expressjs-postgresql/backend",
@@ -19,7 +19,7 @@
     "prisma:push": "npx prisma db push --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:migrate": "npx prisma migrate dev --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:reset": "npx prisma migrate reset --schema=apps/backend/src/integrations/prisma/prisma",
-    "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",    
+    "prisma:reset:force": "npx prisma migrate reset --force --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:deploy": "npx prisma migrate deploy --schema=apps/backend/src/integrations/prisma/prisma",
     "prisma:seed": "npx prisma db seed --schema=apps/backend/src/integrations/prisma/prisma"
   },

@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
+import { asyncHandlerMiddleware } from "../middleware/async-handler.middleware";
 import {
     upsertRatingController,
     getRatingController,
     listRatingsController,
     deleteRatingController,
-} from "../../controllers/protected/rating.controller";
+} from "../controllers/rating.controller";
 
 const protectedRatingRouter = Router();
 

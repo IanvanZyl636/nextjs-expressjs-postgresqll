@@ -44,3 +44,12 @@ export async function deleteVendor(id: string) {
         where: { id },
     });
 }
+
+export async function isUserMember(vendorId: string, userId: string) {
+    const member = await prisma().vendorUser.findFirst({ where: { vendorId, userId } });
+    return !!member;
+}
+
+export async function getUserMembership(vendorId: string, userId: string) {
+    return prisma().vendorUser.findFirst({ where: { vendorId, userId } });
+}

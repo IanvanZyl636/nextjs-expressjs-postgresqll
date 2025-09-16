@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
+import { asyncHandlerMiddleware } from "../middleware/async-handler.middleware";
 import {
     upsertCategoryController,
     getCategoryController,
     listCategoriesController,
     deleteCategoryController,
-} from "../../controllers/protected/category.controller";
+} from "../controllers/category.controller";
 
 const protectedCategoryRouter = Router();
 

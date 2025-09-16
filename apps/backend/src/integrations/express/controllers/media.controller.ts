@@ -1,10 +1,11 @@
-import { Response } from "express";
-import { processAndUploadImagesService } from "../../../../services/media/media.service";
-import { MulterImageRequest } from "../../models/muler-image-request.model";
-import HttpError from "../../../../utils/error/http-error";
-import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import { Request, Response } from "express";
+import { downloadMediaService, processAndUploadImagesService } from "../../../services/media/media.service";
+import { MulterImageRequest } from "../models/muler-image-request.model";
+import HttpError from "../../../utils/error/http-error";
+import { AuthenticatedRequest } from "../models/authenticated-request.model";
 import sharp from "sharp";
-import { getImageExtension } from "../../../../helpers/sharp.helper";
+import { getImageExtension } from "../../../helpers/sharp.helper";
+import { Readable } from "stream";
 
 const ALLOWED_EXTENSIONS = ['jpg', 'png', 'webp', 'tiff', 'gif', 'avif'];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -72,4 +73,18 @@ export async function uploadImagesController(
     const results = await Promise.all(uploadPromises);
     
     res.status(200).json({ success: true, urls: results });
+}
+
+export async function mediaController(
+    req: Request,
+    res: Response
+) {
+    const fileId = req.params.fileId;
+    if (!fileId) throw new HttpError(400, "File ID is required");
+
+    const data = await downloadMediaService(fileId);
+
+    res.setHeader('Content-Type', data.ContentType || 'image/jpeg');
+    
+    (data.Body as Readable).pipe(res);
 }

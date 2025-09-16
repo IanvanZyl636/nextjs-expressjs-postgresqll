@@ -1,13 +1,16 @@
 import { Router } from "express";
-import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
+import { asyncHandlerMiddleware } from "../middleware/async-handler.middleware";
 import {
     upsertVendorController,
     getVendorController,
     listVendorsController,
     deleteVendorController,
-} from "../../controllers/protected/vendor.controller";
+    checkVendorMembershipController,
+    getVendorBySlugController,
+} from "../controllers/vendor.controller";
 
 const protectedVendorRouter = Router();
+const publicVendorRouter = Router();
 
 /**
  * @swagger
@@ -21,7 +24,45 @@ const protectedVendorRouter = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/VendorUpsertSchema'
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 format: uuid
+ *                 description: Optional UUID for existing vendor (include to update)
+ *               name:
+ *                 type: string
+ *               slug:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *                 nullable: true
+ *               status:
+ *                 type: string
+ *                 enum:
+ *                   - PENDING
+ *                   - ACTIVE
+ *                   - SUSPENDED
+ *                   - DEACTIVATED
+ *               ownerId:
+ *                 type: string
+ *                 description: Owner user id (foreign key)
+ *               createdAt:
+ *                 type: string
+ *                 format: date-time
+ *               updatedAt:
+ *                 type: string
+ *                 format: date-time
+ *             required:
+ *               - name
+ *               - slug
+ *               - ownerId
+ *           example:
+ *             name: "Acme Supplies"
+ *             slug: "acme-supplies"
+ *             description: "Wholesale supplier of office goods."
+ *             status: "PENDING"
+ *             ownerId: "b3d5f0e2-7c4a-4f1a-9f2b-9a4e6d1c2e3f"
  *     responses:
  *       200:
  *         description: Vendor upserted successfully
@@ -102,4 +143,8 @@ protectedVendorRouter.get('/vendor/:id', asyncHandlerMiddleware(getVendorControl
  */
 protectedVendorRouter.delete('/vendor/:id', asyncHandlerMiddleware(deleteVendorController));
 
-export { protectedVendorRouter };
+protectedVendorRouter.get('/vendor/:id/membership', asyncHandlerMiddleware(checkVendorMembershipController));
+
+publicVendorRouter.get('/vendor/:slug', getVendorBySlugController);
+
+export { protectedVendorRouter, publicVendorRouter };

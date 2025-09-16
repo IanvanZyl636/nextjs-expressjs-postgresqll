@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
+import { asyncHandlerMiddleware } from "../middleware/async-handler.middleware";
 import {
     upsertTagController,
     getTagController,
     listTagsController,
     deleteTagController,
-} from "../../controllers/protected/tag.controller";
+} from "../controllers/tag.controller";
 
 const protectedTagRouter = Router();
 

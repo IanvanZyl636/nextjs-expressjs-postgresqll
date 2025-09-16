@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
-import { createProductController } from "../../controllers/protected/product.controller";
+import { asyncHandlerMiddleware } from "../middleware/async-handler.middleware";
+import { createProductController, upsertProductController } from "../controllers/product.controller";
 
 const protectedProductRouter = Router();
 
@@ -20,3 +20,10 @@ const protectedProductRouter = Router();
  *         description: Unauthorized
  */
 protectedProductRouter.get('/create', asyncHandlerMiddleware(createProductController));
+
+/**
+ * POST /product/upsert - upsert a product (create or update)
+ */
+protectedProductRouter.post('/product/upsert', asyncHandlerMiddleware(upsertProductController));
+
+export { protectedProductRouter };

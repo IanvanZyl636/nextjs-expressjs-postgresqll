@@ -1,7 +1,7 @@
 
 import { Response } from "express";
-import { upsertRating, getRatingById, listRatings, deleteRating } from "../../../../services/rating/rating.service";
-import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import { upsertRating, getRatingById, listRatings, deleteRating } from "../../../services/rating/rating.service";
+import { AuthenticatedRequest } from "../models/authenticated-request.model";
 import { RatingUpsertSchema } from "@nextjs-expressjs-postgresql/shared/zod/Rating.schema";
 import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
 

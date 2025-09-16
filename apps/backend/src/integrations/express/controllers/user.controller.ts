@@ -1,4 +1,4 @@
-import { AuthenticatedRequest } from "../../models/authenticated-request.model";
+import { AuthenticatedRequest } from "../models/authenticated-request.model";
 import { Response } from "express";
 
 export const getUser = async (

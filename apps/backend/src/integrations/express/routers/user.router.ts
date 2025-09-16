@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { asyncHandlerMiddleware } from "../../middleware/async-handler.middleware";
-import { getUser } from "../../controllers/protected/user.controller";
+import { asyncHandlerMiddleware } from "../middleware/async-handler.middleware";
+import { getUser } from "../controllers/user.controller";
 
 const protectedUserRouter = Router();
 
