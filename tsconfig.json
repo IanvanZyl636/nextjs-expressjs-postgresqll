@@ -5,8 +5,7 @@
   "references": [
     {
       "path": "./apps/backend"
-    },
-    { "path": "./apps/backend/tsconfig.spec.json" },
+    },   
     {
       "path": "./libs/shared"
     }

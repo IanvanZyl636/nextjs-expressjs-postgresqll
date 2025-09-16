@@ -1,9 +1,20 @@
 {
-  "extends": "./tsconfig.json",      // notice: extend local app tsconfig, not base
-  "compilerOptions": {
-    "types": ["node", "jest"],
-    "noEmit": true                   // don’t emit test files
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {    
+    "types": ["jest", "node"],
+    "noEmit": true,
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.spec.tsbuildinfo"  
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.test.ts", "src/**/*.ts"],
-  "exclude": [],  
+  "include": [
+    "jest.config.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts",
+    "src/**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    }
+  ]
 }

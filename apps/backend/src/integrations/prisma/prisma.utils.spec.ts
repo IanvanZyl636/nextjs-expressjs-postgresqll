@@ -1,5 +1,5 @@
+import { Prisma } from '@nextjs-expressjs-postgresql/shared/prisma/generated/client';
 import { safeUpsertOrFindUnique } from './prisma.utils';
-import { Prisma } from '@nextjs-expressjs-postgresql/shared';
 
 describe('safeUpsertOrFindUnique', () => {
   const where = { id: 1 };

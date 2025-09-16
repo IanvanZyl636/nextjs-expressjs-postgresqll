@@ -8,8 +8,8 @@ import bcrypt from "bcrypt";
 import { sendEmail } from "../../integrations/nodemailer";
 import { MailTemplateType } from "../../integrations/nodemailer/constants/mail-template.constants";
 import { Role, TokenType } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/enums";
-import { AuthResult, CredentialInput, ProviderInput, RegisterResult } from "@nextjs-expressjs-postgresql/shared/types/auth-provider.types";
 import { AUTH_PROVIDER } from "@nextjs-expressjs-postgresql/shared/constants/auth-provider.constants";
+import { AuthResult, CredentialInput, ProviderInput, RegisterResult } from "@nextjs-expressjs-postgresql/shared/types/auth-provider.types";
 
 export async function registerService(input: ProviderInput, role:Role = Role.CLIENT): Promise<RegisterResult> {
   switch (input.provider) {

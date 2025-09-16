@@ -28,17 +28,17 @@ describe('initializeDB', () => {
   });
 
   it('should connect to the database successfully on first try', async () => {
-    (prisma.$connect as jest.Mock).mockResolvedValueOnce(undefined);
+    (prisma().$connect as jest.Mock).mockResolvedValueOnce(undefined);
 
     await initializeDB();
 
-    expect(prisma.$connect).toHaveBeenCalledTimes(1);
+    expect(prisma().$connect).toHaveBeenCalledTimes(1);
     expect(consoleLogSpy).toHaveBeenCalledWith('✅  Connected to the database.');
   });
 
   it('should retry connection if it fails', async () => {
     // First call fails, second call succeeds
-    (prisma.$connect as jest.Mock)
+    (prisma().$connect as jest.Mock)
       .mockRejectedValueOnce(new Error('Connection failed'))
       .mockResolvedValueOnce(undefined);
 
@@ -51,7 +51,7 @@ describe('initializeDB', () => {
 
     await initPromise;
 
-    expect(prisma.$connect).toHaveBeenCalledTimes(2);
+    expect(prisma().$connect).toHaveBeenCalledTimes(2);
     expect(consoleLogSpy).toHaveBeenCalledWith('✅  Connected to the database.');
   });
 });
