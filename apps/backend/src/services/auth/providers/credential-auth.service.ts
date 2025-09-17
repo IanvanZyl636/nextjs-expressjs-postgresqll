@@ -9,16 +9,30 @@ import { Role, TokenType } from '@nextjs-expressjs-postgresql/shared/prisma/enha
 
 
 export async function loginWithCredentials(input: CredentialInput): Promise<AuthResult> {
-  const user = await prisma().user.findUnique({ where: { email: input.email } });
+  const user = await prisma().user.findUnique(
+    {
+      where: { email: input.email },
+      include: {
+        vendorMemberships: {
+          include: {
+            vendor: {
+              select: { slug: true }
+            }
+          }
+        }
+      }
+    });
 
   if (!user || !(await bcrypt.compare(input.password, user.password))) {
     throw new HttpError(401, 'Invalid credentials');
   }
 
-  const accessToken = generateAccessToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
-  const refreshToken = generateRefreshToken({userId: user.id, role:user.role, ip: input.ip, userAgent: input.userAgent});
+  const vendorSlugs = user.vendorMemberships.map(vendorMembership => vendorMembership.vendor.slug);
 
-  const session = await prisma().session.create({data:{}});
+  const accessToken = generateAccessToken({ user: { userId: user.id, role: user.role, ip: input.ip, userAgent: input.userAgent, vendorSlugs } });
+  const refreshToken = generateRefreshToken({ user: { userId: user.id, role: user.role, ip: input.ip, userAgent: input.userAgent, vendorSlugs } });
+
+  const session = await prisma().session.create({ data: {} });
 
   await prisma().token.create({
     data: {
@@ -28,31 +42,31 @@ export async function loginWithCredentials(input: CredentialInput): Promise<Auth
       ip: input.ip,
       userAgent: input.userAgent,
       expiresAt: new Date(Date.now() + ms(process.env.BACKEND_JWT_REFRESH_EXPIRATION as StringValue)),
-      sessionId: session.id,      
+      sessionId: session.id,
     }
-  });   
+  });
 
   return { accessToken, refreshToken, user: { email: user.email } };
 };
 
-export async function registerCredentials(input: CredentialInput, role:Role): Promise<RegisterResult>{
-    const existingUser = await prisma().user.findFirst({
-        where: { email: input.email, role }
-    })
+export async function registerCredentials(input: CredentialInput, role: Role): Promise<RegisterResult> {
+  const existingUser = await prisma().user.findFirst({
+    where: { email: input.email, role }
+  })
 
-    if (existingUser) throw new HttpError(409, 'User already exists');
-    
-    const password = await bcrypt.hash(input.password, 10)
+  if (existingUser) throw new HttpError(409, 'User already exists');
 
-    const user = await prisma().user.create({
-        data: {
-            email:input.email,
-            password,
-            role
-        },
-    });
+  const password = await bcrypt.hash(input.password, 10)
 
-    return {
-        email:user.email
-    };
+  const user = await prisma().user.create({
+    data: {
+      email: input.email,
+      password,
+      role
+    },
+  });
+
+  return {
+    email: user.email
+  };
 }

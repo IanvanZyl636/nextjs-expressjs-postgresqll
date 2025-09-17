@@ -276,7 +276,7 @@ model CartItem {
 }
 
 model User {
-  id                String       @id() @default(cuid())
+  id                String       @id() @default(uuid())
   email             String       @unique()
   password          String
   role              Role         @default(CLIENT)
@@ -286,7 +286,6 @@ model User {
   updatedAt         DateTime     @updatedAt()
   customer          Customer?
   ratings           Rating[]
-  ownedVendors      Vendor[]     @relation("VendorOwner")
   vendorMemberships VendorUser[] @relation("VendorUserMembership")
 }
 
@@ -331,8 +330,6 @@ model Vendor {
   name        String
   slug        String       @unique()
   description String?
-  owner       User         @relation("VendorOwner", fields: [ownerId], references: [id])
-  ownerId     String
   users       VendorUser[]
   products    Product[]
   status      VendorStatus @default(PENDING)

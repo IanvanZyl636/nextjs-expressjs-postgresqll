@@ -15,7 +15,7 @@ enum TokenType {
 }
 
 model User {
-  id             String   @id @default(cuid())
+  id             String   @id @default(uuid())
   email          String   @unique
   password       String
   role           Role     @default(CLIENT)
@@ -26,11 +26,7 @@ model User {
 
   customer       Customer?
   ratings        Rating[]
-  
-  // vendors owned by this user
-  ownedVendors   Vendor[] @relation("VendorOwner")
 
-  // memberships in vendor workspaces
   vendorMemberships VendorUser[] @relation("VendorUserMembership")
 
   @@allow('all', true)

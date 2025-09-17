@@ -1,9 +1,8 @@
-
 export const experimental_ppr = true
 
-export default async function Home() {   
+export default async function Home() {    
   return (
-    <div>   
+    <div>      
       HOME PAGE
     </div>
   );

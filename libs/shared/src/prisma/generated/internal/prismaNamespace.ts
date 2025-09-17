@@ -2641,7 +2641,6 @@ export const VendorScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   description: 'description',
-  ownerId: 'ownerId',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

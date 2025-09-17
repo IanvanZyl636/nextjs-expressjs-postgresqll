@@ -8,8 +8,8 @@ async function fetchVendor(slug: string) {
   return res.json();
 }
 
-export default async function VendorDashboard({ params }: { params: { slug: string } }) {
-  const vendor = await fetchVendor(params.slug);
+export default async function VendorDashboard({ params }: { params: Promise<{ slug: string }> }) {
+  const vendor = await fetchVendor((await params).slug);
 
   if (!vendor) return <div className="p-8">Vendor not found or you don't have access.</div>;
 

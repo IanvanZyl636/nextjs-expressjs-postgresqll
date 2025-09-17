@@ -9,5 +9,5 @@ export async function GET(request: NextRequest) {
         return new NextResponse(null, { status: 401 })
     }
 
-    return NextResponse.json({ userId: session.userId, role: session.role });
+    return NextResponse.json({ userId: session.user.userId, role: session.user.role });
 }

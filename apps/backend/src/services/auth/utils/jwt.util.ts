@@ -14,12 +14,12 @@ export const generateRefreshToken = (data:JwtPayload ) => {
 };
 
 export const verifyAccessToken = (token: string):JwtPayload => {
-  const {userId, role, ip, userAgent} = jwt.verify(token, ACCESS_SECRET) as JwtPayload;
+  const {user} = jwt.verify(token, ACCESS_SECRET) as JwtPayload;
 
-  return {userId, role, ip, userAgent};
+  return {user};
 };
 export const verifyRefreshToken = (token: string):JwtPayload => {
-  const {userId, role, ip, userAgent} = jwt.verify(token, REFRESH_SECRET) as JwtPayload;
+  const {user} = jwt.verify(token, REFRESH_SECRET) as JwtPayload;
 
-  return {userId, role, ip, userAgent};
+  return {user};
 };

@@ -21,7 +21,6 @@ export type VendorMinAggregateOutputType = {
       name: string | null
       slug: string | null
       description: string | null
-      ownerId: string | null
       status: $Enums.VendorStatus | null
       createdAt: Date | null
       updatedAt: Date | null
@@ -31,7 +30,6 @@ export type VendorMaxAggregateOutputType = {
       name: string | null
       slug: string | null
       description: string | null
-      ownerId: string | null
       status: $Enums.VendorStatus | null
       createdAt: Date | null
       updatedAt: Date | null
@@ -41,7 +39,6 @@ export type VendorCountAggregateOutputType = {
       name: number
       slug: number
       description: number
-      ownerId: number
       status: number
       createdAt: number
       updatedAt: number
@@ -52,7 +49,6 @@ export type VendorMinAggregateInputType = {
       name?: true
       slug?: true
       description?: true
-      ownerId?: true
       status?: true
       createdAt?: true
       updatedAt?: true
@@ -62,7 +58,6 @@ export type VendorMaxAggregateInputType = {
       name?: true
       slug?: true
       description?: true
-      ownerId?: true
       status?: true
       createdAt?: true
       updatedAt?: true
@@ -72,7 +67,6 @@ export type VendorCountAggregateInputType = {
       name?: true
       slug?: true
       description?: true
-      ownerId?: true
       status?: true
       createdAt?: true
       updatedAt?: true
@@ -149,7 +143,6 @@ export type VendorGroupByOutputType = {
       name: string
       slug: string
       description: string | null
-      ownerId: string
       status: $Enums.VendorStatus
       createdAt: Date
       updatedAt: Date
@@ -177,11 +170,9 @@ export type VendorWhereInput = {
       name?: Prisma.StringFilter<"Vendor"> | string
       slug?: Prisma.StringFilter<"Vendor"> | string
       description?: Prisma.StringNullableFilter<"Vendor"> | string | null
-      ownerId?: Prisma.StringFilter<"Vendor"> | string
       status?: Prisma.EnumVendorStatusFilter<"Vendor"> | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
-      owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
       users?: Prisma.VendorUserListRelationFilter
       products?: Prisma.ProductListRelationFilter
     };
@@ -190,11 +181,9 @@ export type VendorOrderByWithRelationInput = {
       name?: Prisma.SortOrder
       slug?: Prisma.SortOrder
       description?: Prisma.SortOrderInput | Prisma.SortOrder
-      ownerId?: Prisma.SortOrder
       status?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
-      owner?: Prisma.UserOrderByWithRelationInput
       users?: Prisma.VendorUserOrderByRelationAggregateInput
       products?: Prisma.ProductOrderByRelationAggregateInput
     };
@@ -206,11 +195,9 @@ export type VendorWhereUniqueInput = Prisma.AtLeast<{
       NOT?: Prisma.VendorWhereInput | Prisma.VendorWhereInput[]
       name?: Prisma.StringFilter<"Vendor"> | string
       description?: Prisma.StringNullableFilter<"Vendor"> | string | null
-      ownerId?: Prisma.StringFilter<"Vendor"> | string
       status?: Prisma.EnumVendorStatusFilter<"Vendor"> | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
       updatedAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
-      owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
       users?: Prisma.VendorUserListRelationFilter
       products?: Prisma.ProductListRelationFilter
     }, "id" | "slug">;
@@ -219,7 +206,6 @@ export type VendorOrderByWithAggregationInput = {
       name?: Prisma.SortOrder
       slug?: Prisma.SortOrder
       description?: Prisma.SortOrderInput | Prisma.SortOrder
-      ownerId?: Prisma.SortOrder
       status?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
@@ -235,7 +221,6 @@ export type VendorScalarWhereWithAggregatesInput = {
       name?: Prisma.StringWithAggregatesFilter<"Vendor"> | string
       slug?: Prisma.StringWithAggregatesFilter<"Vendor"> | string
       description?: Prisma.StringNullableWithAggregatesFilter<"Vendor"> | string | null
-      ownerId?: Prisma.StringWithAggregatesFilter<"Vendor"> | string
       status?: Prisma.EnumVendorStatusWithAggregatesFilter<"Vendor"> | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeWithAggregatesFilter<"Vendor"> | Date | string
       updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Vendor"> | Date | string
@@ -248,7 +233,6 @@ export type VendorCreateInput = {
       status?: $Enums.VendorStatus
       createdAt?: Date | string
       updatedAt?: Date | string
-      owner: Prisma.UserCreateNestedOneWithoutOwnedVendorsInput
       users?: Prisma.VendorUserCreateNestedManyWithoutVendorInput
       products?: Prisma.ProductCreateNestedManyWithoutVendorInput
     };
@@ -257,7 +241,6 @@ export type VendorUncheckedCreateInput = {
       name: string
       slug: string
       description?: string | null
-      ownerId: string
       status?: $Enums.VendorStatus
       createdAt?: Date | string
       updatedAt?: Date | string
@@ -272,7 +255,6 @@ export type VendorUpdateInput = {
       status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      owner?: Prisma.UserUpdateOneRequiredWithoutOwnedVendorsNestedInput
       users?: Prisma.VendorUserUpdateManyWithoutVendorNestedInput
       products?: Prisma.ProductUpdateManyWithoutVendorNestedInput
     };
@@ -281,7 +263,6 @@ export type VendorUncheckedUpdateInput = {
       name?: Prisma.StringFieldUpdateOperationsInput | string
       slug?: Prisma.StringFieldUpdateOperationsInput | string
       description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-      ownerId?: Prisma.StringFieldUpdateOperationsInput | string
       status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -293,7 +274,6 @@ export type VendorCreateManyInput = {
       name: string
       slug: string
       description?: string | null
-      ownerId: string
       status?: $Enums.VendorStatus
       createdAt?: Date | string
       updatedAt?: Date | string
@@ -312,7 +292,6 @@ export type VendorUncheckedUpdateManyInput = {
       name?: Prisma.StringFieldUpdateOperationsInput | string
       slug?: Prisma.StringFieldUpdateOperationsInput | string
       description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-      ownerId?: Prisma.StringFieldUpdateOperationsInput | string
       status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -321,20 +300,11 @@ export type VendorScalarRelationFilter = {
       is?: Prisma.VendorWhereInput
       isNot?: Prisma.VendorWhereInput
     };
-export type VendorListRelationFilter = {
-      every?: Prisma.VendorWhereInput
-      some?: Prisma.VendorWhereInput
-      none?: Prisma.VendorWhereInput
-    };
-export type VendorOrderByRelationAggregateInput = {
-      _count?: Prisma.SortOrder
-    };
 export type VendorCountOrderByAggregateInput = {
       id?: Prisma.SortOrder
       name?: Prisma.SortOrder
       slug?: Prisma.SortOrder
       description?: Prisma.SortOrder
-      ownerId?: Prisma.SortOrder
       status?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
@@ -344,7 +314,6 @@ export type VendorMaxOrderByAggregateInput = {
       name?: Prisma.SortOrder
       slug?: Prisma.SortOrder
       description?: Prisma.SortOrder
-      ownerId?: Prisma.SortOrder
       status?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
@@ -354,7 +323,6 @@ export type VendorMinOrderByAggregateInput = {
       name?: Prisma.SortOrder
       slug?: Prisma.SortOrder
       description?: Prisma.SortOrder
-      ownerId?: Prisma.SortOrder
       status?: Prisma.SortOrder
       createdAt?: Prisma.SortOrder
       updatedAt?: Prisma.SortOrder
@@ -370,44 +338,6 @@ export type VendorUpdateOneRequiredWithoutProductsNestedInput = {
       upsert?: Prisma.VendorUpsertWithoutProductsInput
       connect?: Prisma.VendorWhereUniqueInput
       update?: Prisma.XOR<Prisma.XOR<Prisma.VendorUpdateToOneWithWhereWithoutProductsInput, Prisma.VendorUpdateWithoutProductsInput>, Prisma.VendorUncheckedUpdateWithoutProductsInput>
-    };
-export type VendorCreateNestedManyWithoutOwnerInput = {
-      create?: Prisma.XOR<Prisma.VendorCreateWithoutOwnerInput, Prisma.VendorUncheckedCreateWithoutOwnerInput> | Prisma.VendorCreateWithoutOwnerInput[] | Prisma.VendorUncheckedCreateWithoutOwnerInput[]
-      connectOrCreate?: Prisma.VendorCreateOrConnectWithoutOwnerInput | Prisma.VendorCreateOrConnectWithoutOwnerInput[]
-      createMany?: Prisma.VendorCreateManyOwnerInputEnvelope
-      connect?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-    };
-export type VendorUncheckedCreateNestedManyWithoutOwnerInput = {
-      create?: Prisma.XOR<Prisma.VendorCreateWithoutOwnerInput, Prisma.VendorUncheckedCreateWithoutOwnerInput> | Prisma.VendorCreateWithoutOwnerInput[] | Prisma.VendorUncheckedCreateWithoutOwnerInput[]
-      connectOrCreate?: Prisma.VendorCreateOrConnectWithoutOwnerInput | Prisma.VendorCreateOrConnectWithoutOwnerInput[]
-      createMany?: Prisma.VendorCreateManyOwnerInputEnvelope
-      connect?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-    };
-export type VendorUpdateManyWithoutOwnerNestedInput = {
-      create?: Prisma.XOR<Prisma.VendorCreateWithoutOwnerInput, Prisma.VendorUncheckedCreateWithoutOwnerInput> | Prisma.VendorCreateWithoutOwnerInput[] | Prisma.VendorUncheckedCreateWithoutOwnerInput[]
-      connectOrCreate?: Prisma.VendorCreateOrConnectWithoutOwnerInput | Prisma.VendorCreateOrConnectWithoutOwnerInput[]
-      upsert?: Prisma.VendorUpsertWithWhereUniqueWithoutOwnerInput | Prisma.VendorUpsertWithWhereUniqueWithoutOwnerInput[]
-      createMany?: Prisma.VendorCreateManyOwnerInputEnvelope
-      set?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      disconnect?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      delete?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      connect?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      update?: Prisma.VendorUpdateWithWhereUniqueWithoutOwnerInput | Prisma.VendorUpdateWithWhereUniqueWithoutOwnerInput[]
-      updateMany?: Prisma.VendorUpdateManyWithWhereWithoutOwnerInput | Prisma.VendorUpdateManyWithWhereWithoutOwnerInput[]
-      deleteMany?: Prisma.VendorScalarWhereInput | Prisma.VendorScalarWhereInput[]
-    };
-export type VendorUncheckedUpdateManyWithoutOwnerNestedInput = {
-      create?: Prisma.XOR<Prisma.VendorCreateWithoutOwnerInput, Prisma.VendorUncheckedCreateWithoutOwnerInput> | Prisma.VendorCreateWithoutOwnerInput[] | Prisma.VendorUncheckedCreateWithoutOwnerInput[]
-      connectOrCreate?: Prisma.VendorCreateOrConnectWithoutOwnerInput | Prisma.VendorCreateOrConnectWithoutOwnerInput[]
-      upsert?: Prisma.VendorUpsertWithWhereUniqueWithoutOwnerInput | Prisma.VendorUpsertWithWhereUniqueWithoutOwnerInput[]
-      createMany?: Prisma.VendorCreateManyOwnerInputEnvelope
-      set?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      disconnect?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      delete?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      connect?: Prisma.VendorWhereUniqueInput | Prisma.VendorWhereUniqueInput[]
-      update?: Prisma.VendorUpdateWithWhereUniqueWithoutOwnerInput | Prisma.VendorUpdateWithWhereUniqueWithoutOwnerInput[]
-      updateMany?: Prisma.VendorUpdateManyWithWhereWithoutOwnerInput | Prisma.VendorUpdateManyWithWhereWithoutOwnerInput[]
-      deleteMany?: Prisma.VendorScalarWhereInput | Prisma.VendorScalarWhereInput[]
     };
 export type EnumVendorStatusFieldUpdateOperationsInput = {
       set?: $Enums.VendorStatus
@@ -432,7 +362,6 @@ export type VendorCreateWithoutProductsInput = {
       status?: $Enums.VendorStatus
       createdAt?: Date | string
       updatedAt?: Date | string
-      owner: Prisma.UserCreateNestedOneWithoutOwnedVendorsInput
       users?: Prisma.VendorUserCreateNestedManyWithoutVendorInput
     };
 export type VendorUncheckedCreateWithoutProductsInput = {
@@ -440,7 +369,6 @@ export type VendorUncheckedCreateWithoutProductsInput = {
       name: string
       slug: string
       description?: string | null
-      ownerId: string
       status?: $Enums.VendorStatus
       createdAt?: Date | string
       updatedAt?: Date | string
@@ -467,7 +395,6 @@ export type VendorUpdateWithoutProductsInput = {
       status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      owner?: Prisma.UserUpdateOneRequiredWithoutOwnedVendorsNestedInput
       users?: Prisma.VendorUserUpdateManyWithoutVendorNestedInput
     };
 export type VendorUncheckedUpdateWithoutProductsInput = {
@@ -475,67 +402,10 @@ export type VendorUncheckedUpdateWithoutProductsInput = {
       name?: Prisma.StringFieldUpdateOperationsInput | string
       slug?: Prisma.StringFieldUpdateOperationsInput | string
       description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-      ownerId?: Prisma.StringFieldUpdateOperationsInput | string
       status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       users?: Prisma.VendorUserUncheckedUpdateManyWithoutVendorNestedInput
-    };
-export type VendorCreateWithoutOwnerInput = {
-      id?: string
-      name: string
-      slug: string
-      description?: string | null
-      status?: $Enums.VendorStatus
-      createdAt?: Date | string
-      updatedAt?: Date | string
-      users?: Prisma.VendorUserCreateNestedManyWithoutVendorInput
-      products?: Prisma.ProductCreateNestedManyWithoutVendorInput
-    };
-export type VendorUncheckedCreateWithoutOwnerInput = {
-      id?: string
-      name: string
-      slug: string
-      description?: string | null
-      status?: $Enums.VendorStatus
-      createdAt?: Date | string
-      updatedAt?: Date | string
-      users?: Prisma.VendorUserUncheckedCreateNestedManyWithoutVendorInput
-      products?: Prisma.ProductUncheckedCreateNestedManyWithoutVendorInput
-    };
-export type VendorCreateOrConnectWithoutOwnerInput = {
-      where: Prisma.VendorWhereUniqueInput
-      create: Prisma.XOR<Prisma.VendorCreateWithoutOwnerInput, Prisma.VendorUncheckedCreateWithoutOwnerInput>
-    };
-export type VendorCreateManyOwnerInputEnvelope = {
-      data: Prisma.VendorCreateManyOwnerInput | Prisma.VendorCreateManyOwnerInput[]
-      skipDuplicates?: boolean
-    };
-export type VendorUpsertWithWhereUniqueWithoutOwnerInput = {
-      where: Prisma.VendorWhereUniqueInput
-      update: Prisma.XOR<Prisma.VendorUpdateWithoutOwnerInput, Prisma.VendorUncheckedUpdateWithoutOwnerInput>
-      create: Prisma.XOR<Prisma.VendorCreateWithoutOwnerInput, Prisma.VendorUncheckedCreateWithoutOwnerInput>
-    };
-export type VendorUpdateWithWhereUniqueWithoutOwnerInput = {
-      where: Prisma.VendorWhereUniqueInput
-      data: Prisma.XOR<Prisma.VendorUpdateWithoutOwnerInput, Prisma.VendorUncheckedUpdateWithoutOwnerInput>
-    };
-export type VendorUpdateManyWithWhereWithoutOwnerInput = {
-      where: Prisma.VendorScalarWhereInput
-      data: Prisma.XOR<Prisma.VendorUpdateManyMutationInput, Prisma.VendorUncheckedUpdateManyWithoutOwnerInput>
-    };
-export type VendorScalarWhereInput = {
-      AND?: Prisma.VendorScalarWhereInput | Prisma.VendorScalarWhereInput[]
-      OR?: Prisma.VendorScalarWhereInput[]
-      NOT?: Prisma.VendorScalarWhereInput | Prisma.VendorScalarWhereInput[]
-      id?: Prisma.StringFilter<"Vendor"> | string
-      name?: Prisma.StringFilter<"Vendor"> | string
-      slug?: Prisma.StringFilter<"Vendor"> | string
-      description?: Prisma.StringNullableFilter<"Vendor"> | string | null
-      ownerId?: Prisma.StringFilter<"Vendor"> | string
-      status?: Prisma.EnumVendorStatusFilter<"Vendor"> | $Enums.VendorStatus
-      createdAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
-      updatedAt?: Prisma.DateTimeFilter<"Vendor"> | Date | string
     };
 export type VendorCreateWithoutUsersInput = {
       id?: string
@@ -545,7 +415,6 @@ export type VendorCreateWithoutUsersInput = {
       status?: $Enums.VendorStatus
       createdAt?: Date | string
       updatedAt?: Date | string
-      owner: Prisma.UserCreateNestedOneWithoutOwnedVendorsInput
       products?: Prisma.ProductCreateNestedManyWithoutVendorInput
     };
 export type VendorUncheckedCreateWithoutUsersInput = {
@@ -553,7 +422,6 @@ export type VendorUncheckedCreateWithoutUsersInput = {
       name: string
       slug: string
       description?: string | null
-      ownerId: string
       status?: $Enums.VendorStatus
       createdAt?: Date | string
       updatedAt?: Date | string
@@ -580,7 +448,6 @@ export type VendorUpdateWithoutUsersInput = {
       status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      owner?: Prisma.UserUpdateOneRequiredWithoutOwnedVendorsNestedInput
       products?: Prisma.ProductUpdateManyWithoutVendorNestedInput
     };
 export type VendorUncheckedUpdateWithoutUsersInput = {
@@ -588,51 +455,10 @@ export type VendorUncheckedUpdateWithoutUsersInput = {
       name?: Prisma.StringFieldUpdateOperationsInput | string
       slug?: Prisma.StringFieldUpdateOperationsInput | string
       description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-      ownerId?: Prisma.StringFieldUpdateOperationsInput | string
       status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
       createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       products?: Prisma.ProductUncheckedUpdateManyWithoutVendorNestedInput
-    };
-export type VendorCreateManyOwnerInput = {
-      id?: string
-      name: string
-      slug: string
-      description?: string | null
-      status?: $Enums.VendorStatus
-      createdAt?: Date | string
-      updatedAt?: Date | string
-    };
-export type VendorUpdateWithoutOwnerInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      name?: Prisma.StringFieldUpdateOperationsInput | string
-      slug?: Prisma.StringFieldUpdateOperationsInput | string
-      description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-      status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      users?: Prisma.VendorUserUpdateManyWithoutVendorNestedInput
-      products?: Prisma.ProductUpdateManyWithoutVendorNestedInput
-    };
-export type VendorUncheckedUpdateWithoutOwnerInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      name?: Prisma.StringFieldUpdateOperationsInput | string
-      slug?: Prisma.StringFieldUpdateOperationsInput | string
-      description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-      status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      users?: Prisma.VendorUserUncheckedUpdateManyWithoutVendorNestedInput
-      products?: Prisma.ProductUncheckedUpdateManyWithoutVendorNestedInput
-    };
-export type VendorUncheckedUpdateManyWithoutOwnerInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      name?: Prisma.StringFieldUpdateOperationsInput | string
-      slug?: Prisma.StringFieldUpdateOperationsInput | string
-      description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-      status?: Prisma.EnumVendorStatusFieldUpdateOperationsInput | $Enums.VendorStatus
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
     };
 /**
  * Count Type VendorCountOutputType
@@ -671,11 +497,9 @@ export type VendorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
       name?: boolean
       slug?: boolean
       description?: boolean
-      ownerId?: boolean
       status?: boolean
       createdAt?: boolean
       updatedAt?: boolean
-      owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
       users?: boolean | Prisma.Vendor$usersArgs<ExtArgs>
       products?: boolean | Prisma.Vendor$productsArgs<ExtArgs>
       _count?: boolean | Prisma.VendorCountOutputTypeDefaultArgs<ExtArgs>
@@ -685,50 +509,39 @@ export type VendorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
       name?: boolean
       slug?: boolean
       description?: boolean
-      ownerId?: boolean
       status?: boolean
       createdAt?: boolean
       updatedAt?: boolean
-      owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["vendor"]>;
 export type VendorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
       id?: boolean
       name?: boolean
       slug?: boolean
       description?: boolean
-      ownerId?: boolean
       status?: boolean
       createdAt?: boolean
       updatedAt?: boolean
-      owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["vendor"]>;
 export type VendorSelectScalar = {
       id?: boolean
       name?: boolean
       slug?: boolean
       description?: boolean
-      ownerId?: boolean
       status?: boolean
       createdAt?: boolean
       updatedAt?: boolean
     };
-export type VendorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "ownerId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["vendor"]>;
+export type VendorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "description" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["vendor"]>;
 export type VendorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
       users?: boolean | Prisma.Vendor$usersArgs<ExtArgs>
       products?: boolean | Prisma.Vendor$productsArgs<ExtArgs>
       _count?: boolean | Prisma.VendorCountOutputTypeDefaultArgs<ExtArgs>
     };
-export type VendorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-    };
-export type VendorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-    };
+export type VendorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
+export type VendorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {};
 export type $VendorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       name: "Vendor"
       objects: {
-        owner: Prisma.$UserPayload<ExtArgs>
         users: Prisma.$VendorUserPayload<ExtArgs>[]
         products: Prisma.$ProductPayload<ExtArgs>[]
       }
@@ -737,7 +550,6 @@ export type $VendorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
         name: string
         slug: string
         description: string | null
-        ownerId: string
         status: $Enums.VendorStatus
         createdAt: Date
         updatedAt: Date
@@ -1092,7 +904,6 @@ export interface VendorDelegate<ExtArgs extends runtime.Types.Extensions.Interna
  */
 export interface Prisma__VendorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise";
-    owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>;
     users<T extends Prisma.Vendor$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vendor$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     products<T extends Prisma.Vendor$productsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Vendor$productsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
@@ -1125,7 +936,6 @@ export interface VendorFieldRefs {
     readonly name: Prisma.FieldRef<"Vendor", 'String'>;
     readonly slug: Prisma.FieldRef<"Vendor", 'String'>;
     readonly description: Prisma.FieldRef<"Vendor", 'String'>;
-    readonly ownerId: Prisma.FieldRef<"Vendor", 'String'>;
     readonly status: Prisma.FieldRef<"Vendor", 'VendorStatus'>;
     readonly createdAt: Prisma.FieldRef<"Vendor", 'DateTime'>;
     readonly updatedAt: Prisma.FieldRef<"Vendor", 'DateTime'>;
@@ -1370,10 +1180,6 @@ export type VendorCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
        */
       data: Prisma.VendorCreateManyInput | Prisma.VendorCreateManyInput[]
       skipDuplicates?: boolean
-      /**
-       * Choose, which related nodes to fetch as well
-       */
-      include?: Prisma.VendorIncludeCreateManyAndReturn<ExtArgs> | null
     };
 /**
  * Vendor update
@@ -1441,10 +1247,6 @@ export type VendorUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
        * Limit how many Vendors to update.
        */
       limit?: number
-      /**
-       * Choose, which related nodes to fetch as well
-       */
-      include?: Prisma.VendorIncludeUpdateManyAndReturn<ExtArgs> | null
     };
 /**
  * Vendor upsert

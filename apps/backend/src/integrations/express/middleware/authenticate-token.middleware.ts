@@ -11,7 +11,7 @@ export function authenticateTokenMiddleware(req: AuthenticatedRequest, res: Resp
 
   if (!token) throw new HttpError(401, 'No token provided');
 
-  const user = verifyAccessToken(token);
+  const {user} = verifyAccessToken(token);
   const { userAgent } = getRequestIpUserAgent(req);
 
   if (user.userAgent !== userAgent) throw new HttpError(403, 'User-Agent mismatch');

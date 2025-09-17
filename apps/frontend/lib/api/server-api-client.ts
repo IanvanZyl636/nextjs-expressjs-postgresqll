@@ -1,6 +1,7 @@
 import 'server-only';
 import { getSession } from '../auth';
 import { headers } from "next/headers";
+import { NextResponse } from 'next/server';
 
 const API_URL = process.env.API_URL!;
 
@@ -31,5 +32,5 @@ export async function serverApiFetch(path: string, opts: ServerApiOpts = {}) {
     headers: proxyReqHeaders,
     cache,
     credentials: "include"
-  });
+  });  
 }

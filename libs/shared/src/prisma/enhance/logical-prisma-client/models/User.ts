@@ -176,7 +176,6 @@ export type UserWhereInput = {
       refreshTokens?: Prisma.TokenListRelationFilter
       customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
       ratings?: Prisma.RatingListRelationFilter
-      ownedVendors?: Prisma.VendorListRelationFilter
       vendorMemberships?: Prisma.VendorUserListRelationFilter
     };
 export type UserOrderByWithRelationInput = {
@@ -190,7 +189,6 @@ export type UserOrderByWithRelationInput = {
       refreshTokens?: Prisma.TokenOrderByRelationAggregateInput
       customer?: Prisma.CustomerOrderByWithRelationInput
       ratings?: Prisma.RatingOrderByRelationAggregateInput
-      ownedVendors?: Prisma.VendorOrderByRelationAggregateInput
       vendorMemberships?: Prisma.VendorUserOrderByRelationAggregateInput
     };
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -207,7 +205,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
       refreshTokens?: Prisma.TokenListRelationFilter
       customer?: Prisma.XOR<Prisma.CustomerNullableScalarRelationFilter, Prisma.CustomerWhereInput> | null
       ratings?: Prisma.RatingListRelationFilter
-      ownedVendors?: Prisma.VendorListRelationFilter
       vendorMemberships?: Prisma.VendorUserListRelationFilter
     }, "id" | "email">;
 export type UserOrderByWithAggregationInput = {
@@ -245,7 +242,6 @@ export type UserCreateInput = {
       refreshTokens?: Prisma.TokenCreateNestedManyWithoutUserInput
       customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
       ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserCreateNestedManyWithoutUserInput
     };
 export type UserUncheckedCreateInput = {
@@ -259,7 +255,6 @@ export type UserUncheckedCreateInput = {
       refreshTokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
       customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
       ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorUncheckedCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserUncheckedCreateNestedManyWithoutUserInput
     };
 export type UserUpdateInput = {
@@ -273,7 +268,6 @@ export type UserUpdateInput = {
       refreshTokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
       customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
       ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUpdateManyWithoutOwnerNestedInput
       vendorMemberships?: Prisma.VendorUserUpdateManyWithoutUserNestedInput
     };
 export type UserUncheckedUpdateInput = {
@@ -287,7 +281,6 @@ export type UserUncheckedUpdateInput = {
       refreshTokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
       customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
       ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUncheckedUpdateManyWithoutOwnerNestedInput
       vendorMemberships?: Prisma.VendorUserUncheckedUpdateManyWithoutUserNestedInput
     };
 export type UserCreateManyInput = {
@@ -387,18 +380,6 @@ export type UserUpdateOneRequiredWithoutRatingsNestedInput = {
       connect?: Prisma.UserWhereUniqueInput
       update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRatingsInput, Prisma.UserUpdateWithoutRatingsInput>, Prisma.UserUncheckedUpdateWithoutRatingsInput>
     };
-export type UserCreateNestedOneWithoutOwnedVendorsInput = {
-      create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedVendorsInput, Prisma.UserUncheckedCreateWithoutOwnedVendorsInput>
-      connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedVendorsInput
-      connect?: Prisma.UserWhereUniqueInput
-    };
-export type UserUpdateOneRequiredWithoutOwnedVendorsNestedInput = {
-      create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedVendorsInput, Prisma.UserUncheckedCreateWithoutOwnedVendorsInput>
-      connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedVendorsInput
-      upsert?: Prisma.UserUpsertWithoutOwnedVendorsInput
-      connect?: Prisma.UserWhereUniqueInput
-      update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedVendorsInput, Prisma.UserUpdateWithoutOwnedVendorsInput>, Prisma.UserUncheckedUpdateWithoutOwnedVendorsInput>
-    };
 export type UserCreateNestedOneWithoutVendorMembershipsInput = {
       create?: Prisma.XOR<Prisma.UserCreateWithoutVendorMembershipsInput, Prisma.UserUncheckedCreateWithoutVendorMembershipsInput>
       connectOrCreate?: Prisma.UserCreateOrConnectWithoutVendorMembershipsInput
@@ -421,7 +402,6 @@ export type UserCreateWithoutCustomerInput = {
       updatedAt?: Date | string
       refreshTokens?: Prisma.TokenCreateNestedManyWithoutUserInput
       ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserCreateNestedManyWithoutUserInput
     };
 export type UserUncheckedCreateWithoutCustomerInput = {
@@ -434,7 +414,6 @@ export type UserUncheckedCreateWithoutCustomerInput = {
       updatedAt?: Date | string
       refreshTokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
       ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorUncheckedCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserUncheckedCreateNestedManyWithoutUserInput
     };
 export type UserCreateOrConnectWithoutCustomerInput = {
@@ -460,7 +439,6 @@ export type UserUpdateWithoutCustomerInput = {
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       refreshTokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
       ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUpdateManyWithoutOwnerNestedInput
       vendorMemberships?: Prisma.VendorUserUpdateManyWithoutUserNestedInput
     };
 export type UserUncheckedUpdateWithoutCustomerInput = {
@@ -473,7 +451,6 @@ export type UserUncheckedUpdateWithoutCustomerInput = {
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       refreshTokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
       ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUncheckedUpdateManyWithoutOwnerNestedInput
       vendorMemberships?: Prisma.VendorUserUncheckedUpdateManyWithoutUserNestedInput
     };
 export type UserCreateWithoutRefreshTokensInput = {
@@ -486,7 +463,6 @@ export type UserCreateWithoutRefreshTokensInput = {
       updatedAt?: Date | string
       customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
       ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserCreateNestedManyWithoutUserInput
     };
 export type UserUncheckedCreateWithoutRefreshTokensInput = {
@@ -499,7 +475,6 @@ export type UserUncheckedCreateWithoutRefreshTokensInput = {
       updatedAt?: Date | string
       customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
       ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorUncheckedCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserUncheckedCreateNestedManyWithoutUserInput
     };
 export type UserCreateOrConnectWithoutRefreshTokensInput = {
@@ -525,7 +500,6 @@ export type UserUpdateWithoutRefreshTokensInput = {
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
       ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUpdateManyWithoutOwnerNestedInput
       vendorMemberships?: Prisma.VendorUserUpdateManyWithoutUserNestedInput
     };
 export type UserUncheckedUpdateWithoutRefreshTokensInput = {
@@ -538,7 +512,6 @@ export type UserUncheckedUpdateWithoutRefreshTokensInput = {
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
       ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUncheckedUpdateManyWithoutOwnerNestedInput
       vendorMemberships?: Prisma.VendorUserUncheckedUpdateManyWithoutUserNestedInput
     };
 export type UserCreateWithoutRatingsInput = {
@@ -551,7 +524,6 @@ export type UserCreateWithoutRatingsInput = {
       updatedAt?: Date | string
       refreshTokens?: Prisma.TokenCreateNestedManyWithoutUserInput
       customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
-      ownedVendors?: Prisma.VendorCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserCreateNestedManyWithoutUserInput
     };
 export type UserUncheckedCreateWithoutRatingsInput = {
@@ -564,7 +536,6 @@ export type UserUncheckedCreateWithoutRatingsInput = {
       updatedAt?: Date | string
       refreshTokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
       customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
-      ownedVendors?: Prisma.VendorUncheckedCreateNestedManyWithoutOwnerInput
       vendorMemberships?: Prisma.VendorUserUncheckedCreateNestedManyWithoutUserInput
     };
 export type UserCreateOrConnectWithoutRatingsInput = {
@@ -590,7 +561,6 @@ export type UserUpdateWithoutRatingsInput = {
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       refreshTokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
       customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUpdateManyWithoutOwnerNestedInput
       vendorMemberships?: Prisma.VendorUserUpdateManyWithoutUserNestedInput
     };
 export type UserUncheckedUpdateWithoutRatingsInput = {
@@ -603,72 +573,6 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
       updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
       refreshTokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
       customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUncheckedUpdateManyWithoutOwnerNestedInput
-      vendorMemberships?: Prisma.VendorUserUncheckedUpdateManyWithoutUserNestedInput
-    };
-export type UserCreateWithoutOwnedVendorsInput = {
-      id?: string
-      email: string
-      password: string
-      role?: $Enums.Role
-      emailVerifiedAt?: Date | string | null
-      createdAt?: Date | string
-      updatedAt?: Date | string
-      refreshTokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-      customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
-      ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
-      vendorMemberships?: Prisma.VendorUserCreateNestedManyWithoutUserInput
-    };
-export type UserUncheckedCreateWithoutOwnedVendorsInput = {
-      id?: string
-      email: string
-      password: string
-      role?: $Enums.Role
-      emailVerifiedAt?: Date | string | null
-      createdAt?: Date | string
-      updatedAt?: Date | string
-      refreshTokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-      customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
-      ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
-      vendorMemberships?: Prisma.VendorUserUncheckedCreateNestedManyWithoutUserInput
-    };
-export type UserCreateOrConnectWithoutOwnedVendorsInput = {
-      where: Prisma.UserWhereUniqueInput
-      create: Prisma.XOR<Prisma.UserCreateWithoutOwnedVendorsInput, Prisma.UserUncheckedCreateWithoutOwnedVendorsInput>
-    };
-export type UserUpsertWithoutOwnedVendorsInput = {
-      update: Prisma.XOR<Prisma.UserUpdateWithoutOwnedVendorsInput, Prisma.UserUncheckedUpdateWithoutOwnedVendorsInput>
-      create: Prisma.XOR<Prisma.UserCreateWithoutOwnedVendorsInput, Prisma.UserUncheckedCreateWithoutOwnedVendorsInput>
-      where?: Prisma.UserWhereInput
-    };
-export type UserUpdateToOneWithWhereWithoutOwnedVendorsInput = {
-      where?: Prisma.UserWhereInput
-      data: Prisma.XOR<Prisma.UserUpdateWithoutOwnedVendorsInput, Prisma.UserUncheckedUpdateWithoutOwnedVendorsInput>
-    };
-export type UserUpdateWithoutOwnedVendorsInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      email?: Prisma.StringFieldUpdateOperationsInput | string
-      password?: Prisma.StringFieldUpdateOperationsInput | string
-      role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-      emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      refreshTokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-      customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
-      ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
-      vendorMemberships?: Prisma.VendorUserUpdateManyWithoutUserNestedInput
-    };
-export type UserUncheckedUpdateWithoutOwnedVendorsInput = {
-      id?: Prisma.StringFieldUpdateOperationsInput | string
-      email?: Prisma.StringFieldUpdateOperationsInput | string
-      password?: Prisma.StringFieldUpdateOperationsInput | string
-      role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-      emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-      createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-      refreshTokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-      customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
-      ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
       vendorMemberships?: Prisma.VendorUserUncheckedUpdateManyWithoutUserNestedInput
     };
 export type UserCreateWithoutVendorMembershipsInput = {
@@ -682,7 +586,6 @@ export type UserCreateWithoutVendorMembershipsInput = {
       refreshTokens?: Prisma.TokenCreateNestedManyWithoutUserInput
       customer?: Prisma.CustomerCreateNestedOneWithoutUserInput
       ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorCreateNestedManyWithoutOwnerInput
     };
 export type UserUncheckedCreateWithoutVendorMembershipsInput = {
       id?: string
@@ -695,7 +598,6 @@ export type UserUncheckedCreateWithoutVendorMembershipsInput = {
       refreshTokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
       customer?: Prisma.CustomerUncheckedCreateNestedOneWithoutUserInput
       ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
-      ownedVendors?: Prisma.VendorUncheckedCreateNestedManyWithoutOwnerInput
     };
 export type UserCreateOrConnectWithoutVendorMembershipsInput = {
       where: Prisma.UserWhereUniqueInput
@@ -721,7 +623,6 @@ export type UserUpdateWithoutVendorMembershipsInput = {
       refreshTokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
       customer?: Prisma.CustomerUpdateOneWithoutUserNestedInput
       ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUpdateManyWithoutOwnerNestedInput
     };
 export type UserUncheckedUpdateWithoutVendorMembershipsInput = {
       id?: Prisma.StringFieldUpdateOperationsInput | string
@@ -734,7 +635,6 @@ export type UserUncheckedUpdateWithoutVendorMembershipsInput = {
       refreshTokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
       customer?: Prisma.CustomerUncheckedUpdateOneWithoutUserNestedInput
       ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
-      ownedVendors?: Prisma.VendorUncheckedUpdateManyWithoutOwnerNestedInput
     };
 /**
  * Count Type UserCountOutputType
@@ -742,13 +642,11 @@ export type UserUncheckedUpdateWithoutVendorMembershipsInput = {
 export type UserCountOutputType = {
       refreshTokens: number
       ratings: number
-      ownedVendors: number
       vendorMemberships: number
     };
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
       ratings?: boolean | UserCountOutputTypeCountRatingsArgs
-      ownedVendors?: boolean | UserCountOutputTypeCountOwnedVendorsArgs
       vendorMemberships?: boolean | UserCountOutputTypeCountVendorMembershipsArgs
     };
 /**
@@ -775,12 +673,6 @@ export type UserCountOutputTypeCountRatingsArgs<ExtArgs extends runtime.Types.Ex
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountOwnedVendorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      where?: Prisma.VendorWhereInput
-    };
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountVendorMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
       where?: Prisma.VendorUserWhereInput
     };
@@ -795,7 +687,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
       refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
       customer?: boolean | Prisma.User$customerArgs<ExtArgs>
       ratings?: boolean | Prisma.User$ratingsArgs<ExtArgs>
-      ownedVendors?: boolean | Prisma.User$ownedVendorsArgs<ExtArgs>
       vendorMemberships?: boolean | Prisma.User$vendorMembershipsArgs<ExtArgs>
       _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
     }, ExtArgs["result"]["user"]>;
@@ -831,7 +722,6 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
       refreshTokens?: boolean | Prisma.User$refreshTokensArgs<ExtArgs>
       customer?: boolean | Prisma.User$customerArgs<ExtArgs>
       ratings?: boolean | Prisma.User$ratingsArgs<ExtArgs>
-      ownedVendors?: boolean | Prisma.User$ownedVendorsArgs<ExtArgs>
       vendorMemberships?: boolean | Prisma.User$vendorMembershipsArgs<ExtArgs>
       _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
     };
@@ -843,7 +733,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
         refreshTokens: Prisma.$TokenPayload<ExtArgs>[]
         customer: Prisma.$CustomerPayload<ExtArgs> | null
         ratings: Prisma.$RatingPayload<ExtArgs>[]
-        ownedVendors: Prisma.$VendorPayload<ExtArgs>[]
         vendorMemberships: Prisma.$VendorUserPayload<ExtArgs>[]
       }
       scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1208,7 +1097,6 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
     refreshTokens<T extends Prisma.User$refreshTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     customer<T extends Prisma.User$customerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$customerArgs<ExtArgs>>): Prisma.Prisma__CustomerClient<runtime.Types.Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>;
     ratings<T extends Prisma.User$ratingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
-    ownedVendors<T extends Prisma.User$ownedVendorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedVendorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     vendorMemberships<T extends Prisma.User$vendorMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$vendorMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>;
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1678,29 +1566,6 @@ export type User$ratingsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
       take?: number
       skip?: number
       distinct?: Prisma.RatingScalarFieldEnum | Prisma.RatingScalarFieldEnum[]
-    };
-/**
- * User.ownedVendors
- */
-export type User$ownedVendorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-      /**
-       * Select specific fields to fetch from the Vendor
-       */
-      select?: Prisma.VendorSelect<ExtArgs> | null
-      /**
-       * Omit specific fields from the Vendor
-       */
-      omit?: Prisma.VendorOmit<ExtArgs> | null
-      /**
-       * Choose, which related nodes to fetch as well
-       */
-      include?: Prisma.VendorInclude<ExtArgs> | null
-      where?: Prisma.VendorWhereInput
-      orderBy?: Prisma.VendorOrderByWithRelationInput | Prisma.VendorOrderByWithRelationInput[]
-      cursor?: Prisma.VendorWhereUniqueInput
-      take?: number
-      skip?: number
-      distinct?: Prisma.VendorScalarFieldEnum | Prisma.VendorScalarFieldEnum[]
     };
 /**
  * User.vendorMemberships

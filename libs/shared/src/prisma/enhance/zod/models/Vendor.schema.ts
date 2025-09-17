@@ -19,13 +19,8 @@ const baseSchema = z.object({
 }
 ).strict();
 const relationSchema = z.object({
-    owner: z.record(z.unknown()),
     users: z.array(z.unknown()).optional(),
     products: z.array(z.unknown()).optional(),
-}
-);
-const fkSchema = z.object({
-    ownerId: z.string(),
 }
 );
 
@@ -38,7 +33,7 @@ export const VendorScalarSchema = baseSchema;
 /**
  * `Vendor` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const VendorSchema = VendorScalarSchema.merge(fkSchema).merge(relationSchema.partial());
+export const VendorSchema = VendorScalarSchema.merge(relationSchema.partial());
 
 
 /**
@@ -74,7 +69,9 @@ export const VendorCreateScalarSchema = baseSchema.partial({
 /**
  * `Vendor` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const VendorCreateSchema = VendorCreateScalarSchema.merge(fkSchema);
+export const VendorCreateSchema = baseSchema.partial({
+    id: true, status: true, createdAt: true, updatedAt: true
+});
 
 
 /**
@@ -86,5 +83,5 @@ export const VendorUpdateScalarSchema = baseSchema.partial();
 /**
  * `Vendor` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const VendorUpdateSchema = VendorUpdateScalarSchema.merge(fkSchema.partial());
+export const VendorUpdateSchema = VendorUpdateScalarSchema;
 

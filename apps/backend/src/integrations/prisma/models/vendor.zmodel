@@ -19,12 +19,9 @@ model Vendor {
   id          String     @id @default(uuid())
   name        String
   slug        String     @unique
-  description String?
-  owner       User       @relation("VendorOwner", fields: [ownerId], references: [id])
-  ownerId     String
+  description String?  
 
   users       VendorUser[]
-
   products    Product[]
 
   status      VendorStatus @default(PENDING)

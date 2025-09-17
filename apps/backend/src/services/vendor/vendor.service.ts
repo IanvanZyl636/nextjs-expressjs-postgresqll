@@ -1,7 +1,9 @@
+
+import { VendorUpsertArgs } from "@nextjs-expressjs-postgresql/shared/prisma/enhance/models";
 import { prisma } from "../../integrations/prisma";
 import { PaginationParams } from "@nextjs-expressjs-postgresql/shared/types/query.types";
 
-export async function upsertVendor(data: any) {
+export async function upsertVendor(data: VendorUpsertArgs) {
     return prisma().vendor.upsert({
         ...data,
         include: { users: { include: { user: true } }, products: true },

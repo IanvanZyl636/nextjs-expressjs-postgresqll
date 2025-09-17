@@ -952,13 +952,6 @@ const metadata = {
                     isDataModel: true,
                     isArray: true,
                     backLink: 'user',
-                }, ownedVendors: {
-                    name: "ownedVendors",
-                    type: "Vendor",
-                    isDataModel: true,
-                    isArray: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "VendorOwner" }] }],
-                    backLink: 'owner',
                 }, vendorMemberships: {
                     name: "vendorMemberships",
                     type: "VendorUser",
@@ -1151,19 +1144,6 @@ const metadata = {
                     name: "description",
                     type: "String",
                     isOptional: true,
-                }, owner: {
-                    name: "owner",
-                    type: "User",
-                    isDataModel: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "VendorOwner" }, { "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'ownedVendors',
-                    isRelationOwner: true,
-                    foreignKeyMapping: { "id": "ownerId" },
-                }, ownerId: {
-                    name: "ownerId",
-                    type: "String",
-                    isForeignKey: true,
-                    relationField: 'owner',
                 }, users: {
                     name: "users",
                     type: "VendorUser",

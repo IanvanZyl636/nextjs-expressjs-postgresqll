@@ -5,7 +5,7 @@ export async function MenuUser(){
     const session = await getSession();
      
     return (<>
-        Session: {session?.userId}
-        <SetClientSession session={session}></SetClientSession>
+        Session: {session?.user.userId}
+        <SetClientSession session={session?.user}></SetClientSession>
     </>)
 }

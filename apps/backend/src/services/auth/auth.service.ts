@@ -76,7 +76,7 @@ export async function refreshTokenService(refreshToken: string, ip: string, user
     data: {
       type: TokenType.REFRESH,
       token: newRefreshToken,
-      userId: payload.userId,
+      userId: payload.user.userId,
       ip,
       userAgent,
       expiresAt: new Date(Date.now() + ms(process.env.BACKEND_JWT_REFRESH_EXPIRATION as StringValue)),
