@@ -698,14 +698,14 @@ const metadata = {
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, userId: {
-                    name: "userId",
-                    type: "String",
-                    attributes: [{ "name": "@unique", "args": [] }],
-                    isForeignKey: true,
-                    relationField: 'user',
                 }, name: {
                     name: "name",
+                    type: "String",
+                }, email: {
+                    name: "email",
+                    type: "String",
+                }, phoneNumber: {
+                    name: "phoneNumber",
                     type: "String",
                 }, createdAt: {
                     name: "createdAt",
@@ -727,20 +727,38 @@ const metadata = {
                     isDataModel: true,
                     isArray: true,
                     backLink: 'customer',
+                }, userId: {
+                    name: "userId",
+                    type: "String",
+                    isOptional: true,
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'user',
+                }, cartId: {
+                    name: "cartId",
+                    type: "String",
+                    isOptional: true,
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'cart',
+                }, user: {
+                    name: "user",
+                    type: "User",
+                    isDataModel: true,
+                    isOptional: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'customer',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "userId" },
                 }, cart: {
                     name: "cart",
                     type: "Cart",
                     isDataModel: true,
                     isOptional: true,
-                    backLink: 'customer',
-                }, user: {
-                    name: "user",
-                    type: "User",
-                    isDataModel: true,
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
                     backLink: 'customer',
                     isRelationOwner: true,
-                    foreignKeyMapping: { "id": "userId" },
+                    foreignKeyMapping: { "id": "cartId" },
                 },
             }, uniqueConstraints: {
                 id: {
@@ -749,6 +767,9 @@ const metadata = {
                 }, userId: {
                     name: "userId",
                     fields: ["userId"]
+                }, cartId: {
+                    name: "cartId",
+                    fields: ["cartId"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
@@ -819,12 +840,12 @@ const metadata = {
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, customerId: {
-                    name: "customerId",
-                    type: "String",
-                    attributes: [{ "name": "@unique", "args": [] }],
-                    isForeignKey: true,
-                    relationField: 'customer',
+                }, cartItems: {
+                    name: "cartItems",
+                    type: "CartItem",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'cart',
                 }, createdAt: {
                     name: "createdAt",
                     type: "DateTime",
@@ -833,28 +854,21 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, deletedAt: {
+                    name: "deletedAt",
+                    type: "DateTime",
+                    isOptional: true,
                 }, customer: {
                     name: "customer",
                     type: "Customer",
                     isDataModel: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'cart',
-                    isRelationOwner: true,
-                    foreignKeyMapping: { "id": "customerId" },
-                }, cartItems: {
-                    name: "cartItems",
-                    type: "CartItem",
-                    isDataModel: true,
-                    isArray: true,
+                    isOptional: true,
                     backLink: 'cart',
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
-                }, customerId: {
-                    name: "customerId",
-                    fields: ["customerId"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
@@ -871,8 +885,8 @@ const metadata = {
                     type: "String",
                     isForeignKey: true,
                     relationField: 'cart',
-                }, productId: {
-                    name: "productId",
+                }, productVariantId: {
+                    name: "productVariantId",
                     type: "String",
                     isForeignKey: true,
                     relationField: 'productVariant',
@@ -894,7 +908,7 @@ const metadata = {
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
                     backLink: 'cartItems',
                     isRelationOwner: true,
-                    foreignKeyMapping: { "id": "productId" },
+                    foreignKeyMapping: { "id": "productVariantId" },
                 },
             }, uniqueConstraints: {
                 id: {
@@ -902,7 +916,7 @@ const metadata = {
                     fields: ["id"]
                 },
             },
-            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }, { "name": "@@index", "args": [{ "name": "fields", "value": [null] }] }],
         },
         user: {
             name: 'User', fields: {

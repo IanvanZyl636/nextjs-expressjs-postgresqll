@@ -2,23 +2,26 @@ import "./customer.zmodel"
 import "./product.zmodel"
 
 model Cart {
-  id         String     @id @default(uuid())
-  customerId String     @unique
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  customer   Customer   @relation(fields: [customerId], references: [id])
-  cartItems  CartItem[]
+  id        String     @id @default(uuid())  
+  cartItems CartItem[]  
+  
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt  
+  deletedAt  DateTime?   
 
-  @@allow('all', true)
+  customer Customer?
+
+  @@allow('all', true)  
 }
 
 model CartItem {
-  id             String         @id @default(uuid())
-  cartId         String
-  productId      String
-  quantity       Int
-  cart           Cart           @relation(fields: [cartId], references: [id])
-  productVariant ProductVariant @relation(fields: [productId], references: [id])
+  id               String         @id @default(uuid())
+  cartId           String
+  productVariantId String
+  quantity         Int
+  cart             Cart           @relation(fields: [cartId], references: [id])
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
 
   @@allow('all', true)
+  @@index([cartId])
 }

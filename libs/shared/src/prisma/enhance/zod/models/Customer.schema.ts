@@ -9,6 +9,8 @@ import { z } from 'zod';
 const baseSchema = z.object({
     id: z.string(),
     name: z.string(),
+    email: z.string(),
+    phoneNumber: z.string(),
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),
 }
@@ -16,12 +18,13 @@ const baseSchema = z.object({
 const relationSchema = z.object({
     addresses: z.array(z.unknown()).optional(),
     orders: z.array(z.unknown()).optional(),
+    user: z.record(z.unknown()).optional(),
     cart: z.record(z.unknown()).optional(),
-    user: z.record(z.unknown()),
 }
 );
 const fkSchema = z.object({
-    userId: z.string(),
+    userId: z.string().nullish(),
+    cartId: z.string().nullish(),
 }
 );
 
@@ -51,6 +54,8 @@ export const CustomerPrismaCreateSchema = baseSchema.partial().passthrough();
 export const CustomerPrismaUpdateSchema = z.object({
     id: z.string(),
     name: z.string(),
+    email: z.string(),
+    phoneNumber: z.string(),
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date()
 }).partial().passthrough();

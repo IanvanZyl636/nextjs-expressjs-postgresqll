@@ -1,6 +1,7 @@
 import "./customer.zmodel"
 import "./rating.zmodel"
 import "./vendor.zmodel"
+import "./cart.zmodel"
 
 enum Role {
   ADMIN
@@ -25,7 +26,7 @@ model User {
   updatedAt      DateTime @updatedAt
 
   customer       Customer?
-  ratings        Rating[]
+  ratings        Rating[]  
 
   vendorMemberships VendorUser[] @relation("VendorUserMembership")
 

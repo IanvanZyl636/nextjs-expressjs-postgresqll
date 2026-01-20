@@ -10,15 +10,12 @@ const baseSchema = z.object({
     id: z.string(),
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),
+    deletedAt: z.coerce.date().nullish(),
 }
 ).strict();
 const relationSchema = z.object({
-    customer: z.record(z.unknown()),
     cartItems: z.array(z.unknown()).optional(),
-}
-);
-const fkSchema = z.object({
-    customerId: z.string(),
+    customer: z.record(z.unknown()).optional(),
 }
 );
 
@@ -31,7 +28,7 @@ export const CartScalarSchema = baseSchema;
 /**
  * `Cart` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const CartSchema = CartScalarSchema.merge(fkSchema).merge(relationSchema.partial());
+export const CartSchema = CartScalarSchema.merge(relationSchema.partial());
 
 
 /**
@@ -48,7 +45,8 @@ export const CartPrismaCreateSchema = baseSchema.partial().passthrough();
 export const CartPrismaUpdateSchema = z.object({
     id: z.string(),
     createdAt: z.coerce.date().default(() => new Date()),
-    updatedAt: z.coerce.date()
+    updatedAt: z.coerce.date(),
+    deletedAt: z.coerce.date().nullish()
 }).partial().passthrough();
 
 
@@ -63,7 +61,9 @@ export const CartCreateScalarSchema = baseSchema.partial({
 /**
  * `Cart` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const CartCreateSchema = CartCreateScalarSchema.merge(fkSchema);
+export const CartCreateSchema = baseSchema.partial({
+    id: true, createdAt: true, updatedAt: true
+});
 
 
 /**
@@ -75,5 +75,5 @@ export const CartUpdateScalarSchema = baseSchema.partial();
 /**
  * `Cart` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const CartUpdateSchema = CartUpdateScalarSchema.merge(fkSchema.partial());
+export const CartUpdateSchema = CartUpdateScalarSchema;
 

@@ -232,15 +232,18 @@ model OrderItem {
 }
 
 model Customer {
-  id        String    @id() @default(uuid())
-  userId    String    @unique()
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt()
-  addresses Address[]
-  orders    Order[]
-  cart      Cart?
-  user      User      @relation(fields: [userId], references: [id])
+  id          String    @id() @default(uuid())
+  name        String
+  email       String
+  phoneNumber String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt()
+  addresses   Address[]
+  orders      Order[]
+  userId      String?   @unique()
+  cartId      String?   @unique()
+  user        User?     @relation(fields: [userId], references: [id])
+  cart        Cart?     @relation(fields: [cartId], references: [id])
 }
 
 model Address {
@@ -258,21 +261,23 @@ model Address {
 }
 
 model Cart {
-  id         String     @id() @default(uuid())
-  customerId String     @unique()
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt()
-  customer   Customer   @relation(fields: [customerId], references: [id])
-  cartItems  CartItem[]
+  id        String     @id() @default(uuid())
+  cartItems CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt()
+  deletedAt DateTime?
+  customer  Customer?
 }
 
 model CartItem {
-  id             String         @id() @default(uuid())
-  cartId         String
-  productId      String
-  quantity       Int
-  cart           Cart           @relation(fields: [cartId], references: [id])
-  productVariant ProductVariant @relation(fields: [productId], references: [id])
+  id               String         @id() @default(uuid())
+  cartId           String
+  productVariantId String
+  quantity         Int
+  cart             Cart           @relation(fields: [cartId], references: [id])
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+
+  @@index([cartId])
 }
 
 model User {

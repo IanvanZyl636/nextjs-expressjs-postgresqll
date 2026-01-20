@@ -23,7 +23,7 @@ export const initializeExpress = async () => new Promise<void>(resolve => {
 
   app.use('/api', publicAuthRouter);
   app.use('/api', publicMediaRouter);
-  app.use('/api', publicVendorRouter);
+  app.use('/api', publicVendorRouter);  
 
   app.use('/api/protected', authenticateTokenMiddleware);
   app.use('/api/protected', protectedUserRouter);

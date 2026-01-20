@@ -18,7 +18,7 @@ const relationSchema = z.object({
 );
 const fkSchema = z.object({
     cartId: z.string(),
-    productId: z.string(),
+    productVariantId: z.string(),
 }
 );
 

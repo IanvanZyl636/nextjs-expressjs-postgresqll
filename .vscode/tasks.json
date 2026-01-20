@@ -1,13 +1,20 @@
 {
 	"version": "2.0.0",
-	"tasks": [
+	"tasks": [		
 		{
-			"type": "npm",
-			"script": "build",
-			"group": "build",
-			"problemMatcher": [],
 			"label": "build",
-			"detail": "tsc -b"
+			"type": "shell",
+			"command": "npm run build"
+		},
+		{
+			"label": "prisma:reset:force",
+			"type": "shell",
+			"command": "npm run prisma:reset:force"
+		},
+		{
+			"label": "prelaunch-all",
+			"dependsOn": ["build", "prisma:reset:force"],
+			"dependsOrder": "parallel"
 		}
 	]
 }

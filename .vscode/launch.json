@@ -33,7 +33,7 @@
       "cwd": "${workspaceFolder}/apps/backend",    
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       "envFile": "${workspaceFolder}/.env",
-      "preLaunchTask": "build"
+      "preLaunchTask": "prelaunch-all"
     },    
     {
       "name": "Next.js: debug server-side",
