@@ -1,18 +1,18 @@
 import "./customer.zmodel"
 import "./order.zmodel"
+import "./shipping.zmodel"
 
 model Address {
-  id          String   @id @default(uuid())
-  customerId  String
+  id          String   @id @default(uuid())  
   street      String
   city        String
   state       String
   postalCode  String
   country     String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  customer    Customer @relation(fields: [customerId], references: [id])
-  orders      Order[]  @relation("ShippingAddress")
+  updatedAt   DateTime @updatedAt    
+
+  shippingAddress ShippingAddress?
 
   @@allow('all', true)
 }

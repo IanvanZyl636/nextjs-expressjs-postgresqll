@@ -2,22 +2,23 @@ import "./address.zmodel"
 import "./cart.zmodel"
 import "./order.zmodel"
 import "./user.zmodel"
+import "./shipping.zmodel"
 
 model Customer {
-  id           String   @id @default(uuid())  
-  name         String
-  email        String
-  phoneNumber  String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  addresses    Address[]
-  orders       Order[]
-
-  userId       String?  @unique
-  cartId       String?  @unique
+  id                String            @id @default(uuid())
+  firstName         String
+  surname           String
+  email             String
+  userId            String?           @unique
+  cartId            String?           @unique
   
-  user         User?    @relation(fields: [userId], references: [id])
-  cart         Cart?    @relation(fields: [cartId], references: [id])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  shippingAddresses ShippingAddress[]
+  orders            Order[]  
+  user              User?             @relation(fields: [userId], references: [id])
+  cart              Cart?             @relation(fields: [cartId], references: [id])
 
   @@allow('all', true)
 }

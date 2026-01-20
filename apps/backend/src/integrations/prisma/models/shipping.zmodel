@@ -1,0 +1,61 @@
+import "./order.zmodel"
+import "./address.zmodel"
+import "./customer.zmodel"
+
+enum ShippingType {
+    COLLECT
+    COURIER
+}
+
+model ShippingMethod {
+    id        String       @id @default(uuid())
+    name      String
+    type      ShippingType
+    isActive  Boolean      @default(true)
+    flatPrice Decimal
+    createdAt DateTime     @default(now())
+    updatedAt DateTime     @updatedAt
+
+    shipments Shipment[]
+}
+
+model ShippingContactInformation {
+    id              String           @id @default(uuid())
+    firstName       String
+    surname         String
+    phoneNumber     String
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
+
+    shippingAddress ShippingAddress?
+
+    @@allow('all', true)
+}
+
+model ShippingAddress {
+    id                           String                     @id @default(uuid())
+    shippingContactInformationId String                     @unique
+    addressId                    String                     @unique
+    customerId                   String                     @unique
+    createdAt                    DateTime                   @default(now())
+    updatedAt                    DateTime                   @updatedAt
+
+    shippingContactInformation   ShippingContactInformation @relation(fields: [shippingContactInformationId], references: [id])
+    address                      Address                    @relation(fields: [addressId], references: [id])
+    customer                     Customer                   @relation(fields: [customerId], references: [id])
+    shipments                    Shipment[]
+
+    @@allow('all', true)
+}
+
+model Shipment {
+    id                String           @id @default(uuid())
+    shippingMethodId  String
+    shippingAddressId String?
+    comment           String?
+    trackingNumber    String?          @unique
+
+    shippingMethod    ShippingMethod   @relation(fields: [shippingMethodId], references: [id])
+    shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
+    order             Order?
+}
