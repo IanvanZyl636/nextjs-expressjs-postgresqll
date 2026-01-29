@@ -8,15 +8,15 @@
 import { z } from 'zod';
 const baseSchema = z.object({
     id: z.string(),
-    name: z.string(),
+    firstName: z.string(),
+    surname: z.string(),
     email: z.string(),
-    phoneNumber: z.string(),
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),
 }
 ).strict();
 const relationSchema = z.object({
-    addresses: z.array(z.unknown()).optional(),
+    shippingAddresses: z.array(z.unknown()).optional(),
     orders: z.array(z.unknown()).optional(),
     user: z.record(z.unknown()).optional(),
     cart: z.record(z.unknown()).optional(),
@@ -53,9 +53,9 @@ export const CustomerPrismaCreateSchema = baseSchema.partial().passthrough();
  */
 export const CustomerPrismaUpdateSchema = z.object({
     id: z.string(),
-    name: z.string(),
+    firstName: z.string(),
+    surname: z.string(),
     email: z.string(),
-    phoneNumber: z.string(),
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date()
 }).partial().passthrough();

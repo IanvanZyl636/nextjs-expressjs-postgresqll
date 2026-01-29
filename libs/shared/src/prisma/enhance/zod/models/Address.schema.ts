@@ -18,12 +18,7 @@ const baseSchema = z.object({
 }
 ).strict();
 const relationSchema = z.object({
-    customer: z.record(z.unknown()),
-    orders: z.array(z.unknown()).optional(),
-}
-);
-const fkSchema = z.object({
-    customerId: z.string(),
+    shippingAddress: z.record(z.unknown()).optional(),
 }
 );
 
@@ -36,7 +31,7 @@ export const AddressScalarSchema = baseSchema;
 /**
  * `Address` schema including all fields (scalar, foreign key, and relations) and validations.
  */
-export const AddressSchema = AddressScalarSchema.merge(fkSchema).merge(relationSchema.partial());
+export const AddressSchema = AddressScalarSchema.merge(relationSchema.partial());
 
 
 /**
@@ -73,7 +68,9 @@ export const AddressCreateScalarSchema = baseSchema.partial({
 /**
  * `Address` schema for create operations including scalar fields, foreign key fields, and validations.
  */
-export const AddressCreateSchema = AddressCreateScalarSchema.merge(fkSchema);
+export const AddressCreateSchema = baseSchema.partial({
+    id: true, createdAt: true, updatedAt: true
+});
 
 
 /**
@@ -85,5 +82,5 @@ export const AddressUpdateScalarSchema = baseSchema.partial();
 /**
  * `Address` schema for update operations including scalar fields, foreign key fields, and validations.
  */
-export const AddressUpdateSchema = AddressUpdateScalarSchema.merge(fkSchema.partial());
+export const AddressUpdateSchema = AddressUpdateScalarSchema;
 

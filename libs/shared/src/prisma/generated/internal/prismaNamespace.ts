@@ -408,6 +408,10 @@ export const ModelName = {
   OrderItem: 'OrderItem',
   Customer: 'Customer',
   Address: 'Address',
+  ShippingMethod: 'ShippingMethod',
+  ShippingContactInformation: 'ShippingContactInformation',
+  ShippingAddress: 'ShippingAddress',
+  Shipment: 'Shipment',
   Cart: 'Cart',
   CartItem: 'CartItem',
   User: 'User',
@@ -435,7 +439,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "media" | "image" | "video" | "audio" | "document" | "file" | "product" | "productVariant" | "productVariantGalleryMedia" | "productVariantAttachment" | "order" | "orderItem" | "customer" | "address" | "cart" | "cartItem" | "user" | "token" | "session" | "rating" | "vendor" | "vendorUser" | "payment" | "category" | "tag" | "log"
+    modelProps: "media" | "image" | "video" | "audio" | "document" | "file" | "product" | "productVariant" | "productVariantGalleryMedia" | "productVariantAttachment" | "order" | "orderItem" | "customer" | "address" | "shippingMethod" | "shippingContactInformation" | "shippingAddress" | "shipment" | "cart" | "cartItem" | "user" | "token" | "session" | "rating" | "vendor" | "vendorUser" | "payment" | "category" | "tag" | "log"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1472,6 +1476,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.AddressCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AddressCountAggregateOutputType> | number
+        }
+      }
+    }
+    ShippingMethod: {
+      payload: Prisma.$ShippingMethodPayload<ExtArgs>
+      fields: Prisma.ShippingMethodFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShippingMethodFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShippingMethodFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>
+        }
+        findFirst: {
+          args: Prisma.ShippingMethodFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShippingMethodFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>
+        }
+        findMany: {
+          args: Prisma.ShippingMethodFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>[]
+        }
+        create: {
+          args: Prisma.ShippingMethodCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>
+        }
+        createMany: {
+          args: Prisma.ShippingMethodCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShippingMethodCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>[]
+        }
+        delete: {
+          args: Prisma.ShippingMethodDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>
+        }
+        update: {
+          args: Prisma.ShippingMethodUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShippingMethodDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShippingMethodUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShippingMethodUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShippingMethodUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingMethodPayload>
+        }
+        aggregate: {
+          args: Prisma.ShippingMethodAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShippingMethod>
+        }
+        groupBy: {
+          args: Prisma.ShippingMethodGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingMethodGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShippingMethodCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingMethodCountAggregateOutputType> | number
+        }
+      }
+    }
+    ShippingContactInformation: {
+      payload: Prisma.$ShippingContactInformationPayload<ExtArgs>
+      fields: Prisma.ShippingContactInformationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShippingContactInformationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShippingContactInformationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>
+        }
+        findFirst: {
+          args: Prisma.ShippingContactInformationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShippingContactInformationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>
+        }
+        findMany: {
+          args: Prisma.ShippingContactInformationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>[]
+        }
+        create: {
+          args: Prisma.ShippingContactInformationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>
+        }
+        createMany: {
+          args: Prisma.ShippingContactInformationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShippingContactInformationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>[]
+        }
+        delete: {
+          args: Prisma.ShippingContactInformationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>
+        }
+        update: {
+          args: Prisma.ShippingContactInformationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShippingContactInformationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShippingContactInformationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShippingContactInformationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShippingContactInformationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingContactInformationPayload>
+        }
+        aggregate: {
+          args: Prisma.ShippingContactInformationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShippingContactInformation>
+        }
+        groupBy: {
+          args: Prisma.ShippingContactInformationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingContactInformationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShippingContactInformationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingContactInformationCountAggregateOutputType> | number
+        }
+      }
+    }
+    ShippingAddress: {
+      payload: Prisma.$ShippingAddressPayload<ExtArgs>
+      fields: Prisma.ShippingAddressFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShippingAddressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShippingAddressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>
+        }
+        findFirst: {
+          args: Prisma.ShippingAddressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShippingAddressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>
+        }
+        findMany: {
+          args: Prisma.ShippingAddressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>[]
+        }
+        create: {
+          args: Prisma.ShippingAddressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>
+        }
+        createMany: {
+          args: Prisma.ShippingAddressCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShippingAddressCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>[]
+        }
+        delete: {
+          args: Prisma.ShippingAddressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>
+        }
+        update: {
+          args: Prisma.ShippingAddressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShippingAddressDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShippingAddressUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShippingAddressUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShippingAddressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShippingAddressPayload>
+        }
+        aggregate: {
+          args: Prisma.ShippingAddressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShippingAddress>
+        }
+        groupBy: {
+          args: Prisma.ShippingAddressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingAddressGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShippingAddressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShippingAddressCountAggregateOutputType> | number
+        }
+      }
+    }
+    Shipment: {
+      payload: Prisma.$ShipmentPayload<ExtArgs>
+      fields: Prisma.ShipmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShipmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShipmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>
+        }
+        findFirst: {
+          args: Prisma.ShipmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShipmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>
+        }
+        findMany: {
+          args: Prisma.ShipmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>[]
+        }
+        create: {
+          args: Prisma.ShipmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>
+        }
+        createMany: {
+          args: Prisma.ShipmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShipmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>[]
+        }
+        delete: {
+          args: Prisma.ShipmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>
+        }
+        update: {
+          args: Prisma.ShipmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShipmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShipmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShipmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShipmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShipmentPayload>
+        }
+        aggregate: {
+          args: Prisma.ShipmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShipment>
+        }
+        groupBy: {
+          args: Prisma.ShipmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShipmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShipmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShipmentCountAggregateOutputType> | number
         }
       }
     }
@@ -2520,11 +2820,10 @@ export type ProductVariantAttachmentScalarFieldEnum = (typeof ProductVariantAtta
 export const OrderScalarFieldEnum = {
   id: 'id',
   customerId: 'customerId',
-  total: 'total',
+  shipmentId: 'shipmentId',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  shippingAddressId: 'shippingAddressId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -2543,13 +2842,13 @@ export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof t
 
 export const CustomerScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  firstName: 'firstName',
+  surname: 'surname',
   email: 'email',
-  phoneNumber: 'phoneNumber',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
   userId: 'userId',
-  cartId: 'cartId'
+  cartId: 'cartId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
@@ -2557,7 +2856,6 @@ export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typ
 
 export const AddressScalarFieldEnum = {
   id: 'id',
-  customerId: 'customerId',
   street: 'street',
   city: 'city',
   state: 'state',
@@ -2568,6 +2866,54 @@ export const AddressScalarFieldEnum = {
 } as const
 
 export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
+
+
+export const ShippingMethodScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  isActive: 'isActive',
+  flatPrice: 'flatPrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShippingMethodScalarFieldEnum = (typeof ShippingMethodScalarFieldEnum)[keyof typeof ShippingMethodScalarFieldEnum]
+
+
+export const ShippingContactInformationScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  surname: 'surname',
+  phoneNumber: 'phoneNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShippingContactInformationScalarFieldEnum = (typeof ShippingContactInformationScalarFieldEnum)[keyof typeof ShippingContactInformationScalarFieldEnum]
+
+
+export const ShippingAddressScalarFieldEnum = {
+  id: 'id',
+  shippingContactInformationId: 'shippingContactInformationId',
+  addressId: 'addressId',
+  customerId: 'customerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShippingAddressScalarFieldEnum = (typeof ShippingAddressScalarFieldEnum)[keyof typeof ShippingAddressScalarFieldEnum]
+
+
+export const ShipmentScalarFieldEnum = {
+  id: 'id',
+  shippingMethodId: 'shippingMethodId',
+  shippingAddressId: 'shippingAddressId',
+  comment: 'comment',
+  trackingNumber: 'trackingNumber'
+} as const
+
+export type ShipmentScalarFieldEnum = (typeof ShipmentScalarFieldEnum)[keyof typeof ShipmentScalarFieldEnum]
 
 
 export const CartScalarFieldEnum = {
@@ -2666,8 +3012,10 @@ export type VendorUserScalarFieldEnum = (typeof VendorUserScalarFieldEnum)[keyof
 export const PaymentScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
+  provider: 'provider',
+  providerRef: 'providerRef',
   amount: 'amount',
-  method: 'method',
+  currency: 'currency',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2890,6 +3238,34 @@ export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'ShippingType'
+ */
+export type EnumShippingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ShippingType'>
+    
+
+
+/**
+ * Reference to a field of type 'ShippingType[]'
+ */
+export type ListEnumShippingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ShippingType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
  * Reference to a field of type 'Role'
  */
 export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
@@ -2946,16 +3322,16 @@ export type ListEnumVendorUserRoleFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
- * Reference to a field of type 'PaymentMethod'
+ * Reference to a field of type 'PaymentProvider'
  */
-export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
+export type EnumPaymentProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentProvider'>
     
 
 
 /**
- * Reference to a field of type 'PaymentMethod[]'
+ * Reference to a field of type 'PaymentProvider[]'
  */
-export type ListEnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod[]'>
+export type ListEnumPaymentProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentProvider[]'>
     
 
 
@@ -3069,6 +3445,10 @@ export type GlobalOmitConfig = {
   orderItem?: Prisma.OrderItemOmit
   customer?: Prisma.CustomerOmit
   address?: Prisma.AddressOmit
+  shippingMethod?: Prisma.ShippingMethodOmit
+  shippingContactInformation?: Prisma.ShippingContactInformationOmit
+  shippingAddress?: Prisma.ShippingAddressOmit
+  shipment?: Prisma.ShipmentOmit
   cart?: Prisma.CartOmit
   cartItem?: Prisma.CartItemOmit
   user?: Prisma.UserOmit

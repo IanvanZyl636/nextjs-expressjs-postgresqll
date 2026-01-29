@@ -50,6 +50,14 @@ export const OrderStatus = {
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 
 
+export const ShippingType = {
+  COLLECT: 'COLLECT',
+  COURIER: 'COURIER'
+} as const
+
+export type ShippingType = (typeof ShippingType)[keyof typeof ShippingType]
+
+
 export const Role = {
   ADMIN: 'ADMIN',
   CLIENT: 'CLIENT',
@@ -90,20 +98,17 @@ export type VendorUserRole = (typeof VendorUserRole)[keyof typeof VendorUserRole
 
 export const PaymentStatus = {
   PENDING: 'PENDING',
-  COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED',
+  PAID: 'PAID',
   REFUNDED: 'REFUNDED',
+  FAILED: 'FAILED',
   CANCELLED: 'CANCELLED'
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 
-export const PaymentMethod = {
-  CARD: 'CARD',
-  PAYPAL: 'PAYPAL',
-  BANK_TRANSFER: 'BANK_TRANSFER',
-  CASH_ON_DELIVERY: 'CASH_ON_DELIVERY'
+export const PaymentProvider = {
+  PAYFAST: 'PAYFAST'
 } as const
 
-export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+export type PaymentProvider = (typeof PaymentProvider)[keyof typeof PaymentProvider]

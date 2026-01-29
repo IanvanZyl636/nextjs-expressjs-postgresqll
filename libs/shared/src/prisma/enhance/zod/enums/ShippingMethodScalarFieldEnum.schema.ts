@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const PaymentMethodSchema = z.enum(["CARD", "PAYPAL", "BANK_TRANSFER", "CASH_ON_DELIVERY"])
+export const ShippingMethodScalarFieldEnumSchema = z.enum(["id", "name", "type", "isActive", "flatPrice", "createdAt", "updatedAt"])

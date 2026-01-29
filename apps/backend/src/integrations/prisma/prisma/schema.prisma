@@ -49,6 +49,11 @@ enum OrderStatus {
   RETURNED
 }
 
+enum ShippingType {
+  COLLECT
+  COURIER
+}
+
 enum Role {
   ADMIN
   CLIENT
@@ -77,17 +82,14 @@ enum VendorUserRole {
 
 enum PaymentStatus {
   PENDING
-  COMPLETED
-  FAILED
+  PAID
   REFUNDED
+  FAILED
   CANCELLED
 }
 
-enum PaymentMethod {
-  CARD
-  PAYPAL
-  BANK_TRANSFER
-  CASH_ON_DELIVERY
+enum PaymentProvider {
+  PAYFAST
 }
 
 model Media {
@@ -208,17 +210,16 @@ model ProductVariantAttachment {
 }
 
 model Order {
-  id                String      @id() @default(uuid())
-  customerId        String
-  total             Float
-  status            OrderStatus
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt()
-  customer          Customer    @relation(fields: [customerId], references: [id])
-  orderItems        OrderItem[]
-  payment           Payment?
-  shippingAddressId String?
-  shippingAddress   Address?    @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+  id         String      @id() @default(uuid())
+  customerId String
+  shipmentId String      @unique()
+  status     OrderStatus
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt()
+  customer   Customer    @relation(fields: [customerId], references: [id])
+  orderItems OrderItem[]
+  payment    Payment?
+  shipment   Shipment    @relation(fields: [shipmentId], references: [id])
 }
 
 model OrderItem {
@@ -232,32 +233,75 @@ model OrderItem {
 }
 
 model Customer {
-  id          String    @id() @default(uuid())
-  name        String
-  email       String
-  phoneNumber String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt()
-  addresses   Address[]
-  orders      Order[]
-  userId      String?   @unique()
-  cartId      String?   @unique()
-  user        User?     @relation(fields: [userId], references: [id])
-  cart        Cart?     @relation(fields: [cartId], references: [id])
+  id                String            @id() @default(uuid())
+  firstName         String
+  surname           String
+  email             String
+  userId            String?           @unique()
+  cartId            String?           @unique()
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt()
+  shippingAddresses ShippingAddress[]
+  orders            Order[]
+  user              User?             @relation(fields: [userId], references: [id])
+  cart              Cart?             @relation(fields: [cartId], references: [id])
 }
 
 model Address {
-  id         String   @id() @default(uuid())
-  customerId String
-  street     String
-  city       String
-  state      String
-  postalCode String
-  country    String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt()
-  customer   Customer @relation(fields: [customerId], references: [id])
-  orders     Order[]  @relation("ShippingAddress")
+  id              String           @id() @default(uuid())
+  street          String
+  city            String
+  state           String
+  postalCode      String
+  country         String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt()
+  shippingAddress ShippingAddress?
+}
+
+model ShippingMethod {
+  id        String       @id() @default(uuid())
+  name      String
+  type      ShippingType
+  isActive  Boolean      @default(true)
+  flatPrice Decimal
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt()
+  shipments Shipment[]
+}
+
+model ShippingContactInformation {
+  id              String           @id() @default(uuid())
+  firstName       String
+  surname         String
+  phoneNumber     String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt()
+  shippingAddress ShippingAddress?
+}
+
+model ShippingAddress {
+  id                           String                     @id() @default(uuid())
+  shippingContactInformationId String                     @unique()
+  addressId                    String                     @unique()
+  customerId                   String                     @unique()
+  createdAt                    DateTime                   @default(now())
+  updatedAt                    DateTime                   @updatedAt()
+  shippingContactInformation   ShippingContactInformation @relation(fields: [shippingContactInformationId], references: [id])
+  address                      Address                    @relation(fields: [addressId], references: [id])
+  customer                     Customer                   @relation(fields: [customerId], references: [id])
+  shipments                    Shipment[]
+}
+
+model Shipment {
+  id                String           @id() @default(uuid())
+  shippingMethodId  String
+  shippingAddressId String?
+  comment           String?
+  trackingNumber    String?          @unique()
+  shippingMethod    ShippingMethod   @relation(fields: [shippingMethodId], references: [id])
+  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
+  order             Order?
 }
 
 model Cart {
@@ -355,14 +399,16 @@ model VendorUser {
 }
 
 model Payment {
-  id        String        @id() @default(uuid())
-  orderId   String        @unique()
-  amount    Float
-  method    PaymentMethod
-  status    PaymentStatus
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt()
-  order     Order         @relation(fields: [orderId], references: [id])
+  id          String          @id() @default(uuid())
+  orderId     String          @unique()
+  provider    PaymentProvider
+  providerRef String?
+  amount      Float
+  currency    String          @default("ZAR")
+  status      PaymentStatus
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt()
+  order       Order           @relation(fields: [orderId], references: [id])
 }
 
 model Category {

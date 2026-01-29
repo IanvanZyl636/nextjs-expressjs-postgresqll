@@ -126,6 +126,26 @@ export type Customer = Prisma.CustomerModel
  */
 export type Address = Prisma.AddressModel
 /**
+ * Model ShippingMethod
+ * 
+ */
+export type ShippingMethod = Prisma.ShippingMethodModel
+/**
+ * Model ShippingContactInformation
+ * 
+ */
+export type ShippingContactInformation = Prisma.ShippingContactInformationModel
+/**
+ * Model ShippingAddress
+ * 
+ */
+export type ShippingAddress = Prisma.ShippingAddressModel
+/**
+ * Model Shipment
+ * 
+ */
+export type Shipment = Prisma.ShipmentModel
+/**
  * Model Cart
  * 
  */
@@ -198,6 +218,9 @@ export const ProductStatus = $Enums.ProductStatus
 export type OrderStatus = $Enums.OrderStatus
 export const OrderStatus = $Enums.OrderStatus
 
+export type ShippingType = $Enums.ShippingType
+export const ShippingType = $Enums.ShippingType
+
 export type Role = $Enums.Role
 export const Role = $Enums.Role
 
@@ -213,5 +236,5 @@ export const VendorUserRole = $Enums.VendorUserRole
 export type PaymentStatus = $Enums.PaymentStatus
 export const PaymentStatus = $Enums.PaymentStatus
 
-export type PaymentMethod = $Enums.PaymentMethod
-export const PaymentMethod = $Enums.PaymentMethod
+export type PaymentProvider = $Enums.PaymentProvider
+export const PaymentProvider = $Enums.PaymentProvider

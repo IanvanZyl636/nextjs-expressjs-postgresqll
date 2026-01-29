@@ -12,12 +12,13 @@ import { MediaType } from "../generated/client";
 import { ImageSize } from "../generated/client";
 import { ProductStatus } from "../generated/client";
 import { OrderStatus } from "../generated/client";
+import { ShippingType } from "../generated/client";
 import { Role } from "../generated/client";
 import { TokenType } from "../generated/client";
 import { VendorStatus } from "../generated/client";
 import { VendorUserRole } from "../generated/client";
 import { PaymentStatus } from "../generated/client";
-import { PaymentMethod } from "../generated/client";
+import { PaymentProvider } from "../generated/client";
 
 const policy: PolicyDef = {
     policy: {
@@ -301,6 +302,86 @@ const policy: PolicyDef = {
             },
 
         },
+        shippingMethod: {
+            modelLevel: {
+                read: { guard: ShippingMethod_read, },
+                create: { guard: ShippingMethod_create, inputChecker: ShippingMethod_create_input, },
+                update: { guard: ShippingMethod_update, },
+                postUpdate: { guard: ShippingMethod_postUpdate, },
+                delete: { guard: ShippingMethod_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        shippingContactInformation: {
+            modelLevel: {
+                read: { guard: ShippingContactInformation_read, },
+                create: { guard: ShippingContactInformation_create, inputChecker: ShippingContactInformation_create_input, },
+                update: { guard: ShippingContactInformation_update, },
+                postUpdate: { guard: ShippingContactInformation_postUpdate, },
+                delete: { guard: ShippingContactInformation_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        shippingAddress: {
+            modelLevel: {
+                read: { guard: ShippingAddress_read, },
+                create: { guard: ShippingAddress_create, inputChecker: ShippingAddress_create_input, },
+                update: { guard: ShippingAddress_update, },
+                postUpdate: { guard: ShippingAddress_postUpdate, },
+                delete: { guard: ShippingAddress_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
+        shipment: {
+            modelLevel: {
+                read: { guard: Shipment_read, },
+                create: { guard: Shipment_create, inputChecker: Shipment_create_input, },
+                update: { guard: Shipment_update, },
+                postUpdate: { guard: Shipment_postUpdate, },
+                delete: { guard: Shipment_delete, }
+            },
+            fieldLevel: {
+                read:
+                {
+
+                },
+                update:
+                {
+
+                },
+            },
+
+        },
         cart: {
             modelLevel: {
                 read: { guard: Cart_read, },
@@ -557,6 +638,10 @@ const policy: PolicyDef = {
         orderItem: { hasValidation: false },
         customer: { hasValidation: false },
         address: { hasValidation: false },
+        shippingMethod: { hasValidation: false },
+        shippingContactInformation: { hasValidation: false },
+        shippingAddress: { hasValidation: false },
+        shipment: { hasValidation: false },
         cart: { hasValidation: false },
         cartItem: { hasValidation: false },
         user: { hasValidation: false },
@@ -1298,6 +1383,198 @@ function Address_delete(context: QueryContext, db: CrudContract): any {
 function $check_Address_delete(input: any, context: QueryContext): any {
     if (true) { return true; }
 
+    return false;
+}
+
+function ShippingMethod_read(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ShippingMethod_read(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ShippingMethod_create(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ShippingMethod_create(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ShippingMethod_create_input(input: any, context: QueryContext): boolean {
+    return false;
+}
+
+function ShippingMethod_update(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ShippingMethod_update(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ShippingMethod_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingMethod_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function ShippingMethod_delete(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_ShippingMethod_delete(input: any, context: QueryContext): any {
+    return false;
+}
+
+function ShippingContactInformation_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingContactInformation_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ShippingContactInformation_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingContactInformation_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ShippingContactInformation_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function ShippingContactInformation_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingContactInformation_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ShippingContactInformation_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingContactInformation_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function ShippingContactInformation_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingContactInformation_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ShippingAddress_read(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingAddress_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ShippingAddress_create(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingAddress_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ShippingAddress_create_input(input: any, context: QueryContext): boolean {
+    return true
+}
+
+function ShippingAddress_update(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingAddress_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function ShippingAddress_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingAddress_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function ShippingAddress_delete(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_ShippingAddress_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
+    return false;
+}
+
+function Shipment_read(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Shipment_read(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Shipment_create(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Shipment_create(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Shipment_create_input(input: any, context: QueryContext): boolean {
+    return false;
+}
+
+function Shipment_update(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Shipment_update(input: any, context: QueryContext): any {
+    return false;
+}
+
+function Shipment_postUpdate(context: QueryContext, db: CrudContract): any {
+    return { AND: [] };
+}
+
+function $check_Shipment_postUpdate(input: any, context: QueryContext): any {
+    return true;
+}
+
+function Shipment_delete(context: QueryContext, db: CrudContract): any {
+    return { OR: [] };
+}
+
+function $check_Shipment_delete(input: any, context: QueryContext): any {
     return false;
 }
 

@@ -6,12 +6,14 @@
 // @ts-nocheck
 
 import { z } from 'zod';
-import { PaymentMethodSchema } from '../enums/PaymentMethod.schema';
+import { PaymentProviderSchema } from '../enums/PaymentProvider.schema';
 import { PaymentStatusSchema } from '../enums/PaymentStatus.schema';
 const baseSchema = z.object({
     id: z.string(),
+    provider: PaymentProviderSchema,
+    providerRef: z.string().nullish(),
     amount: z.number(),
-    method: PaymentMethodSchema,
+    currency: z.string().default("ZAR"),
     status: PaymentStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),
@@ -51,8 +53,10 @@ export const PaymentPrismaCreateSchema = baseSchema.partial().passthrough();
  */
 export const PaymentPrismaUpdateSchema = z.object({
     id: z.string(),
+    provider: PaymentProviderSchema,
+    providerRef: z.string().nullish(),
     amount: z.union([z.number(), z.record(z.unknown())]),
-    method: PaymentMethodSchema,
+    currency: z.string().default("ZAR"),
     status: PaymentStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date()
@@ -63,7 +67,7 @@ export const PaymentPrismaUpdateSchema = z.object({
  * `Payment` schema for create operations excluding foreign keys and relations.
  */
 export const PaymentCreateScalarSchema = baseSchema.partial({
-    id: true, createdAt: true, updatedAt: true
+    id: true, currency: true, createdAt: true, updatedAt: true
 });
 
 

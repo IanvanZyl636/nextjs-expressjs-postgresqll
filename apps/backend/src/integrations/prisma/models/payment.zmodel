@@ -2,27 +2,28 @@ import "./order.zmodel"
 
 enum PaymentStatus {
   PENDING
-  COMPLETED
-  FAILED
+  PAID
   REFUNDED
+  FAILED
   CANCELLED
 }
 
-enum PaymentMethod {
-  CARD
-  PAYPAL
-  BANK_TRANSFER
-  CASH_ON_DELIVERY
+enum PaymentProvider {
+  PAYFAST
 }
+
 model Payment {
-  id        String   @id @default(uuid())
-  orderId   String   @unique
-  amount    Float
-  method    PaymentMethod
-  status    PaymentStatus
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  order     Order    @relation(fields: [orderId], references: [id])
+  id          String          @id @default(uuid())
+  orderId     String          @unique
+  provider    PaymentProvider
+  providerRef String?
+  amount      Float
+  currency    String          @default("ZAR")
+  status      PaymentStatus  
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  order       Order           @relation(fields: [orderId], references: [id])
 
   @@allow('all', true)
 }

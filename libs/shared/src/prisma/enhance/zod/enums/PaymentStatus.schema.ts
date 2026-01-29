@@ -7,4 +7,4 @@
 
 import { z } from 'zod';
 
-export const PaymentStatusSchema = z.enum(["PENDING", "COMPLETED", "FAILED", "REFUNDED", "CANCELLED"])
+export const PaymentStatusSchema = z.enum(["PENDING", "PAID", "REFUNDED", "FAILED", "CANCELLED"])

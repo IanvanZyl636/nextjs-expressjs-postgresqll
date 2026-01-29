@@ -585,9 +585,12 @@ const metadata = {
                     type: "String",
                     isForeignKey: true,
                     relationField: 'customer',
-                }, total: {
-                    name: "total",
-                    type: "Float",
+                }, shipmentId: {
+                    name: "shipmentId",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'shipment',
                 }, status: {
                     name: "status",
                     type: "OrderStatus",
@@ -619,26 +622,22 @@ const metadata = {
                     isDataModel: true,
                     isOptional: true,
                     backLink: 'order',
-                }, shippingAddressId: {
-                    name: "shippingAddressId",
-                    type: "String",
-                    isOptional: true,
-                    isForeignKey: true,
-                    relationField: 'shippingAddress',
-                }, shippingAddress: {
-                    name: "shippingAddress",
-                    type: "Address",
+                }, shipment: {
+                    name: "shipment",
+                    type: "Shipment",
                     isDataModel: true,
-                    isOptional: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ShippingAddress" }, { "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'orders',
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'order',
                     isRelationOwner: true,
-                    foreignKeyMapping: { "id": "shippingAddressId" },
+                    foreignKeyMapping: { "id": "shipmentId" },
                 },
             }, uniqueConstraints: {
                 id: {
                     name: "id",
                     fields: ["id"]
+                }, shipmentId: {
+                    name: "shipmentId",
+                    fields: ["shipmentId"]
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
@@ -698,35 +697,15 @@ const metadata = {
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, name: {
-                    name: "name",
+                }, firstName: {
+                    name: "firstName",
+                    type: "String",
+                }, surname: {
+                    name: "surname",
                     type: "String",
                 }, email: {
                     name: "email",
                     type: "String",
-                }, phoneNumber: {
-                    name: "phoneNumber",
-                    type: "String",
-                }, createdAt: {
-                    name: "createdAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
-                }, updatedAt: {
-                    name: "updatedAt",
-                    type: "DateTime",
-                    attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, addresses: {
-                    name: "addresses",
-                    type: "Address",
-                    isDataModel: true,
-                    isArray: true,
-                    backLink: 'customer',
-                }, orders: {
-                    name: "orders",
-                    type: "Order",
-                    isDataModel: true,
-                    isArray: true,
-                    backLink: 'customer',
                 }, userId: {
                     name: "userId",
                     type: "String",
@@ -741,6 +720,26 @@ const metadata = {
                     attributes: [{ "name": "@unique", "args": [] }],
                     isForeignKey: true,
                     relationField: 'cart',
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, shippingAddresses: {
+                    name: "shippingAddresses",
+                    type: "ShippingAddress",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'customer',
+                }, orders: {
+                    name: "orders",
+                    type: "Order",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'customer',
                 }, user: {
                     name: "user",
                     type: "User",
@@ -781,11 +780,6 @@ const metadata = {
                     type: "String",
                     isId: true,
                     attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
-                }, customerId: {
-                    name: "customerId",
-                    type: "String",
-                    isForeignKey: true,
-                    relationField: 'customer',
                 }, street: {
                     name: "street",
                     type: "String",
@@ -809,21 +803,12 @@ const metadata = {
                     name: "updatedAt",
                     type: "DateTime",
                     attributes: [{ "name": "@updatedAt", "args": [] }],
-                }, customer: {
-                    name: "customer",
-                    type: "Customer",
+                }, shippingAddress: {
+                    name: "shippingAddress",
+                    type: "ShippingAddress",
                     isDataModel: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
-                    backLink: 'addresses',
-                    isRelationOwner: true,
-                    foreignKeyMapping: { "id": "customerId" },
-                }, orders: {
-                    name: "orders",
-                    type: "Order",
-                    isDataModel: true,
-                    isArray: true,
-                    attributes: [{ "name": "@relation", "args": [{ "name": "name", "value": "ShippingAddress" }] }],
-                    backLink: 'shippingAddress',
+                    isOptional: true,
+                    backLink: 'address',
                 },
             }, uniqueConstraints: {
                 id: {
@@ -832,6 +817,229 @@ const metadata = {
                 },
             },
             attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        shippingMethod: {
+            name: 'ShippingMethod', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, name: {
+                    name: "name",
+                    type: "String",
+                }, type: {
+                    name: "type",
+                    type: "ShippingType",
+                }, isActive: {
+                    name: "isActive",
+                    type: "Boolean",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": true }] }],
+                }, flatPrice: {
+                    name: "flatPrice",
+                    type: "Decimal",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, shipments: {
+                    name: "shipments",
+                    type: "Shipment",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'shippingMethod',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                },
+            },
+        },
+        shippingContactInformation: {
+            name: 'ShippingContactInformation', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, firstName: {
+                    name: "firstName",
+                    type: "String",
+                }, surname: {
+                    name: "surname",
+                    type: "String",
+                }, phoneNumber: {
+                    name: "phoneNumber",
+                    type: "String",
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, shippingAddress: {
+                    name: "shippingAddress",
+                    type: "ShippingAddress",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'shippingContactInformation',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        shippingAddress: {
+            name: 'ShippingAddress', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, shippingContactInformationId: {
+                    name: "shippingContactInformationId",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'shippingContactInformation',
+                }, addressId: {
+                    name: "addressId",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'address',
+                }, customerId: {
+                    name: "customerId",
+                    type: "String",
+                    attributes: [{ "name": "@unique", "args": [] }],
+                    isForeignKey: true,
+                    relationField: 'customer',
+                }, createdAt: {
+                    name: "createdAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value" }] }],
+                }, updatedAt: {
+                    name: "updatedAt",
+                    type: "DateTime",
+                    attributes: [{ "name": "@updatedAt", "args": [] }],
+                }, shippingContactInformation: {
+                    name: "shippingContactInformation",
+                    type: "ShippingContactInformation",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'shippingAddress',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "shippingContactInformationId" },
+                }, address: {
+                    name: "address",
+                    type: "Address",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'shippingAddress',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "addressId" },
+                }, customer: {
+                    name: "customer",
+                    type: "Customer",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'shippingAddresses',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "customerId" },
+                }, shipments: {
+                    name: "shipments",
+                    type: "Shipment",
+                    isDataModel: true,
+                    isArray: true,
+                    backLink: 'shippingAddress',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, shippingContactInformationId: {
+                    name: "shippingContactInformationId",
+                    fields: ["shippingContactInformationId"]
+                }, addressId: {
+                    name: "addressId",
+                    fields: ["addressId"]
+                }, customerId: {
+                    name: "customerId",
+                    fields: ["customerId"]
+                },
+            },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
+        },
+        shipment: {
+            name: 'Shipment', fields: {
+                id: {
+                    name: "id",
+                    type: "String",
+                    isId: true,
+                    attributes: [{ "name": "@id", "args": [] }, { "name": "@default", "args": [{ "name": "value" }] }],
+                }, shippingMethodId: {
+                    name: "shippingMethodId",
+                    type: "String",
+                    isForeignKey: true,
+                    relationField: 'shippingMethod',
+                }, shippingAddressId: {
+                    name: "shippingAddressId",
+                    type: "String",
+                    isOptional: true,
+                    isForeignKey: true,
+                    relationField: 'shippingAddress',
+                }, comment: {
+                    name: "comment",
+                    type: "String",
+                    isOptional: true,
+                }, trackingNumber: {
+                    name: "trackingNumber",
+                    type: "String",
+                    isOptional: true,
+                    attributes: [{ "name": "@unique", "args": [] }],
+                }, shippingMethod: {
+                    name: "shippingMethod",
+                    type: "ShippingMethod",
+                    isDataModel: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'shipments',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "shippingMethodId" },
+                }, shippingAddress: {
+                    name: "shippingAddress",
+                    type: "ShippingAddress",
+                    isDataModel: true,
+                    isOptional: true,
+                    attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
+                    backLink: 'shipments',
+                    isRelationOwner: true,
+                    foreignKeyMapping: { "id": "shippingAddressId" },
+                }, order: {
+                    name: "order",
+                    type: "Order",
+                    isDataModel: true,
+                    isOptional: true,
+                    backLink: 'shipment',
+                },
+            }, uniqueConstraints: {
+                id: {
+                    name: "id",
+                    fields: ["id"]
+                }, trackingNumber: {
+                    name: "trackingNumber",
+                    fields: ["trackingNumber"]
+                },
+            },
         },
         cart: {
             name: 'Cart', fields: {
@@ -1260,12 +1468,20 @@ const metadata = {
                     attributes: [{ "name": "@unique", "args": [] }],
                     isForeignKey: true,
                     relationField: 'order',
+                }, provider: {
+                    name: "provider",
+                    type: "PaymentProvider",
+                }, providerRef: {
+                    name: "providerRef",
+                    type: "String",
+                    isOptional: true,
                 }, amount: {
                     name: "amount",
                     type: "Float",
-                }, method: {
-                    name: "method",
-                    type: "PaymentMethod",
+                }, currency: {
+                    name: "currency",
+                    type: "String",
+                    attributes: [{ "name": "@default", "args": [{ "name": "value", "value": "ZAR" }] }],
                 }, status: {
                     name: "status",
                     type: "PaymentStatus",

@@ -9,7 +9,6 @@ import { z } from 'zod';
 import { OrderStatusSchema } from '../enums/OrderStatus.schema';
 const baseSchema = z.object({
     id: z.string(),
-    total: z.number(),
     status: OrderStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date(),
@@ -19,12 +18,12 @@ const relationSchema = z.object({
     customer: z.record(z.unknown()),
     orderItems: z.array(z.unknown()).optional(),
     payment: z.record(z.unknown()).optional(),
-    shippingAddress: z.record(z.unknown()).optional(),
+    shipment: z.record(z.unknown()),
 }
 );
 const fkSchema = z.object({
     customerId: z.string(),
-    shippingAddressId: z.string().nullish(),
+    shipmentId: z.string(),
 }
 );
 
@@ -53,7 +52,6 @@ export const OrderPrismaCreateSchema = baseSchema.partial().passthrough();
  */
 export const OrderPrismaUpdateSchema = z.object({
     id: z.string(),
-    total: z.union([z.number(), z.record(z.unknown())]),
     status: OrderStatusSchema,
     createdAt: z.coerce.date().default(() => new Date()),
     updatedAt: z.coerce.date()
