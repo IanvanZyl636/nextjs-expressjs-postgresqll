@@ -1387,30 +1387,36 @@ function $check_Address_delete(input: any, context: QueryContext): any {
 }
 
 function ShippingMethod_read(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ShippingMethod_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function ShippingMethod_create(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ShippingMethod_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function ShippingMethod_create_input(input: any, context: QueryContext): boolean {
-    return false;
+    return true
 }
 
 function ShippingMethod_update(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ShippingMethod_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -1423,10 +1429,12 @@ function $check_ShippingMethod_postUpdate(input: any, context: QueryContext): an
 }
 
 function ShippingMethod_delete(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_ShippingMethod_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -1535,30 +1543,36 @@ function $check_ShippingAddress_delete(input: any, context: QueryContext): any {
 }
 
 function Shipment_read(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Shipment_read(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function Shipment_create(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Shipment_create(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
 function Shipment_create_input(input: any, context: QueryContext): boolean {
-    return false;
+    return true
 }
 
 function Shipment_update(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Shipment_update(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 
@@ -1571,10 +1585,12 @@ function $check_Shipment_postUpdate(input: any, context: QueryContext): any {
 }
 
 function Shipment_delete(context: QueryContext, db: CrudContract): any {
-    return { OR: [] };
+    return { AND: [] };
 }
 
 function $check_Shipment_delete(input: any, context: QueryContext): any {
+    if (true) { return true; }
+
     return false;
 }
 

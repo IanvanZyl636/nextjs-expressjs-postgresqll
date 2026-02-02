@@ -7,7 +7,8 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 /**
  * Model Shipment
- *
+ * @
+ * @allow ('all', true)
  */
 export type ShipmentModel = runtime.Types.Result.DefaultSelection<Prisma.$ShipmentPayload>;
 export type AggregateShipment = {

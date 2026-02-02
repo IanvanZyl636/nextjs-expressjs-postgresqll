@@ -17,6 +17,8 @@ model ShippingMethod {
     updatedAt DateTime     @updatedAt
 
     shipments Shipment[]
+
+    @@allow('all', true)
 }
 
 model ShippingContactInformation {
@@ -58,4 +60,6 @@ model Shipment {
     shippingMethod    ShippingMethod   @relation(fields: [shippingMethodId], references: [id])
     shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
     order             Order?
+
+    @@allow('all', true)
 }

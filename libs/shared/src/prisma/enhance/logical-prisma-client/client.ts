@@ -108,7 +108,7 @@ export type Customer = Prisma.CustomerModel
 export type Address = Prisma.AddressModel
 /**
  * Model ShippingMethod
- * 
+ * @@allow('all', true)
  */
 export type ShippingMethod = Prisma.ShippingMethodModel
 /**
@@ -123,7 +123,7 @@ export type ShippingContactInformation = Prisma.ShippingContactInformationModel
 export type ShippingAddress = Prisma.ShippingAddressModel
 /**
  * Model Shipment
- * 
+ * @@allow('all', true)
  */
 export type Shipment = Prisma.ShipmentModel
 /**

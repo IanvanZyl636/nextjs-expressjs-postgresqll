@@ -654,8 +654,8 @@ const metadata = {
                     type: "String",
                     isForeignKey: true,
                     relationField: 'order',
-                }, productId: {
-                    name: "productId",
+                }, productVariantId: {
+                    name: "productVariantId",
                     type: "String",
                     isForeignKey: true,
                     relationField: 'productVariant',
@@ -680,7 +680,7 @@ const metadata = {
                     attributes: [{ "name": "@relation", "args": [{ "name": "fields", "value": [null] }, { "name": "references", "value": [null] }] }],
                     backLink: 'orderItems',
                     isRelationOwner: true,
-                    foreignKeyMapping: { "id": "productId" },
+                    foreignKeyMapping: { "id": "productVariantId" },
                 },
             }, uniqueConstraints: {
                 id: {
@@ -859,6 +859,7 @@ const metadata = {
                     fields: ["id"]
                 },
             },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         shippingContactInformation: {
             name: 'ShippingContactInformation', fields: {
@@ -1040,6 +1041,7 @@ const metadata = {
                     fields: ["trackingNumber"]
                 },
             },
+            attributes: [{ "name": "@@allow", "args": [{ "name": "operation", "value": "all" }, { "name": "condition", "value": true }] }],
         },
         cart: {
             name: 'Cart', fields: {

@@ -223,13 +223,13 @@ model Order {
 }
 
 model OrderItem {
-  id             String         @id() @default(uuid())
-  orderId        String
-  productId      String
-  quantity       Int
-  price          Float
-  order          Order          @relation(fields: [orderId], references: [id])
-  productVariant ProductVariant @relation(fields: [productId], references: [id])
+  id               String         @id() @default(uuid())
+  orderId          String
+  productVariantId String
+  quantity         Int
+  price            Float
+  order            Order          @relation(fields: [orderId], references: [id])
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
 }
 
 model Customer {

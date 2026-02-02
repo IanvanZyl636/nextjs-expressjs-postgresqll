@@ -5,7 +5,7 @@ import { AUTH_PROVIDER } from '@nextjs-expressjs-postgresql/shared/constants/aut
 import { prisma } from '../integrations/prisma';
 import { registerService } from './auth/auth.service';
 import { VendorUpsertSchema, VendorViewModel } from '@nextjs-expressjs-postgresql/shared/zod/Vendor.schema';
-import { VendorUserRole } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/enums';
+import { ShippingType, VendorUserRole } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/enums';
 import { upsertVendor } from './vendor/vendor.service';
 import { readFileSync } from 'fs';
 import { processAndUploadImagesService } from './media/media.service';
@@ -17,6 +17,13 @@ import { TagUpsertSchema, TagViewModel } from '@nextjs-expressjs-postgresql/shar
 import { upsertTag } from './tag/tag.service';
 import { CartUpsertSchema, CartViewModel } from '@nextjs-expressjs-postgresql/shared/zod/Cart.schema';
 import { CartService } from './cart/cart.service';
+import { OrderUpsertSchema, OrderViewModel } from '@nextjs-expressjs-postgresql/shared/zod/Order.schema';
+import { OrderService } from './order/order.service';
+import { CustomerUpsertSchema, CustomerViewModel } from '@nextjs-expressjs-postgresql/shared/zod/Customer.schema';
+import { CustomerService } from './customer/customer.service';
+import { CartGetPayload, OrderGetPayload } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/models';
+import { PaymentService } from './payment/payment.service';
+
 
 beforeAll(async () => {
     await prisma().$connect();
@@ -30,8 +37,11 @@ describe('Full service flow', () => {
         const category = await createCategory();
         const tag =  await createTag();
         const product = await createActiveProduct(vendor.id, category.id, tag.id, image.id);
-        await createCart(product.productVariants[0].id);
-
+        const cart = await createCart(product.productVariants[0].id);   
+        const shipping = await createShipping();    
+        const customer = await createCustomer();
+        const order = await createOrder(customer.id, shipping.id, cart); 
+        await createPayment(order);
     }, 500000);
 });
 
@@ -179,4 +189,44 @@ async function createCart(productVariantId:string){
     CartUpsertSchema.parse(cartData);
           
     return await CartService.upsertCart(cartData);
+}
+
+async function createCustomer(){
+    const customerData: CustomerViewModel = {
+        id: '11111111-1111-1111-1111-111111111111',
+        firstName: 'Test',
+        surname: 'Customer',
+        email: 'test-customer@example.com',
+    };
+
+    CustomerUpsertSchema.parse(customerData);
+
+    return await CustomerService.upsertCustomer(customerData);
+}
+
+async function createOrder(customerId:string, shipmentId:string, cart:CartGetPayload<{include:{cartItems:{include:{productVariant:true}}}}>){
+    const orderData: OrderViewModel = {
+          status: 'PENDING' as any,
+          customerId,
+          shipmentId,
+          orderItems: cart.cartItems.map(cartItem => ({
+            productVariantId: cartItem.productVariantId,
+            quantity: cartItem.quantity,
+            price: cartItem.productVariant.price
+          }))                   
+        };
+    
+    OrderUpsertSchema.parse(orderData);
+
+    return await OrderService.upsertOrder(orderData);
+}
+
+async function createShipping(){
+    const shippingMethod = await prisma().shippingMethod.create({ data: { name: 'TestShip', type: ShippingType.COLLECT, flatPrice: 0 } });
+
+    return await prisma().shipment.create({ data: { shippingMethodId: shippingMethod.id } });
+}
+
+async function createPayment(order: OrderGetPayload<{ include: { orderItems: true } }>){
+    return await PaymentService.createPaymentForOrder(order);
 }

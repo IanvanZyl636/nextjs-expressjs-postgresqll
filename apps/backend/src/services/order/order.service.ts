@@ -29,7 +29,7 @@ export class OrderService {
       } else {
         // On update, compare with existing order quantities
         const existingOrder = await prisma().order.findUnique({ where: { id: data.id }, include: { orderItems: true } });
-        const existingQty = existingOrder?.orderItems?.filter(i => i.productId === variantId).reduce((s, i) => s + i.quantity, 0) ?? 0;
+        const existingQty = existingOrder?.orderItems?.filter(i => i.productVariantId === variantId).reduce((s, i) => s + i.quantity, 0) ?? 0;
         const delta = qty - existingQty;
         if (delta > 0 && delta > variant.stock) {
           throw new Error(`Increasing quantity by ${delta} exceeds available stock (${variant.stock}) for product variant ${variant.name}.`);
@@ -47,7 +47,7 @@ export class OrderService {
       // update: compute delta per variant
       const existingOrder = await prisma().order.findUnique({ where: { id: data.id }, include: { orderItems: true } });
       const existingByVariant = new Map<string, number>();
-      for (const it of existingOrder?.orderItems ?? []) existingByVariant.set(it.productId, (existingByVariant.get(it.productId) ?? 0) + it.quantity);
+      for (const it of existingOrder?.orderItems ?? []) existingByVariant.set(it.productVariantId, (existingByVariant.get(it.productVariantId) ?? 0) + it.quantity);
 
       // For variants present in either existing or requested sets compute delta
       const variantIds = new Set<string>([...existingByVariant.keys(), ...requestedByVariant.keys()]);
