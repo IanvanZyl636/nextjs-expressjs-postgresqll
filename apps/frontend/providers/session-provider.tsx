@@ -1,6 +1,5 @@
 "use client";
 import { ClientSession } from "@/models/client-session.model";
-import { useRouter } from "next/navigation";
 import {
   createContext,
   Dispatch,
@@ -10,45 +9,72 @@ import {
   useState,
 } from "react";
 
+enum AuthStatus{
+  Unknown = "unknown",
+  Authenticated = "authenticated",
+  Unauthenticated = "unauthenticated"
+}
+
 const SessionContext = createContext<{
   session?: ClientSession; 
+  authStatus: AuthStatus;
   setSession: Dispatch<SetStateAction<ClientSession | undefined>>;
   fetchSession: () => Promise<void>;
 }>({
   session: undefined,
+  authStatus: AuthStatus.Unknown,
   setSession: () => {return undefined},
   fetchSession: async () => {},
 });
 
 export function SessionProvider({session:initialSession, children }: { session?: ClientSession, children: React.ReactNode }) {
-  const [session, setSession] = useState<ClientSession | undefined>(initialSession);  
-  const router = useRouter();
+  const [session, setSession] = useState<ClientSession | undefined>(initialSession);   
+  const [authStatus, setAuthStatus] = useState<AuthStatus>(() => {
+    if (initialSession) return AuthStatus.Authenticated;
+    return AuthStatus.Unknown;
+  }); 
 
-  async function fetchSession() {        
-    const res = await fetch("/api/auth/session");
+  async function fetchSession() {   
+    try {
+      const res = await fetch("/api/auth/session");
 
-    if (!res.ok) {
-      router.refresh();
-      setSession(undefined);     
-      return;
+      if (res.status === 401) {    
+        setSession(undefined);
+        setAuthStatus(AuthStatus.Unauthenticated);
+        return;
+      }
+
+      if (!res.ok) {      
+        setSession(undefined);
+        setAuthStatus(AuthStatus.Unknown);
+        return;
+      }
+
+      setSession(await res.json());
+      setAuthStatus(AuthStatus.Authenticated);
+    } catch {  
+      setSession(undefined);
+      setAuthStatus(AuthStatus.Unknown);
     }
-
-    const data = await res.json();
-
-    setSession(data);     
   }
 
   useEffect(() => {
-    const onFocus = () => {
-      if (!!session) fetchSession();
-    };
-    window.addEventListener("focus", onFocus);
+    fetchSession()
+  }, [])
+  
 
+ useEffect(() => {
+    const onFocus = () => {
+      if (authStatus === AuthStatus.Unauthenticated) return;
+      fetchSession();
+    };
+
+    window.addEventListener("focus", onFocus);
     return () => window.removeEventListener("focus", onFocus);
-  }, [session]);
+  }, [authStatus]);
 
   return (
-    <SessionContext.Provider value={{ session, setSession, fetchSession }}>
+    <SessionContext.Provider value={{ session, authStatus, setSession, fetchSession }}>
       {children}
     </SessionContext.Provider>
   );

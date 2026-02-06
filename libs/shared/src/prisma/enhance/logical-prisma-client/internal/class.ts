@@ -56,7 +56,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Projects\\nextjs-expressjs-postgresql\\apps\\backend\\src\\integrations\\prisma\\logical-1770028942645.prisma",
+    "sourceFilePath": "C:\\Projects\\nextjs-expressjs-postgresql\\apps\\backend\\src\\integrations\\prisma\\logical-1770121841215.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../../../../../apps/backend/src/integrations/prisma",

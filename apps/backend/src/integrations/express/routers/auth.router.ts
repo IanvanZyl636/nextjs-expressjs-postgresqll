@@ -24,11 +24,11 @@ const publicAuthRouter = Router();
  *               email:
  *                 type: string
  *                 format: email
- *                 example: user@example.com
+ *                 example: user2@example.com
  *               password:
  *                 type: string
  *                 format: password
- *                 example: secret123
+ *                 example: S&ecret123
  *               role:
  *                 type: string
  *                 example: ADMIN

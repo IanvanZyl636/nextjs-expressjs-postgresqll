@@ -39,7 +39,7 @@ describe('Full service flow', () => {
         const product = await createActiveProduct(vendor.id, category.id, tag.id, image.id);
         const cart = await createCart(product.productVariants[0].id);   
         const shipping = await createShipping();    
-        const customer = await createCustomer();
+        const customer = await createCustomer();        
         const order = await createOrder(customer.id, shipping.id, cart); 
         await createPayment(order);
     }, 500000);
@@ -60,7 +60,7 @@ async function createUser() {
                 userAgent: 'test'
             } as CredentialInput
         } as ProviderInput,
-            Role.VENDOR
+            Role.ADMIN
         );
 
         const user = await prisma().user.findFirst();

@@ -8,7 +8,7 @@ export const config = {
 }
 
 export default async function middleware(request: NextRequest) {
-  const res = await updateSession(request);
+  const {response} = await updateSession(request);
   const session = await getSession();
 
   const path = request.nextUrl.pathname;
@@ -22,18 +22,18 @@ export default async function middleware(request: NextRequest) {
   }
 
   if (path.startsWith('/vendor')) {
-    if (session?.user.role === Role.ADMIN) return res;
+    if (session?.user.role === Role.ADMIN) return response;
 
     const parts = path.split('/').filter(Boolean);
     const slug = parts[1];
     if (!slug) return NextResponse.redirect(new URL('/auth/unauthorized', request.nextUrl));
     
     if(session && session.user.vendorSlugs.includes(slug)){
-      return res;
+      return response;
     }
 
     return NextResponse.redirect(new URL('/auth/unauthorized', request.nextUrl));
   }
 
-  return res;
+  return response;
 }

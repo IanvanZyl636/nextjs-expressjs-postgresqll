@@ -11,13 +11,13 @@ const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET!;
 function isJwtExpired(token: string | undefined): boolean {
   if (!token) return true;
 
-  const tokenValue = jwt.verify(token, JWT_ACCESS_SECRET) as JwtPayload & jwt.JwtPayload;
-
-  if (!tokenValue.exp) return true;
-
-  const now = Math.floor(Date.now() / 1000);
-
-  return tokenValue.exp < now;
+  try {
+    jwt.verify(token, JWT_ACCESS_SECRET) as JwtPayload & jwt.JwtPayload;
+    return false;
+  } 
+  catch (e) {    
+    return true;
+  }
 }
 
 async function refreshJwt(refreshToken: string) {
@@ -34,12 +34,15 @@ async function refreshJwt(refreshToken: string) {
   return res;
 }
 
-export async function updateSession(req: NextRequest) {
+export async function updateSession(req: NextRequest):Promise<{
+  statusCode: number
+  response:NextResponse<unknown>
+}> {
   try {
     const accessToken = req.cookies.get(COOKIES.accessToken)?.value;
     const refreshToken = req.cookies.get(COOKIES.refreshToken)?.value;
 
-    if (!refreshToken) return;
+    if (!refreshToken) return {statusCode: 401, response: NextResponse.next()};
 
     const nextRes = NextResponse.next();
     const cookieStore = await cookies();
@@ -47,7 +50,7 @@ export async function updateSession(req: NextRequest) {
     if (isJwtExpired(accessToken)) {
       const res = await refreshJwt(refreshToken);
 
-      if (!res.ok) return;
+      if (!res.ok) return {statusCode: 401, response: NextResponse.next()};
 
       const setCookies = getResponseSetCookies(res);
 
@@ -57,9 +60,9 @@ export async function updateSession(req: NextRequest) {
       }
     }
 
-    return nextRes;
+    return {statusCode: 200, response: nextRes};
   } catch (e) {    
-    return NextResponse.next();
+    return {statusCode: 503, response: NextResponse.next()};
   }
 }
 
