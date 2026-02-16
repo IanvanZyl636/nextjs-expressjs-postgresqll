@@ -1,5 +1,7 @@
 import crypto from 'crypto';
 import { PaymentStatus } from '@nextjs-expressjs-postgresql/shared/prisma/enhance/enums';
+import ipaddr from 'ipaddr.js';
+import axios from 'axios';
 import https from 'https';
 
 function getBaseUrl() {
@@ -34,18 +36,21 @@ function phpUrlEncode(value: string): string {
     );
 }
 
-function generateSignature(
-  data: Record<string, string | number | null | undefined>,
-  passPhrase?: string | null
-): string {
+function generatePayloadString(data: Record<string, string | number | null | undefined>){
   let pfOutput = '';
-
   for (const [key, val] of Object.entries(data)) {    
     pfOutput += `${key}=${phpUrlEncode(String(val).trim())}&`;    
   }
 
-  let getString = pfOutput.slice(0, -1);
+  return pfOutput.slice(0, -1);
+}
 
+function generateSignature(
+  payloadString: string,
+  passPhrase?: string | null
+): string {   
+  let getString = payloadString;
+  
   if (passPhrase) {
     getString += `&passphrase=${phpUrlEncode(passPhrase.trim())}`;
   }
@@ -73,7 +78,8 @@ export async function createCheckout(payment: any, opts: { amount: number; retur
     payment_method: 'cc'
   };
 
-  const signature = generateSignature(params, process.env.PAYFAST_PASSPHRASE);
+  const payloadString = generatePayloadString(params);
+  const signature = generateSignature(payloadString, process.env.PAYFAST_PASSPHRASE);
 
   const form: Record<string, string> = { ...params, signature };
 
@@ -92,19 +98,35 @@ function verifySignature(payload: Record<string, any>): boolean {
   const payloadCopy = { ...payload };
   delete payloadCopy.signature;
 
-  const expected = generateSignature(payloadCopy, process.env.PAYFAST_PASSPHRASE);
+  const payloadString = generatePayloadString(payloadCopy);
+
+  const expected = generateSignature(payloadString, process.env.PAYFAST_PASSPHRASE);
   return expected === signature;
+}
+
+function isPayfastIp(ip: string): boolean {
+  const addr = ipaddr.process(ip);
+
+  return PAYFAST_IP_WHITELIST.some(range => {
+    if (!range.includes('/')) {
+      return addr.toString() === range;
+    }
+
+    const [rangeAddr, prefix] = ipaddr.parseCIDR(range);
+    return addr.match([rangeAddr, prefix]);
+  });
 }
 
 // Security check 2: Verify the notification came from PayFast domain
 function verifyNotificationSource(remoteAddress: string, domain: string): boolean {
-
   if (!validNotificationDomains.includes(domain)) {
     throw new Error(`Payfast: Notification from unexpected domain: ${domain}`);
   }
 
-  
-  
+  if (!isPayfastIp(remoteAddress)) {
+    throw new Error(`Payfast: Notification from unexpected IP address: ${remoteAddress}`);
+  }
+
   return true;
 }
 
@@ -112,55 +134,35 @@ function verifyNotificationSource(remoteAddress: string, domain: string): boolea
 // This will be handled by comparing the notification amount with stored order amount
 
 // Security check 4: Perform server request to confirm with PayFast
-async function confirmPaymentWithPayFast(payload: Record<string, any>): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    const sandbox = (process.env.PAYFAST_SANDBOX ?? 'true') === 'true';
-    const host = sandbox ? 'sandbox.payfast.co.za' : 'www.payfast.co.za';
+async function confirmPaymentWithPayFast(
+  payloadString: string
+): Promise<boolean> {
+  const sandbox = (process.env.PAYFAST_SANDBOX ?? 'true') === 'true';
+  const host = sandbox ? 'sandbox.payfast.co.za' : 'www.payfast.co.za';
+  const url = `https://${host}/eng/query/validate`;
 
-    // Build query string for confirmation
-    const queryParams = new URLSearchParams();
-    for (const [key, val] of Object.entries(payload)) {
-      if (val !== '' && val !== null && val !== undefined) {
-        queryParams.append(key, String(val));
-      }
-    }
-
-    const options = {
-      hostname: host,
-      port: 443,
-      path: `/eng/query/validate?${queryParams.toString()}`,
-      method: 'GET',
+  try {
+    const response = await axios.post(url, payloadString, {
+      timeout: 10_000,
       headers: {
-        'User-Agent': 'NodeJS',
+        'Content-Type': 'application/x-www-form-urlencoded',        
+        'User-Agent': '',
       },
-      timeout: 10000,
-    };
+      
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: true,
+      }),    
 
-    const req = https.request(options, (res) => {
-      let data = '';
-
-      res.on('data', chunk => {
-        data += chunk;
-      });
-
-      res.on('end', () => {
-        // PayFast returns 'VALID' for confirmed payments
-        resolve(data.trim() === 'VALID');
-      });
+      responseType: 'text',
+      validateStatus: () => true, // PayFast always returns 200
     });
 
-    req.on('error', (err) => {
-      console.error('Error confirming payment with PayFast:', err);
-      reject(err);
-    });
-
-    req.on('timeout', () => {
-      req.destroy();
-      reject(new Error('PayFast confirmation timeout'));
-    });
-
-    req.end();
-  });
+    return typeof response.data === 'string' &&
+      response.data.trim() === 'VALID';
+  } catch (err) {
+    console.error('PayFast server confirmation failed:', err);
+    return false;
+  }
 }
 
 export async function verifyNotification(
@@ -178,12 +180,18 @@ export async function verifyNotification(
   // Security Check 2: Verify notification source (if remoteAddress provided)
   if (options?.remoteAddress && options?.domain && !verifyNotificationSource(options.remoteAddress, options.domain)) {
     throw new Error('Payfast: Notification from unexpected IP address: ' + options.remoteAddress);    
-  }
+  }  
 
   // Security Check 4: Perform server confirmation (if not skipped)
   if (!options?.skipServerConfirmation) {
     try {
-      const isValid = await confirmPaymentWithPayFast(payload);
+      const payloadCopy = { ...payload };
+      delete payloadCopy.signature;
+      delete payloadCopy.m_payment_id;
+      // delete payloadCopy.pf_payment_id;
+
+      const payloadString = generatePayloadString(payloadCopy);
+      const isValid = await confirmPaymentWithPayFast(payloadString);
       if (!isValid) {
         throw new Error('PayFast server confirmation failed: Payment not valid on PayFast servers');
       }
