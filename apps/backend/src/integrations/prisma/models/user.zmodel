@@ -28,7 +28,7 @@ model User {
   customer       Customer?
   ratings        Rating[]  
 
-  vendorMemberships VendorUser[] @relation("VendorUserMembership")
+  // vendorMemberships VendorUser[] @relation("VendorUserMembership")
 
   @@allow('all', true)
 }

@@ -5,6 +5,7 @@ import "./rating.zmodel"
 import "./category.zmodel"
 import "./tag.zmodel"
 import "./vendor.zmodel"
+import "./delivery-cycle.zmodel"
 
 enum ProductStatus {
   DRAFT
@@ -44,6 +45,9 @@ model Product {
 
   vendorId        String
   vendor          Vendor          @relation(fields: [vendorId], references: [id])
+
+  deliveryCycleId String
+  deliveryCycle   DeliveryCycle @relation(fields: [deliveryCycleId], references: [id])
 
   @@allow('all', true)
 }

@@ -3,6 +3,8 @@ import "./payment.zmodel"
 import "./address.zmodel"
 import "./product.zmodel"
 import "./shipping.zmodel"
+import "./vendor.zmodel"
+import "./delivery-cycle.zmodel"
 
 enum OrderStatus {
   PENDING
@@ -14,18 +16,21 @@ enum OrderStatus {
 }
 
 model Order {
-  id         String      @id @default(uuid())
-  customerId String
-  shipmentId String      @unique
-  status     OrderStatus
+  id              String        @id @default(uuid())
+  customerId      String
+  shipmentId      String        @unique
+  deliveryCycleId String
+  status          OrderStatus
 
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 
-  customer   Customer    @relation(fields: [customerId], references: [id])
-  orderItems OrderItem[]
-  payment    Payment?
-  shipment   Shipment    @relation(fields: [shipmentId], references: [id])
+  customer        Customer      @relation(fields: [customerId], references: [id])
+  orderItems      OrderItem[]
+  payment         Payment?
+  shipment        Shipment      @relation(fields: [shipmentId], references: [id])
+
+  deliveryCycle   DeliveryCycle @relation(fields: [deliveryCycleId], references: [id])
 
   @@allow('all', true)
 }
@@ -34,10 +39,13 @@ model OrderItem {
   id               String         @id @default(uuid())
   orderId          String
   productVariantId String
+  vendorId         String
   quantity         Int
   price            Float
+
   order            Order          @relation(fields: [orderId], references: [id])
   productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  vendor           Vendor         @relation(fields: [vendorId], references: [id])
 
   @@allow('all', true)
 }

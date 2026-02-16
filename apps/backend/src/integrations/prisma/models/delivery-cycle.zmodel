@@ -1,0 +1,32 @@
+import "./order.zmodel"
+import "./product.zmodel"
+import "./vendor.zmodel"
+
+enum DeliveryCycleStatus {
+  OPEN
+  CLOSED
+  FULFILLING
+  COMPLETED
+}
+
+model DeliveryCycle {
+  id                 String   @id @default(uuid())
+  
+  name               String
+  
+  preorderStartDate  DateTime
+  preorderCutoffDate DateTime
+  deliveryDate       DateTime
+  
+  status             DeliveryCycleStatus @default(OPEN)
+  
+
+  products           Product[]
+  orders             Order[]
+  vendorPayouts      VendorPayout[]
+  
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@allow('all', true)
+}
